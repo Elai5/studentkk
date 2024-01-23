@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from mysite import settings
+from django.core.mail import send_mail
 
 # Create your views here.
 def home(request):
@@ -17,7 +19,27 @@ def signup(request):
         lname = request.POST['lname']
         email = request.POST['email']
         pass1 = request.POST['pass1']
-        pass1 = request.POST['pass1']
+        pass2 = request.POST['pass2']
+        
+        # email
+        
+        if User.objects.filter(username=username):
+            messages.error(request, "username alrady exist. Chose another")
+            return redirect('home')
+            
+        if User.objects.filter(email=email):
+            messages.error(request, "Email already registered")
+            return redirect('home')
+        
+        if len(username)>10:
+            messages.error(request, "username be under 10 characters")
+            
+        if pass1 != pass2:
+            messages.error(request, "password doesn`t march")
+            
+        if not username.isalnum():
+            messages.error(request, "username must be alphanumeric")
+            return redirect('home')
         
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
@@ -26,6 +48,15 @@ def signup(request):
         myuser.save()
         
         messages.success(request, "your account has been succesfully created")
+        
+        # sednmail
+        
+        subject = "welcome to studentkonnect login"
+        message = "hello" + myuser.first_name + "! \n" + "welcome to sks \n thankyou for visiting. \n weve sent email confrimation. \n\n thank you\n laine"
+        from_email = settings.EMAIL_HOST_USER
+        to_list = [myuser.email]
+        send_mail(subject, message, from_email, to_list, fail_silently=True)
+        
         return redirect('signin')
         
     
