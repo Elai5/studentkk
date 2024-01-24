@@ -14,7 +14,7 @@ body {
   font-family: 'Arial', sans-serif;
   font-family: 'Itim', cursive;
   text-decoration: none;
-  background-image: url("{% static 'img/young.jpg' %}");
+  background-image: url("{% static 'image/young.jpg' %}");
   /* background-image: url("young.jpg"); */
   background-size: cover;
   /* background-position: center; */
