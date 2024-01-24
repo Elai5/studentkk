@@ -34,20 +34,7 @@
         <li><a href="#">Service</a></li>
     </ul>
     <div class="btn">
-
-    </div>
-     <div class="toggle-icon" onclick="toggleNavbar()">&#9776;</div>
-
-    </div>
-    
-    
-
-
-
-
-
-
-    {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
 
     <h3>Hello {{ fname }}</h3>
     <h4>You are loggedin succesfully</h4>
@@ -55,16 +42,36 @@
 
     {% else %}
 
-    <a href="signup"> <button>Sign Up</button></a>
-    <a href="signin"> <button type="submit">Sign In</button></a>
+    <a href="signup"> <button class="button" type="submit">Sign Up</button></a>
+    <a href="signin"> <button class="button" type="submit">Sign In</button></a>
 
     {% endif %}
 
-  
-    <!-- <button type="submit"> <a href="/signup"></a> Sign up</button>
-    <button type="submit"><a href="signin"></a> Sign in</button>
-    <button type="submit"><a href="/signout"></a> Sign out</button> -->
+    </div>
+     <div class="toggle-icon" onclick="toggleNavbar()">&#9776;</div>
 
+    </div>
+
+    <!-- Your page content goes here -->
+<section id="home">
+  <div class="profile">
+    <h1>Find Friends</h1>
+    <h2>Forge Connections Beyond Borders: Connect with students from your home country who are navigating the same foreign city.<h2>
+    <p>We can help you find friends, starting a new life. </p>
+    <div class="button">
+        <button type="button"><a href="">learn more</a></button>
+    </div>
+  </div>
+</section>
+<script src="{% static 'js/script.js' %}"></script>
+    
+
+
+
+
+
+
+    
 
     <script src="" async defer></script>
 </body>
