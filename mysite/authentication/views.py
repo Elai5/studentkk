@@ -17,7 +17,10 @@ def signup(request):
         username = request.POST['username']
         fname = request.POST['fname']
         lname = request.POST['lname']
-        email = request.POST['email']
+        email = request.POST['email'] 
+        country = request.POST['country']
+        location = request.POST['location']
+        institution = request.POST['institution']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
         
