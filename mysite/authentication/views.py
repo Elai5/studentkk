@@ -88,3 +88,6 @@ def signout(request):
     logout(request)
     messages.success(request, "log out succesfully!")
     return redirect('home')
+
+def about(request):
+    return render(request, 'authentication/about.html')
