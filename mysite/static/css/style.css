@@ -20,7 +20,7 @@
 .navbar {
   background-color: #3498db;
   /* width: 100vh; */
-  background-color: grey;
+  /* background-color: grey; */
   overflow: hidden;
   text-align: center;
   display: flex;

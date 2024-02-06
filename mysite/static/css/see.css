@@ -26,6 +26,7 @@ body {
   justify-content: space-between;
   align-items: center;
   position: relative; /* Add relative positioning */
+  padding: 10px;
 }
 .logo-container {
   width: auto; /* Set to auto to adjust based on text size */
@@ -49,7 +50,7 @@ body {
 }
 .navbar a:hover {
    /* background-color: #ddd; */
-  color: #333;
+  /* color: #333; */
   text-decoration: underline;  
   }
 .navbar .button {
@@ -132,7 +133,7 @@ padding: 30px;
 .about-page .mage{
     width: 750px;
     height: 650px;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     border-radius: 15px;
     /* padding: 30px; */
 }
