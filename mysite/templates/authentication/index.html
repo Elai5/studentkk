@@ -28,8 +28,9 @@
   </div>
   <ul>
         <li><a href="index.html" class="active">Home</a></li>
+        {% comment %} <li><a href="{% url 'index' %}">home</a></li> {% endcomment %}
         <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="#">Career</a></li>
+        <li><a href="{% url 'career'%}">Career</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Service</a></li>
     </ul>
@@ -38,7 +39,8 @@
 
     <!-- <h3>Hello {{ fname }}</h3>
     <h4>You are loggedin succesfully</h4> -->
-    <a href="signout"> <button type="submit">Sign OUt</button></a>
+    <button type="submit"> <a href="signout">SignOUt</a></button>
+    {% comment %} <a href="signout"> <button type="submit">Sign OUt</button></a> {% endcomment %}
 
     {% else %}
 

@@ -10,34 +10,23 @@
 </head>
 <body>
 
-
-    {% for message in messages %}
-    <div class="alert alert-{{message.tags }} alert-dismissible fade show" role="alert">
-        <strong>Message:</strong> {{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    {% endfor %}
-
-
     <!-- <h1>Welcome to Our app</h1> -->
     <div class="navbar" id="myNavbar">
         <div class="logo-container">
             <a href="index.html"><span style="color: #fff; font-size: 18px; font-weight: bold;">S.Konect</span></a>
   </div>
   <ul>
-        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="{% url 'home' %}" class="active">Home</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'contact'%}">Career</a></li>
+        <li><a href="{% url 'career'%}">Career</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Service</a></li>
     </ul>
     <div class="btn">
     {% if user.is_authenticated %}
 
-    <h3>Hello {{ fname }}</h3>
-    <h4>You are loggedin succesfully</h4>
+    <!-- <h3>Hello {{ fname }}</h3>
+    <h4>You are loggedin succesfully</h4> -->
     <a href="signout"> <button type="submit">Sign OUt</button></a>
 
     {% else %}
@@ -56,6 +45,7 @@
 <section id="home">
   <div class="profile">
     <h1>Find Friends</h1>
+    <h5>hello stranger</h5>
     
   </div>
 </section>

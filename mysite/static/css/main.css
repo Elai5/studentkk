@@ -57,7 +57,7 @@ body {
   color: #333;
   text-decoration: underline;  
   }
-.navbar .button {
+/* .navbar .button {
   background-color: navy;
   color: white;
   border: none;
@@ -68,13 +68,16 @@ body {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 14px;
+} */
+.navbar ul li .active{
+  color: red;
 }
-  .navbar .button:hover{
+.navbar .button:hover{
     background-color: #333;
     cursor: pointer;
-  }
-  .toggle-icon {
+}
+.toggle-icon {
   display: none;
   color: #fff;
   cursor: pointer;

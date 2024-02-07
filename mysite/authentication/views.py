@@ -89,8 +89,11 @@ def signout(request):
     # messages.success(request, "log out succesfully!")
     return redirect('home')
 
+def index(request):
+    return render(request, 'authentication/index.html')
+
 def about(request):
     return render(request, 'authentication/about.html')
 
-def contact(request):
-    return render(request, 'authentication/contact.html')
+def career(request):
+    return render(request, 'authentication/career.html')

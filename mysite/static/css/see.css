@@ -17,16 +17,16 @@ body {
   background-color: #ddd;
 }
 .navbar {
-  background-color: #3498db;
+  /* background-color: #3498db; */
   /* width: 100vh; */
-  /* background-color: grey; */
+  background-color: grey;
   overflow: hidden;
   text-align: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative; /* Add relative positioning */
-  padding: 10px;
+  /* padding: 5px; */
 }
 .logo-container {
   width: auto; /* Set to auto to adjust based on text size */
