@@ -17,9 +17,9 @@ body {
   background-color: #ddd;
 }
 .navbar {
-  /* background-color: #3498db; */
+  background-color: #3498db;
   /* width: 100vh; */
-  background-color: grey;
+  /* background-color: grey; */
   overflow: hidden;
   text-align: center;
   display: flex;
@@ -203,4 +203,11 @@ padding: 30px;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 4px;
+}
+footer{
+  height: 30px;
+  background-color: red;
+  position:absolute;
+  bottom: 0;
+  width: 100%;
 }

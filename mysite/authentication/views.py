@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from mysite import settings
 from django.core.mail import send_mail
+from django.apps import apps
 
 # Create your views here.
 def home(request):
@@ -17,15 +18,15 @@ def signup(request):
         username = request.POST['username']
         fname = request.POST['fname']
         lname = request.POST['lname']
-        email = request.POST['email'] 
+        email = request.POST['email']
         country = request.POST['country']
         location = request.POST['location']
         institution = request.POST['institution']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
         
-        # email
         
+        # email
         if User.objects.filter(username=username):
             messages.error(request, "username alrady exist. Chose another")
             return redirect('home')
@@ -51,9 +52,7 @@ def signup(request):
         myuser.save()
         
         messages.success(request, "your account has been succesfully created")
-        
         # sednmail
-        
         subject = "welcome to studentkonnect login"
         message = "hello" + myuser.first_name + "! \n" + "welcome to sks \n thankyou for visiting. \n weve sent email confrimation. \n\n thank you\n laine"
         from_email = settings.EMAIL_HOST_USER
@@ -61,10 +60,8 @@ def signup(request):
         send_mail(subject, message, from_email, to_list, fail_silently=True)
         
         return redirect('signin')
-        
-    
-    
     return render(request, "authentication/signup.html")
+
 
 def signin(request):
     if request.method == 'POST':

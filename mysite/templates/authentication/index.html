@@ -24,13 +24,13 @@
     <!-- <h1>Welcome to Our app</h1> -->
     <div class="navbar" id="myNavbar">
         <div class="logo-container">
-            <a href="index.html"><span style="color: #fff; font-size: 18px; font-weight: bold;">S.Konect</span></a>
+            <a href="{% url 'home' %}"><span style="color: #fff; font-size: 18px; font-weight: bold;">S.Konect</span></a>
   </div>
   <ul>
         <li><a href="index.html" class="active">Home</a></li>
         {% comment %} <li><a href="{% url 'index' %}">home</a></li> {% endcomment %}
         <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'career'%}">Career</a></li>
+        <li><a href="{% url 'career'%}">Features</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Service</a></li>
     </ul>

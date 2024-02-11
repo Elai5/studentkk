@@ -57,7 +57,7 @@ body {
   color: #333;
   text-decoration: underline;  
   }
-/* .navbar .button {
+.navbar .button {
   background-color: navy;
   color: white;
   border: none;
@@ -68,8 +68,8 @@ body {
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
-  border-radius: 14px;
-} */
+  border-radius: 4px;
+}
 .navbar ul li .active{
   color: red;
 }
@@ -136,6 +136,7 @@ body {
   }
  
 form {
+  margin-top: 70px;
   max-width: 400px;
   width: 100%;
   text-align: center;
@@ -145,6 +146,9 @@ form {
   box-sizing: border-box;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* margin-top: 40px; */
+  /* position: relative; */
+  /* top: 20px; */
 }
 label {
   display: block;

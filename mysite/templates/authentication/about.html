@@ -10,12 +10,12 @@
 <body>
     <div class="navbar" id="myNavbar">
         <div class="logo-container">
-            <a href="/index.html"><span style="color: #fff; font-size: 18px; font-weight: bold;">S.Konect</span></a>
+            <a href="{% url 'home' %}"><span style="color: #fff; font-size: 18px; font-weight: bold;">S.Konect</span></a>
     </div>
     <ul>
         <li><a href="{% url 'home' %}" class="active">Home</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'career'%}">Career</a></li>
+        <li><a href="{% url 'career'%}">Features</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Service</a></li>
     </ul>
@@ -29,8 +29,8 @@
 
     {% else %}
 
-    <a href="signup"> <button class="button" type="submit">Sign Up</button></a>
-    <a href="signin"> <button class="button" type="submit">Sign In</button></a>
+    <a href="{% url 'signup' %}"> <button class="button" type="submit">Sign Up</button></a>
+    <a href="{% url 'signin' %}"> <button class="button" type="submit">Sign In</button></a>
 
     {% endif %}
 
@@ -41,7 +41,7 @@
     <section id="about">
         <div class="about-page">
             <div class="mage">
-                <img src="{% static 'image/gurl.jpeg' %}" alt="" style="width: 100%;">
+                <img src="{% static 'image/happy.jpg' %}" alt="" style="width: 100%;">
             </div>
             <div class="info">
                 <h3>nula</h3>
@@ -65,7 +65,11 @@
             </div>
          <!-- <a href="/signin.html"><button class="button">Learn More</button></a> -->
             </div>
+            
         </div>
+        <footer>
+                <p>a</p>
+            </footer>
     </section>
    
 <script src="{% static 'js/script.js' %}"></script>
