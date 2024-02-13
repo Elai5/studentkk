@@ -17,7 +17,10 @@ body {
   background-color: #ddd;
 }
 .navbar {
-  background-color: #3498db;
+  /* background-color: #3498db; */
+  background-color: #00a693;
+  background-color: #008080;
+  background-color: #000080;
   /* width: 100vh; */
   /* background-color: grey; */
   overflow: hidden;
@@ -54,23 +57,22 @@ body {
   text-decoration: underline;  
   }
 .navbar .button {
-  background-color: navy;
-  color: white;
-  border: none;
+  background-color: #f8f9fa;
+  color: black;
+  /* border: 1px solid navy; */
   padding: 10px 20px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 4px;
 }
-  .navbar .button:hover{
-    background-color: #333;
-    cursor: pointer;
-  }
-  .toggle-icon {
+.navbar .button:hover{
+  background-color: teal;
+  cursor: pointer;
+}
+.toggle-icon {
   display: none;
   color: #fff;
   cursor: pointer;
@@ -119,37 +121,36 @@ body {
   }
   }
 
-  /* #about{
-  background-color: #333;
-  height: 200px;
-} */
+#about{
+  background-color: #f9f9f9;
+  height:90vh;
+}
 .about-page{
   display: flex;
-  margin: 60px;
+  /* margin: 0 60px; */
   justify-content: space-around;
-padding: 30px;
-    /* background-color: rebeccapurple; */
+  padding: 30px;
 }
 .about-page .mage{
-    width: 750px;
-    height: 650px;
-    /* border: 2px solid blue; */
-    border-radius: 15px;
-    /* padding: 30px; */
+  width: 750px;
+  height:650px;
+  /* border: 2px solid blue; */
+  border-radius: 15px;
+  /* padding: 30px; */
 }
 .about-page .mage img{
-    width: 100%;
-    height: 100%;
-    border-radius: 15px;
-    /* box-shadow: 10px 10px 10px 10px yellow; */
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  /* box-shadow: 10px 10px 10px 10px yellow; */
 }
 .about-page .info{
-    width: 800px;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 50px;
-    /* background-color: gold; */
+  width: 800px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 50px;
+  /* background-color: gold; */
 }
 .info h1{
     color: navy;
@@ -172,12 +173,6 @@ padding: 30px;
   line-height: 32px;
   margin-bottom: 20px;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-}
-.info ol li{
-  line-height: 22px;
-  font-size: 16px;
-  list-style-type:square;
-
 }
 .info .btn{
     /* align-items: center; */
@@ -206,7 +201,7 @@ padding: 30px;
 }
 footer{
   height: 30px;
-  background-color: red;
+  background-color: #000080;
   position:absolute;
   bottom: 0;
   width: 100%;

@@ -44,23 +44,14 @@
                 <img src="{% static 'image/happy.jpg' %}" alt="" style="width: 100%;">
             </div>
             <div class="info">
-                <h3>nula</h3>
+                {% comment %} <h3>nula</h3> {% endcomment %}
                 <h1> What We Do! </h1>
                 <h2>Welcome to Student Konnect - Your Gateway to Connection Abroad!</h2>
                 <p>At Student Konnect, we understand the unique and exciting journey of being a student in a foreign country. Navigating a new culture, forging connections, and creating a sense of belonging can be both thrilling and challenging. That's why we've created a vibrant online space dedicated to fostering a sense of community among native students studying abroad</p>
         
-        <!-- <h1>How It Works</h1>
-        <p>Native Friends is more than just a social network. It's a community of students who support and inspire each other. Here's what you can do on our website:
-          <ol>
-            <li><strong>Create your profile </strong>and tell us about yourself, your hobbies, your studies, and your native country.</li>
-            <li><strong>Use our search algorithim </strong>to find and connect with other native students who are studying in the same or nearby countries.</li>
-            <li><strong>Send and receive messages</strong>with your new friends and keep in touch with them.</li>
-            <li><strong>Post your updates</strong>on our post page and share your experiences, challenges, and achievements with the community.</li>
-            <li><strong>Invite your parents or guardians</strong>to join the website and keep up with your progress and well-being.</li>
-          </ol>
-        </p> -->
+
             <div class="btn">
-                <a href="signin.html"><button class="button">Find Friends</button></a>
+                <a href="{% url 'signup' %}"><button class="button">Find Friends</button></a>
                 <a href="signup.html"><button class="button">Learn More</button></a>
             </div>
          <!-- <a href="/signin.html"><button class="button">Learn More</button></a> -->
