@@ -45,7 +45,7 @@ def signup(request):
             messages.error(request, "username must be alphanumeric")
             return redirect('home')
         
-        myuser = User.objects.create_user(username, email, pass1)
+        myuser = User.objects.create_user(username, email, pass1, country=country, location=location, institution=institution)
         myuser.first_name = fname
         myuser.last_name = lname
         

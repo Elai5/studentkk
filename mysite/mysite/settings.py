@@ -47,8 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fontawesomefree',
     # 'authenticate.apps.MyAppConfig',
-    # 'mysite'
+    'mysite'
     # 'authentication'
     # 'authenticate',
 ]
