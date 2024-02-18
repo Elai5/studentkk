@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AboutUs</title>
+    <link rel="stylesheet" href="{% static 'css/see.css' %}">
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="navbar" id="myNavbar">
+        <div class="logo-container">
+            <a href="{% url 'home' %}"><span style="color: #fff; font-size: 18px; font-weight: bold;">S.Konect</span></a>
+    </div>
+    <ul>
+        <li><a href="{% url 'home' %}" class="active">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'career'%}">Features</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Service</a></li>
+    </ul>
+    <div class="btn">
+        {% if user.is_authenticated %}
+
+    <!-- <h3>Hello {{ fname }}</h3> -->
+    <!-- <h4>You are loggedin succesfully</h4> -->
+    <button type="submit"> <a href="signout">SignOUt</a></button>
+    <!-- <a href="signout"> <button type="submit">Sign OUt</button></a> -->
+
+    {% else %}
+
+    <a href="{% url 'signup' %}"> <button class="button" type="submit">Sign Up</button></a>
+    <a href="{% url 'signin' %}"> <button class="button" type="submit">Sign In</button></a>
+
+    {% endif %}
+
+    </div>
+     <div class="toggle-icon" onclick="toggleNavbar()">&#9776;</div>
+
+    </div>
+    <section id="profile">
+       <div class="profile_page">
+        <div class="box">
+            <div class="mage">
+
+            </div>
+            <p>keila alex</p>
+            <p>email@gmail.com</p>
+        </div>
+        <div class="text">
+            
+        </div>
+
+       </div>
+       <div class="profile_message">
+
+       </div>
+
+
+
+
+
+
+        <footer>
+            <p> Connect with us at: <span></span><i class="fa-solid fa-envelope"></i></p>
+            <!-- <i class="fa-solid fa-envelope"></i> -->
+            <p>term&conditions apply</p>
+            </footer>
+    </section>
+   
+<script src="{% static 'js/script.js' %}"></script>
+    
+</body>
+</html>

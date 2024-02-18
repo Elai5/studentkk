@@ -1,5 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
 *{
   padding: 0;
   margin: 0;
@@ -14,15 +16,20 @@ body {
   font-family: 'Arial', sans-serif;
   font-family: 'Itim', cursive;
   text-decoration: none;
-  background-image: url("/static/image/young.jpg");
+  /* background-image: url("/static/image/happy.jpg"); */
   /* background-image: url("young.jpg"); */
   background-size: cover;
+  /* background-color: #DDE7F6; */
+  background-image:linear-gradient(to right, rgba(221, 231, 246, 0.7665), #FFFFFF);
+  
+
   /* background-position: center; */
   background-repeat:no-repeat ;
   /* overflow:scroll; */
 }
 .navbar {
   background-color: #3498db;
+  background-color: #000080;
   /* width: 100vh; */
   /* background-color: grey; */
   overflow: hidden;
@@ -57,25 +64,24 @@ body {
   color: #333;
   text-decoration: underline;  
   }
+.navbar ul li .active{
+  color: red;
+}
 .navbar .button {
-  background-color: navy;
-  color: white;
-  border: none;
+  background-color: #f8f9fa;
+  color: black;
+  /* border: 1px solid navy; */
   padding: 10px 20px;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 4px;
 }
-.navbar ul li .active{
-  color: red;
-}
 .navbar .button:hover{
-    background-color: #333;
-    cursor: pointer;
+  background-color: teal;
+  cursor: pointer;
 }
 .toggle-icon {
   display: none;
@@ -85,6 +91,25 @@ body {
   position: absolute; /* Add absolute positioning */
   top: 10px; /* Adjust the top position as needed */
   right: 15px; /* Adjust the right position as needed */
+}
+footer{
+  height: 40px;
+  background-color: #000080;
+  position:absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  /* font-size: 12px; */
+}
+.fa-solid{
+  font-size: 23px;
+  color: white;
+}
+footer p{
+  font-size: 21px;
 }
 @media screen and (max-width: 600px) {
   .navbar {
@@ -202,39 +227,59 @@ p {
 }
   /* home */
 #home{
-  position: relative;
+  /* position: relative; */
+  display: flex;
   /* top: -200px; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  text-align: center;
+  justify-content:space-between;
+  align-items: center;
+  /* text-align: center; */
 }
 #home .profile{
+  display: flex;
   justify-content: center;
-  align-items: center;
-  /* border: 2px solid red; */
-  width: 1000px;
+  /* align-items: center; */
+  padding:90px 0 0 50px;
+  /* border: 2px solid gold; */
+  /* width: 700px; */
+  width: 55%;
+  /* width: 753px; */
+  height: 100%;
   position: relative;
-  top: -210px;
-  }
-.profile h2{
-  font-weight: 400;
-  /* width: 1000px; */
+  /* flex: 1; */
+  /* background-color: red; */
+}
+.text{
+  /* border: 2px solid red; */
+  margin:100px 0 80px 80px;
+  padding: 0 40px;
+  width: 800px;
 }
 .profile h1{ 
-  font-size: 52px;
-  font-weight: bolder;
-  margin-bottom: 10px;
-  /* position: relative; */  
+  font-size: 36px;
+  font-weight: lighter;
+  margin-bottom: 50px;
+  font-family: itim;
 }
-.profile h2, p{
-  font-size: 31px;
+.profile h2{
+  font-family: "Katibeh", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 58px;
+  line-height: 52px;
+}
+.profile p{
+  font-family: "Katibeh", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 32px;
 }
 .profile button{
   margin-top: 30px;
   border-radius: 5px;
   outline: 0;
   border: none;
-  background-color: white;  
+  background-color:#3498db;
+  color: white;
 }
 .profile button a{
   color: black;
@@ -246,6 +291,25 @@ p {
 }
 .profile button a:hover{
   color: white;
+}
+.prof-pic{
+  /* width: 50%; */
+  flex: 1;
+  height:100% ;
+  position: relative;
+  overflow: hidden;
+  /* border: 2px solid red; */
+  /* background-color: green; */
+}
+.profile-pic img{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+
+
 }
 @media screen and (max-width: 600px) {
   #home{
