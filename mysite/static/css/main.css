@@ -16,15 +16,13 @@ body {
   font-family: 'Arial', sans-serif;
   font-family: 'Itim', cursive;
   text-decoration: none;
-  /* background-image: url("/static/image/happy.jpg"); */
-  /* background-image: url("young.jpg"); */
   background-size: cover;
-  /* background-color: #DDE7F6; */
-  background-image:linear-gradient(to right, rgba(221, 231, 246, 0.7665), #FFFFFF);
+  background-color: gold;
+  /* background-image:linear-gradient(to right, rgba(221, 231, 246, 0.7665), #FFFFFF); */
   
 
   /* background-position: center; */
-  background-repeat:no-repeat ;
+  background-repeat:no-repeat;
   /* overflow:scroll; */
 }
 .navbar {

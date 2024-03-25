@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
     <div class="navbar" id="myNavbar">
@@ -41,7 +43,7 @@
 
     {% comment %} <h2>sign up</h2> {% endcomment %}
     <section>
-        <form action="/signup" method="post">
+        <form action="/signup" method="post" id="signup-form">
     {% csrf_token %}
         <div class="image-upload-container">
             <img class="image-preview" src="{% static 'image/woman.jpg' %}" alt="Dummy Image" id="previewImage">

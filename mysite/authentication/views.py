@@ -1,8 +1,10 @@
+from urllib.request import urlopen
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+import requests
 from mysite import settings
 from django.core.mail import send_mail
 from django.apps import apps
@@ -27,14 +29,23 @@ def signup(request):
         
         
         # email
+        #check if username already exist
         if User.objects.filter(username=username):
             messages.error(request, "username alrady exist. Chose another")
             return redirect('home')
-            
+        
+        # Check if the email address belongs to an institutional domain
+        institutional_domains = ['edu', 'ac', 'edu.au', 'edu.uk']  # Add more domains as needed
+        domain = email.split('@')[-1].split('.')[0]
+        if domain not in institutional_domains:
+            messages.error(request, "Please enter a valid institutional email address.")
+            return redirect('home')
+        #check if email is already registered    
         if User.objects.filter(email=email):
             messages.error(request, "Email already registered")
             return redirect('home')
         
+
         if len(username)>10:
             messages.error(request, "username be under 10 characters")
             
