@@ -62,7 +62,10 @@
         <label for="">Email Adress</label>
         <input type="email" id="email" name="email" placeholder="enter email adress" required><br>
         <label for="country">Country of Origin</label>
-        <input type="text" id="country" name="country" placeholder="Enter your country" required><br>
+        <input type="text" id="country" name="country" placeholder="Enter your country"onclick="ShowCountries()" required><br>
+        <div id="CountryList" style="display:none">
+
+        </div>
         <label for="">Country of study</label>
         <input type="text" id="location" name="location" placeholder="Enter your location" required><br>
         <label for="institution">Academic Institution</label>
@@ -76,6 +79,7 @@
         <p>Already have an account? Click <a href="signin">here</a></p>
 
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/country-list/2.5.0/country.min.js"></script>
     </section>
 
     <script src="{% static 'js/script.js' %}"></script>

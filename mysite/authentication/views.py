@@ -1,4 +1,4 @@
-from urllib.request import urlopen
+import requests
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -13,6 +13,23 @@ from django.apps import apps
 def home(request):
     # return HttpResponse("hello monica")
     return render(request, "authentication/index.html")
+
+def verify_email_with_hunter(email):
+    # Replace 'your_api_key_here' with your actual Hunter API key
+    api_key = '709a4901e4f150a8aa5909792dfd1a2baceb770d'
+    url = f'https://api.hunter.io/v2/email-verifier?email={email}&api_key={api_key}'
+
+    try:
+        response = requests.get(url)
+        print("Response from Hunter API:", response.json())  # Debug statement
+        data = response.json()
+        if data['data']['result'] == 'valid':
+            return True
+        else:
+            return False
+    except Exception as e:
+        print("Error:", e)
+        return False
 
 def signup(request):
     if request.method == "POST":
@@ -45,6 +62,10 @@ def signup(request):
             messages.error(request, "Email already registered")
             return redirect('home')
         
+        # Verify email using Hunter API
+        if not verify_email_with_hunter(email):
+            messages.error(request, "Please enter a valid institutional email address.")
+            return redirect('home')
 
         if len(username)>10:
             messages.error(request, "username be under 10 characters")
