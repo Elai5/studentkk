@@ -8,6 +8,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/universities-list@1.0.0/dist/universities.min.js"></script>
+    
+
 </head>
 <body>
     <div class="navbar" id="myNavbar">
@@ -575,7 +578,8 @@
                 <option value="ZW">Zimbabwe</option>
         </select><br>
         <label for="institution">Academic Institution</label>
-        <input type="text" id="institution" name="institution" placeholder="Enter your institution" required><br>
+        <input type="text" id="institution" name="institution" placeholder="Enter institution name" autocomplete="on"><br>
+        <!-- <select id="institution" name="institution" placeholder="Enter your institution" required></select><br> -->
         <label for="">Password</label>
         <input type="password" id="pass1" name="pass1" placeholder="Create a password" required> <br>
         <label for="">Confirm Password</label>

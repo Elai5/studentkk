@@ -42,7 +42,29 @@ fetch('https://restcountries.com/v3.1/all')
     });
 
 
+    
+    // Example universities array (replace with your actual data)
+const universities = [
+    'Harvard University',
+    'Stanford University',
+    'Massachusetts Institute of Technology (MIT)',
+    'University of Oxford',
+    // Add more universities here...
+];
 
+const institutionInput = document.querySelector('#institution');
+institutionInput.addEventListener('input', () => {
+    const inputValue = institutionInput.value.toLowerCase();
+    const filteredUniversities = universities.filter(univ => univ.toLowerCase().startsWith(inputValue));
+
+    const datalist = document.querySelector('#institution-datalist');
+    datalist.innerHTML = '';
+    filteredUniversities.forEach(univ => {
+        const option = document.createElement('option');
+        option.value = univ;
+        datalist.appendChild(option);
+    });
+});
 
 
 

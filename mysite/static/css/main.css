@@ -216,6 +216,16 @@ select#location {
   box-sizing: border-box;
   /* Add any additional styling you want for the dropdowns */
 }
+select#institution {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+  /* Add any additional styling you want for the dropdown */
+  border: 1px solid #ccc; /* Add a border for visual separation */
+  border-radius: 4px; /* Rounded corners */
+  font-size: 14px; /* Adjust font size */
+}
 button {
   background-color: navy;
   color: #fff;

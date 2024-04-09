@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from.views import universities_data
+
 
 urlpatterns = [
     path('', views.home, name="home"),
@@ -11,4 +13,6 @@ urlpatterns = [
     path('signup', views.signup, name="signup"),
     path('signin', views.signin, name="signin"),
     path('signout', views.signout, name="signout"),
+    path('universities/', universities_data, name='universities_data'),
+
 ]

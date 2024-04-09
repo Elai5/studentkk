@@ -8,6 +8,8 @@ import requests
 from mysite import settings
 from django.core.mail import send_mail
 from django.apps import apps
+import json
+from django.http import JsonResponse
 
 # Create your views here.
 def home(request):
@@ -126,3 +128,11 @@ def about(request):
 
 def career(request):
     return render(request, 'authentication/career.html')
+
+def universities_data(request):
+    # Read the JSON file
+    with open("data/world_universities_and_domains.json", "r") as json_file:
+        universities_data = json.load(json_file)
+
+    # Return the data as a JSON response
+    return JsonResponse(universities_data, safe=False)
