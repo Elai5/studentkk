@@ -21,43 +21,27 @@ function previewProfileImage() {
     }
 }
 
-function populateCountries() {
-    var countryListDiv = document.getElementById("countryList");
-    countryListDiv.innerHTML = ""; // Clear previous list
+// Fetch country data from the API
+fetch('https://restcountries.com/v3.1/all')
+    .then(res => res.json())
+    .then(data => {
+        const countrySelect = document.querySelector('#country');
+        const locationSelect = document.querySelector('#location');
 
-    // Create the select element for the dropdown list
-    var select = document.createElement("select");
-    select.setAttribute("id", "countrySelect");
-    select.setAttribute("name", "country");
+        data.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country.alpha3Code; // Use ISO code as the value
+            option.textContent = country.name; // Display country name
 
-    // Loop through all countries and add them to the dropdown list
-    for (var countryCode in countryListDiv) {
-        if (countryListDiv.hasOwnProperty(countryCode)) {
-            var countryName = countryListDiv[countryCode];
-            var option = document.createElement("option");
-            option.text = countryName;
-            option.value = countryCode;
-            select.appendChild(option);
-        }
-    }
+            countrySelect.appendChild(option);
+            locationSelect.appendChild(option.cloneNode(true)); // Clone for the other dropdown
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching country data:', error);
+    });
 
-    // Append the select element to the countryListDiv
-    countryListDiv.appendChild(select);
-}
 
-// Function to show the dropdown list of countries when the country input field is clicked
-function showCountries() {
-    var countryListDiv = document.getElementById("countryList");
-    if (countryListDiv.style.display === "none") {
-        populateCountries(); // Populate the dropdown list if it's not already populated
-        countryListDiv.style.display = "block";
-    } else {
-        countryListDiv.style.display = "none";
-    }
-}
-
-// Call the function to populate countries when the page is loaded
-window.onload = populateCountries;
 
 
 
