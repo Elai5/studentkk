@@ -1,5 +1,6 @@
 import json
 import requests
+import random
 from django.shortcuts import redirect, render
 from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
@@ -7,6 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import CustomUser
+from django.utils import timezone
+
 
 # Create your views here.
 def home(request):
@@ -66,20 +69,53 @@ def signup(request):
         )
         myuser.first_name = fname
         myuser.last_name = lname
-        myuser.save()
+        myuser.generate_otp()
+        # myuser.save()
         
+        # send OTP email
+        subject = "Your OTP for StudentKonnect"
+        message = f"Hello {myuser.first_name}, \n\nYour OTP is {myuser.otp}. It is valid for 10 minutes.\n\nThank You, \nLaine"
         messages.success(request, "Your account has been successfully created.")
-        
-        # Send email
-        subject = "Welcome to StudentKonnect"
-        message = f"Hello {myuser.first_name}!\n\nWelcome to StudentKonnect.\nThank you for visiting. We've sent an email confirmation.\n\nThank you,\nLaine"
         from_email = settings.EMAIL_HOST_USER
         to_list = [myuser.email]
         send_mail(subject, message, from_email, to_list, fail_silently=True)
         
-        return redirect('signin')
+        messages.success(request, "Your account has been successfully created. Please check your email for the OTP.")
+        
+        return redirect('verify.otp')
     return render(request, "authentication/signup.html")
+        
+    #     # Send email
+    #     subject = "Welcome to StudentKonnect"
+    #     message = f"Hello {myuser.first_name}!\n\nWelcome to StudentKonnect.\nThank you for visiting. We've sent an email confirmation.\n\nThank you,\nLaine"
+    #     from_email = settings.EMAIL_HOST_USER
+    #     to_list = [myuser.email]
+    #     send_mail(subject, message, from_email, to_list, fail_silently=True)
+        
+    #     return redirect('signin')
+    # return render(request, "authentication/signup.html")
 
+
+# to verift otp
+def verify_otp(request):
+    if request.method == "POST":
+        email = request.POST['email']
+        otp = request.POST['otp']
+        
+        try:
+            user = CustomUser.objects.get(email=email)
+            if user.is_otp_valid(otp):
+                user.otp = None
+                user.otp_created_at = None
+                user.save()
+                messages.success(request, "OTP verified succesfully. You can now log in ")
+                return redirect('signin')
+            else:
+                messages.error(request, "Invalid or expired OTP.")
+        except CustomUser.DoesNOtExist:
+            messages.error(request, "User does not exist.")
+    return render(request, "authentication/verify_otp.html")
+    
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']

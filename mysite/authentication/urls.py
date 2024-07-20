@@ -13,6 +13,7 @@ urlpatterns = [
     path('signup', views.signup, name="signup"),
     path('signin', views.signin, name="signin"),
     path('signout', views.signout, name="signout"),
+    path('verify_otp', views.verify_otp, name='verify_otp'),
     path('universities/', universities_data, name='universities_data'),
 
 ]
