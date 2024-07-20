@@ -47,10 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'fontawesomefree',
-    # 'authenticate.apps.MyAppConfig',
-    'mysite'
-    # 'authentication'
+    'mysite',
+    # 'authenticate',
+    'authentication'
     # 'authenticate',
 ]
 
@@ -114,7 +113,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# AUTH_USER_MODEL = 'authenticate.CustomUser'
+# AUTH_USER_MODEL = 'authentication.CustomUser'
+
+AUTH_USER_MODEL = 'authentication.CustomUser'
+# AUTH_USER_MODEL = 'authentication.CustomUser'
 
 
 # Internationalization
