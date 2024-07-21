@@ -3,7 +3,7 @@
 {% block title %}Sign In{% endblock %}
 
 {% block content %}
-<section>
+<section id="formy">
     <form action="/signin" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="image-upload-container">
