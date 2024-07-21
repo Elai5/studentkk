@@ -1,74 +1,22 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AboutUs</title>
-    <link rel="stylesheet" href="{% static 'css/see.css' %}">
-    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
-</head>
-<body>
-    <div class="navbar" id="myNavbar">
-        <div class="logo-container">
-            <a href="{% url 'home' %}"><span style="color: #fff; font-size: 18px; font-weight: bold;">S.Konect</span></a>
-    </div>
-    <ul>
-        <li><a href="{% url 'home' %}" class="active">Home</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'career'%}">Features</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Service</a></li>
-    </ul>
-    <div class="btn">
-        {% if user.is_authenticated %}
+{% extends "authentication/base.html" %}
 
-    <!-- <h3>Hello {{ fname }}</h3> -->
-    <!-- <h4>You are loggedin succesfully</h4> -->
-    <button type="submit"> <a href="signout">SignOUt</a></button>
-    <!-- <a href="signout"> <button type="submit">Sign OUt</button></a> -->
+{% block title %}About Us{% endblock %}
 
-    {% else %}
-
-    <a href="{% url 'signup' %}"> <button class="button" type="submit">Sign Up</button></a>
-    <a href="{% url 'signin' %}"> <button class="button" type="submit">Sign In</button></a>
-
-    {% endif %}
-
-    </div>
-     <div class="toggle-icon" onclick="toggleNavbar()">&#9776;</div>
-
-    </div>
-    <section id="about">
-        <div class="about-page">
-            <div class="mage">
-                <img src="{% static 'image/happy.jpg' %}" alt="" style="width: 100%;">
-            </div>
-            <div class="info">
-                {% comment %} <h3>nula</h3> {% endcomment %}
-                <h1> What We Do! </h1>
-                <h2>Welcome to Student Konnect - Your Gateway to Connection Abroad!</h2>
-                <p>At Student Konnect, we understand the unique and exciting journey of being a student in a foreign country. Navigating a new culture, forging connections, and creating a sense of belonging can be both thrilling and challenging. That's why we've created a vibrant online space dedicated to fostering a sense of community among native students studying abroad</p>
-        
-
+{% block content %}
+<section id="about">
+    <div class="about-page">
+        <div class="mage">
+            <img src="{% static 'image/happy.jpg' %}" alt="" style="width: 100%;">
+        </div>
+        <div class="info">
+            <h1> What We Do! </h1>
+            <h2>Welcome to Student Konnect - Your Gateway to Connection Abroad!</h2>
+            <p>At Student Konnect, we understand the unique and exciting journey of being a student in a foreign country. Navigating a new culture, forging connections, and creating a sense of belonging can be both thrilling and challenging. That's why we've created a vibrant online space dedicated to fostering a sense of community among native students studying abroad</p>
             <div class="btn">
                 <a href="{% url 'signup' %}"><button class="button">Find Friends</button></a>
                 <a href="signup.html"><button class="button">Learn More</button></a>
             </div>
-         <!-- <a href="/signin.html"><button class="button">Learn More</button></a> -->
-            </div>
-            
         </div>
-        <footer>
-            <p> Connect with us at: <span></span><i class="fa-solid fa-envelope"></i></p>
-            <!-- <i class="fa-solid fa-envelope"></i> -->
-            <p>term&conditions apply</p>
-        </footer>
-    </section>
-   
-<script src="{% static 'js/script.js' %}"></script>
-    
-</body>
-</html>
+    </div>
+</section>
+{% endblock %}

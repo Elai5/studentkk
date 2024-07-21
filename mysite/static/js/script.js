@@ -66,7 +66,28 @@ institutionInput.addEventListener('input', () => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const countrySelect = document.getElementById("country");
+    const locationSelect = document.getElementById("location");
 
+    fetch("https://restcountries.com/v3.1/all")
+        .then(response => response.json())
+        .then(data => {
+            const countries = data.map(country => ({
+                name: country.name.common,
+                code: country.cca2
+            })).sort((a, b) => a.name.localeCompare(b.name));
+
+            countries.forEach(country => {
+                const option = document.createElement("option");
+                option.value = country.code;
+                option.textContent = country.name;
+                countrySelect.appendChild(option.cloneNode(true));
+                locationSelect.appendChild(option);
+            });
+        })
+        .catch(error => console.error("Error fetching countries:", error));
+});
 
 
 

@@ -1,89 +1,20 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>homepage</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-  
-</head>
-<body>
+{% extends "authentication/base.html" %}
 
+{% block title %}Home Page{% endblock %}
 
-    {% for message in messages %}
-    <div class="alert alert-{{message.tags }} alert-dismissible fade show" role="alert">
-        <strong>Message:</strong> {{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    {% endfor %}
-
-
-    <!-- <h1>Welcome to Our app</h1> -->
-    <div class="navbar" id="myNavbar">
-        <div class="logo-container">
-            <a href="{% url 'home' %}"><span style="color: #fff; font-size: 18px; font-weight: bold;">S.Konect</span></a>
-  </div>
-  <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        {% comment %} <li><a href="{% url 'index' %}">home</a></li> {% endcomment %}
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'career'%}">Features</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Service</a></li>
-        <li><a href="{% url 'verify_otp' %}">Verify</a></li>
-    </ul>
-    <div class="btn">
-    {% if user.is_authenticated %}
-
-    <!-- <h3>Hello {{ fname }}</h3>
-    <h4>You are loggedin succesfully</h4> -->
-    <button type="submit"> <a href="signout">SignOUt</a></button>
-    {% comment %} <a href="signout"> <button type="submit">Sign OUt</button></a> {% endcomment %}
-
-    {% else %}
-
-    <a href="signup"> <button class="button" type="submit">Sign Up</button></a>
-    <a href="signin"> <button class="button" type="submit">Sign In</button></a>
-
-    {% endif %}
-
-    </div>
-    <div class="toggle-icon" onclick="toggleNavbar()">&#9776;</div>
-
-    </div>
-
-    <!-- Your page content goes here -->
+{% block content %}
 <section id="home">
-  <div class="profile">
-    <div class="text">
-        <!-- <h1>Find Friends</h1> -->
-        <h1>Students Konnect!</h1>
-        {% comment %} <h2>We are dedicated to help you find native friends abroad</h2> {% endcomment %}
-        <p>Forge Connections Beyond Borders: Connect with students from your home country who are navigating the same foreign city.<p>
-    <!-- <p>We can help you find friends, starting a new life. </p> -->
-    <div class="button">
-        <button type="button"><a href="">learn more</a></button>
+    <div class="profile">
+        <div class="text">
+            <h1>Students Konnect!</h1>
+            <p>Forge Connections Beyond Borders: Connect with students from your home country who are navigating the same foreign city.</p>
+            <div class="button">
+                <button type="button"><a href="">Learn More</a></button>
+            </div>
+        </div>
     </div>
+    <div class="prof-pic">
+        {% comment %} <img src="{% static 'image/going.jpg' %}" alt="" style="width: 100%; height: 100%;"> {% endcomment %}
     </div>
-  </div>
-  <div class="prof-pic">
-    <img src="{% static 'image/going.jpg' %}" alt="" style="width: 100%;height:100%">
-
-  </div>
-   {% comment %} <footer>
-        <p> Connect with us at: <span></span><i class="fa-solid fa-envelope"></i></p>
-        <p>term&conditions apply</p>
-    </footer> {% endcomment %}
 </section>
-<footer>
-        <p> Connect with us at: <span></span><i class="fa-solid fa-envelope"></i></p>
-        <p>term&conditions apply</p>
-    </footer>
-<script src="{% static 'js/script.js' %}"></script>
-    
-    <script src="" async defer></script>
-</body>
-</html>
+{% endblock %}
