@@ -2,16 +2,21 @@
 
 {% block title %}About Us{% endblock %}
 
+{% block extra_css %}
+{% comment %} <link rel="stylesheet" href="{% static 'css/about.css' %}"> {% endcomment %}
+{% endblock %}
+
 {% block content %}
 <section id="about">
     <div class="about-page">
         <div class="mage">
-            <img src="{% static 'image/happy.jpg' %}" alt="" style="width: 100%;">
+            {% comment %} <img src="{% static 'image/happy.jpg' %}" alt="" style="width: 100%;"> {% endcomment %}
         </div>
         <div class="info">
+            <h2> hello world</h2>
             <h1> What We Do! </h1>
             <h2>Welcome to Student Konnect - Your Gateway to Connection Abroad!</h2>
-            <p>At Student Konnect, we understand the unique and exciting journey of being a student in a foreign country. Navigating a new culture, forging connections, and creating a sense of belonging can be both thrilling and challenging. That's why we've created a vibrant online space dedicated to fostering a sense of community among native students studying abroad</p>
+            <p>At Student Konnect, we understand the unique and exciting journey of being a student in a foreign country. Navigating a new culture, forging connections, and creating a sense of belonging can be both thrilling and challenging. That's why we've created a vibrant online space dedicated to fostering a sense of community among native students studying abroad.</p>
             <div class="btn">
                 <a href="{% url 'signup' %}"><button class="button">Find Friends</button></a>
                 <a href="signup.html"><button class="button">Learn More</button></a>

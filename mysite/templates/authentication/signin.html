@@ -7,7 +7,7 @@
     <form action="/signin" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="image-upload-container">
-            <img class="image-preview" src="{% static 'image/woman.jpg' %}" alt="Dummy Image" id="previewImage">
+            {% comment %} <img class="image-preview" src="{% static 'image/woman.jpg' %}" alt="Dummy Image" id="previewImage"> {% endcomment %}
             <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewProfileImage()">
         </div>
         <label for="username">Username:</label>
