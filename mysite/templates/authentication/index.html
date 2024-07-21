@@ -33,6 +33,7 @@
         <li><a href="{% url 'career'%}">Features</a></li>
         <li><a href="#">Contact</a></li>
         <li><a href="#">Service</a></li>
+        <li><a href="{% url 'verify_otp' %}">Verify</a></li>
     </ul>
     <div class="btn">
     {% if user.is_authenticated %}
