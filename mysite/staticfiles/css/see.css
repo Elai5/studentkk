@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@1,200&family=Itim&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none; 
+  /* outline: 0; */
+  /* border: 0; */
+}
+body {
+  height: 100vh;
+  font-family: 'Arial', sans-serif;
+  font-family: 'Itim', cursive;
+  text-decoration: none;
+  /* background-color: #ddd; */
+}
+.navbar {
+  /* background-color: #3498db; */
+  background-color: #00a693;
+  background-color: #008080;
+  background-color: #000080;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  /* padding: 5px; */
+}
+.logo-container {
+  width: auto; /* Set to auto to adjust based on text size */
+}
+.logo-container:hover{
+  color: red;
+}
+.navbar ul {
+  display: flex;
+}
+.navbar li {
+  margin-right: 8px; /* Adjust the margin to reduce space between links */
+}
+.navbar a {
+  color: #fff; 
+  padding: 0 10px; /* Adjust the padding to reduce space between links */
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+}
+.navbar a:hover {
+   /* background-color: #ddd; */
+  /* color: #333; */
+  text-decoration: underline;  
+  }
+.navbar .button {
+  background-color: #f8f9fa;
+  color: black;
+  /* border: 1px solid navy; */
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.navbar .button:hover{
+  background-color: teal;
+  cursor: pointer;
+}
+.toggle-icon {
+  display: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute; /* Add absolute positioning */
+  top: 10px; /* Adjust the top position as needed */
+  right: 15px; /* Adjust the right position as needed */
+}
+@media screen and (max-width: 600px) {
+  .navbar {
+    padding: 20px 15px; /* Adjust the padding to fit the toggle bar and logo */
+  }
+  .navbar a, .navbar .button {
+      display: none;
+  }
+  .navbar .logo-container {
+    width: auto; /* Set to auto to adjust based on text size */
+    position: absolute;
+    top: 10px;
+    left: 15px;
+  }
+  .navbar .toggle-icon {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+  }
+  .navbar.responsive {
+    flex-direction: column;
+    text-align: center;
+  }
+  .navbar.responsive ul {
+    flex-direction: column;
+  }
+  .navbar.responsive a, .navbar.responsive .button {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 14px 23px;
+    cursor: pointer;
+  }
+  .navbar a:hover {
+    background-color: #ddd;
+    color: #333;
+    width:100%;
+  }
+  }
+
+#about{
+  background-color: #fff;
+  /* height:92vh; */
+  justify-content: space-around;
+  /* padding:30px; */
+}
+.about-page{
+  display: flex;
+  /* margin-top: 60px; */
+  justify-content: space-around;
+  padding: 30px;
+}
+.about-page .mage{
+  width: 750px;
+  height:600px;
+  /* border: 2px solid blue; */
+  /* border-radius: 15px; */
+  margin-top: 80px;
+}
+.about-page .mage img{
+  width: 100%;
+  height: 100%;
+  /* border-radius: 15px; */
+  /* box-shadow: 10px 10px 10px 10px yellow; */
+}
+.about-page .info{
+  width: 800px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 50px;
+  margin-top: 80px;
+  /* background-color: gold; */
+}
+.info h1{
+    color: navy;
+    font-size: 36px;
+    /* text-align: center; */
+    margin-bottom: 40px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    line-height: 22px;
+}
+.info h2{
+  font-family: 'Inter Tight', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+.info p{
+  font-size: 20px;
+  margin-bottom: 15px;
+  line-height: 32px;
+  margin-bottom: 20px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.info .btn{
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* background-color: red; */
+    
+    position: relative;
+    display: flex;
+}
+.info .btn button{
+  outline: 0;
+  border: 0;
+  border: 2px solid #3498db;
+  box-shadow: 0px 2px 0px #3498db;
+  background-color: navy;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  /* text-decoration: none; */
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+footer{
+  height: 40px;
+  background-color: #000080;
+  position:absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+}
+.fa-solid{
+  font-size: 23px;
+  color: white;
+}
+@media screen and (max-width: 600px) {
+  #about{
+    margin-top: -100px;
+    /* height: 100vh; */
+    display: flex;
+    /* background-color: #d02b2b; */
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+  }
+  .about-page{
+    display: inline;
+    justify-content: center;
+    align-items: center;
+  }
+  .about-page .mage{
+    /* display: none; */
+    width: 350px;
+    height: 200px;
+    border-radius: 10px;
+  }
+  .about-page .mage img {
+    border-radius: 15px;
+  }
+  .about-page .info h1, h2{
+    text-align: center;
+  }
+  .about-page .info {
+    width: 300px;
+    font-size: 15px;
+    margin-top: -30px;
+    text-align: justify;
+    padding: 0 2px;
+  }
+  .about-page .info p {
+    width: 300px;
+    font-size: 18px;
+  }
+  .btn {
+    display: inline;
+  }
+  footer{
+    display: none;
+    position: relative;
+    bottom: 0;
+  }
+}
+@media screen and (max-width:768px) {
+  .navbar{
+    padding: 20px;
+  }
+  .navbar .button{
+    display: none;
+    background-color: red;
+  }
+  #about{
+    margin-top: -90px;
+    justify-content: center;
+    align-items: center;
+    /* /* display: flex; */
+  }
+  .about-page{
+    display: inline;
+    /* margin-top: -90px; */
+  }
+  .about-page .mage{
+    height: 340px;
+  }
+  .info{
+    display: block;
+    text-align: justify;
+    /* width: 200px; */
+    border: 2px solid rgb(0, 21, 255);
+    background-color: red;
+  }
+  .info p{
+    width: 500px;
+  }
+    
+}
+/* features section */
+
