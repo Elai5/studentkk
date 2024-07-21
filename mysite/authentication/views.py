@@ -16,12 +16,14 @@ from django.urls import reverse
 def home(request):
     return render(request, "authentication/index.html")
 
+def homepage(request):
+    return render(request, "authentication/homepage.html")
+
 def get_email_domain(email):
     domain_parts = email.split('@')[-1].split('.')
     if len(domain_parts) >= 2:
         return '.'.join(domain_parts[-2:])
     return domain_parts[0]
-
 
 def signup(request):
     if request.method == "POST":
@@ -118,8 +120,9 @@ def signin(request):
         
         if user is not None:
             login(request, user)
-            fname = user.first_name
-            return render(request, "authentication/index.html", {'fname': fname})
+            return redirect('homepage')
+            # fname = user.first_name
+            # return render(request, "authentication/index.html", {'fname': fname})
         else:
             messages.error(request, "Bad credentials")
             return redirect('home')
@@ -146,3 +149,4 @@ def universities_data(request):
 
     # Return the data as a JSON response
     return JsonResponse(universities_data, safe=False)
+

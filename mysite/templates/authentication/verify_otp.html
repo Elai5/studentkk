@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Verify OTP</title>
-</head>
-<body>
-    <h1>Verify OTP</h1>
-    <form method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="email" value="{{ email }}">
-        <label for="otp">Enter OTP:</label>
-        <input type="text" id="otp" name="otp" required>
-        <button type="submit">Verify</button>
-    </form>
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-</body>
-</html>
+{% extends "authentication/base.html" %}
+
+{% block title %}Verify OTP{% endblock %}
+
+{% block content %}
+<h1>Verify OTP</h1>
+<form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="email" value="{{ email }}">
+    <label for="otp">Enter OTP:</label>
+    <input type="text" id="otp" name="otp" required>
+    <button type="submit">Verify</button>
+</form>
+{% endblock %}
