@@ -169,98 +169,106 @@ footer p {
   }
 }
 
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  .navbar {
+    padding: 15px;
+    /* Adjust padding for tablet */
+    flex-wrap: wrap;
+    /* Allow items to wrap if necessary */
+  }
+
+  .navbar a,
+  .navbar .button {
+    display: inline-block;
+    margin: 0 5px;
+    /* Add margin for spacing between buttons */
+    font-size: 14px;
+    /* Adjust font size for tablet */
+  }
+
+  .navbar .logo-container {
+    flex: 1;
+    /* Allow logo to take available space */
+  }
+
+  .navbar .toggle-icon {
+    display: none;
+    /* Hide toggle icon on tablet */
+  }
+
+  .navbar.responsive {
+    flex-direction: column;
+    /* Stack items vertically in responsive mode */
+    text-align: center;
+    /* Center text in responsive mode */
+  }
+
+  .navbar.responsive ul {
+    flex-direction: column;
+    /* Stack menu items vertically */
+  }
+
+  .navbar.responsive a,
+  .navbar.responsive .button {
+    display: block;
+    /* Show links and buttons in block format */
+    width: 100%;
+    /* Full width for buttons */
+    padding: 10px;
+    /* Adjust padding for buttons */
+  }
+}
+
 /* Home Section Styles */
 #home {
   display: flex;
-  flex-direction: row;
-  /* Ensure items are side by side */
-  justify-content: flex-start;
-  /* Align items to the start */
-  align-items: flex-start;
-  /* Align items to the start */
-  width: 100%;
-  /* Full width for the parent */
-  padding: 20px;
-  box-sizing: border-box;
-  /* Include padding in width calculation */
-}
-
-.profile {
-  display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-  width: 100%;
-  /* Full width for profile */
-  max-width: 600px;
-  /* Optional: limit max width */
-  height: auto;
-  position: relative;
-  box-sizing: border-box;
-  /* Include padding in width calculation */
-}
-
-.text {
-  margin: 20px;
-  padding: 20px;
-  width: 100%;
-  max-width: 600px;
-}
-
-.profile h1 {
-  font-size: 24px;
-  font-weight: lighter;
-  margin-bottom: 20px;
-  font-family: 'Itim', cursive;
-}
-
-.profile h2 {
-  font-family: 'Katibeh', serif;
-  font-weight: 400;
-  font-size: 32px;
-  line-height: 36px;
-}
-
-.profile p {
-  font-family: 'Katibeh', serif;
-  font-weight: 400;
-  font-size: 16px;
-}
-
-.profile button {
-  margin-top: 10px;
-  border-radius: 5px;
-  background-color: #000080;
-  color: white;
-  padding: 8px 16px;
-  border: 1px solid white;
-  width: 100%;
-}
-
-.profile button a {
-  color: white;
-  text-transform: capitalize;
-}
-
-.profile button:hover {
-  background-color: #3498db;
-  color: white;
+  height: 100vh;
+  padding-top: 5px;
 }
 
 .prof-pic {
   flex: 1;
-  height: auto;
-  position: relative;
-  overflow: hidden;
-  width: 50%;
+  width: 100%;
   border: 2px solid gold;
   background-color: #f0e68c;
 }
 
-.profile-pic img {
+.profile {
+  order: 2;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  padding: 10px;
+  flex: 1;
+}
+
+.text {
+  margin: 20px;
+  padding: 10px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.profile h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.profile h2 {
+  font-size: 20px;
+  margin: 5px 0;
+  width: 100%;
+  text-align: left;
+}
+
+.profile p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 5px 0;
+  width: 100%;
+  text-align: left;
 }
 
 @media screen and (min-width: 601px) and (max-width: 1024px) {
@@ -280,17 +288,17 @@ footer p {
   }
 
   .profile h1 {
-    font-size: 40px;
+    font-size: 30px;
     color: red;
   }
 
   .profile h2 {
-    font-size: 56px;
+    font-size: 28px;
     padding-top: 30px;
   }
 
   .profile p {
-    font-size: 40px;
+    font-size: 25pxpx;
     line-height: 42px;
   }
 
@@ -304,7 +312,6 @@ footer p {
     display: flex;
     flex-direction: column;
     padding-top: 5px;
-    background-color: sandybrown;
     align-items: flex-start;
   }
 
@@ -315,8 +322,6 @@ footer p {
     position: relative;
     width: 100%;
     padding: 10px;
-    background-color: red;
-    height: 20vh;
   }
 
   .text {
@@ -331,7 +336,7 @@ footer p {
     width: 100%;
     height: auto;
     border: 2px solid gold;
-    /* background-color: #f0e68c; */
+    background-color: #f0e68c;
   }
 
   .profile h1 {
