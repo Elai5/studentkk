@@ -120,7 +120,8 @@ footer p {
     padding: 20px 15px;
   }
 
-  .navbar a, .navbar .button {
+  .navbar a,
+  .navbar .button {
     display: none;
   }
 
@@ -147,7 +148,8 @@ footer p {
     flex-direction: column;
   }
 
-  .navbar.responsive a, .navbar.responsive .button {
+  .navbar.responsive a,
+  .navbar.responsive .button {
     display: block;
     width: 100%;
     text-align: center;
@@ -220,14 +222,25 @@ input[type="file"] {
   cursor: pointer;
 }
 
-#username, #fname, #lname, #email, #country, #location, #institution, #pass1, #pass2, #password {
+#username,
+#fname,
+#lname,
+#email,
+#country,
+#location,
+#institution,
+#pass1,
+#pass2,
+#password {
   width: 100%;
   padding: 8px;
   margin-bottom: 12px;
   box-sizing: border-box;
 }
 
-select#country, select#location, select#institution {
+select#country,
+select#location,
+select#institution {
   width: 100%;
   padding: 8px;
   margin-bottom: 12px;
@@ -339,20 +352,30 @@ p {
 @media screen and (max-width: 600px) {
   #home {
     padding-top: 10px;
+    border: 2px solid gold;
+    /* position: relative; */
+    /* top: -120px; */
   }
 
   .profile {
     justify-content: center;
     align-items: center;
     position: relative;
+    border: 2px solid green;
+    /* top: -120px; */
+  }
+
+  .text {
+    border: 2px solid red;
   }
 
   h1 {
-    padding-top: 30px;
+    /* padding-top: 30px; */
     text-align: center;
   }
 
-  h2, p {
+  h2,
+  p {
     text-align: start;
   }
 }
@@ -456,7 +479,8 @@ p {
     border-radius: 15px;
   }
 
-  .about-page .info h1, h2 {
+  .about-page .info h1,
+  h2 {
     text-align: center;
   }
 
