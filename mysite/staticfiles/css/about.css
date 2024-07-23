@@ -1,0 +1,165 @@
+/* About Section */
+section{
+    background-color: #2980b9;
+    height: 800px;
+  }
+#about {
+  background-color: #fff;
+  justify-content: space-around;
+}
+
+.about-page {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+}
+
+.about-page .mage {
+  width: 750px;
+  height: 600px;
+  margin-top: 80px;
+}
+
+.about-page .mage img {
+  width: 100%;
+  height: 100%;
+}
+
+.about-page .info {
+  width: 800px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  top: 50px;
+  margin-top: 80px;
+}
+
+.info h1 {
+  color: navy;
+  font-size: 36px;
+  margin-bottom: 40px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  line-height: 22px;
+}
+
+.info h2 {
+  font-family: 'Inter Tight', sans-serif, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.info p {
+  font-size: 20px;
+  margin-bottom: 15px;
+  line-height: 32px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.info .btn {
+  position: relative;
+  display: flex;
+}
+
+.info .btn button {
+  outline: 0;
+  border: 0;
+  border: 2px solid #3498db;
+  box-shadow: 0px 2px 0px #3498db;
+  background-color: navy;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+@media screen and (max-width: 600px) {
+  #about {
+    margin-top: -100px;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+  }
+
+  .about-page {
+    display: inline;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-page .mage {
+    width: 350px;
+    height: 200px;
+    border-radius: 10px;
+  }
+
+  .about-page .mage img {
+    border-radius: 15px;
+  }
+
+  .about-page .info h1, h2 {
+    text-align: center;
+  }
+
+  .about-page .info {
+    width: 300px;
+    font-size: 15px;
+    margin-top: -30px;
+    text-align: justify;
+    padding: 0 2px;
+  }
+
+  .about-page .info p {
+    width: 300px;
+    font-size: 18px;
+  }
+
+  .btn {
+    display: inline;
+  }
+
+  footer {
+    display: none;
+    position: relative;
+    bottom: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 20px;
+  }
+
+  .navbar .button {
+    display: none;
+  }
+
+  #about {
+    margin-top: -90px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .about-page {
+    display: inline;
+  }
+
+  .about-page .mage {
+    height: 340px;
+  }
+
+  .info {
+    display: block;
+    text-align: justify;
+    border: 2px solid rgb(0, 21, 255);
+    background-color: red;
+  }
+
+  .info p {
+    width: 500px;
+  }
+}
