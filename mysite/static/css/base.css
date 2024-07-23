@@ -280,6 +280,53 @@ footer p {
 }
 
 /* Media Query for Mobile Devices */
+/* Media Query for Tablet Devices */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  #home {
+    padding: 20px;
+    /* Adjust padding for tablet */
+  }
+
+  .profile {
+    padding: 40px;
+    /* Adjust padding for tablet */
+    width: 80%;
+    /* Adjust width for tablet */
+  }
+
+  .text {
+    margin: 40px;
+    /* Adjust margin for tablet */
+    padding: 20px;
+    /* Adjust padding for tablet */
+    width: 100%;
+    /* Full width on tablet */
+  }
+
+  .profile h1 {
+    font-size: 60px;
+    color: red;
+    /* Increase font size for tablet */
+  }
+
+  .profile h2 {
+    font-size: 56px;
+    padding-top: 30px;
+    /* Increase font size for tablet */
+  }
+
+  .profile p {
+    font-size: 40px;
+    line-height: 42px;
+    /* Increase font size for tablet */
+  }
+
+  .profile button {
+    padding: 10px 20px;
+    /* Adjust padding for tablet */
+  }
+}
+
 @media screen and (max-width: 600px) {
   #home {
     padding-top: 5px;
@@ -297,20 +344,25 @@ footer p {
     border: 2px solid red;
   } */
 
-  h1 {
+  .profile h1 {
     padding-top: 10px;
     /* Adjust padding for mobile */
-    text-align: center;
+    text-align: start;
     color: green;
-    font-size: 43px;
+    font-size: 33px;
   }
 
-  h2,
-  p {
+  .profile h2 {
+    font-size: 24px;
     text-align: start;
-    font-size: 32px;
-    line-height: 35px;
   }
+
+  .profile p {
+    font-size: 18px;
+    line-height: 28px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
 }
 
 /* Form Styles */
