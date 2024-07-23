@@ -584,99 +584,131 @@ p {
 @media screen and (max-width: 600px) {
   #about {
     display: flex;
-    /* Use flexbox for centering */
     flex-direction: column;
-    /* Stack elements vertically */
     justify-content: center;
-    /* Center items vertically */
     align-items: center;
-    /* Center items horizontally */
     margin-top: 0;
-    /* Reset margin-top */
     overflow: auto;
-    /* Allow scrolling if content overflows */
     padding: 10px;
-    /* Add some padding for better spacing */
     height: 100vh;
-    /* Set height to cover the entire viewport height */
   }
 
   .about-page {
     display: flex;
-    /* Use flexbox for layout */
     flex-direction: column;
-    /* Stack items vertically */
     justify-content: center;
-    /* Center items vertically */
     align-items: center;
-    /* Center items horizontally */
     width: 100%;
-    /* Full width */
     height: 100%;
-    /* Full height to fill the parent */
     padding: 0;
-    /* Reset padding */
   }
 
   .about-page .mage {
     width: 100%;
-    /* Full width for the image container */
     max-width: 320px;
-    /* Limit max width for larger screens */
     height: auto;
-    /* Maintain aspect ratio */
     border-radius: 10px;
     margin-bottom: 10px;
-    /* Add space below the image */
   }
 
   .about-page .mage img {
     width: 100%;
-    /* Make image responsive */
     height: auto;
-    /* Maintain aspect ratio */
     border-radius: 15px;
   }
 
   .about-page .info {
     width: 100%;
-    /* Full width for the info container */
     max-width: 300px;
-    /* Limit max width for larger screens */
     font-size: 15px;
     text-align: justify;
     padding: 0 2px;
     margin: 0;
-    /* Reset margin */
   }
 
   .about-page .info h1,
   .about-page .info h2 {
     text-align: center;
-    /* Center headings */
     margin: 10px 0;
-    /* Add margin for spacing */
   }
 
   .about-page .info p {
     width: 100%;
-    /* Full width for paragraphs */
     font-size: 18px;
-    /* Font size for paragraphs */
     margin: 0;
-    /* Reset margin */
   }
 
   .btn {
     display: inline-block;
-    /* Change to inline-block for better spacing */
     margin-top: 10px;
-    /* Add margin for spacing */
   }
 
   footer {
     display: none;
-    /* Hide footer */
+    position: relative;
+    bottom: 0;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  #about {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    padding: 20px;
+  }
+
+  .about-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .about-page .mage {
+    width: 50%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+
+  .about-page .mage img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+  }
+
+  .about-page .info {
+    width: 50%;
+    max-width: 400px;
+    font-size: 16px;
+    text-align: justify;
+    padding: 0 10px;
+  }
+
+  .about-page .info h1,
+  .about-page .info h2 {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .about-page .info p {
+    width: 100%;
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  footer {
+    display: none;
     position: relative;
     bottom: 0;
   }
