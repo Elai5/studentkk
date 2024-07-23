@@ -48,7 +48,7 @@ body {
   margin: 0 5px;
   color: white;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 18px;
   padding: 5px 10px;
 }
 
@@ -218,20 +218,52 @@ footer {
 }
 
 .profile h1 {
-  font-size: 24px;
-  margin: 0;
+  font-size: 36px;
+  font-weight: lighter;
+  margin-bottom: 50px;
+  font-family: 'Itim', cursive;
 }
 
 .profile h2 {
-  font-size: 20px;
-  margin: 5px 0;
+  font-family: 'Katibeh', serif;
+  font-weight: 400;
+  font-size: 58px;
+  line-height: 52px;
 }
 
 .profile p {
-  font-size: 16px;
+  font-family: 'Katibeh', serif;
+  font-weight: 400;
+  font-size: 26px;
   line-height: 1.5;
   margin: 5px 0;
 }
+
+.profile button {
+  margin-top: 30px;
+  border-radius: 5px;
+  outline: 0;
+  border: none;
+  background-color: navy;
+  color: white;
+}
+
+.profile button a {
+  color: white;
+  text-transform: capitalize;
+}
+
+.profile button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid navy;
+}
+
+.profile button a:hover {
+  color: black;
+}
+
+
 
 
 
@@ -244,27 +276,27 @@ footer {
   .profile {
     padding: 40px;
     width: 80%;
+
   }
 
   .text {
-    margin: 40px;
     padding: 20px;
     width: 100%;
   }
 
   .profile h1 {
-    font-size: 30px;
+    font-size: 40px;
     color: red;
   }
 
   .profile h2 {
-    font-size: 28px;
-    padding-top: 30px;
+    font-size: 32px;
+    line-height: 30px;
   }
 
   .profile p {
-    font-size: 25pxpx;
-    line-height: 42px;
+    font-size: 25px;
+    padding-top: 10px;
   }
 
   .profile button {
@@ -278,6 +310,7 @@ footer {
     flex-direction: column;
     padding-top: 5px;
     align-items: flex-start;
+    background-color: red;
   }
 
   .profile {
@@ -287,6 +320,7 @@ footer {
     position: relative;
     width: 100%;
     padding: 10px;
+    background-color: green;
   }
 
   .text {
@@ -305,23 +339,26 @@ footer {
   }
 
   .profile h1 {
-    font-size: 24px;
+    font-size: 28px;
     margin: 0;
+
   }
 
   .profile h2 {
-    font-size: 20px;
-    margin: 5px 0;
+    font-size: 25px;
+    line-height: 22px;
+    margin: 15px 0;
     width: 100%;
     text-align: left;
+
   }
 
   .profile p {
-    font-size: 16px;
-    line-height: 1.5;
+    font-size: 19px;
+    /* line-height: 1.5; */
     margin: 5px 0;
     width: 100%;
-    text-align: left;
+    /* text-align: left; */
   }
 }
 
