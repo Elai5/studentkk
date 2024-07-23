@@ -12,46 +12,44 @@
 }
 
 body {
-  height: 100vh;
   font-family: 'Arial', sans-serif, 'Itim', cursive;
   background-size: cover;
   background-repeat: no-repeat;
+  height: 100vh;
+  /* Ensure body takes full viewport height */
 }
 
-/* Navbar Styles */
 .navbar {
   background-color: #000080;
-  overflow: hidden;
-  text-align: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
+  padding: 5px;
 }
 
 .logo-container {
   width: auto;
 }
 
-.logo-container:hover {
-  color: red;
-}
-
 .navbar ul {
   display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
 .navbar li {
   margin-right: 8px;
 }
 
-.navbar a {
-  color: #fff;
-  padding: 0 10px;
+.navbar a,
+.navbar .button {
   display: inline-block;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 16px;
+  margin: 0 5px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 5px 10px;
 }
 
 .navbar a:hover {
@@ -66,18 +64,13 @@ body {
 .navbar .button {
   background-color: #f8f9fa;
   color: black;
-  padding: 10px 20px;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 14px;
   border-radius: 4px;
 }
 
 .navbar .button:hover {
   background-color: teal;
-  cursor: pointer;
 }
 
 .toggle-icon {
@@ -90,30 +83,20 @@ body {
   right: 15px;
 }
 
-/* Footer Styles */
 footer {
   height: 40px;
   background-color: #000080;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: white;
   font-size: 20px;
+  padding: 0 10px;
 }
 
-.fa-solid {
-  font-size: 23px;
-  color: white;
-}
-
-footer p {
-  font-size: 21px;
-}
-
-/* Media Queries */
 @media screen and (max-width: 600px) {
   .navbar {
     padding: 20px 15px;
@@ -125,7 +108,6 @@ footer p {
   }
 
   .navbar .logo-container {
-    width: auto;
     position: absolute;
     top: 10px;
     left: 15px;
@@ -151,7 +133,6 @@ footer p {
   .navbar.responsive .button {
     display: block;
     width: 100%;
-    text-align: center;
     padding: 14px 23px;
     cursor: pointer;
   }
@@ -164,67 +145,52 @@ footer p {
 
   footer {
     display: none;
-    position: relative;
-    bottom: 0;
   }
 }
 
 @media screen and (min-width: 601px) and (max-width: 1024px) {
   .navbar {
-    padding: 15px;
-    /* Adjust padding for tablet */
-    flex-wrap: wrap;
-    /* Allow items to wrap if necessary */
+    padding: 10px;
   }
 
   .navbar a,
   .navbar .button {
     display: inline-block;
     margin: 0 5px;
-    /* Add margin for spacing between buttons */
     font-size: 14px;
-    /* Adjust font size for tablet */
   }
 
   .navbar .logo-container {
     flex: 1;
-    /* Allow logo to take available space */
   }
 
   .navbar .toggle-icon {
     display: none;
-    /* Hide toggle icon on tablet */
   }
 
   .navbar.responsive {
-    flex-direction: column;
-    /* Stack items vertically in responsive mode */
+    flex-direction: row;
     text-align: center;
-    /* Center text in responsive mode */
   }
 
   .navbar.responsive ul {
-    flex-direction: column;
-    /* Stack menu items vertically */
+    flex-direction: row;
   }
 
   .navbar.responsive a,
   .navbar.responsive .button {
-    display: block;
-    /* Show links and buttons in block format */
-    width: 100%;
-    /* Full width for buttons */
+    display: inline-block;
     padding: 10px;
-    /* Adjust padding for buttons */
   }
 }
+
 
 /* Home Section Styles */
 #home {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  padding-top: 5px;
+  /* padding-top: 5px; */
 }
 
 .prof-pic {
