@@ -170,50 +170,38 @@ footer p {
 }
 
 /* Home Section Styles */
-
 #home {
   display: flex;
-  flex-direction: column;
-  /* Change to column for mobile */
+  flex-direction: row;
+  /* Align items side by side */
   justify-content: center;
   align-items: center;
   padding: 20px;
-  /* Add padding for mobile */
 }
 
 #home .profile {
   display: flex;
   flex-direction: column;
-  /* Stack elements vertically on mobile */
   justify-content: center;
   padding: 20px;
-  /* Adjust padding for mobile */
-  width: 100%;
-  /* Full width on mobile */
+  width: 50%;
+  /* Set width to 50% for the profile */
   max-width: 600px;
-  /* Limit max width for larger screens */
   height: auto;
-  /* Allow height to adjust */
   position: relative;
 }
 
 .text {
   margin: 20px;
-  /* Reduce margin for mobile */
   padding: 20px;
-  /* Adjust padding for mobile */
   width: 100%;
-  /* Full width on mobile */
   max-width: 600px;
-  /* Limit max width for larger screens */
 }
 
 .profile h1 {
   font-size: 24px;
-  /* Smaller font size for mobile */
   font-weight: lighter;
   margin-bottom: 20px;
-  /* Reduce margin for mobile */
   font-family: 'Itim', cursive;
 }
 
@@ -221,29 +209,23 @@ footer p {
   font-family: 'Katibeh', serif;
   font-weight: 400;
   font-size: 32px;
-  /* Smaller font size for mobile */
   line-height: 36px;
-  /* Adjust line height */
 }
 
 .profile p {
   font-family: 'Katibeh', serif;
   font-weight: 400;
   font-size: 16px;
-  /* Smaller font size for mobile */
 }
 
 .profile button {
   margin-top: 10px;
-  /* Reduce margin for mobile */
   border-radius: 5px;
   background-color: #000080;
   color: white;
   padding: 8px 16px;
-  /* Adjust padding for mobile */
   border: 1px solid white;
   width: 100%;
-  /* Full width button */
 }
 
 .profile button a {
@@ -263,86 +245,91 @@ footer p {
 .prof-pic {
   flex: 1;
   height: auto;
-  /* Allow height to adjust */
   position: relative;
   overflow: hidden;
-  width: 100%;
-  /* Full width on mobile */
+  width: 50%;
+  /* Set width to 50% for the profile picture */
+  border: 2px solid gold;
+  background-color: #f0e68c;
 }
 
 .profile-pic img {
   width: 100%;
   height: auto;
-  /* Maintain aspect ratio */
-  position: relative;
-  /* Change to relative for better responsiveness */
   object-fit: cover;
 }
 
-/* Media Query for Mobile Devices */
-/* Media Query for Tablet Devices */
 @media screen and (min-width: 601px) and (max-width: 1024px) {
   #home {
     padding: 20px;
-    /* Adjust padding for tablet */
   }
 
   .profile {
     padding: 40px;
-    /* Adjust padding for tablet */
     width: 80%;
-    /* Adjust width for tablet */
   }
 
   .text {
     margin: 40px;
-    /* Adjust margin for tablet */
     padding: 20px;
-    /* Adjust padding for tablet */
     width: 100%;
-    /* Full width on tablet */
   }
 
   .profile h1 {
-    font-size: 60px;
+    font-size: 40px;
     color: red;
-    /* Increase font size for tablet */
   }
 
   .profile h2 {
     font-size: 56px;
     padding-top: 30px;
-    /* Increase font size for tablet */
   }
 
   .profile p {
     font-size: 40px;
     line-height: 42px;
-    /* Increase font size for tablet */
   }
 
   .profile button {
     padding: 10px 20px;
-    /* Adjust padding for tablet */
   }
 }
 
+
 @media screen and (max-width: 600px) {
   #home {
+    display: flex;
+    /* Use flexbox layout */
+    flex-direction: column;
+    /* Stack items vertically */
     padding-top: 5px;
   }
 
   .profile {
+    order: 2;
+    /* Set order to 2 to position it below prof-pic */
     justify-content: center;
     align-items: center;
     position: relative;
-    /* border: 2px solid green; */
+    width: 100%;
+    /* Full width for profile */
+    padding: 20px;
+    /* Add padding for profile */
   }
 
-  /* 
-  .text {
-    border: 2px solid red;
-  } */
+  .prof-pic {
+    order: 1;
+    /* Set order to 1 to position it above profile */
+    width: 100%;
+    /* Full width for the image container */
+    height: auto;
+    /* Maintain aspect ratio */
+    border: 2px solid gold;
+    /* Optional: border to represent the picture */
+    background-color: #f0e68c;
+    /* Light background color as a placeholder */
+  }
+
 
   .profile h1 {
     padding-top: 10px;
@@ -362,7 +349,6 @@ footer p {
     line-height: 28px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
-
 }
 
 /* Form Styles */
@@ -526,60 +512,6 @@ p {
   cursor: pointer;
   border-radius: 4px;
 }
-
-/* 
-@media screen and (max-width: 600px) {
-  #about {
-    margin-top: -100px;
-    justify-content: center;
-    align-items: center;
-    overflow: scroll;
-  }
-
-  .about-page {
-    display: inline;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .about-page .mage {
-    width: 320px;
-    height: 200px;
-    border-radius: 10px;
-  }
-
-  .about-page .mage img {
-    border-radius: 15px;
-  }
-
-  .about-page .info h1,
-  h2 {
-    text-align: center;
-  }
-
-  .about-page .info {
-    width: 300px;
-    font-size: 15px;
-    margin-top: -30px;
-    text-align: justify;
-    padding: 0 2px;
-  }
-
-  .about-page .info p {
-    width: 300px;
-    font-size: 18px;
-  }
-
-  .btn {
-    display: inline;
-  }
-
-  footer {
-    display: none;
-    position: relative;
-    bottom: 0;
-  }
-} */
 
 @media screen and (max-width: 600px) {
   #about {
