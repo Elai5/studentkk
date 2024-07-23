@@ -173,22 +173,31 @@ footer p {
 #home {
   display: flex;
   flex-direction: row;
-  /* Align items side by side */
-  justify-content: center;
-  align-items: center;
+  /* Ensure items are side by side */
+  justify-content: flex-start;
+  /* Align items to the start */
+  align-items: flex-start;
+  /* Align items to the start */
+  width: 100%;
+  /* Full width for the parent */
   padding: 20px;
+  box-sizing: border-box;
+  /* Include padding in width calculation */
 }
 
-#home .profile {
+.profile {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 20px;
-  width: 50%;
-  /* Set width to 50% for the profile */
+  width: 100%;
+  /* Full width for profile */
   max-width: 600px;
+  /* Optional: limit max width */
   height: auto;
   position: relative;
+  box-sizing: border-box;
+  /* Include padding in width calculation */
 }
 
 .text {
@@ -238,17 +247,12 @@ footer p {
   color: white;
 }
 
-.profile button a:hover {
-  color: white;
-}
-
 .prof-pic {
   flex: 1;
   height: auto;
   position: relative;
   overflow: hidden;
   width: 50%;
-  /* Set width to 50% for the profile picture */
   border: 2px solid gold;
   background-color: #f0e68c;
 }
@@ -295,59 +299,59 @@ footer p {
   }
 }
 
-
 @media screen and (max-width: 600px) {
   #home {
     display: flex;
-    /* Use flexbox layout */
     flex-direction: column;
-    /* Stack items vertically */
     padding-top: 5px;
+    background-color: sandybrown;
+    align-items: flex-start;
   }
 
   .profile {
     order: 2;
-    /* Set order to 2 to position it below prof-pic */
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     position: relative;
     width: 100%;
-    /* Full width for profile */
-    padding: 20px;
-    /* Add padding for profile */
+    padding: 10px;
+    background-color: red;
+    height: 20vh;
+  }
+
+  .text {
+    margin: 20px;
+    padding: 10px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .prof-pic {
     order: 1;
-    /* Set order to 1 to position it above profile */
     width: 100%;
-    /* Full width for the image container */
     height: auto;
-    /* Maintain aspect ratio */
     border: 2px solid gold;
-    /* Optional: border to represent the picture */
-    background-color: #f0e68c;
-    /* Light background color as a placeholder */
+    /* background-color: #f0e68c; */
   }
 
-
   .profile h1 {
-    padding-top: 10px;
-    /* Adjust padding for mobile */
-    text-align: start;
-    color: green;
-    font-size: 33px;
+    font-size: 24px;
+    margin: 0;
   }
 
   .profile h2 {
-    font-size: 24px;
-    text-align: start;
+    font-size: 20px;
+    margin: 5px 0;
+    width: 100%;
+    text-align: left;
   }
 
   .profile p {
-    font-size: 18px;
-    line-height: 28px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 5px 0;
+    width: 100%;
+    text-align: left;
   }
 }
 
