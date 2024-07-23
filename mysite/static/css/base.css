@@ -467,6 +467,7 @@ p {
   width: 750px;
   height: 600px;
   margin-top: 80px;
+  border: 2px solid red;
 }
 
 .about-page .mage img {
@@ -526,6 +527,7 @@ p {
   border-radius: 4px;
 }
 
+/* 
 @media screen and (max-width: 600px) {
   #about {
     margin-top: -100px;
@@ -541,7 +543,7 @@ p {
   }
 
   .about-page .mage {
-    width: 350px;
+    width: 320px;
     height: 200px;
     border-radius: 10px;
   }
@@ -574,6 +576,107 @@ p {
 
   footer {
     display: none;
+    position: relative;
+    bottom: 0;
+  }
+} */
+
+@media screen and (max-width: 600px) {
+  #about {
+    display: flex;
+    /* Use flexbox for centering */
+    flex-direction: column;
+    /* Stack elements vertically */
+    justify-content: center;
+    /* Center items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    margin-top: 0;
+    /* Reset margin-top */
+    overflow: auto;
+    /* Allow scrolling if content overflows */
+    padding: 10px;
+    /* Add some padding for better spacing */
+    height: 100vh;
+    /* Set height to cover the entire viewport height */
+  }
+
+  .about-page {
+    display: flex;
+    /* Use flexbox for layout */
+    flex-direction: column;
+    /* Stack items vertically */
+    justify-content: center;
+    /* Center items vertically */
+    align-items: center;
+    /* Center items horizontally */
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height to fill the parent */
+    padding: 0;
+    /* Reset padding */
+  }
+
+  .about-page .mage {
+    width: 100%;
+    /* Full width for the image container */
+    max-width: 320px;
+    /* Limit max width for larger screens */
+    height: auto;
+    /* Maintain aspect ratio */
+    border-radius: 10px;
+    margin-bottom: 10px;
+    /* Add space below the image */
+  }
+
+  .about-page .mage img {
+    width: 100%;
+    /* Make image responsive */
+    height: auto;
+    /* Maintain aspect ratio */
+    border-radius: 15px;
+  }
+
+  .about-page .info {
+    width: 100%;
+    /* Full width for the info container */
+    max-width: 300px;
+    /* Limit max width for larger screens */
+    font-size: 15px;
+    text-align: justify;
+    padding: 0 2px;
+    margin: 0;
+    /* Reset margin */
+  }
+
+  .about-page .info h1,
+  .about-page .info h2 {
+    text-align: center;
+    /* Center headings */
+    margin: 10px 0;
+    /* Add margin for spacing */
+  }
+
+  .about-page .info p {
+    width: 100%;
+    /* Full width for paragraphs */
+    font-size: 18px;
+    /* Font size for paragraphs */
+    margin: 0;
+    /* Reset margin */
+  }
+
+  .btn {
+    display: inline-block;
+    /* Change to inline-block for better spacing */
+    margin-top: 10px;
+    /* Add margin for spacing */
+  }
+
+  footer {
+    display: none;
+    /* Hide footer */
     position: relative;
     bottom: 0;
   }
