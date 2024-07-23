@@ -42,23 +42,14 @@ def signup(request):
             messages.error(request, "Username already exists. Choose another.")
             return redirect('home')
         
-        # Check if the email address belongs to an institutional domain
-        institutional_domains = ['edu', 'ac', 'edu.au', 'edu.uk', 'ac.ke']
-        domain = get_email_domain(email)
-        if domain not in institutional_domains:
-            messages.error(request, "Please enter a valid institutional email address.")
-            return redirect('home')
-        
-        # Check if email is already registered   
+        # Check if email is already registered    
         if CustomUser.objects.filter(email=email).exists():
             # Create a mailto link
             mailto_link = f"mailto:{email}?subject=OTP%20Request&body=Please%20send%20me%20the%20OTP%20for%20my%20account."
             messages.info(request, f"An account with this email already exists. Please check your email for the OTP. If you haven't received it, click <a href='{mailto_link}'>here</a> to send a request.", extra_tags='safe')
             return render(request, "authentication/signup.html")
-        # if CustomUser.objects.filter(email=email).exists():
-        #     messages.error(request, "Email already registered.")
-        #     return redirect('home')
         
+        # Other validation checks...
         if len(username) > 10:
             messages.error(request, "Username must be under 10 characters.")
             return redirect('home')
@@ -70,7 +61,7 @@ def signup(request):
         if not username.isalnum():
             messages.error(request, "Username must be alphanumeric.")
             return redirect('home')
-        
+
         # Create a new user instance
         myuser = CustomUser.objects.create_user(
             username=username, email=email, password=pass1, 
@@ -84,24 +75,24 @@ def signup(request):
         # Generate the OTP verification URL
         otp_verification_url = f"{request.scheme}://{request.get_host()}{reverse('verify_otp')}?email={email}"
 
-        # Send OTP email
+        # Send OTP email with link
         subject = "Your OTP for StudentKonnect"
         message = (
-            f"Hello {myuser.first_name}, \n\n"
+            f"Hello {myuser.first_name},\n\n"
             f"Your OTP is {myuser.otp}. It is valid for 10 minutes.\n\n"
             f"Click this link to enter your OTP: {otp_verification_url}\n\n"
-            "Thank You, \n ELaine"
+            "Thank You,\n ELaine"
         )
-
         from_email = settings.EMAIL_HOST_USER
         to_list = [myuser.email]
         send_mail(subject, message, from_email, to_list, fail_silently=True)
-
+        
         messages.success(request, "Your account has been successfully created. Please check your email for the OTP.")
-
+        
         # Redirect to verify_otp page with email as a parameter
+        return redirect(f'{reverse("verify_otp")}?email={email}')
     
-    return render(request, "authentication/signup.html") 
+    return render(request, "authentication/signup.html")
 
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
