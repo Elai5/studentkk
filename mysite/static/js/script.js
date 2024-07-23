@@ -7,7 +7,11 @@ function toggleNavbar() {
     }
 }
 
+<<<<<<< HEAD
 document.addEventListener("DOMContentLoaded", function() {
+=======
+document.addEventListener("DOMContentLoaded", function () {
+>>>>>>> 0b0fc292652221ec74ee3dce29975c30f027de5b
     function previewProfileImage() {
         var preview = document.getElementById('previewImage');
         var fileInput = document.getElementById('profileImage');
@@ -29,6 +33,9 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(data => {
             const countrySelect = document.querySelector('#country');
             const locationSelect = document.querySelector('#location');
+
+            console.log('Country Select:', countrySelect); // Debugging line
+            console.log('Location Select:', locationSelect); // Debugging line
 
             if (countrySelect && locationSelect) {
                 data.forEach(country => {
@@ -57,6 +64,8 @@ document.addEventListener("DOMContentLoaded", function() {
     ];
 
     const institutionInput = document.querySelector('#institution');
+    console.log('Institution Input:', institutionInput); // Debugging line
+
     if (institutionInput) {
         institutionInput.addEventListener('input', () => {
             const inputValue = institutionInput.value.toLowerCase();
