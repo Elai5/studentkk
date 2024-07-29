@@ -4,15 +4,12 @@
 {% block content %}
 <section id="homepage"
   style="background-image: url('{% static 'images/background.jpg' %}'); background-size: cover; background-position: center; height: 100vh; color: white;">
-  <div class="overlay"></div> 
+  {% comment %} <div class="overlay"></div>  {% endcomment %}
   <div class="profile">
     <div class="text">
       <h1>Hello {{ user.username}}</h1>
       <h2>Welcome to {{ location }}canada!</h2>
       <p>Eager to start your new adventure? Heres ome guideline to start you off.</p>
-      {% comment %} <div class="button">
-        <button type="button"><a href="">Learn More</a></button>
-      </div> {% endcomment %}
     </div>
     <div class="card">
       <div class="row">

@@ -6,12 +6,12 @@ function toggleNavbar() {
         navbar.className = "navbar";
     }
 }
+// function toggleNavbar() {
+//     const navbar = document.getElementById('myNavbar');
+//     navbar.classList.toggle('responsive');
+// }
 
-<<<<<<< HEAD
-document.addEventListener("DOMContentLoaded", function() {
-=======
 document.addEventListener("DOMContentLoaded", function () {
->>>>>>> 0b0fc292652221ec74ee3dce29975c30f027de5b
     function previewProfileImage() {
         var preview = document.getElementById('previewImage');
         var fileInput = document.getElementById('profileImage');
