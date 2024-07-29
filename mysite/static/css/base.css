@@ -644,3 +644,17 @@ p {
     bottom: 0;
   }
 }
+
+#friends {
+  /* background-color: darkcyan; */
+  color: white;
+
+}
+
+.friend {
+  margin-top: 60px;
+  width: 600px;
+  height: 500px;
+  background-color: #FF6F20;
+  color: white;
+}

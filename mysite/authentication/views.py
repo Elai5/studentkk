@@ -1,29 +1,20 @@
 import json
-import requests
 import random
-from django.shortcuts import redirect, render
-from django.http import HttpResponse, JsonResponse
+from django.shortcuts import redirect, render, get_object_or_404
+from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import CustomUser
+from .models import CustomUser, UserProfile, FriendRequest  # Ensure all models are imported correctly
 from django.utils import timezone
 from django.urls import reverse
 
-
-# Create your views here.
 def home(request):
     return render(request, "authentication/index.html")
 
 def homepage(request):
     return render(request, "authentication/homepage.html")
-
-def get_email_domain(email):
-    domain_parts = email.split('@')[-1].split('.')
-    if len(domain_parts) >= 2:
-        return '.'.join(domain_parts[-2:])
-    return domain_parts[0]
 
 def signup(request):
     if request.method == "POST":
@@ -37,19 +28,15 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
         
-        # Check if username already exists
         if CustomUser.objects.filter(username=username).exists():
             messages.error(request, "Username already exists. Choose another.")
             return redirect('home')
         
-        # Check if email is already registered    
         if CustomUser.objects.filter(email=email).exists():
-            # Create a mailto link
             mailto_link = f"mailto:{email}?subject=OTP%20Request&body=Please%20send%20me%20the%20OTP%20for%20my%20account."
             messages.info(request, f"An account with this email already exists. Please check your email for the OTP. If you haven't received it, click <a href='{mailto_link}'>here</a> to send a request.", extra_tags='safe')
             return render(request, "authentication/signup.html")
         
-        # Other validation checks...
         if len(username) > 10:
             messages.error(request, "Username must be under 10 characters.")
             return redirect('home')
@@ -72,6 +59,14 @@ def signup(request):
         myuser.generate_otp()
         myuser.save()
         
+        # Create the UserProfile automatically
+        UserProfile.objects.create(
+            user=myuser,
+            country=country,
+            location=location,
+            institution=institution
+        )
+
         # Generate the OTP verification URL
         otp_verification_url = f"{request.scheme}://{request.get_host()}{reverse('verify_otp')}?email={email}"
 
@@ -89,10 +84,10 @@ def signup(request):
         
         messages.success(request, "Your account has been successfully created. Please check your email for the OTP.")
         
-        # Redirect to verify_otp page with email as a parameter
         return redirect(f'{reverse("verify_otp")}?email={email}')
     
     return render(request, "authentication/signup.html")
+
 
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
@@ -125,8 +120,6 @@ def signin(request):
         if user is not None:
             login(request, user)
             return redirect('homepage')
-            # fname = user.first_name
-            # return render(request, "authentication/index.html", {'fname': fname})
         else:
             messages.error(request, "Bad credentials")
             return redirect('home')
@@ -147,12 +140,65 @@ def career(request):
     return render(request, 'authentication/career.html')
 
 def universities_data(request):
-    # Read the JSON file
     with open("data/world_universities_and_domains.json", "r") as json_file:
         universities_data = json.load(json_file)
 
-    # Return the data as a JSON response
     return JsonResponse(universities_data, safe=False)
 
 def friends(request):
-    return render(request, 'authentication/friends.html')
+    if request.user.is_authenticated:
+        # Call the friend_suggestions logic to get friends based on criteria
+        user_profile = request.user
+
+        # Get friends from the same institution and country of origin
+        friends_from_school = CustomUser.objects.filter(
+            institution=user_profile.institution,
+            country=user_profile.country
+        ).exclude(id=request.user.id)
+
+        # If no friends found from the same institution, get friends from the same location
+        if not friends_from_school.exists():
+            friends_from_country = CustomUser.objects.filter(
+                location=user_profile.location,
+                country=user_profile.country
+            ).exclude(id=request.user.id)
+            friends = friends_from_country
+        else:
+            friends = friends_from_school
+
+        return render(request, "authentication/friends.html", {'friends': friends})
+    else:
+        return redirect('login')  # Redirect to login if not authenticated
+
+def friend_suggestions(request):
+    if request.user.is_authenticated:
+        user_profile = request.user
+
+        # Get friends from the same institution and country of origin
+        friends_from_school = CustomUser.objects.filter(
+            institution=user_profile.institution,
+            country=user_profile.country
+        ).exclude(id=request.user.id)
+
+        # If no friends found from the same institution, get friends from the same location
+        if not friends_from_school.exists():
+            friends_from_country = CustomUser.objects.filter(
+                location=user_profile.location,
+                country=user_profile.country
+            ).exclude(id=request.user.id)
+            friends = friends_from_country
+        else:
+            friends = friends_from_school
+
+        return render(request, 'friend_suggestions.html', {'friends': friends})
+    else:
+        return redirect('login')  # Redirect to login if not authenticated
+
+def send_friend_request(request, user_id):
+    if request.user.is_authenticated:
+        to_user = get_object_or_404(CustomUser, id=user_id)
+        if to_user != request.user:
+            FriendRequest.objects.get_or_create(from_user=request.user, to_user=to_user)
+        return redirect('friend_suggestions')  # Redirect back to suggestions
+    else:
+        return redirect('login')  # Redirect to login if not authenticated
