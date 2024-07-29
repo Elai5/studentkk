@@ -1,26 +1,42 @@
-{% extends "authentication/base.html" %} {% block title %}Home Page{% endblock%}
+{% extends "authentication/nav2.html" %}
+{% load static %} <!-- Load the static template tag library -->
+{% block title %}Home Page{% endblock %}
 {% block content %}
-<section id="home">
+<section id="home"
+  style="background-image: url('{% static 'images/background.jpg' %}'); background-size: cover; background-position: center; height: 100vh; color: white;">
   <div class="profile">
     <div class="text">
-      <h1>Hello Human</h1>
-      <p>
-        Forge Connections Beyond Borders: Connect with students from your home
-        country who are navigating the same foreign city.
-      </p>
-      <div class="button">
+      <h1>Hello {{ user.username}}</h1>
+      <h2>Welcome to {{ location }}canada!</h2>
+      <p>Eager to start your new adventure? Heres ome guideline to start you off.</p>
+      {% comment %} <div class="button">
         <button type="button"><a href="">Learn More</a></button>
+      </div> {% endcomment %}
+    </div>
+    <div class="card">
+      <div class="row">
+        <h2>Transportation</h2>
+        <p>Getting Around Canada: Transportation Tips for International Student</p>
+      </div>
+      <div class="row">
+        <h2>Housing</h2>
+        <p>Finding Accommodation in Canada: A Guide for International StudentsGetting Around Canada</p>
+      </div>
+      <div class="row">
+        <h2>culture</h2>
+        <p>Cultural Etiquette in Canada: What International Students Should Know</p>
+      </div>
+      <div class="row">
+        <h2>Food</h2>
+        <p>Exploring Canadian Cuisine: A Food Guide for International Students</p>
       </div>
     </div>
   </div>
-  <div class="prof-pic">
+  {% comment %} <div class="prof-pic"> {% endcomment %}
     {% comment %}
-    <img
-      src="{% static 'images/going.jpg' %}"
-      alt="Students Konnect"
-      style="width: 100%; height: 100%"
-    />
+    <img src="{% static 'images/going.jpg' %}" alt="Students Konnect" style="width: 100%; height: 100%" />
     {% endcomment %}
-  </div>
+    {% comment %}
+  </div> {% endcomment %}
 </section>
 {% endblock %}

@@ -35,12 +35,11 @@
         >
       </div>
       <ul>
-        <li><a href="{% url 'home' %}" class="active">Home</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'career' %}">How it works</a></li>
-        <li><a href="#">Testimonials</a></li>
-        <li><a href="#">Contact</a></li>
-        {% comment %} <li><a href="{% url 'verify_otp' %}">Verify</a></li> {% endcomment %}
+        <li><a href="{% url 'home' %}" class="active">HOME</a></li>
+        <li><a href="#">FRIENDS</a></li>
+        <li><a href="#">MESSAGES</a></li>
+        <li><a href="#">EVENTS</a></li>
+        <li><a href="#">PROFILE</a></li>
       </ul>
       <div class="btn">
         {% if user.is_authenticated %}
