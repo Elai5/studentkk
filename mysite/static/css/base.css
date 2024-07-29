@@ -187,99 +187,60 @@ footer {
   }
 }
 
-
 /* Home Section Styles */
-
 #home {
   display: flex;
-  flex-direction: row;
-  /* justify-content: center; */
-  align-items: stretch;
+  flex-direction: column;
+  /* Changed to column for vertical alignment */
   height: 100vh;
   padding: 20px;
-
 }
 
-
-/* .profile {
-  flex: 1;
+.profile {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 20px;
-}
-
-.text {
-  margin: 20px;
-  padding: 10px;
-  width: 100%;
-} */
-.profile {
-  /* display: flex; */
-  flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: flex-start; */
-  padding: 20px;
-  background-color: #f9f9f9;
+  justify-content: space-between;
+  /* Aligns text at the top and card at the bottom */
+  padding: 80px;
   min-height: 100vh;
   width: 100%;
 }
 
 .text {
-  /* text-align: center; */
-  /* Center the text */
+  padding: 30px;
   margin-bottom: 20px;
-  /* Space between text and card */
+  background-color: rgba(217, 217, 217, 0.41);
 }
 
 .card {
-  background-color: white;
-  /* White background for the card */
   border-radius: 8px;
-  /* Rounded corners */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow */
   padding: 20px;
-  /* Padding inside the card */
   width: 100%;
-  /* Full width */
-  max-width: 800px;
-  /* Increased max width for better layout */
   display: flex;
-  /* Enable flexbox */
   flex-wrap: wrap;
-  /* Allow wrapping of rows */
   justify-content: space-between;
-  /* Space rows evenly */
+  margin-top: auto;
+  /* Pushes the card to the bottom */
 }
 
 .row {
   background-color: #f0f0f0;
-  /* Light background for each row */
-  border-radius: 5px;
-  /* Rounded corners for rows */
+  border-radius: 3px;
   padding: 10px;
-  /* Padding inside each row */
   margin: 10px;
-  /* Margin around each row */
   flex: 1 1 calc(25% - 20px);
-  /* Flex-grow, flex-shrink, and basis for responsive layout */
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for rows */
-  min-width: 200px;
-  /* Minimum width for each row */
+  min-width: 300px;
 }
-
 
 h1,
 h2 {
   color: #333;
-  /* Dark text color */
 }
 
 p {
   color: #666;
-  /* Lighter text color */
 }
 
 .profile h1 {
@@ -329,104 +290,95 @@ p {
   color: black;
 }
 
-
-
-
-
-
-@media screen and (min-width: 601px) and (max-width: 1024px) {
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
   #home {
-    padding: 20px;
+    padding: 0;
+    /* Remove padding for full width on mobile */
   }
 
   .profile {
-    padding: 40px;
-    width: 80%;
-
-  }
-
-  .text {
     padding: 20px;
+    /* Reduce padding on smaller screens */
     width: 100%;
-  }
-
-  .profile h1 {
-    font-size: 40px;
-    color: red;
-  }
-
-  .profile h2 {
-    font-size: 32px;
-    line-height: 30px;
-  }
-
-  .profile p {
-    font-size: 25px;
-    padding-top: 10px;
-  }
-
-  .profile button {
-    padding: 10px 20px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  #home {
-    display: flex;
-    flex-direction: column;
-    padding-top: 5px;
-    align-items: flex-start;
-    background-color: red;
-  }
-
-  .profile {
-    order: 2;
-    justify-content: flex-start;
-    align-items: flex-start;
-    position: relative;
-    width: 100%;
-    padding: 10px;
-    background-color: green;
+    /* Ensure full width */
+    height: 100%;
+    /* Ensure full height */
   }
 
   .text {
-    margin: 20px;
-    padding: 10px;
-    width: 100%;
-    max-width: 100%;
+    padding: 15px;
+    /* Adjust padding for text */
   }
 
-  .prof-pic {
-    order: 1;
-    width: 100%;
-    height: auto;
-    border: 2px solid gold;
-    background-color: #f0e68c;
+  .card {
+    margin-top: 20px;
+    /* Adjust margin for smaller screens */
+  }
+
+  .row {
+    flex: 1 1 calc(50% - 20px);
+    /* Adjust card layout for smaller screens */
   }
 
   .profile h1 {
     font-size: 28px;
-    margin: 0;
-
+    /* Adjust font size for smaller screens */
   }
 
   .profile h2 {
-    font-size: 25px;
-    line-height: 22px;
-    margin: 15px 0;
-    width: 100%;
-    text-align: left;
-
+    font-size: 36px;
+    /* Adjust font size for smaller screens */
   }
 
   .profile p {
-    font-size: 19px;
-    /* line-height: 1.5; */
-    margin: 5px 0;
-    width: 100%;
-    /* text-align: left; */
+    font-size: 20px;
+    /* Adjust font size for smaller screens */
   }
 }
+
+@media (max-width: 480px) {
+  .row {
+    flex: 1 1 100%;
+    /* Stack rows on very small screens */
+  }
+
+  .profile {
+    padding: 10px;
+    /* Further reduce padding */
+    width: 100%;
+    /* Ensure full width */
+    height: auto;
+    /* Allow height to adjust based on content */
+  }
+
+  .text {
+    padding: 10px;
+    /* Further reduce padding on text */
+  }
+
+  .profile h1 {
+    font-size: 24px;
+    /* Further adjust font size */
+  }
+
+  .profile h2 {
+    font-size: 28px;
+    /* Further adjust font size */
+  }
+
+  .profile p {
+    font-size: 18px;
+    /* Further adjust font size */
+  }
+}
+
+
+
+
+
+
+
 
 /* Form Styles */
 #formy {
