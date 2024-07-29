@@ -9,6 +9,7 @@ class CustomUser(AbstractUser):
     institution = models.CharField(max_length=100, null=True, blank=True)
     otp = models.CharField(max_length=6, blank=True, null=True)
     otp_created_at = models.DateTimeField(blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)  # New field for profile picture
 
     def generate_otp(self):      
         self.otp = str(random.randint(100000, 999999))
@@ -18,6 +19,7 @@ class CustomUser(AbstractUser):
     def is_otp_valid(self, otp):
         expiry_time = self.otp_created_at + timezone.timedelta(minutes=10)
         return self.otp == otp and timezone.now() < expiry_time
+
 class UserProfile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     country = models.CharField(max_length=100, null=True, blank=True)

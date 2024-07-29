@@ -27,7 +27,8 @@ def signup(request):
         institution = request.POST['institution']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
-        
+        profile_image = request.FILES.get('profileImage')  # Get the uploaded image file
+
         if CustomUser.objects.filter(username=username).exists():
             messages.error(request, "Username already exists. Choose another.")
             return redirect('home')
@@ -52,7 +53,8 @@ def signup(request):
         # Create a new user instance
         myuser = CustomUser.objects.create_user(
             username=username, email=email, password=pass1, 
-            country=country, location=location, institution=institution
+            country=country, location=location, institution=institution,
+            profile_picture=profile_image  # Save the uploaded image
         )
         myuser.first_name = fname
         myuser.last_name = lname

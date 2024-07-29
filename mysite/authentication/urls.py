@@ -3,6 +3,8 @@ from django.urls import path, include
 from . import views
 from.views import universities_data
 from .views import friend_suggestions, send_friend_request
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -19,4 +21,4 @@ urlpatterns = [
     path('friends/suggestions/', friend_suggestions, name='friend_suggestions'),
     path('friends/send_request/<int:user_id>/', send_friend_request, name='send_friend_request'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

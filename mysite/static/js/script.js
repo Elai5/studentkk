@@ -6,26 +6,27 @@ function toggleNavbar() {
         navbar.className = "navbar";
     }
 }
-// function toggleNavbar() {
-//     const navbar = document.getElementById('myNavbar');
-//     navbar.classList.toggle('responsive');
-// }
+
+// Function to preview the profile image
+function previewProfileImage() {
+    const file = document.getElementById('profileImage').files[0];
+    const preview = document.getElementById('previewImage');
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            preview.src = e.target.result; // Set the image source to the uploaded file
+            preview.style.display = 'block'; // Ensure the image is displayed
+        }
+        reader.readAsDataURL(file); // Read the file as a data URL
+    } else {
+        preview.src = '{% static "images/woman.jpg" %}'; // Reset to default image if no file is selected
+    }
+}
 
 document.addEventListener("DOMContentLoaded", function () {
-    function previewProfileImage() {
-        var preview = document.getElementById('previewImage');
-        var fileInput = document.getElementById('profileImage');
-        var file = fileInput.files[0];
-
-        if (file) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-        }
-    }
+    // Add event listener for the file input to preview the image
+    document.getElementById('profileImage').addEventListener('change', previewProfileImage);
 
     // Fetch country data from the API
     fetch('https://restcountries.com/v3.1/all')
@@ -33,9 +34,6 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(data => {
             const countrySelect = document.querySelector('#country');
             const locationSelect = document.querySelector('#location');
-
-            console.log('Country Select:', countrySelect); // Debugging line
-            console.log('Location Select:', locationSelect); // Debugging line
 
             if (countrySelect && locationSelect) {
                 data.forEach(country => {
@@ -64,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     const institutionInput = document.querySelector('#institution');
-    console.log('Institution Input:', institutionInput); // Debugging line
 
     if (institutionInput) {
         institutionInput.addEventListener('input', () => {

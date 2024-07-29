@@ -1,13 +1,13 @@
 {% extends "authentication/base.html" %}
-
+{% load static %} 
 {% block title %}Sign Up{% endblock %}
 
 {% block content %}
 <section id="formy">
-    <form action="/signup" method="post" id="signup-form">
+    <form action="/signup" method="post" id="signup-form" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="image-upload-container">
-            {% comment %} <img class="image-preview" src="{% static 'image/woman.jpg' %}" alt="Dummy Image" id="previewImage"> {% endcomment %}
+            <img class="image-preview" src="{% static 'images/woman.jpg' %}" alt="Dummy Image" id="previewImage">
             <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewProfileImage()">
         </div>
 
