@@ -1,23 +1,48 @@
 {% extends "authentication/base.html" %}
-
+{% load static %} 
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
+<style>
+    #home {
+        background-image: url("{% static 'images/founders-events.jpg' %}");
+        background-size: cover; /* Cover the entire section */
+        background-position: center; /* Center the image */
+        height: 100vh; /* Set the height to cover the full viewport height */
+        display: flex; /* Use flexbox to center content */
+        align-items: center; /* Center content vertically */
+        justify-content: center; /* Center content horizontally */
+        color: white; /* Change text color for better visibility */
+        text-align: center; /* Center text */
+        position: relative; /* Position relative for overlay */
+    }
+
+    .dark-overlay {
+        position: absolute; /* Position it absolutely within the #home section */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+        z-index: 1; /* Ensure the overlay is above the background image */
+    }
+
+    .home-profile {
+        position: relative; /* Position relative to allow stacking with the overlay */
+        z-index: 2; /* Ensure content is above the overlay */
+    }
+</style>
+
 <section id="home">
-    <div class="profile">
-        <div class="text">
-            <h1>Students Konnect!</h1>
-            <h2>We are dedicated to help you find native friends abroad <h2/>
-            <p>Forge Connections Beyond Borders: Connect with students from your home country who are navigating the same foreign city.</p>
+    <div class="dark-overlay"></div> <!-- Overlay div for darkening -->
+    <div class="home-profile">
+        <div class="home-text">
+            <h2>Connect with Fellow students Abroad!!</h2>
+            <h1>FIND YOUR COMMUNITY AND MAKE THE MOST OF YOUR STUDY ABROAD EXPERIENCE</h1>
             <div class="button">
                 <button type="button"><a href="">Learn More</a></button>
             </div>
         </div>
     </div>
-    <div class="prof-pic">
-        {% comment %} <img src="{% static 'image/going.jpg' %}" alt="" style="width: 100%; height: 100%;"> {% endcomment %}
-    </div>
 </section>
 {% endblock %}
-
-

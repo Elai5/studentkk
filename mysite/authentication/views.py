@@ -199,8 +199,19 @@ def friend_suggestions(request):
 def send_friend_request(request, user_id):
     if request.user.is_authenticated:
         to_user = get_object_or_404(CustomUser, id=user_id)
+        
+        # Check if the user is not trying to send a friend request to themselves
         if to_user != request.user:
-            FriendRequest.objects.get_or_create(from_user=request.user, to_user=to_user)
-        return redirect('friend_suggestions')  # Redirect back to suggestions
+            # Create a friend request if it doesn't already exist
+            friend_request, created = FriendRequest.objects.get_or_create(from_user=request.user, to_user=to_user)
+            
+            if created:
+                messages.success(request, f"Friend request sent to {to_user.username}!")
+            else:
+                messages.info(request, f"You have already sent a friend request to {to_user.username}.")
+        else:
+            messages.error(request, "You cannot send a friend request to yourself.")
+        
+        return redirect('friend_suggestions')  # Redirect back to friend suggestions
     else:
         return redirect('login')  # Redirect to login if not authenticated

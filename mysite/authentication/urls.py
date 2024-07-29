@@ -16,9 +16,13 @@ urlpatterns = [
     path('signout', views.signout, name="signout"),
     path('verify_otp', views.verify_otp, name='verify_otp'),
     path('homepage', views.homepage, name="homepage"),
-    path('friends', views.friends, name="friends"),
+    path('friends/', views.friends, name="friends"),
     path('universities/', universities_data, name='universities_data'),
-    path('friends/suggestions/', friend_suggestions, name='friend_suggestions'),
+    path('friends/suggestions', friend_suggestions, name='friend_suggestions'),
     path('friends/send_request/<int:user_id>/', send_friend_request, name='send_friend_request'),
+    path('friend-suggestions', friend_suggestions, name='friend_suggestions'),
+    path('send-friend-request/<int:user_id>/', send_friend_request, name='send_friend_request'),
+    path('friend-suggestions/', friend_suggestions, name='friend_suggestions'),
+    path('send-friend-request/<int:user_id>/', send_friend_request, name='send_friend_request'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

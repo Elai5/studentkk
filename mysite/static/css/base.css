@@ -166,6 +166,31 @@ footer {
   }
 }
 
+/* landing page */
+/* hme section */
+#home {
+  /* height: 100vh; */
+  color: black;
+  /* margin-top: 140px; */
+}
+
+.home-profile {
+  width: 500px;
+  height: 700px;
+  /* background-color: red; */
+  margin: 120px 70px;
+}
+
+/* Add this to your CSS file */
+
+
+
+
+
+
+
+
+
 
 #homepage {
   display: flex;

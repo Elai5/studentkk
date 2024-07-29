@@ -1,0 +1,27 @@
+{% extends "authentication/base.html" %}
+{% load static %}
+
+{% block title %}Friend Suggestions{% endblock %}
+
+{% block content %}
+<section id="friend-suggestions">
+    <h2>Friend Suggestions</h2>
+    <ul>
+        {% for friend in friends %}
+            <li>
+                <div class="friend-info">
+                    {% if friend.profile_picture %}
+                        <img src="{{ friend.profile_picture.url }}" alt="{{ friend.username }}'s profile picture" class="profile-pic">
+                    {% else %}
+                        <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture" class="profile-pic">
+                    {% endif %}
+                    <span>{{ friend.first_name }} {{ friend.last_name }} - {{ friend.institution }}</span>
+                    <a href="{% url 'send_friend_request' friend.id %}">Send Friend Request</a>
+                </div>
+            </li>
+        {% empty %}
+            <li>No friend suggestions available.</li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}
