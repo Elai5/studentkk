@@ -154,3 +154,5 @@ def universities_data(request):
     # Return the data as a JSON response
     return JsonResponse(universities_data, safe=False)
 
+def friends(request):
+    return render(request, 'authentication/friends.html')

@@ -13,6 +13,7 @@ urlpatterns = [
     path('signout', views.signout, name="signout"),
     path('verify_otp', views.verify_otp, name='verify_otp'),
     path('homepage', views.homepage, name="homepage"),
+    path('friends', views.friends, name="friends"),
     path('universities/', universities_data, name='universities_data'),
 
 ]
