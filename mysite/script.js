@@ -30,9 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
             const countrySelect = document.querySelector('#country');
             const locationSelect = document.querySelector('#location');
 
-            console.log('Country Select:', countrySelect); // Debugging line
-            console.log('Location Select:', locationSelect); // Debugging line
-
             if (countrySelect && locationSelect) {
                 data.forEach(country => {
                     const option = document.createElement('option');
@@ -60,8 +57,6 @@ document.addEventListener("DOMContentLoaded", function() {
     ];
 
     const institutionInput = document.querySelector('#institution');
-    console.log('Institution Input:', institutionInput); // Debugging line
-
     if (institutionInput) {
         institutionInput.addEventListener('input', () => {
             const inputValue = institutionInput.value.toLowerCase();

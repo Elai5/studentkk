@@ -197,6 +197,7 @@ footer {
   align-items: stretch;
   height: 100vh;
   padding: 20px;
+
 }
 
 
@@ -213,18 +214,19 @@ footer {
   padding: 10px;
   width: 100%;
 } */
-/* .profile {
-  display: flex;
+.profile {
+  /* display: flex; */
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  /* align-items: center; */
+  /* justify-content: flex-start; */
   padding: 20px;
   background-color: #f9f9f9;
   min-height: 100vh;
-} */
+  width: 100%;
+}
 
 .text {
-  text-align: center;
+  /* text-align: center; */
   /* Center the text */
   margin-bottom: 20px;
   /* Space between text and card */
@@ -242,19 +244,16 @@ footer {
   width: 100%;
   /* Full width */
   max-width: 800px;
+  /* Increased max width for better layout */
   display: flex;
   /* Enable flexbox */
   flex-wrap: wrap;
   /* Allow wrapping of rows */
   justify-content: space-between;
   /* Space rows evenly */
-
-  /* Max width for the card */
 }
 
 .row {
-  /* margin-bottom: 15px;
-  flex-direction: column; */
   background-color: #f0f0f0;
   /* Light background for each row */
   border-radius: 5px;
@@ -263,14 +262,14 @@ footer {
   /* Padding inside each row */
   margin: 10px;
   /* Margin around each row */
-  flex: 1 1 calc(45% - 20px);
+  flex: 1 1 calc(25% - 20px);
   /* Flex-grow, flex-shrink, and basis for responsive layout */
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   /* Subtle shadow for rows */
   min-width: 200px;
   /* Minimum width for each row */
-  /* Space between rows */
 }
+
 
 h1,
 h2 {

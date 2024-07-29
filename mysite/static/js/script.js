@@ -7,7 +7,11 @@ function toggleNavbar() {
     }
 }
 
+<<<<<<< HEAD
+document.addEventListener("DOMContentLoaded", function() {
+=======
 document.addEventListener("DOMContentLoaded", function () {
+>>>>>>> 0b0fc292652221ec74ee3dce29975c30f027de5b
     function previewProfileImage() {
         var preview = document.getElementById('previewImage');
         var fileInput = document.getElementById('profileImage');
