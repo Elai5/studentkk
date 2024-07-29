@@ -2,8 +2,9 @@
 {% load static %} <!-- Load the static template tag library -->
 {% block title %}Home Page{% endblock %}
 {% block content %}
-<section id="home"
+<section id="homepage"
   style="background-image: url('{% static 'images/background.jpg' %}'); background-size: cover; background-position: center; height: 100vh; color: white;">
+  <div class="overlay"></div> 
   <div class="profile">
     <div class="text">
       <h1>Hello {{ user.username}}</h1>
@@ -17,18 +18,22 @@
       <div class="row">
         <h2>Transportation</h2>
         <p>Getting Around Canada: Transportation Tips for International Student</p>
+        <small>click here to view more</small>
       </div>
       <div class="row">
         <h2>Housing</h2>
         <p>Finding Accommodation in Canada: A Guide for International StudentsGetting Around Canada</p>
+        <small>click here to view more</small>
       </div>
       <div class="row">
         <h2>culture</h2>
         <p>Cultural Etiquette in Canada: What International Students Should Know</p>
+        <small>click here to view more</small>
       </div>
       <div class="row">
         <h2>Food</h2>
         <p>Exploring Canadian Cuisine: A Food Guide for International Students</p>
+        <small>click here to view more</small>
       </div>
     </div>
   </div>
