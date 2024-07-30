@@ -105,23 +105,17 @@ footer {
 @media screen and (max-width: 600px) {
   .navbar ul {
     display: none;
-    /* Hide the navbar links by default */
     flex-direction: column;
-    /* Stack links vertically when shown */
     background-color: #001F3F;
-    /* Match navbar background */
     width: 100%;
-    /* Full width */
   }
 
   .navbar .toggle-icon {
     display: block;
-    /* Show the toggle icon */
   }
 
   .navbar.responsive ul {
     display: flex;
-    /* Show the links when responsive */
   }
 
   .navbar.responsive {
@@ -133,27 +127,28 @@ footer {
   .navbar.responsive .button {
     display: block;
     width: 100%;
-    /* Ensure buttons take full width */
     padding: 14px 23px;
     cursor: pointer;
   }
 
-  footer {
+  footer p {
+    font-size: 13px;
+  }
+  .navbar .btn button {
     display: none;
-    /* Hide footer on mobile */
   }
 }
 
 @media screen and (min-width: 601px) and (max-width: 1024px) {
   .navbar {
-    padding: 10px;
+    padding: 8px;
   }
 
   .navbar a,
   .navbar .button {
     display: inline-block;
-    margin: 0 5px;
-    font-size: 14px;
+    /* margin: 0 3px; */
+    font-size: 10px;
   }
 
   .navbar .logo-container {
@@ -167,59 +162,7 @@ footer {
 }
 
 /* landing page */
-/* hme section */
-/* #home {
-  height: 100vh;
-  color: black;
-  background-image: url('/static/images/Rectangle 2.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  z-index: 1;
-}
-
-.home-profile {
-  width: 500px;
-}
-
-.home-text {
-  position: relative;
-  z-index: 2;
-  color: white;
-  text-align: left;
-  width: 1150px;
-  padding: 300px 100px;
-  
-}
-
-.home-text h2 {
-  color: red;
-  margin-bottom: 20px;
-  font-size: 38px;
-  font-weight: medium;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.home-text h1 {
-  font-size: 58px;
-  font-weight: bolder;
-  margin-bottom: 20px;
-}
-
-#home .button button {
-  background-color: red;
-  color: white;
-  border-radius: 4px;
-  padding: 12px 22px;
-  border: 0;
-  margin-left: 10px;
-}
-
-#home .button button a {
-  color: white;
-} */
-
+/* home section */
 #home {
   height: 100vh;
   color: black;
@@ -233,12 +176,9 @@ footer {
 
 .home-profile {
   width: 100%;
-  max-width: 500px;
-  /* Limit the maximum width */
-  padding: 100px 20px;
-  /* Add padding for smaller screens */
+  max-width: 1300px;
+  padding: 250px 20px;
   margin: auto;
-  /* Center the profile */
 }
 
 .home-text {
@@ -247,9 +187,7 @@ footer {
   color: white;
   text-align: left;
   width: 100%;
-  /* Full width for responsiveness */
   padding: 50px 20px;
-  /* Adjust padding for smaller screens */
 }
 
 .home-text h2 {
@@ -281,46 +219,46 @@ footer {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+  .home-text {
+    text-align: start;
+  }
+
   .home-text h2 {
-    font-size: 28px;
-    /* Smaller font size for smaller screens */
+    padding-top: 80px;
+    font-size: 35px;
   }
 
   .home-text h1 {
     font-size: 38px;
-    /* Smaller font size for smaller screens */
+    margin-bottom: 80px;
+    text-align: start;
   }
 
   .home-profile {
-    padding: 50px 10px;
-    /* Less padding for smaller screens */
+    padding: 100px 10px;
   }
 
   .home-text {
     padding: 30px 10px;
-    /* Less padding for smaller screens */
   }
 }
 
 @media (max-width: 480px) {
+
   .home-text h2 {
     font-size: 24px;
-    /* Further reduce font size */
+    padding-top: 70px;
   }
-
   .home-text h1 {
     font-size: 32px;
-    /* Further reduce font size */
+    padding-top: 30px;
+    text-align: center;
   }
 
   #home .button button {
     padding: 10px 15px;
-    /* Adjust button padding */
   }
 }
-
-
-
 
 
 #homepage {
@@ -730,11 +668,11 @@ p {
     margin-top: 10px;
   }
 
-  footer {
+  /* footer {
     display: none;
     position: relative;
     bottom: 0;
-  }
+  } */
 }
 
 @media screen and (min-width: 601px) and (max-width: 1024px) {
@@ -794,11 +732,11 @@ p {
     margin-top: 10px;
   }
 
-  footer {
+  /* footer {
     display: none;
     position: relative;
     bottom: 0;
-  }
+  } */
 }
 
 #friends {
