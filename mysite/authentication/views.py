@@ -9,6 +9,9 @@ from django.conf import settings
 from .models import CustomUser, UserProfile, FriendRequest
 from django.utils import timezone
 from django.urls import reverse
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
 
 def home(request):
     return render(request, "authentication/index.html")
@@ -90,7 +93,6 @@ def signup(request):
     
     return render(request, "authentication/signup.html")
 
-
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
     
@@ -146,6 +148,13 @@ def universities_data(request):
         universities_data = json.load(json_file)
 
     return JsonResponse(universities_data, safe=False)
+
+def profile_view(request):
+    if request.user.is_authenticated:
+        user_profile = UserProfile.objects.get(user=request.user)  # Access the user profile
+        return render(request, "profile.html", {'profile': user_profile})
+    else:
+        return redirect('login')  # Redirect to login if not authenticated
 
 def friends(request):
     if request.user.is_authenticated:
@@ -213,3 +222,27 @@ def send_friend_request(request, user_id):
         return redirect('friend_suggestions')  # Redirect back to friend suggestions
     else:
         return redirect('login')  # Redirect to login if not authenticated
+
+def your_django_view(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        country_code = data.get('country')
+        location_code = data.get('location')
+
+        # Create a mapping of country codes to names
+        country_mapping = {
+            'AF': 'Afghanistan',
+            'AU': 'Australia',
+            # Add more countries as needed
+        }
+
+        country_name = country_mapping.get(country_code, 'Unknown Country')
+        location_name = country_mapping.get(location_code, 'Unknown Location')
+
+        # Return the full names as JSON response
+        return JsonResponse({
+            'country_name': country_name,
+            'location_name': location_name
+        })
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)

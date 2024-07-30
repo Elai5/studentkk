@@ -52,35 +52,53 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error('Error fetching country data:', error);
         });
 
-    // Example universities array (replace with your actual data)
-    const universities = [
-        'Harvard University',
-        'Stanford University',
-        'Massachusetts Institute of Technology (MIT)',
-        'University of Oxford',
-        // Add more universities here...
-    ];
+    // Handle form submission
+    document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
 
-    const institutionInput = document.querySelector('#institution');
+        const selectedCountryCode = countrySelect.value;
+        const selectedLocationCode = locationSelect.value;
 
-    if (institutionInput) {
-        institutionInput.addEventListener('input', () => {
-            const inputValue = institutionInput.value.toLowerCase();
-            const filteredUniversities = universities.filter(univ => univ.toLowerCase().startsWith(inputValue));
+        // Create a data object to send to the server
+        const data = {
+            country: selectedCountryCode,
+            location: selectedLocationCode
+        };
 
-            const datalist = document.querySelector('#institution-datalist');
-            if (datalist) {
-                datalist.innerHTML = '';
-                filteredUniversities.forEach(univ => {
-                    const option = document.createElement('option');
-                    option.value = univ;
-                    datalist.appendChild(option);
-                });
-            } else {
-                console.error('Datalist element not found');
+        // Send the data to the Django backend
+        fetch('/your-django-endpoint/', { // Replace with your actual endpoint
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken') // Include CSRF token for security
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => response.json())
+            .then(result => {
+                console.log('Success:', result);
+                // Handle the result here (e.g., display the full country names)
+                alert(`Country of Origin: ${result.country_name}, Country of Study: ${result.location_name}`);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+
+    // Function to get CSRF token from cookies
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Check if this cookie string begins with the name we want
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
-        });
-    } else {
-        console.error('Institution input element not found');
+        }
+        return cookieValue;
     }
 });

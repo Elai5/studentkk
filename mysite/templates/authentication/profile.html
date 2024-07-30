@@ -1,4 +1,4 @@
-{% extends "authentication/base.html" %}
+{% comment %} {% extends "authentication/base.html" %}
 
 {% block title %}Profile{% endblock %}
 
@@ -7,7 +7,6 @@
     <div class="profile_page">
         <div class="box">
             <div class="mage">
-                <!-- Add profile image here -->
             </div>
             <p>keila alex</p>
             <p>email@gmail.com</p>
@@ -17,7 +16,31 @@
         </div>
     </div>
     <div class="profile_message">
-        <!-- Add profile message content here -->
     </div>
 </section>
+{% endblock %} {% endcomment %}
+
+
+{% extends "authentication/nav2.html" %}
+{% load static %} <!-- Load the static template tag library -->
+{% block title %}Friends Page{% endblock %}
+{% block content %}
+<section id="profile">
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="{{ profile.user.profile_picture.url }}" alt="Profile Picture" class="profile-image">
+            <div class="profile-info">
+                <h1>{{ profile.user.first_name }} {{ profile.user.last_name }}</h1>
+                <p><strong>Email:</strong> {{ profile.user.email }}</p>
+                <p><strong>Country:</strong> {{ profile.country }}</p>
+                <p><strong>Location:</strong> {{ profile.location }}</p>
+                <p><strong>Institution:</strong> {{ profile.institution }}</p>
+            </div>
+        </div>
+        <div class="profile-footer">
+            <a href="{% url 'edit_profile' %}" class="edit-button">Edit Profile</a>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

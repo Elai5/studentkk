@@ -1000,3 +1000,92 @@ p {
 .send-request:hover {
   background-color: darkorange;
 }
+
+
+
+.profile-container {
+  max-width: 600px;
+  /* Max width for the profile card */
+  margin: auto;
+  /* Center the card */
+  background-color: white;
+  /* White background for the card */
+  border-radius: 10px;
+  /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* Subtle shadow effect */
+  padding: 20px;
+  /* Padding inside the card */
+}
+
+.profile-header {
+  display: flex;
+  /* Use flexbox for layout */
+  align-items: center;
+  /* Center items vertically */
+  margin-bottom: 20px;
+  /* Space below the header */
+}
+
+.profile-image {
+  width: 100px;
+  /* Set width for the profile image */
+  height: 100px;
+  /* Set height for the profile image */
+  border-radius: 50%;
+  /* Make the image circular */
+  margin-right: 20px;
+  /* Space between image and text */
+  object-fit: cover;
+  /* Maintain aspect ratio */
+}
+
+.profile-info {
+  flex-grow: 1;
+  /* Allow this section to grow */
+}
+
+.profile-info h1 {
+  margin: 0;
+  /* Remove default margin */
+  font-size: 24px;
+  /* Font size for the name */
+}
+
+.profile-info p {
+  margin: 5px 0;
+  /* Space between paragraphs */
+  font-size: 16px;
+  /* Font size for other information */
+  color: #555;
+  /* Dark gray color for text */
+}
+
+.profile-footer {
+  margin-top: 20px;
+  /* Space above the footer */
+  text-align: center;
+  /* Center the footer text */
+}
+
+.edit-button {
+  background-color: orangered;
+  /* Background color for the button */
+  color: white;
+  /* Text color */
+  padding: 10px 15px;
+  /* Padding for the button */
+  border: none;
+  /* Remove default border */
+  border-radius: 5px;
+  /* Rounded corners */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  transition: background-color 0.3s ease;
+  /* Smooth transition for hover effect */
+}
+
+.edit-button:hover {
+  background-color: darkorange;
+  /* Change background on hover */
+}
