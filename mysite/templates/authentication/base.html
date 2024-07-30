@@ -52,17 +52,19 @@
       <div class="btn">
         {% if user.is_authenticated %}
         <button type="submit">
-          <a href="{% url 'signout' %}">Sign Out</a>
+            <a href="{% url 'signout' %}">Sign Out</a>
         </button>
         {% else %}
-        <a href="{% url 'signup' %}"
-          ><button class="button" type="submit">Sign Up</button></a
-        >
-        <a href="{% url 'signin' %}"
-          ><button class="button" type="submit">Sign In</button></a
-        >
+        <a href="{% url 'signup' %}">
+            <button class="button signup" type="submit">Sign Up</button>
+        </a>
+        <a href="{% url 'signin' %}">
+            <button class="button signin" type="submit">Sign In</button>
+        </a>
         {% endif %}
-      </div>
+    </div>
+
+
       <div class="toggle-icon" onclick="toggleNavbar()">&#9776;</div>
     </div>
 

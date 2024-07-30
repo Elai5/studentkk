@@ -47,19 +47,59 @@ body {
   margin-right: 8px;
 }
 
-.navbar a,
-.navbar .button {
+.btn {
+  display: flex;
+  /* Align buttons in a row */
+  gap: 10px;
+  /* Space between buttons */
+}
+
+.button {
+  border-radius: 5px;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button.signup {
+  background-color: white;
+  color: black;
+}
+
+
+.button.signin {
+  background-color: #F0440E;
+  color: white;
+}
+
+
+.button.signin:hover {
+  background-color: darkorange;
+  color: white;
+}
+
+.button.signup:hover {
+  background-color: white;
+  color: #F0440E;
+}
+
+
+
+.navbar a {
   display: inline-block;
   margin: 0 5px;
   color: white;
   text-decoration: none;
   font-size: 18px;
   padding: 5px 10px;
-  border-radius: 5px;
 }
 
+
+
 .navbar a:hover {
-  color: orangered;
+  color: #F0440E;
   text-decoration: underline;
 }
 
@@ -67,7 +107,7 @@ body {
   color: red;
 }
 
-.btn button {
+/* .btn button {
   background-color: red;
   border-radius: 4px;
   padding: 5px 10px;
@@ -77,12 +117,12 @@ body {
 .btn .button a {
   font-weight: bolder;
   border: none;
-}
+} */
 
-.navbar .button:hover {
+/* .navbar .button:hover {
   background-color: white;
   color: black;
-}
+} */
 
 .toggle-icon {
   display: none;
@@ -215,12 +255,16 @@ footer {
   border-radius: 4px;
   padding: 12px 22px;
   border: 0;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 #home .button button a {
   color: white;
 }
+
+/* #home .button button:hover {
+  background-color: navajowhite;
+} */
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -455,7 +499,7 @@ small {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 90vh;
+  height: 100vh;
 }
 
 form {
@@ -880,15 +924,75 @@ p {
 
 
 #friends {
-  /* background-color: darkcyan; */
+  background-color: darkcyan;
   color: white;
+  height: 100vh;
+  padding: 50px;
 
 }
 
 .friend {
-  margin-top: 60px;
-  width: 600px;
-  height: 500px;
+  margin-top: 100px;
+  padding: 50px;
+  max-width: 100%;
+  height: 800px;
   background-color: #FF6F20;
   color: white;
+}
+
+.friend h2 {
+  color: #001F3F;
+  font-size: 32px;
+  font-family: inter;
+  margin-bottom: 10px;
+}
+
+.friend ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.friend-card {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.friend-info {
+  flex-grow: 1;
+}
+
+.friend-name {
+  font-weight: bold;
+}
+
+.friend-country {
+  font-size: 14px;
+  color: #666;
+}
+
+.send-request {
+  background-color: orangered;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+
+}
+
+.send-request:hover {
+  background-color: darkorange;
 }
