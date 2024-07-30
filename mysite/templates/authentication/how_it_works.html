@@ -1,0 +1,42 @@
+{% extends "authentication/base.html" %}
+{% load static %} <!-- Load the static template tag library -->
+{% block title %}How it works{% endblock %}
+{% block content %}
+
+<section id="works">
+    <div class="container">
+        <h1>How It Works</h1>
+        <h2>Learn more about our services and how they can benefit you.</h2>
+
+        <div class="cards-container">
+            <div class="card">
+                <div class="image-container">
+                    <img src="dummy-image.jpg" alt="Transportation" class="circular-image"> <!-- Replace with your image -->
+                </div>
+                <h2>Transportation</h2>
+                <p>Our transportation services ensure that you get to your destination safely and on time. We offer a variety of options to suit your needs.</p>
+                <button class="learn-more">Learn More</button>
+            </div>
+
+            <div class="card">
+                <div class="image-container">
+                    <img src="dummy-image.jpg" alt="Accommodation" class="circular-image"> <!-- Replace with your image -->
+                </div>
+                <h2>Accommodation</h2>
+                <p>We provide a range of accommodation options to make your stay comfortable and enjoyable. Choose from hotels, hostels, and more.</p>
+                <button class="learn-more">Learn More</button>
+            </div>
+
+            <div class="card">
+                <div class="image-container">
+                    <img src="dummy-image.jpg" alt="Activities" class="circular-image"> <!-- Replace with your image -->
+                </div>
+                <h2>Activities</h2>
+                <p>Explore various activities that we offer, from guided tours to adventure sports. There's something for everyone!</p>
+                <button class="learn-more">Learn More</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

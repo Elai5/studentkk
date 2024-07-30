@@ -17,7 +17,7 @@ class CustomUser(AbstractUser):
         self.save()
         
     def is_otp_valid(self, otp):
-        expiry_time = self.otp_created_at + timezone.timedelta(minutes=10)
+        expiry_time = self.otp_created_at + timezone.timedelta(minutes=120)
         return self.otp == otp and timezone.now() < expiry_time
 
 class UserProfile(models.Model):

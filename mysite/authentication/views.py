@@ -20,7 +20,13 @@ def home(request):
 def homepage(request):
     return render(request, "authentication/homepage.html")
 
-
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.urls import reverse
+from django.conf import settings
+import re
+from .models import CustomUser, UserProfile
 
 def signup(request):
     if request.method == "POST":
@@ -38,31 +44,38 @@ def signup(request):
         # Define a regex pattern for institutional email domains
         institutional_email_pattern = r'^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+(edu|ac|org|[a-z]{2})$'
 
+        # Initialize a flag for errors
+        has_error = False
+
         # Check if the email matches the institutional email pattern
         if not re.match(institutional_email_pattern, email):
             messages.error(request, "Please use a valid institutional email address.")
-            return redirect('signup')
+            has_error = True
 
         if CustomUser.objects.filter(username=username).exists():
             messages.error(request, "Username already exists. Choose another.")
-            return redirect('home')
+            has_error = True
         
         if CustomUser.objects.filter(email=email).exists():
             mailto_link = f"mailto:{email}?subject=OTP%20Request&body=Please%20send%20me%20the%20OTP%20for%20my%20account."
             messages.info(request, f"An account with this email already exists. Please check your email for the OTP. If you haven't received it, click <a href='{mailto_link}'>here</a> to send a request.", extra_tags='safe')
-            return render(request, "authentication/signup.html")
+            has_error = True
         
         if len(username) > 10:
             messages.error(request, "Username must be under 10 characters.")
-            return redirect('home')
+            has_error = True
         
         if pass1 != pass2:
             messages.error(request, "Passwords do not match.")
-            return redirect('home')
+            has_error = True
         
         if not username.isalnum():
             messages.error(request, "Username must be alphanumeric.")
-            return redirect('home')
+            has_error = True
+
+        # If there are errors, render the signup page again
+        if has_error:
+            return render(request, "authentication/signup.html")
 
         # Create a new user instance
         myuser = CustomUser.objects.create_user(
@@ -103,6 +116,7 @@ def signup(request):
         return redirect(f'{reverse("verify_otp")}?email={email}')
     
     return render(request, "authentication/signup.html")
+
 
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
@@ -257,3 +271,6 @@ def your_django_view(request):
         })
 
     return JsonResponse({'error': 'Invalid request'}, status=400)
+
+def how_it_works(request):
+    return render(request, 'authentication/how_it_works.html')
