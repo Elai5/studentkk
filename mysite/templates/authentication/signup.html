@@ -4,6 +4,15 @@
 
 {% block content %}
 <section id="formy">
+    <!-- Display error messages -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     <form action="/signup" method="post" id="signup-form" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="image-upload-container">
@@ -22,43 +31,16 @@
 
         <label for="email">Email Address</label>
         <input type="email" id="email" name="email" placeholder="Enter email address" required><br>
+
         <label for="country">Country of Origin</label>
-        <select id="country" name="country" required>
-        <option value="">Select country</option>
-        </select><br>
-
-        <label for="location">Country of Study</label>
-        <select id="location" name="location" required>
-        <option value="">Select country</option>
-        </select><br>
-
-
-        {% comment %} <label for="country">Country of Origin</label>
         <select id="country" name="country" required>
             <option value="">Select country</option>
         </select><br>
 
         <label for="location">Country of Study</label>
         <select id="location" name="location" required>
-            <option value="">Select country
-            <option value="AF">Afghanistan</option>
-            <option value="AX">Aland Islands</option>
-            <option value="AL">Albania</option>
-            <option value="DZ">Algeria</option>
-            <option value="AS">American Samoa</option>
-            <option value="AD">Andorra</option>
-            <option value="AO">Angola</option>
-            <option value="AI">Anguilla</option>
-            <option value="AQ">Antarctica</option>
-            <option value="AG">Antigua and Barbuda</option>
-            <option value="AR">Argentina</option>
-            <option value="AM">Armenia</option>
-            <option value="AW">Aruba</option>
-            <option value="AU">Australia</option>
-            <option value="AT">Austria</option>
-            <option value="AZ">Azerbaijan</option>
-            </option>
-        </select><br> {% endcomment %}
+            <option value="">Select country</option>
+        </select><br>
 
         <label for="institution">Academic Institution</label>
         <input type="text" id="institution" name="institution" placeholder="Enter institution name" autocomplete="on" list="institution-datalist"><br>

@@ -1,3 +1,4 @@
+import re
 import json
 import random
 from django.shortcuts import redirect, render, get_object_or_404
@@ -19,6 +20,8 @@ def home(request):
 def homepage(request):
     return render(request, "authentication/homepage.html")
 
+
+
 def signup(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -31,6 +34,14 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
         profile_image = request.FILES.get('profileImage')  # Get the uploaded image file
+
+        # Define a regex pattern for institutional email domains
+        institutional_email_pattern = r'^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+(edu|ac|org|[a-z]{2})$'
+
+        # Check if the email matches the institutional email pattern
+        if not re.match(institutional_email_pattern, email):
+            messages.error(request, "Please use a valid institutional email address.")
+            return redirect('signup')
 
         if CustomUser.objects.filter(username=username).exists():
             messages.error(request, "Username already exists. Choose another.")
