@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import CustomUser, UserProfile, FriendRequest  # Ensure all models are imported correctly
+from .models import CustomUser, UserProfile, FriendRequest
 from django.utils import timezone
 from django.urls import reverse
 
@@ -149,15 +149,12 @@ def universities_data(request):
 
 def friends(request):
     if request.user.is_authenticated:
-        # Call the friend_suggestions logic to get friends based on criteria
         user_profile = request.user
-
         # Get friends from the same institution and country of origin
         friends_from_school = CustomUser.objects.filter(
             institution=user_profile.institution,
             country=user_profile.country
         ).exclude(id=request.user.id)
-
         # If no friends found from the same institution, get friends from the same location
         if not friends_from_school.exists():
             friends_from_country = CustomUser.objects.filter(
@@ -171,6 +168,7 @@ def friends(request):
         return render(request, "authentication/friends.html", {'friends': friends})
     else:
         return redirect('login')  # Redirect to login if not authenticated
+
 
 def friend_suggestions(request):
     if request.user.is_authenticated:

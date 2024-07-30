@@ -2,27 +2,27 @@
 {% load static %} <!-- Load the static template tag library -->
 {% block title %}Friends Page{% endblock %}
 {% block content %}
+
 <section id="friends">
   <div class="friend"> 
     <p>This is your friends page</p>
     <h2>Friend Suggestions</h2>
     <ul>
         {% for friend in friends %}
-            {% comment %} <li> {% endcomment %}
             <li class="friend-card">
-              <img src="{{ friend.avatar_url }}" alt="{{ friend.username }}'s avatar" class="avatar">
+                <img src="{{ friend.avatar_url }}" alt="{{ friend.username }}'s avatar" class="avatar">
                 <div class="friend-info">
-                  <span class="friend-name">{{ friend.username }}</span>
-                  <span class="friend-country">{{ friend.country }}</span>
+                    <span class="friend-name">{{ friend.first_name }} {{ friend.last_name }}</span>
+                    <span class="friend-institution">{{ friend.institution }}</span>
+                    <span class="friend-country">{{ friend.country }}</span>
+                    <span class="friend-location">{{ friend.location }}</span>
                 </div>
-                  <a href="{% url 'send_friend_request' friend.id %}" class="send-request">Send Friend Request</a>
+                <a href="{% url 'send_friend_request' friend.id %}" class="send-request">Send Friend Request</a>
             </li>
         {% empty %}
             <li>No friend suggestions available.</li>
         {% endfor %}
     </ul>
-  
   </div>
-  
 </section>
 {% endblock %}
