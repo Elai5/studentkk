@@ -59,7 +59,7 @@ body {
 }
 
 .navbar a:hover {
-  color: #333;
+  color: orangered;
   text-decoration: underline;
 }
 
@@ -80,7 +80,8 @@ body {
 }
 
 .navbar .button:hover {
-  background-color: #0086B3;
+  background-color: white;
+  color: black;
 }
 
 .toggle-icon {
@@ -538,7 +539,6 @@ p {
 /* About Page Styles */
 #about {
   background-color: #fff;
-
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -547,17 +547,18 @@ p {
 .about-page {
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  /* background-color: red; */
-  height: 97vh;
+  align-items: flex-start;
+  padding-top: 150px;
+  height: 100vh;
+  width: 100%;
 
 }
 
 .about-page .mage {
   width: 750px;
   height: 600px;
-  margin-top: 80px;
-  /* border: 2px solid red; */
+  margin-top: 40px;
+  margin-right: -250px;
 }
 
 .about-page .mage img {
@@ -568,27 +569,19 @@ p {
 .about-page .image-container {
   display: flex;
   flex-wrap: wrap;
-  /* Allow images to wrap to the next line */
   justify-content: center;
-  /* Center images */
-  margin-bottom: 20px;
-  /* Space below the images */
+  margin-bottom: 10px;
 }
 
 .image-item {
   width: calc(50% - 20px);
-  /* Two images per row with spacing */
   margin: 10px;
-  /* Space between images */
 }
 
 .image-item img {
   width: 100%;
-  /* Make images responsive */
   height: auto;
-  /* Maintain aspect ratio */
   border-radius: 3px;
-  /* Optional: Add rounded corners */
 }
 
 .about-page .info {
@@ -596,21 +589,17 @@ p {
   justify-content: center;
   align-items: center;
   position: relative;
-  top: 40px;
-  margin-top: -80px;
+  top: 20px;
+  margin-top: 100px;
 }
 
 .info h1 {
-
   color: #F0440E;
   font-size: 64px;
   margin-bottom: 20px;
   font-family: "Katibeh", serif;
-  /* font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; */
   line-height: 22px;
   font-weight: 400;
-  /* text-indent: 80px; */
-
 }
 
 .info h2 {
@@ -628,6 +617,7 @@ p {
   font-family: "Roboto", sans-serif;
 }
 
+/* 
 .info .btn {
   position: relative;
   display: flex;
@@ -636,9 +626,7 @@ p {
 .info .btn button {
   outline: 0;
   border: 0;
-  border: 2px solid #3498db;
-  box-shadow: 0px 2px 0px #3498db;
-  background-color: navy;
+  background-color: orangered;
   color: white;
   padding: 10px 20px;
   text-align: center;
@@ -647,6 +635,38 @@ p {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 4px;
+}
+
+.info .btn button:hover {
+  background-color: darkorange;
+  background-color: navy;
+} */
+
+.info .btn {
+  display: flex;
+  gap: 20px;
+}
+
+.info .btn .button {
+  border: none;
+  padding: 13px 28px;
+  border-radius: 5px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button.navy {
+  background-color: #001F3F;
+}
+
+.button.orangered {
+  background-color: orangered;
+}
+
+.button:hover {
+  background-color: navy;
 }
 
 @media screen and (max-width: 600px) {
@@ -677,6 +697,7 @@ p {
     height: auto;
     border-radius: 10px;
     margin-bottom: 10px;
+    margin-right: 0;
   }
 
   .about-page .mage img {
@@ -710,53 +731,52 @@ p {
     display: inline-block;
     margin-top: 10px;
   }
-
-
-  /* footer {
-    display: none;
-    position: relative;
-    bottom: 0;
-  } */
 }
 
-@media screen and (min-width: 601px) and (max-width: 1024px) {
+
+/* Tablet Styles (601px to 768px) */
+@media screen and (min-width: 601px) and (max-width: 768px) {
   #about {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: auto;
     padding: 20px;
+    height: auto;
+    /* background-color: darkgray; */
   }
 
   .about-page {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    /* Stack elements vertically */
+    justify-content: center;
     align-items: center;
     width: 100%;
+    height: auto;
+    /* background-color: darkgoldenrod; */
+    margin-top: -120px;
   }
 
   .about-page .mage {
-    width: 50%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 600px;
+    /* Increase max-width for larger screens */
     height: auto;
     border-radius: 10px;
+    margin-bottom: 10px;
     margin-right: 20px;
-  }
-
-  .about-page .mage img {
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
+    /* Space below the image */
   }
 
   .about-page .info {
-    width: 50%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 600px;
+    /* Increase max-width for larger screens */
     font-size: 16px;
     text-align: justify;
     padding: 0 10px;
+    margin: 0;
   }
 
   .about-page .info h1,
@@ -775,13 +795,89 @@ p {
     display: inline-block;
     margin-top: 10px;
   }
-
-  /* footer {
-    display: none;
-    position: relative;
-    bottom: 0;
-  } */
 }
+
+/* Laptop Styles (769px to 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1440px) {
+  #about {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .about-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: auto;
+  }
+
+  .about-page .mage {
+    width: 50%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+
+  .about-page .mage img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+
+  }
+
+  .about-page .info {
+    width: 50%;
+    max-width: 600px;
+    font-size: 16px;
+    text-align: justify;
+    padding: 0 10px;
+    margin-top: 40px;
+  }
+
+  .about-page .info h1,
+  .about-page .info h2 {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .about-page .info p {
+    width: 100%;
+    font-size: 18px;
+    margin: 0;
+  }
+
+  .btn {
+    display: inline-block;
+    margin-top: 10px;
+  }
+}
+
+.icon {
+  font-size: 24px;
+  color: white;
+  margin: 10px;
+  margin-left: 150px;
+  background-color: orangered;
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.icon:hover {
+  background-color: darkorange;
+  cursor: pointer;
+}
+
 
 #friends {
   /* background-color: darkcyan; */
