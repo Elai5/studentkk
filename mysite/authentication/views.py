@@ -202,6 +202,9 @@ def friends(request):
             )
         )
 
+        # Fetch incoming friend requests
+        incoming_requests = FriendRequest.objects.filter(to_user=request.user, accepted=False)
+
         # Fetch friend suggestions based on institution or location
         friend_suggestions = CustomUser.objects.exclude(id=request.user.id).exclude(id__in=accepted_friends.values_list('id', flat=True))
 
@@ -217,6 +220,7 @@ def friends(request):
         suggestions = suggestions_from_school | suggestions_from_location
 
         return render(request, "authentication/friends.html", {
+            'incoming_requests': incoming_requests,
             'friends': accepted_friends,
             'suggestions': suggestions
         })
@@ -227,9 +231,7 @@ def send_friend_request(request, user_id):
     if request.user.is_authenticated:
         to_user = get_object_or_404(CustomUser, id=user_id)
         
-        # Check if the user is not trying to send a friend request to themselves
         if to_user != request.user:
-            # Create a friend request if it doesn't already exist
             friend_request, created = FriendRequest.objects.get_or_create(from_user=request.user, to_user=to_user)
             
             if created:
@@ -242,6 +244,7 @@ def send_friend_request(request, user_id):
         return redirect('friends')  # Redirect back to friends page
     else:
         return redirect('signin')  # Redirect to login if not authenticated
+
 
 def accept_friend_request(request, request_id):
     if request.user.is_authenticated:

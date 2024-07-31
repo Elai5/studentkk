@@ -16,6 +16,32 @@
             </ul>
         {% endif %}
 
+        <h2>Incoming Friend Requests</h2>
+        {% if incoming_requests %}
+            <ul>
+                {% for request in incoming_requests %}
+                    <li class="request-card">
+                        <div class="request-info">
+                            {% if request.from_user.profile_picture %}
+                                <img src="{{ request.from_user.profile_picture.url }}" alt="{{ request.from_user.username }}'s profile picture" class="avatar">
+                            {% else %}
+                                <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture" class="avatar">
+                            {% endif %}
+                            <span>{{ request.from_user.first_name }} {{ request.from_user.last_name }}</span>
+                        </div>
+                        <div class="request-actions">
+                            <a href="{% url 'accept_friend_request' request.id %}" class="accept-button">Accept</a>
+                            <a href="{% url 'decline_friend_request' request.id %}" class="decline-button">Decline</a>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li>No incoming friend requests.</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No incoming friend requests.</p>
+        {% endif %}
+
         <h2>Your Friends</h2>
         <ul>
             {% for friend in friends %}
