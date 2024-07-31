@@ -18,7 +18,7 @@
 
         <h2>Incoming Friend Requests</h2>
         {% if incoming_requests %}
-            <ul>
+            <ul class="incoming-requests">
                 {% for request in incoming_requests %}
                     <li class="request-card">
                         <div class="request-info">
@@ -27,7 +27,7 @@
                             {% else %}
                                 <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture" class="avatar">
                             {% endif %}
-                            <span>{{ request.from_user.first_name }} {{ request.from_user.last_name }}</span>
+                            <span class="friend-name">{{ request.from_user.first_name }} {{ request.from_user.last_name }}</span>
                         </div>
                         <div class="request-actions">
                             <a href="{% url 'accept_friend_request' request.id %}" class="accept-button">Accept</a>
