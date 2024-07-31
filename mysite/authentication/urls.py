@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .views import universities_data, send_friend_request, accept_friend_request, decline_friend_request  # Ensure these are imported
+from .views import universities_data, send_friend_request, accept_friend_request, decline_friend_request, chat_view  # Ensure these are imported
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -23,4 +23,5 @@ urlpatterns = [
     path('friends/accept_request/<int:request_id>/', accept_friend_request, name='accept_friend_request'),
     path('friends/decline_request/<int:request_id>/', decline_friend_request, name='decline_friend_request'),
     path('how_it_works', views.how_it_works, name='how_it_works'),
+     path('friends/chat/<int:friend_id>/', chat_view, name='send_message'), 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

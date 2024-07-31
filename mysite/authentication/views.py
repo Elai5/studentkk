@@ -1,3 +1,4 @@
+from django.db.models import Q
 import re
 import json
 import random
@@ -14,6 +15,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.auth.decorators import login_required
+from .models import Message
 
 
 def home(request):
@@ -115,7 +117,6 @@ def signup(request):
         return redirect(f'{reverse("verify_otp")}?email={email}')
     
     return render(request, "authentication/signup.html")
-
 
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
@@ -332,3 +333,27 @@ def edit_profile(request):
         return redirect('profile_view')  # Redirect to the profile view after saving
 
     return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
+
+def chat_view(request, friend_id):
+    if request.user.is_authenticated:
+        friend = get_object_or_404(CustomUser, id=friend_id)
+        
+        # Fetch messages between the two users
+        messages = Message.objects.filter(
+            (Q(sender=request.user) & Q(recipient=friend)) | 
+            (Q(sender=friend) & Q(recipient=request.user))
+        ).order_by('timestamp')
+
+        if request.method == 'POST':
+            content = request.POST.get('content')
+            if content:
+                Message.objects.create(sender=request.user, recipient=friend, content=content)
+                return redirect('chat', friend_id=friend.id)  # Redirect to the same chat view
+
+        return render(request, 'authentication/chat.html', {
+            'friend': friend,
+            'messages': messages,
+        })
+    else:
+        return redirect('signin')  # Redirect to sign-in if not authenticated
+
