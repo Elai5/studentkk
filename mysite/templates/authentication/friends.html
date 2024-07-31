@@ -57,7 +57,7 @@
                         <span class="friend-country">{{ friend.country }}</span>
                         <span class="friend-location">{{ friend.location }}</span>
                     </div>
-                    <a href="{% url 'send_message' friend.id %}" class="send-message">Send Message</a>
+                    <a href="{% url 'chat_with_friend' friend.id %}" class="send-message">Send Message</a>
                 </li>
             {% empty %}
                 <li>No friends found.</li>

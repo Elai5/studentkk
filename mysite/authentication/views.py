@@ -357,3 +357,26 @@ def chat_view(request, friend_id):
     else:
         return redirect('signin')  # Redirect to sign-in if not authenticated
 
+@login_required
+def chat_list_view(request, friend_id=None):
+    # Get the list of friends based on accepted friend requests
+    friends = CustomUser.objects.filter(
+        Q(friend_requests_received__from_user=request.user, friend_requests_received__accepted=True) |
+        Q(friend_requests_sent__to_user=request.user, friend_requests_sent__accepted=True)
+    )
+
+    messages = []
+    friend = None
+
+    if friend_id:
+        friend = get_object_or_404(CustomUser, id=friend_id)  # Get the friend by ID
+        messages = Message.objects.filter(
+            (Q(sender=request.user) & Q(recipient=friend)) |
+            (Q(sender=friend) & Q(recipient=request.user))
+        ).order_by('timestamp')  # Order messages by timestamp
+        
+    return render(request, 'authentication/chat_list.html', {
+        'friends': friends,
+        'messages': messages,
+        'friend': friend,
+    })
