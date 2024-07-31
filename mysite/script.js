@@ -7,38 +7,57 @@ function toggleNavbar() {
     }
 }
 
-
 document.addEventListener("DOMContentLoaded", function () {
     // Function to preview the profile image
-    function previewProfileImage() {
-        var preview = document.getElementById('previewImage');
-        var fileInput = document.getElementById('profileImage');
+    function previewProfileImage(fileInputId, previewImageId) {
+        var preview = document.getElementById(previewImageId);
+        var fileInput = document.getElementById(fileInputId);
+
+        // Check if the file input exists
+        if (!fileInput) {
+            console.error('File input element not found');
+            return; // Exit if the file input is not found
+        }
+
         var file = fileInput.files[0];
 
         if (file) {
             var reader = new FileReader();
 
             reader.onload = function (e) {
-                preview.src = e.target.result;
+                preview.src = e.target.result; // Set the preview image source
             };
             reader.readAsDataURL(file);
         }
     }
 
-    // Add event listener to the file input for previewing the image
-    var fileInput = document.getElementById('profileImage');
-    if (fileInput) {
-        fileInput.addEventListener('change', previewProfileImage);
+    // Add event listeners for the signup form
+    var signupFileInput = document.getElementById('signupProfileImage');
+    if (signupFileInput) {
+        signupFileInput.addEventListener('change', function () {
+            previewProfileImage('signupProfileImage', 'signupPreviewImage');
+        });
     } else {
-        console.error('Profile image input element not found');
+        console.error('Signup file input element not found');
+    }
+
+    // Add event listeners for the edit profile form
+    var editFileInput = document.getElementById('editProfileImage');
+    if (editFileInput) {
+        editFileInput.addEventListener('change', function () {
+            previewProfileImage('editProfileImage', 'editPreviewImage');
+        });
+    } else {
+        console.error('Edit file input element not found');
     }
 
     // Fetch country data from the API
     fetch('https://restcountries.com/v3.1/all')
         .then(res => res.json())
         .then(data => {
-            const countrySelect = document.querySelector('#country');
-            const locationSelect = document.querySelector('#location');
+            console.log('Fetched countries data:', data); // Log the fetched data
+            const countrySelect = document.querySelector('#country'); // Matches the ID in your HTML
+            const locationSelect = document.querySelector('#location'); // Matches the ID in your HTML
 
             if (countrySelect && locationSelect) {
                 data.forEach(country => {
@@ -74,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const datalist = document.querySelector('#institution-datalist');
             if (datalist) {
-                datalist.innerHTML = '';
+                datalist.innerHTML = ''; // Clear previous options
                 filteredUniversities.forEach(univ => {
                     const option = document.createElement('option');
                     option.value = univ;
@@ -88,4 +107,3 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error('Institution input element not found');
     }
 });
-

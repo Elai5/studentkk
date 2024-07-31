@@ -1097,8 +1097,8 @@ p {
   background-color: darkorange;
 }
 
-/* How it works section */
 
+/* How it works section */
 #works {
   height: 100vh;
 }
@@ -1136,13 +1136,16 @@ p {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin: 15px;
   padding: 20px;
-  width: 400px;
+  width: 300px;
   /* Adjust width as needed */
   text-align: center;
 }
 
 .container .image-container {
   margin-bottom: 15px;
+  /* justify-content: center;
+  align-items: center; */
+
 }
 
 .container .circular-image {
@@ -1158,6 +1161,12 @@ p {
 .container h2.card-title {
   font-size: 1.5em;
   margin: 10px 0;
+}
+
+.cards-container .card h2 {
+  text-align: center;
+  color: red;
+
 }
 
 .container p {

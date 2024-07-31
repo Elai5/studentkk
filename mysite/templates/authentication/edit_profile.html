@@ -20,10 +20,9 @@
             {% csrf_token %}
             
             <div class="image-upload-container">
-                <img class="image-preview" src="{% if user_profile.profile_picture %}{{ user_profile.profile_picture.url }}{% else %}{% static 'images/woman.jpg' %}{% endif %}" alt="Profile Image" id="previewImage">
-                <input type="file" id="profileImage" name="profile_picture" accept="image/*" onchange="previewProfileImage()" required>
+                <img class="image-preview" src="{% if user_profile.profile_picture %}{{ user_profile.profile_picture.url }}{% else %}{% static 'images/woman.jpg' %}{% endif %}" alt="Profile Image" id="editPreviewImage">
+                <input type="file" id="editProfileImage" name="profile_picture" accept="image/*" onchange="previewProfileImage()" required>
             </div>
-
             <div class="form-group">
                 <label for="fname">First Name</label>
                 <input type="text" id="fname" name="fname" value="{{ user_profile.user.first_name }}" placeholder="Enter first name" required>
@@ -67,3 +66,6 @@
     </div>
 </section>
 {% endblock %}
+
+<!-- Place your script tag here, at the end of the body -->
+<script src="{% static 'js/script.js' %}"></script>

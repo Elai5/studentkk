@@ -21,6 +21,7 @@ def home(request):
 
 def homepage(request):
     return render(request, "authentication/homepage.html")
+
 def signup(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -307,5 +308,3 @@ def edit_profile(request):
         return redirect('profile_view')  # Redirect to the profile view after saving
 
     return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
-
-
