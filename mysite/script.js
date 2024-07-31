@@ -32,20 +32,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Add event listeners for the signup form
-    var signupFileInput = document.getElementById('profileImage'); // Updated ID for signup file input
+    var signupFileInput = document.getElementById('profileImage'); // ID for signup file input
     if (signupFileInput) {
         signupFileInput.addEventListener('change', function () {
-            previewProfileImage('profileImage', 'previewImage'); // Updated IDs for preview
+            previewProfileImage('profileImage', 'previewImage'); // IDs for preview
         });
     } else {
         console.error('Signup file input element not found');
     }
 
     // Add event listeners for the edit profile form
-    var editFileInput = document.getElementById('editProfileImage');
+    var editFileInput = document.getElementById('editProfileImage'); // ID for edit profile file input
     if (editFileInput) {
         editFileInput.addEventListener('change', function () {
-            previewProfileImage('editProfileImage', 'editPreviewImage');
+            previewProfileImage('editProfileImage', 'editPreviewImage'); // IDs for preview
         });
     } else {
         console.error('Edit file input element not found');

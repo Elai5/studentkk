@@ -186,30 +186,7 @@ def profile_view(request):
 def friends(request):
     if request.user.is_authenticated:
         user_profile = request.user
-        # Get friends from the same institution and country of origin
-        friends_from_school = CustomUser.objects.filter(
-            institution=user_profile.institution,
-            country=user_profile.country
-        ).exclude(id=request.user.id)
-        # If no friends found from the same institution, get friends from the same location
-        if not friends_from_school.exists():
-            friends_from_country = CustomUser.objects.filter(
-                location=user_profile.location,
-                country=user_profile.country
-            ).exclude(id=request.user.id)
-            friends = friends_from_country
-        else:
-            friends = friends_from_school
-
-        return render(request, "authentication/friends.html", {'friends': friends})
-    else:
-        return redirect('login')  # Redirect to login if not authenticated
-
-
-def friend_suggestions(request):
-    if request.user.is_authenticated:
-        user_profile = request.user
-
+        
         # Get friends from the same institution and country of origin
         friends_from_school = CustomUser.objects.filter(
             institution=user_profile.institution,
@@ -226,9 +203,26 @@ def friend_suggestions(request):
         else:
             friends = friends_from_school
 
-        return render(request, 'friend_suggestions.html', {'friends': friends})
+        # Optional Logic for Friend Suggestions
+        friend_suggestions = CustomUser.objects.exclude(id=request.user.id).exclude(id__in=friends.values_list('id', flat=True))
+
+        # Suggest friends from the same institution or location
+        suggestions_from_school = friend_suggestions.filter(
+            institution=user_profile.institution
+        )
+        suggestions_from_location = friend_suggestions.filter(
+            location=user_profile.location
+        )
+
+        # Combine suggestions if needed
+        suggestions = suggestions_from_school | suggestions_from_location
+
+        return render(request, "authentication/friends.html", {
+            'friends': friends,
+            'suggestions': suggestions
+        })
     else:
-        return redirect('login')  # Redirect to login if not authenticated
+        return redirect('signin')  # Redirect to sign-in if not authenticated
 
 def send_friend_request(request, user_id):
     if request.user.is_authenticated:
@@ -246,9 +240,10 @@ def send_friend_request(request, user_id):
         else:
             messages.error(request, "You cannot send a friend request to yourself.")
         
-        return redirect('friend_suggestions')  # Redirect back to friend suggestions
+        return redirect('friends')  # Redirect back to friends page
     else:
         return redirect('login')  # Redirect to login if not authenticated
+
 
 def your_django_view(request):
     if request.method == 'POST':
@@ -286,8 +281,8 @@ def edit_profile(request):
         print(request.POST)  # Print the POST data for debugging
 
         # Update user information
-        request.user.first_name = request.POST.get('first_name', request.user.first_name)
-        request.user.last_name = request.POST.get('last_name', request.user.last_name)
+        request.user.first_name = request.POST.get('fname', request.user.first_name)  # Ensure 'fname' matches your form
+        request.user.last_name = request.POST.get('lname', request.user.last_name)  # Ensure 'lname' matches your form
         request.user.email = request.POST.get('email', request.user.email)
 
         # Update profile information

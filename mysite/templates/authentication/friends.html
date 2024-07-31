@@ -1,28 +1,63 @@
 {% extends "authentication/nav2.html" %}
 {% load static %} <!-- Load the static template tag library -->
-{% block title %}Friends Page{% endblock %}
-{% block content %}
 
+{% block title %}Friends Page{% endblock %}
+
+{% block content %}
 <section id="friends">
-  <div class="friend"> 
-    <p>This is your friends page</p>
-    <h2>Friend Suggestions</h2>
-    <ul>
-        {% for friend in friends %}
-            <li class="friend-card">
-                <img src="{{ friend.avatar_url }}" alt="{{ friend.username }}'s avatar" class="avatar">
-                <div class="friend-info">
-                    <span class="friend-name">{{ friend.first_name }} {{ friend.last_name }}</span>
-                    <span class="friend-institution">{{ friend.institution }}</span>
-                    <span class="friend-country">{{ friend.country }}</span>
-                    <span class="friend-location">{{ friend.location }}</span>
-                </div>
-                <a href="{% url 'send_friend_request' friend.id %}" class="send-request">Send Friend Request</a>
-            </li>
-        {% empty %}
-            <li>No friend suggestions available.</li>
-        {% endfor %}
-    </ul>
-  </div>
+    <div class="friend"> 
+        <h1>This is your friends page</h1>
+        
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <h2>Your Friends</h2>
+        <ul>
+            {% for friend in friends %}
+                <li class="friend-card">
+                    {% if friend.profile_picture %}
+                        <img src="{{ friend.profile_picture.url }}" alt="{{ friend.username }}'s profile picture" class="avatar">
+                    {% else %}
+                        <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture" class="avatar">
+                    {% endif %}
+                    <div class="friend-info">
+                        <span class="friend-name">{{ friend.first_name }} {{ friend.last_name }}</span>
+                        <span class="friend-institution">{{ friend.institution }}</span>
+                        <span class="friend-country">{{ friend.country }}</span>
+                        <span class="friend-location">{{ friend.location }}</span>
+                    </div>
+                </li>
+            {% empty %}
+                <li>No friends found.</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Friend Suggestions</h2>
+        <ul>
+            {% for suggestion in suggestions %}
+                <li class="friend-card">
+                    {% if suggestion.profile_picture %}
+                        <img src="{{ suggestion.profile_picture.url }}" alt="{{ suggestion.username }}'s profile picture" class="avatar">
+                    {% else %}
+                        <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture" class="avatar">
+                    {% endif %}
+                    <div class="friend-info">
+                        <span class="friend-name">{{ suggestion.first_name }} {{ suggestion.last_name }}</span>
+                        <span class="friend-institution">{{ suggestion.institution }}</span>
+                        <span class="friend-country">{{ suggestion.country }}</span>
+                        <span class="friend-location">{{ suggestion.location }}</span>
+                    </div>
+                    <a href="{% url 'send_friend_request' suggestion.id %}" class="send-request">Send Friend Request</a>
+                </li>
+            {% empty %}
+                <li>No friend suggestions available.</li>
+            {% endfor %}
+        </ul>
+    </div>
 </section>
 {% endblock %}
