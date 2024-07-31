@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Check if the file input exists
         if (!fileInput) {
-            console.error('File input element not found');
+            console.error('File input element not found:', fileInputId);
             return; // Exit if the file input is not found
         }
 
@@ -32,10 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Add event listeners for the signup form
-    var signupFileInput = document.getElementById('signupProfileImage');
+    var signupFileInput = document.getElementById('profileImage'); // Updated ID for signup file input
     if (signupFileInput) {
         signupFileInput.addEventListener('change', function () {
-            previewProfileImage('signupProfileImage', 'signupPreviewImage');
+            previewProfileImage('profileImage', 'previewImage'); // Updated IDs for preview
         });
     } else {
         console.error('Signup file input element not found');
