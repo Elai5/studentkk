@@ -1,0 +1,41 @@
+{% extends "authentication/nav2.html" %}
+{% load static %} <!-- Load the static template tag library -->
+
+{% block title %}Friend Requests{% endblock %}
+
+{% block content %}
+<section id="friend-requests">
+    <div class="request-container">
+        <h1>Friend Requests</h1>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <ul>
+            {% for request in friend_requests %}
+                <li class="request-card">
+                    <div class="request-info">
+                        {% if request.from_user.profile_picture %}
+                            <img src="{{ request.from_user.profile_picture.url }}" alt="{{ request.from_user.username }}'s profile picture" class="avatar">
+                        {% else %}
+                            <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture" class="avatar">
+                        {% endif %}
+                        <span>{{ request.from_user.first_name }} {{ request.from_user.last_name }}</span>
+                    </div>
+                    <div class="request-actions">
+                        <a href="{% url 'accept_friend_request' request.id %}" class="accept-button">Accept</a>
+                        <a href="{% url 'decline_friend_request' request.id %}" class="decline-button">Decline</a>
+                    </div>
+                </li>
+            {% empty %}
+                <li>No friend requests available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock %}

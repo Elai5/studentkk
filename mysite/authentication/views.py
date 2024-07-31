@@ -187,24 +187,23 @@ def friends(request):
     if request.user.is_authenticated:
         user_profile = request.user
         
-        # Get friends from the same institution and country of origin
-        friends_from_school = CustomUser.objects.filter(
-            institution=user_profile.institution,
-            country=user_profile.country
-        ).exclude(id=request.user.id)
+        # Fetch accepted friends
+        accepted_friends = CustomUser.objects.filter(
+            id__in=FriendRequest.objects.filter(
+                accepted=True,
+                from_user=request.user
+            ).values_list('to_user', flat=True)
+        ).union(
+            CustomUser.objects.filter(
+                id__in=FriendRequest.objects.filter(
+                    accepted=True,
+                    to_user=request.user
+                ).values_list('from_user', flat=True)
+            )
+        )
 
-        # If no friends found from the same institution, get friends from the same location
-        if not friends_from_school.exists():
-            friends_from_country = CustomUser.objects.filter(
-                location=user_profile.location,
-                country=user_profile.country
-            ).exclude(id=request.user.id)
-            friends = friends_from_country
-        else:
-            friends = friends_from_school
-
-        # Optional Logic for Friend Suggestions
-        friend_suggestions = CustomUser.objects.exclude(id=request.user.id).exclude(id__in=friends.values_list('id', flat=True))
+        # Fetch friend suggestions based on institution or location
+        friend_suggestions = CustomUser.objects.exclude(id=request.user.id).exclude(id__in=accepted_friends.values_list('id', flat=True))
 
         # Suggest friends from the same institution or location
         suggestions_from_school = friend_suggestions.filter(
@@ -218,7 +217,7 @@ def friends(request):
         suggestions = suggestions_from_school | suggestions_from_location
 
         return render(request, "authentication/friends.html", {
-            'friends': friends,
+            'friends': accepted_friends,
             'suggestions': suggestions
         })
     else:
@@ -242,8 +241,35 @@ def send_friend_request(request, user_id):
         
         return redirect('friends')  # Redirect back to friends page
     else:
-        return redirect('login')  # Redirect to login if not authenticated
+        return redirect('signin')  # Redirect to login if not authenticated
 
+def accept_friend_request(request, request_id):
+    if request.user.is_authenticated:
+        friend_request = get_object_or_404(FriendRequest, id=request_id, to_user=request.user)
+        friend_request.accepted = True
+        friend_request.save()
+        
+        messages.success(request, f"You are now friends with {friend_request.from_user.username}!")
+        return redirect('friends')
+    else:
+        return redirect('signin')
+
+def decline_friend_request(request, request_id):
+    if request.user.is_authenticated:
+        friend_request = get_object_or_404(FriendRequest, id=request_id, to_user=request.user)
+        friend_request.delete()  # Remove the friend request
+        
+        messages.success(request, "Friend request declined.")
+        return redirect('friends')
+    else:
+        return redirect('signin')
+
+def friend_requests_view(request):
+    if request.user.is_authenticated:
+        friend_requests = FriendRequest.objects.filter(to_user=request.user, accepted=False)
+        return render(request, 'authentication/friend_requests.html', {'friend_requests': friend_requests})
+    else:
+        return redirect('signin')  # Redirect to sign-in if not authenticated
 
 def your_django_view(request):
     if request.method == 'POST':
