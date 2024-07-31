@@ -13,6 +13,7 @@ from django.urls import reverse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.staticfiles.storage import staticfiles_storage
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -275,18 +276,31 @@ def your_django_view(request):
 def how_it_works(request):
     return render(request, 'authentication/how_it_works.html')
 
+@login_required
 def edit_profile(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+
     if request.method == 'POST':
-        # Handle form submission to update user profile
-        # For example:
-        user = request.user
-        user.first_name = request.POST['first_name']
-        user.last_name = request.POST['last_name']
-        user.email = request.POST['email']
-        # Save other fields as needed
-        user.save()
+        # Update user information
+        request.user.first_name = request.POST.get('first_name', request.user.first_name)
+        request.user.last_name = request.POST.get('last_name', request.user.last_name)
+        request.user.email = request.POST.get('email', request.user.email)
+
+        # Update profile information
+        user_profile.country = request.POST.get('country', user_profile.country)
+        user_profile.location = request.POST.get('location', user_profile.location)
+        user_profile.institution = request.POST.get('institution', user_profile.institution)
+
+        # Handle profile picture upload
+        profile_image = request.FILES.get('profile_picture')
+        if profile_image:
+            user_profile.profile_picture = profile_image  # Update the profile picture
+
+        # Save changes
+        request.user.save()
+        user_profile.save()
+
         messages.success(request, "Profile updated successfully.")
         return redirect('profile_view')  # Redirect to the profile view after saving
 
-    # Render the edit profile form
-    return render(request, 'authentication/edit_profile.html', {'user': request.user})
+    return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
