@@ -17,7 +17,7 @@
         {% csrf_token %}
         <div class="image-upload-container">
             <img class="image-preview" src="{% static 'images/woman.jpg' %}" alt="Dummy Image" id="previewImage">
-            <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewProfileImage()">
+            <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewProfileImage()"required>
         </div>
 
         <label for="username">Username</label>

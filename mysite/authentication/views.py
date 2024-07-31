@@ -12,6 +12,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 
 def home(request):
@@ -19,15 +20,6 @@ def home(request):
 
 def homepage(request):
     return render(request, "authentication/homepage.html")
-
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.core.mail import send_mail
-from django.urls import reverse
-from django.conf import settings
-import re
-from .models import CustomUser, UserProfile
-
 def signup(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -77,11 +69,16 @@ def signup(request):
         if has_error:
             return render(request, "authentication/signup.html")
 
+        # Check if the profile image is provided; if not, set a default image
+        if not profile_image:
+            profile_image = staticfiles_storage.url('images/woman.jpg') 
+
+
         # Create a new user instance
         myuser = CustomUser.objects.create_user(
             username=username, email=email, password=pass1, 
             country=country, location=location, institution=institution,
-            profile_picture=profile_image  # Save the uploaded image
+            profile_picture=profile_image  # Save the uploaded image or the default
         )
         myuser.first_name = fname
         myuser.last_name = lname
@@ -174,10 +171,13 @@ def universities_data(request):
 
     return JsonResponse(universities_data, safe=False)
 
+def profile(request):
+    return render(request, 'authentication/profile.html')
+
 def profile_view(request):
     if request.user.is_authenticated:
         user_profile = UserProfile.objects.get(user=request.user)  # Access the user profile
-        return render(request, "profile.html", {'profile': user_profile})
+        return render(request, "authentication/profile.html", {'profile': user_profile})
     else:
         return redirect('login')  # Redirect to login if not authenticated
 
@@ -274,3 +274,19 @@ def your_django_view(request):
 
 def how_it_works(request):
     return render(request, 'authentication/how_it_works.html')
+
+def edit_profile(request):
+    if request.method == 'POST':
+        # Handle form submission to update user profile
+        # For example:
+        user = request.user
+        user.first_name = request.POST['first_name']
+        user.last_name = request.POST['last_name']
+        user.email = request.POST['email']
+        # Save other fields as needed
+        user.save()
+        messages.success(request, "Profile updated successfully.")
+        return redirect('profile_view')  # Redirect to the profile view after saving
+
+    # Render the edit profile form
+    return render(request, 'authentication/edit_profile.html', {'user': request.user})

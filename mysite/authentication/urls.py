@@ -18,8 +18,8 @@ urlpatterns = [
     path('verify_otp', views.verify_otp, name='verify_otp'),
     path('homepage', views.homepage, name="homepage"),
     path('friends/', views.friends, name="friends"),
-    path('profile/', profile_view, name='profile'),
-
+    path('profile', profile_view, name='profile_view'),
+    path('edit_profile', views.edit_profile, name='edit_profile'),
     
     path('universities/', universities_data, name='universities_data'),
     path('friends/suggestions', friend_suggestions, name='friend_suggestions'),

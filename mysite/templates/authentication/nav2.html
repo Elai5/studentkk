@@ -27,7 +27,7 @@
         <li><a href="{% url 'friends' %}" >FRIENDS</a></li>
         <li><a href="#">MESSAGES</a></li>
         <li><a href="#">EVENTS</a></li>
-        <li><a href="#">PROFILE</a></li>
+        <li><a href="{% url 'profile_view' %}" >PROFILE</a></li>
       </ul>
       <div class="btn">
         {% if user.is_authenticated %}
