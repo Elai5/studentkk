@@ -7,7 +7,9 @@ function toggleNavbar() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function() {
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Function to preview the profile image
     function previewProfileImage() {
         var preview = document.getElementById('previewImage');
         var fileInput = document.getElementById('profileImage');
@@ -21,6 +23,14 @@ document.addEventListener("DOMContentLoaded", function() {
             };
             reader.readAsDataURL(file);
         }
+    }
+
+    // Add event listener to the file input for previewing the image
+    var fileInput = document.getElementById('profileImage');
+    if (fileInput) {
+        fileInput.addEventListener('change', previewProfileImage);
+    } else {
+        console.error('Profile image input element not found');
     }
 
     // Fetch country data from the API
@@ -78,3 +88,4 @@ document.addEventListener("DOMContentLoaded", function() {
         console.error('Institution input element not found');
     }
 });
+

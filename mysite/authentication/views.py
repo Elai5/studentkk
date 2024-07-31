@@ -281,6 +281,9 @@ def edit_profile(request):
     user_profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
+        print("Form submitted")  # Debugging line
+        print(request.POST)  # Print the POST data for debugging
+
         # Update user information
         request.user.first_name = request.POST.get('first_name', request.user.first_name)
         request.user.last_name = request.POST.get('last_name', request.user.last_name)
@@ -304,3 +307,5 @@ def edit_profile(request):
         return redirect('profile_view')  # Redirect to the profile view after saving
 
     return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
+
+
