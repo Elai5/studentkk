@@ -19,6 +19,7 @@ urlpatterns = [
     path('signin', views.signin, name="signin"),
     path('signout', views.signout, name="signout"),
     path('verify_otp', views.verify_otp, name='verify_otp'),
+    path('verify_otp', views.resend_otp, name='resend_otp'),
     path('homepage', views.homepage, name="homepage"),
     path('friends/', views.friends, name="friends"),
     path('profile', views.profile_view, name='profile_view'),

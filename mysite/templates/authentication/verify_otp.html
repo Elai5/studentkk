@@ -4,14 +4,20 @@
 {% block content %}
 <section id="verify">
     <div class="verification-container">
-    <h1>Verify OTP</h1>
-    <form method="POST" class="verification-form">
-        {% csrf_token %}
-        <input type="hidden" name="email" value="{{ email }}">
-        <label for="otp">Enter OTP:</label>
-        <input type="text" id="otp" name="otp" required class="otp-input">
-        <button type="submit" class="verify-button">Verify</button>
-    </form>
-</div>
+        <h1>Verify OTP</h1>
+        <form method="POST" class="verification-form">
+            {% csrf_token %}
+            <input type="hidden" name="email" value="{{ email }}">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" id="otp" name="otp" required class="otp-input">
+            <button type="submit" class="verify-button">Verify</button>
+        </form>
+
+        <form method="POST" action="{% url 'resend_otp' %}" class="resend-otp-form">
+            {% csrf_token %}
+            <input type="hidden" name="email" value="{{ email }}">
+            <button type="submit" class="resend-button">Resend OTP</button>
+        </form>
+    </div>
 </section>
 {% endblock %}

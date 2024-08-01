@@ -118,26 +118,68 @@ def signup(request):
     
     return render(request, "authentication/signup.html")
 
-
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
     
     if request.method == "POST":
-        otp = request.POST['otp']
-        try:
-            user = CustomUser.objects.get(email=email)
-            if user.is_otp_valid() and user.otp == otp:
-                user.otp = None
-                user.otp_created_at = None
-                user.save()
-                messages.success(request, "OTP verified successfully. You can now log in.")
-                return redirect('signin')
+        # Check if the OTP is provided
+        if 'otp' in request.POST:
+            otp = request.POST['otp']
+            try:
+                user = CustomUser.objects.get(email=email)
+                if user.is_otp_valid() and user.otp == otp:
+                    user.otp = None
+                    user.otp_created_at = None
+                    user.save()
+                    messages.success(request, "OTP verified successfully. You can now log in.")
+                    return redirect('signin')
+                else:
+                    messages.error(request, "Invalid or expired OTP.")
+            except CustomUser.DoesNotExist:
+                messages.error(request, "User does not exist.")
+        else:
+            # Handle resend OTP logic
+            if email:  # Check if email is provided
+                try:
+                    user = CustomUser.objects.get(email=email)
+                    user.generate_otp()  # Generate a new OTP
+                    
+                    # Send the new OTP email
+                    send_mail(
+                        'Your New OTP',
+                        f'Your new OTP is {user.otp}. It is valid for 10 minutes.',
+                        'from@example.com',
+                        [user.email],
+                        fail_silently=False,
+                    )
+                    messages.success(request, "A new OTP has been sent to your email.")
+                except CustomUser.DoesNotExist:
+                    messages.error(request, "User does not exist.")
             else:
-                messages.error(request, "Invalid or expired OTP.")
-        except CustomUser.DoesNotExist:
-            messages.error(request, "User does not exist.")
-    
+                messages.error(request, "Email address is required to resend OTP.")
+        
     return render(request, "authentication/verify_otp.html", {'email': email})
+
+def resend_otp(request):
+    email = request.POST.get('email')
+    try:
+        user = CustomUser.objects.get(email=email)
+        user.generate_otp()  # Generate a new OTP
+        
+        # Send the new OTP email
+        send_mail(
+            'Your New OTP',
+            f'Your new OTP is {user.otp}. It is valid for 10 minutes.',
+            'from@example.com',
+            [user.email],
+            fail_silently=False,
+        )
+        messages.success(request, "A new OTP has been sent to your email.")
+    except CustomUser.DoesNotExist:
+        messages.error(request, "User does not exist.")
+    
+    return redirect('verify_otp')  # Redirect back to the OTP verification page
+
 
 def signin(request):
     if request.method == 'POST':
