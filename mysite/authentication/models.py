@@ -11,6 +11,8 @@ class CustomUser(AbstractUser):
     otp_created_at = models.DateTimeField(blank=True, null=True)
     otp_verified = models.BooleanField(default=False)  # New field to track OTP verification
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
+    password_reset_token = models.CharField(max_length=36, blank=True, null=True)
+    token_created_at = models.DateTimeField(blank=True, null=True)
 
     def generate_otp(self):      
         self.otp = str(random.randint(100000, 999999))
@@ -18,7 +20,7 @@ class CustomUser(AbstractUser):
         self.save()
         
     def is_otp_valid(self, otp):
-        expiry_time = self.otp_created_at + timezone.timedelta(minutes=20)
+        expiry_time = self.otp_created_at + timezone.timedelta(minutes=120)
         return self.otp == otp and timezone.now() < expiry_time
 
 class UserProfile(models.Model):

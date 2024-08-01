@@ -5,6 +5,16 @@
 <section id="verify">
     <div class="verification-container">
         <h1>Verify OTP</h1>
+
+        <!-- Message Display Section -->
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
         <form method="POST" class="verification-form">
             {% csrf_token %}
             <input type="hidden" name="email" value="{{ email }}">

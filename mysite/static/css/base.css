@@ -686,6 +686,29 @@ p {
   border-color: #c3e6cb;
 }
 
+#password-reset-confirm,
+#password-reset {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.reset-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+
 /* verification page */
 #verify {
   font-family: Arial, sans-serif;

@@ -7,8 +7,8 @@
     <form action="/signin" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="image-upload-container">
-            {% if user.is_authenticated and user.profile_picture %}
-                <img class="image-preview" src="{{ user.profile_picture.url }}" alt="Profile Picture" id="previewImage">
+            {% if profile_picture %}
+                <img class="image-preview" src="{{ profile_picture }}" alt="Profile Picture" id="previewImage">
             {% else %}
                 <img class="image-preview" src="{% static 'images/woman.jpg' %}" alt="Dummy Image" id="previewImage">
             {% endif %}
@@ -20,6 +20,18 @@
         <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required><br>
         <button type="submit">Sign In</button>
         <p>Don't have an account? Create one <a href="{% url 'signup' %}">here</a></p>
+        <p><a href="{% url 'password_reset_request' %}">Forgot Password?</a></p>  <!-- Link to password reset -->
     </form>
+
+    <!-- Message Display Section -->
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </section>
 {% endblock %}
+
+

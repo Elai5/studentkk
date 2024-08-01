@@ -16,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.auth.decorators import login_required
 from .models import Message
+import uuid
 
 
 def home(request):
@@ -77,7 +78,6 @@ def signup(request):
         if not profile_image:
             profile_image = staticfiles_storage.url('images/woman.jpg') 
 
-
         # Create a new user instance
         myuser = CustomUser.objects.create_user(
             username=username, email=email, password=pass1, 
@@ -96,6 +96,9 @@ def signup(request):
             location=location,
             institution=institution
         )
+
+        # Store the profile picture URL in the session
+        request.session['profile_picture'] = myuser.profile_picture.url if myuser.profile_picture else None
 
         # Generate the OTP verification URL
         otp_verification_url = f"{request.scheme}://{request.get_host()}{reverse('verify_otp')}?email={email}"
@@ -118,7 +121,6 @@ def signup(request):
     
     return render(request, "authentication/signup.html")
 
-
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
     
@@ -133,55 +135,40 @@ def verify_otp(request):
                     user.otp_created_at = None
                     user.save()
                     messages.success(request, "OTP verified successfully. You can now log in.")
-                    return redirect('signin')
+                    
+                    # Store the profile picture URL in the session
+                    request.session['profile_picture'] = user.profile_picture.url if user.profile_picture else None
+                    
+                    return redirect('signin')  # Redirect to the sign-in page
                 else:
                     messages.error(request, "Invalid or expired OTP.")
             except CustomUser.DoesNotExist:
                 messages.error(request, "User does not exist.")
         else:
-            # Handle resend OTP logic
-            if email:  # Check if email is provided
-                try:
-                    user = CustomUser.objects.get(email=email)
-                    user.generate_otp()  # Generate a new OTP
-                    
-                    # Send the new OTP email
-                    send_mail(
-                        'Your New OTP',
-                        f'Your new OTP is {user.otp}. It is valid for 10 minutes.',
-                        'from@example.com',
-                        [user.email],
-                        fail_silently=False,
-                    )
-                    messages.success(request, "A new OTP has been sent to your email.")
-                except CustomUser.DoesNotExist:
-                    messages.error(request, "User does not exist.")
-            else:
-                messages.error(request, "Email address is required to resend OTP.")
-        
+            messages.error(request, "OTP is required.")
+    
     return render(request, "authentication/verify_otp.html", {'email': email})
 
-
 def resend_otp(request):
-    email = request.POST.get('email')
-    try:
-        user = CustomUser.objects.get(email=email)
-        user.generate_otp()  # Generate a new OTP
-        
-        # Send the new OTP email
-        send_mail(
-            'Your New OTP',
-            f'Your new OTP is {user.otp}. It is valid for 10 minutes.',
-            'from@example.com',
-            [user.email],
-            fail_silently=False,
-        )
-        messages.success(request, "A new OTP has been sent to your email.")
-    except CustomUser.DoesNotExist:
-        messages.error(request, "User does not exist.")
+    if request.method == "POST":
+        email = request.POST.get('email')
+        try:
+            user = CustomUser.objects.get(email=email)
+            user.generate_otp()  # Generate a new OTP
+            
+            # Send the new OTP email
+            send_mail(
+                'Your New OTP',
+                f'Your new OTP is {user.otp}. It is valid for 10 minutes.',
+                'from@example.com',
+                [user.email],
+                fail_silently=False,
+            )
+            messages.success(request, "A new OTP has been sent to your email.")
+        except CustomUser.DoesNotExist:
+            messages.error(request, "User does not exist.")
     
     return redirect('verify_otp')  # Redirect back to the OTP verification page
-
 
 def signin(request):
     if request.method == 'POST':
@@ -191,17 +178,24 @@ def signin(request):
         user = authenticate(username=username, password=pass1)
         
         if user is not None:
-            if not user.otp_verified:  # Check if OTP is verified
-                messages.error(request, "You must verify your OTP before signing in.")
-                return redirect('home')
+            # No OTP check here, since the user has already verified their OTP during signup
             login(request, user)
-            return redirect('homepage')
+            return redirect('homepage')  # Redirect to the homepage after successful login
         else:
-            messages.error(request, "Bad credentials")
-            return redirect('home')
+            messages.error(request, "Invalid username or password")  # Invalid username or password
+            return redirect('signin')  # Redirect back to the sign-in page
     
-    return render(request, "authentication/signin.html")
+    # If the request method is GET, retrieve the profile picture for display
+    profile_picture = None
+    if 'username' in request.GET:
+        username = request.GET['username']
+        try:
+            user = CustomUser.objects.get(username=username)
+            profile_picture = user.profile_picture.url if user.profile_picture else None
+        except CustomUser.DoesNotExist:
+            profile_picture = None
 
+    return render(request, "authentication/signin.html", {'profile_picture': profile_picture})
 
 def signout(request):
     logout(request)
@@ -428,3 +422,55 @@ def chat_list_view(request, friend_id=None):
         'messages': messages,
         'friend': friend,
     })
+
+
+def password_reset_request(request):
+    if request.method == "POST":
+        email = request.POST['email']
+        try:
+            user = CustomUser.objects.get(email=email)
+            # Generate a unique token
+            token = str(uuid.uuid4())
+            user.password_reset_token = token
+            user.token_created_at = timezone.now()
+            user.save()
+
+            # Send password reset email
+            reset_url = f"{request.scheme}://{request.get_host()}{reverse('password_reset_confirm', args=[token])}"
+            subject = "Password Reset Request"
+            message = f"Hello {user.first_name},\n\nClick the link below to reset your password:\n{reset_url}\n\nThank You!"
+            send_mail(subject, message, 'from@example.com', [user.email], fail_silently=False)
+
+            messages.success(request, "A password reset link has been sent to your email.")
+            return redirect('home')
+        except CustomUser.DoesNotExist:
+            messages.error(request, "No account found with this email address.")
+    
+    return render(request, "authentication/password_reset_request.html")
+
+
+
+
+def password_reset_confirm(request, token):
+    try:
+        user = CustomUser.objects.get(password_reset_token=token)
+        # Check if the token is still valid (e.g., not expired)
+        if timezone.now() > user.token_created_at + timezone.timedelta(hours=1):  # Token valid for 1 hour
+            messages.error(request, "This password reset link has expired.")
+            return redirect('password_reset_request')
+
+        if request.method == "POST":
+            new_password = request.POST['new_password']
+            user.set_password(new_password)  # Use Django's method to hash the password
+            user.password_reset_token = None  # Clear the token after resetting
+            user.token_created_at = None  # Clear the token timestamp
+            user.save()
+            messages.success(request, "Your password has been reset successfully. You can now log in.")
+            return redirect('signin')
+
+    except CustomUser.DoesNotExist:
+        messages.error(request, "Invalid password reset token.")
+    
+    return render(request, "authentication/password_reset_confirm.html", {'token': token})
+
+
