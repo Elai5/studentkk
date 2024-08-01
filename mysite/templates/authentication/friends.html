@@ -1,4 +1,4 @@
-{% extends "authentication/nav2.html" %}
+{% extends "authentication/base.html" %}
 {% load static %}
 
 {% block title %}Friends Page{% endblock %}
@@ -8,10 +8,11 @@
     <div class="friend"> 
         <h1>This is your friends page</h1>
         
+        <!-- Message Display Section -->
         {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
-                    <li>{{ message }}</li>
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                 {% endfor %}
             </ul>
         {% endif %}

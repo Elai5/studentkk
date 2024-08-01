@@ -15,7 +15,6 @@ from .views import password_reset_request, password_reset_confirm
 urlpatterns = [
     path('', views.home, name="home"),
     path('about/', views.about, name="about"),
-    path('career/', views.career, name="career"),
     path('signup', views.signup, name="signup"),
     path('signin', views.signin, name="signin"),
     path('signout', views.signout, name="signout"),

@@ -207,9 +207,6 @@ def index(request):
 def about(request):
     return render(request, 'authentication/about.html')
 
-def career(request):
-    return render(request, 'authentication/career.html')
-
 def universities_data(request):
     with open("data/world_universities_and_domains.json", "r") as json_file:
         universities_data = json.load(json_file)
@@ -275,19 +272,25 @@ def send_friend_request(request, user_id):
         to_user = get_object_or_404(CustomUser, id=user_id)
         
         if to_user != request.user:
-            friend_request, created = FriendRequest.objects.get_or_create(from_user=request.user, to_user=to_user)
-            
-            if created:
-                messages.success(request, f"Friend request sent to {to_user.username}!")
+            # Check if they are already friends
+            if FriendRequest.objects.filter(
+                (Q(from_user=request.user) & Q(to_user=to_user) & Q(accepted=True)) |
+                (Q(from_user=to_user) & Q(to_user=request.user) & Q(accepted=True))
+            ).exists():
+                messages.error(request, f"You are already friends with {to_user.username}.")
             else:
-                messages.info(request, f"You have already sent a friend request to {to_user.username}.")
+                friend_request, created = FriendRequest.objects.get_or_create(from_user=request.user, to_user=to_user)
+                
+                if created:
+                    messages.success(request, f"Friend request sent to {to_user.username}!")
+                else:
+                    messages.info(request, f"You have already sent a friend request to {to_user.username}.")
         else:
             messages.error(request, "You cannot send a friend request to yourself.")
         
         return redirect('friends')  # Redirect back to friends page
     else:
         return redirect('signin')  # Redirect to login if not authenticated
-
 
 def accept_friend_request(request, request_id):
     if request.user.is_authenticated:

@@ -783,7 +783,6 @@ label {
   padding-top: 150px;
   height: 100vh;
   width: 100%;
-
 }
 
 .about-page .mage {
@@ -1212,6 +1211,7 @@ label {
 .incoming-requests .decline-button:hover {
   background-color: darkorange;
 }
+
 
 @media (max-width: 768px) {
   .friend {
