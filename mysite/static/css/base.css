@@ -329,15 +329,17 @@ footer {
   height: auto;
   width: 100%;
   margin: 0 auto;
-
 }
 
 .text {
   height: 190px;
   width: 80%;
-  padding: 20px 70px;
-  margin: 20px 80px;
-  background-color: rgba(217, 217, 217, 0.41);
+  padding: 20px 30px;
+  margin: 20px auto;
+  background: linear-gradient(to right, rgba(217, 217, 217, 0.6), rgba(217, 217, 217, 0.4));
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .text h1 {
@@ -345,9 +347,14 @@ footer {
   font-size: 38px;
 }
 
+.text:hover {
+  transform: translateY(-5px);
+}
+
 .text h2 {
   font-size: 30px;
   color: black;
+  margin: 5px 0;
 }
 
 .card {
@@ -359,6 +366,12 @@ footer {
   flex-direction: column;
   margin: 20px auto;
   min-height: 300px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease
+}
+
+.card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  /* transform: translateY(-5px); */
 }
 
 .row-group {
@@ -371,11 +384,18 @@ footer {
   background-color: #f0f0f0;
   border-radius: 15px;
   padding: 10px;
-  margin: 20px;
+  margin: 10px;
   max-width: 600px;
   height: 200px;
   flex: 1;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.row:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  background-color: wheat;
 }
 
 .profile .card .row h2 {
@@ -534,7 +554,6 @@ input[type="file"] {
 #password {
   width: 100%;
   padding: 8px;
-  margin-bottom: 12px;
   box-sizing: border-box;
 }
 
@@ -587,6 +606,63 @@ p {
   border-color: #c3e6cb;
 }
 
+#verify {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.verification-container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.verification-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.otp-input {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.verify-button {
+  padding: 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.verify-button:hover {
+  background-color: #0056b3;
+}
 
 /* About Page Styles */
 #about {
@@ -822,6 +898,7 @@ p {
     margin-top: 10px;
   }
 }
+
 /* Laptop Styles (769px to 1024px) */
 @media screen and (min-width: 769px) and (max-width: 1440px) {
   #about {
@@ -905,7 +982,6 @@ p {
 
 /* frineds section */
 #friends {
-  /* background-color: #eaeaea; */
   color: black;
   height: 100vh;
   padding: 20px;
@@ -916,7 +992,6 @@ p {
   margin-left: 80px;
   padding: 20px;
   max-width: 80%;
-  /* background-color: #333; */
 }
 
 .friend h1 {
@@ -947,6 +1022,14 @@ p {
   margin: 10px 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid #e0e0e0;
+  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.friend-card:hover {
+  background-color: #f9f9f9;
+  border-color: #b0b0b0;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .avatar {
@@ -1084,21 +1167,29 @@ p {
   }
 }
 
+/* setting up rpofile page */
 
 #profile {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background-color: #f9f9f9;
 }
 
 .profile-container {
-  max-width: 600px;
+  max-width: 750px;
   margin-top: -180px;
-  background-color: red;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   padding: 20px;
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 .profile-header {
@@ -1113,6 +1204,7 @@ p {
   border-radius: 50%;
   margin-right: 20px;
   object-fit: cover;
+  border: 2px solid #FF6F20;
 }
 
 .profile-info {
@@ -1122,6 +1214,7 @@ p {
 .profile-info h1 {
   margin: 0;
   font-size: 24px;
+  color: #333;
 }
 
 .profile-info p {
@@ -1142,12 +1235,39 @@ p {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .edit-button:hover {
   background-color: darkorange;
+  transform: scale(1.05);
 }
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+  .profile-container {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-info h1 {
+    font-size: 20px;
+  }
+
+  .profile-info p {
+    font-size: 14px;
+  }
+
+  .edit-button {
+    padding: 8px 12px;
+  }
+}
+
 
 
 /* How it works section */
