@@ -1203,11 +1203,12 @@ p {
 
 /* How it works section */
 #works {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   background-color: #f8f9fa;
+  overflow: auto;
 }
 
 .container {
@@ -1296,9 +1297,62 @@ p {
   background-color: #0056b3;
 }
 
-@media (max-width: 768px) {
+/* Responsive Styles */
+@media screen and (max-width: 320px) {
+  .container {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+    background-color: #721c24;
+  }
 
-  /* Tablet */
+  .container h1 {
+    font-size: 1.5em;
+    /* Smaller font size for headings */
+    margin-bottom: 5px;
+    /* Reduced margin for visibility */
+  }
+
+  .container h2 {
+    font-size: 1em;
+    /* Smaller font size for subheadings */
+    margin-bottom: 10px;
+    /* Reduced margin for visibility */
+  }
+
+  .container .card {
+    width: 100%;
+    /* Full width for cards */
+    margin: 5px 0;
+    /* Adjusted margin for cards */
+    height: 400px;
+    /* Reduced height for cards */
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 600px) {
+  .container {
+    margin: 10px;
+  }
+
+  .container h1 {
+    font-size: 2em;
+    margin-bottom: 5px;
+  }
+
+  .container h2 {
+    font-size: 1.2em;
+    margin-bottom: 15px;
+  }
+
+  .container .card {
+    width: 100%;
+    margin: 10px 0;
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 768px) {
   .container {
     margin: 20px 40px;
     /* Reduced margin for smaller screens */
@@ -1307,13 +1361,17 @@ p {
   }
 
   .container h1 {
-    font-size: 2em;
+    font-size: 2.2em;
     /* Smaller font size for headings */
+    margin-bottom: 5px;
+    /* Reduced margin for visibility */
   }
 
   .container h2 {
-    font-size: 1.25em;
+    font-size: 1.4em;
     /* Smaller font size for subheadings */
+    margin-bottom: 15px;
+    /* Reduced margin for visibility */
   }
 
   .container .card {
@@ -1326,35 +1384,35 @@ p {
   }
 }
 
-@media (max-width: 480px) {
-
-  /* Phone */
+@media screen and (min-width: 769px) and (max-width: 1440px) {
   .container {
-    margin: 20px 10px;
-    /* Further reduced margin */
-    padding: 20px 10px;
-    /* Further reduced padding */
+    margin: 20px 60px;
+    /* Adjusted margin for medium screens */
+    padding: 40px 20px;
+    /* Adjusted padding */
   }
 
   .container h1 {
-    font-size: 1.8em;
-    /* Smaller font size for headings */
+    font-size: 2.5em;
+    /* Maintain original font size for headings */
   }
 
   .container h2 {
-    font-size: 1.1em;
-    /* Smaller font size for subheadings */
+    font-size: 1.5em;
+    /* Maintain original font size for subheadings */
   }
 
   .container .card {
-    width: 100%;
-    /* Full width for cards */
-    margin: 10px 0;
-    /* Adjusted margin for cards */
-    height: auto;
-    /* Allow height to adjust based on content */
+    width: 400px;
+    /* Maintain width for larger screens */
+    margin: 20px;
+    /* Maintain margin for cards */
+    height: 600px;
+    /* Maintain height for cards */
   }
 }
+
+
 
 
 
