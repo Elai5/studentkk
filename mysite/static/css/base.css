@@ -1462,11 +1462,13 @@ label {
     width: 100%;
     margin: 0;
     padding: 10px;
-    background-color: #721c24;
+    padding-top: 30px;
+    /* background-color: #721c24; */
   }
 
   .container h1 {
-    font-size: 1.5em;
+    font-size: 28px;
+    color: gold;
     margin-bottom: 5px;
   }
 

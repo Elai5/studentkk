@@ -9,7 +9,8 @@ class CustomUser(AbstractUser):
     institution = models.CharField(max_length=100, null=True, blank=True)
     otp = models.CharField(max_length=6, blank=True, null=True)
     otp_created_at = models.DateTimeField(blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)  # New field for profile picture
+    otp_verified = models.BooleanField(default=False)  # New field to track OTP verification
+    profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
 
     def generate_otp(self):      
         self.otp = str(random.randint(100000, 999999))

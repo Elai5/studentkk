@@ -118,15 +118,15 @@ def signup(request):
     
     return render(request, "authentication/signup.html")
 
+
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
     
     if request.method == "POST":
         otp = request.POST['otp']
-        
         try:
             user = CustomUser.objects.get(email=email)
-            if user.is_otp_valid(otp):
+            if user.is_otp_valid() and user.otp == otp:
                 user.otp = None
                 user.otp_created_at = None
                 user.save()
@@ -147,6 +147,9 @@ def signin(request):
         user = authenticate(username=username, password=pass1)
         
         if user is not None:
+            if not user.otp_verified:  # Check if OTP is verified
+                messages.error(request, "You must verify your OTP before signing in.")
+                return redirect('home')
             login(request, user)
             return redirect('homepage')
         else:
@@ -154,6 +157,7 @@ def signin(request):
             return redirect('home')
     
     return render(request, "authentication/signin.html")
+
 
 def signout(request):
     logout(request)
