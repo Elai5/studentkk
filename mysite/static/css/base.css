@@ -1267,6 +1267,7 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 5px;
 }
 
 .container .card h2 {
@@ -1355,32 +1356,36 @@ p {
 @media screen and (min-width: 601px) and (max-width: 768px) {
   .container {
     margin: 20px 40px;
-    /* Reduced margin for smaller screens */
     padding: 30px 15px;
-    /* Reduced padding */
   }
 
   .container h1 {
     font-size: 2.2em;
-    /* Smaller font size for headings */
-    margin-bottom: 5px;
-    /* Reduced margin for visibility */
+    margin-bottom: 10px;
+    margin-top: 50px;
   }
 
   .container h2 {
     font-size: 1.4em;
-    /* Smaller font size for subheadings */
     margin-bottom: 15px;
-    /* Reduced margin for visibility */
+    color: #F0440E;
   }
 
   .container .card {
     width: 90%;
-    /* Full width for cards */
     margin: 10px 0;
-    /* Adjusted margin for cards */
-    height: auto;
-    /* Allow height to adjust based on content */
+    height: 500px;
+  }
+
+  .container .card h2 {
+    font-size: 28px;
+    text-align: start;
+    margin-bottom: 10px;
+  }
+
+  .container .card p {
+    font-size: 18px;
+    margin-bottom: 10px;
   }
 }
 
