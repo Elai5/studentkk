@@ -310,52 +310,71 @@ footer {
   }
 }
 
-
 #homepage {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   background-size: cover;
   background-position: center;
   position: relative;
   width: 100%;
+  padding: 90px 0;
 }
 
 .profile {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 20px;
+  justify-content: flex-start;
+  padding: 15px;
   height: auto;
   width: 100%;
-  margin: 160px auto 0;
+  margin: 0 auto;
+
 }
 
 .text {
-  padding: 20px;
-  margin: 20px 0;
+  height: 190px;
+  width: 80%;
+  padding: 20px 70px;
+  margin: 20px 80px;
   background-color: rgba(217, 217, 217, 0.41);
+}
+
+.text h1 {
+  color: black;
+  font-size: 38px;
+}
+
+.text h2 {
+  font-size: 30px;
+  color: black;
 }
 
 .card {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 600px;
+  width: 100%;
   display: flex;
-  margin: 20px;
+  flex-direction: column;
+  margin: 20px auto;
   min-height: 300px;
-  justify-content: space-between;
+}
 
+.row-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .row {
   background-color: #f0f0f0;
   border-radius: 15px;
   padding: 10px;
-  margin: 10px;
-  flex: 1 1 calc(45% - 10px);
-  min-width: 420px;
+  margin: 20px;
+  max-width: 600px;
+  height: 200px;
+  flex: 1;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -379,114 +398,9 @@ footer {
   margin-top: auto;
 }
 
-.profile h1 {
-  font-size: 36px;
-  font-weight: lighter;
-  margin-bottom: 20px;
-  font-family: 'Itim', cursive;
-  color: #FF6F20;
-}
-
-.profile h2 {
-  font-family: 'Katibeh', serif;
-  font-weight: 400;
-  font-size: 58px;
-  line-height: 52px;
-  color: #333;
-}
-
-.profile p {
-  font-family: 'Katibeh', serif;
-  font-weight: 400;
-  font-size: 26px;
-  line-height: 1.5;
-  margin: 5px 0;
-  color: black;
-}
-
-.profile button {
-  margin-top: 30px;
-  border-radius: 5px;
-  outline: 0;
-  border: none;
-  background-color: navy;
-  color: white;
-}
-
-.profile button a {
-  color: white;
-  text-transform: capitalize;
-}
-
-.profile button:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid navy;
-}
-
-.profile button a:hover {
-  color: black;
-}
-
-
-@media screen and (max-width: 768px) {
-
-  .card {
-    width: 100%;
-    /* Full width for tablet and mobile */
-    margin: 10px;
-    /* Adjust margin for tablet and mobile */
-  }
-
-  .row {
-    flex: 1 1 calc(50% - 20px);
-    /* Two rows per card on tablet */
-    min-width: 200px;
-    /* Minimum width for rows */
-  }
-}
-
-
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 600px) {
   .profile {
-    margin-top: 40px;
-  }
-
-  .text {
-    width: 100%;
-    margin: 0;
-    padding: 10px;
-  }
-
-  .card {
-    padding: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    margin: 20px auto;
-    min-height: 300px;
-  }
-
-  .row {
-    border-radius: 15px;
-    padding: 10px;
-    margin: 10px 0;
-    flex: 1;
-  }
-
-  .profile .card .row h2 {
-    font-size: 22px;
-    margin: -10px 0;
-  }
-
-  .profile .card .row p {
-    font-size: 18px;
-  }
-}
-
-@media screen and (min-width: 321px) and (max-width: 600px) {
-  .profile {
-    margin-top: 60px;
+    margin-top: -80px;
   }
 
   .text {
@@ -504,12 +418,15 @@ footer {
     min-height: 300px;
   }
 
+  .row-group {
+    flex-direction: column;
+  }
+
   .row {
     border-radius: 15px;
     padding: 10px;
     margin: 10px 0;
     flex: 1;
-    background-color: #f0f0f0;
   }
 
   .profile .card .row h2 {
@@ -519,19 +436,12 @@ footer {
 
   .profile .card .row p {
     font-size: 20px;
-  }
-
-  .row small {
-    font-size: 0.9em;
-    color: purple;
-    cursor: pointer;
-    margin-top: auto;
   }
 }
 
 @media screen and (min-width: 601px) and (max-width: 768px) {
   .profile {
-    margin-top: 80px;
+    margin-top: 10px;
   }
 
   .text {
@@ -540,23 +450,12 @@ footer {
     padding: 15px;
   }
 
-  .card {
-    padding: 20px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    /* Keep the card vertical */
-    margin: 20px auto;
-    min-height: 300px;
+  .row {
+    flex: 1 1 calc(50% - 20px);
   }
 
-  .row {
-    border-radius: 15px;
-    padding: 10px;
-    margin: 10px;
-    flex: 1 1 calc(50% - 20px);
-    /* Two rows per card */
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  .row-group {
+    flex-direction: row;
   }
 
   .profile .card .row h2 {
@@ -567,68 +466,9 @@ footer {
   .profile .card .row p {
     font-size: 20px;
   }
-
-  .row small {
-    font-size: 0.9em;
-    color: purple;
-    cursor: pointer;
-    margin-top: auto;
-  }
 }
 
 
-/* @media (max-width: 480px) {
-  .row {
-    flex: 1 1 100%;
-  }
-
-  .profile {
-    padding: 10px;
-    width: 100%;
-  }
-
-  .text {
-    padding: 10px;
-  }
-
-  .profile h1 {
-    font-size: 24px;
-  }
-
-  .profile h2 {
-    font-size: 28px;
-  }
-
-  .profile p {
-    font-size: 18px;
-  }
-
-  .card {
-    padding: 10px;
-  }
-} */
-
-/* @media (max-width: 320px) {
-  .profile {
-    padding: 5px;
-  }
-
-  .text {
-    padding: 5px;
-  }
-
-  .profile h1 {
-    font-size: 20px;
-  }
-
-  .profile h2 {
-    font-size: 24px;
-  }
-
-  .profile p {
-    font-size: 16px;
-  }
-} */
 
 /* Form Styles */
 #formy {
@@ -829,7 +669,6 @@ p {
   font-family: "Roboto", sans-serif;
 }
 
-
 .info .btn {
   display: flex;
   gap: 20px;
@@ -921,7 +760,6 @@ p {
   }
 }
 
-
 /* Tablet Styles (601px to 768px) */
 @media screen and (min-width: 601px) and (max-width: 768px) {
   #about {
@@ -984,7 +822,6 @@ p {
     margin-top: 10px;
   }
 }
-
 /* Laptop Styles (769px to 1024px) */
 @media screen and (min-width: 769px) and (max-width: 1440px) {
   #about {
@@ -1395,10 +1232,12 @@ p {
 }
 
 .container p {
-  color: #666;
+  font-family: "Roboto", sans-serif;
+  color: #001F3F;
   margin-bottom: 15px;
   text-align: left;
   flex-grow: 1;
+  line-height: 32px;
 }
 
 .learn-more {

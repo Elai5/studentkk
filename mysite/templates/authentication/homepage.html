@@ -4,8 +4,42 @@
 {% block content %}
 <section id="homepage"
   style="background-image: url('{% static 'images/background.jpg' %}'); background-size: cover; background-position: center; height: 100vh; color: white;">
-  {% comment %} <div class="overlay"></div>  {% endcomment %}
-  <div class="profile">
+  {% comment %} <div class="overlay"></div>  {% endcomment %}  
+<div class="profile">
+  <div class="text">
+    <h1>Hello {{ user.username}}</h1>
+      <h2>Welcome to {{ location }}canada!</h2>
+      <p>Eager to start your new adventure? Heres ome guideline to start you off.</p>
+  </div>
+  <div class="card">
+    <div class="row-group">
+      <div class="row">
+        <h2>Transportation</h2>
+        <p>Getting Around Canada: Transportation Tips for International Students</p>
+        <small>Click here to view more</small>
+      </div>
+      <div class="row">
+        <h2>Housing</h2>
+        <p>Finding Accommodation in Canada: A Guide for International Students</p>
+        <small>Click here to view more</small>
+      </div>
+    </div>
+    <div class="row-group">
+      <div class="row">
+        <h2>Culture</h2>
+        <p>Cultural Etiquette in Canada: What International Students Should Know</p>
+        <small>Click here to view more</small>
+      </div>
+      <div class="row">
+        <h2>Food</h2>
+        <p>Exploring Canadian Cuisine: A Food Guide for International Students</p>
+        <small>Click here to view more</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+  {% comment %} <div class="profile">
     <div class="text">
       <h1>Hello {{ user.username}}</h1>
       <h2>Welcome to {{ location }}canada!</h2>
@@ -33,7 +67,7 @@
         <small>click here to view more</small>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
 </section>
 {% endblock %}
 
