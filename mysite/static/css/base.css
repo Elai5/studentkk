@@ -318,16 +318,7 @@ footer {
   background-size: cover;
   background-position: center;
   position: relative;
-}
-
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(19, 18, 18, 0.589);
-  z-index: 1;
+  width: 100%;
 }
 
 .profile {
@@ -336,8 +327,7 @@ footer {
   justify-content: space-between;
   padding: 20px;
   height: auto;
-  width: 90%;
-  /* max-width: 800px; */
+  width: 100%;
   margin: 160px auto 0;
 }
 
@@ -351,43 +341,42 @@ footer {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: 100%;
+  width: 600px;
   display: flex;
-  flex-wrap: wrap;
-  /* Allow wrapping of rows */
+  margin: 20px;
+  min-height: 300px;
   justify-content: space-between;
-  /* Space between cards */
-  margin-top: 20px;
+
 }
 
 .row {
   background-color: #f0f0f0;
-  border-radius: 3px;
+  border-radius: 15px;
   padding: 10px;
   margin: 10px;
-  flex: 1 1 calc(25% - 20px);
-  /* Four cards per row */
+  flex: 1 1 calc(45% - 10px);
+  min-width: 420px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-  min-width: 250px;
-  /* Set a minimum width for smaller screens */
 }
 
-small {
+.profile .card .row h2 {
+  font-size: 36px;
+  color: #F0440E;
+  margin: 5px;
+}
+
+.profile .card .row p {
+  font-size: 22px;
+  color: #001F3F;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 5px;
+}
+
+.row small {
+  font-size: 0.9em;
   color: purple;
-}
-
-@media (max-width: 1024px) {
-  .row {
-    flex: 1 1 calc(50% - 20px);
-    /* Two cards per row on medium screens */
-  }
-}
-
-@media (max-width: 600px) {
-  .row {
-    flex: 1 1 100%;
-    /* Stack rows on small screens */
-  }
+  cursor: pointer;
+  margin-top: auto;
 }
 
 .profile h1 {
@@ -439,16 +428,163 @@ small {
   color: black;
 }
 
-@media (max-width: 480px) {
+
+@media screen and (max-width: 768px) {
+
+  .card {
+    width: 100%;
+    /* Full width for tablet and mobile */
+    margin: 10px;
+    /* Adjust margin for tablet and mobile */
+  }
+
+  .row {
+    flex: 1 1 calc(50% - 20px);
+    /* Two rows per card on tablet */
+    min-width: 200px;
+    /* Minimum width for rows */
+  }
+}
+
+
+@media screen and (max-width: 320px) {
+  .profile {
+    margin-top: 40px;
+  }
+
+  .text {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+  }
+
+  .card {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    min-height: 300px;
+  }
+
+  .row {
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px 0;
+    flex: 1;
+  }
+
+  .profile .card .row h2 {
+    font-size: 22px;
+    margin: -10px 0;
+  }
+
+  .profile .card .row p {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 600px) {
+  .profile {
+    margin-top: 60px;
+  }
+
+  .text {
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+  }
+
+  .card {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px auto;
+    min-height: 300px;
+  }
+
+  .row {
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px 0;
+    flex: 1;
+    background-color: #f0f0f0;
+  }
+
+  .profile .card .row h2 {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .profile .card .row p {
+    font-size: 20px;
+  }
+
+  .row small {
+    font-size: 0.9em;
+    color: purple;
+    cursor: pointer;
+    margin-top: auto;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 768px) {
+  .profile {
+    margin-top: 80px;
+  }
+
+  .text {
+    width: 100%;
+    margin: 0;
+    padding: 15px;
+  }
+
+  .card {
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Keep the card vertical */
+    margin: 20px auto;
+    min-height: 300px;
+  }
+
+  .row {
+    border-radius: 15px;
+    padding: 10px;
+    margin: 10px;
+    flex: 1 1 calc(50% - 20px);
+    /* Two rows per card */
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile .card .row h2 {
+    font-size: 28px;
+    margin: 0;
+  }
+
+  .profile .card .row p {
+    font-size: 20px;
+  }
+
+  .row small {
+    font-size: 0.9em;
+    color: purple;
+    cursor: pointer;
+    margin-top: auto;
+  }
+}
+
+
+/* @media (max-width: 480px) {
   .row {
     flex: 1 1 100%;
-    /* Stack rows on small screens */
   }
 
   .profile {
     padding: 10px;
     width: 100%;
-    /* Ensure full width */
   }
 
   .text {
@@ -470,9 +606,9 @@ small {
   .card {
     padding: 10px;
   }
-}
+} */
 
-@media (max-width: 320px) {
+/* @media (max-width: 320px) {
   .profile {
     padding: 5px;
   }
@@ -492,7 +628,7 @@ small {
   .profile p {
     font-size: 16px;
   }
-}
+} */
 
 /* Form Styles */
 #formy {
@@ -1291,9 +1427,7 @@ p {
 
   .container h1 {
     font-size: 1.5em;
-    /* Smaller font size for headings */
     margin-bottom: 5px;
-    /* Reduced margin for visibility */
   }
 
   .container h2 {
