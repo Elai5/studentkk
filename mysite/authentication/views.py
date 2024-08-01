@@ -118,6 +118,7 @@ def signup(request):
     
     return render(request, "authentication/signup.html")
 
+
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
     
@@ -127,7 +128,7 @@ def verify_otp(request):
             otp = request.POST['otp']
             try:
                 user = CustomUser.objects.get(email=email)
-                if user.is_otp_valid() and user.otp == otp:
+                if user.is_otp_valid(otp):  # Pass the OTP to the method
                     user.otp = None
                     user.otp_created_at = None
                     user.save()
@@ -159,6 +160,7 @@ def verify_otp(request):
                 messages.error(request, "Email address is required to resend OTP.")
         
     return render(request, "authentication/verify_otp.html", {'email': email})
+
 
 def resend_otp(request):
     email = request.POST.get('email')
