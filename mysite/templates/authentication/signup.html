@@ -4,7 +4,6 @@
 
 {% block content %}
 <section id="formy">
-    <!-- Display error messages -->
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -13,43 +12,44 @@
         </ul>
     {% endif %}
 
-    <form action="/signup" method="post" id="signup-form" enctype="multipart/form-data">
+    <form action="/signup" method="post" id="signup-form" enctype="multipart/form-data" class="signup-form">
         {% csrf_token %}
         <div class="image-upload-container">
             <img class="image-preview" src="{% static 'images/woman.jpg' %}" alt="Dummy Image" id="previewImage">
             <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewProfileImage()" required>
         </div>
+        
         <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder="Create a username (only letters and numbers)" required><br>
+        <input type="text" id="username" name="username" placeholder="Create a username (only letters and numbers)" required>
 
         <label for="fname">First Name</label>
-        <input type="text" id="fname" name="fname" placeholder="Enter first name" required><br>
+        <input type="text" id="fname" name="fname" placeholder="Enter first name" required>
 
         <label for="lname">Last Name</label>
-        <input type="text" id="lname" name="lname" placeholder="Enter last name" required><br>
+        <input type="text" id="lname" name="lname" placeholder="Enter last name" required>
 
         <label for="email">Email Address</label>
-        <input type="email" id="email" name="email" placeholder="Enter email address" required><br>
+        <input type="email" id="email" name="email" placeholder="Enter email address" required>
 
         <label for="country">Country of Origin</label>
         <select id="country" name="country" required>
             <option value="">Select country</option>
-        </select><br>
+        </select>
 
         <label for="location">Country of Study</label>
         <select id="location" name="location" required>
             <option value="">Select country</option>
-        </select><br>
+        </select>
 
         <label for="institution">Academic Institution</label>
-        <input type="text" id="institution" name="institution" placeholder="Enter institution name" autocomplete="on" list="institution-datalist"><br>
+        <input type="text" id="institution" name="institution" placeholder="Enter institution name" autocomplete="on" list="institution-datalist">
         <datalist id="institution-datalist"></datalist>
 
         <label for="pass1">Password</label>
-        <input type="password" id="pass1" name="pass1" placeholder="Create a password" required><br>
+        <input type="password" id="pass1" name="pass1" placeholder="Create a password" required>
 
         <label for="pass2">Confirm Password</label>
-        <input type="password" id="pass2" name="pass2" placeholder="Confirm your password" required><br>
+        <input type="password" id="pass2" name="pass2" placeholder="Confirm your password" required>
 
         <button type="submit">Sign Up</button>
         <p>Already have an account? Click <a href="{% url 'signin' %}">here</a></p>
