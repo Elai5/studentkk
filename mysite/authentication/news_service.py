@@ -6,7 +6,7 @@ class NewsService:
     BASE_URL = 'https://newsapi.org/v2/everything'  # Use the 'everything' endpoint for keyword-based searches
 
     @staticmethod
-    def get_custom_news(query, location):
+    def get_custom_news(query):
         params = {
             'apiKey': NewsService.API_KEY,
             'q': query,  # The query to search for specific topics
@@ -35,18 +35,40 @@ class NewsService:
         except Exception as err:
             print(f"An unexpected error occurred: {err}")  # Log or handle any other unexpected errors
             return []
-        
-def get_news_by_category(location, institution):
-    categories = {
-        'school': f"{institution}",
-        'culture': f"culture in {location}",
-        'events': f"events in {location}",
-        'food': f"food in {location}",
-        'weather': f"weather in {location}"
-    }
-
-    news_by_category = {}
-    for category, query in categories.items():
-        news_by_category[category] = NewsService.get_custom_news(query, location)
     
-    return news_by_category
+    def get_news_by_category(category, location, institution):
+        queries = {
+            'accommodation': f"housing tips in {location}",
+            'culture': f"culture in {location}",
+            'transportation': f"transportation in {location}",
+            'food': f"food options in {location}",
+            'healthcare': f"healthcare services in {location}",
+            'weather': f"weather in {location}",
+            'student_resources': f"student resources in {location}",
+            'legal': f"legal advice for students in {location}",
+            'events': f"events and social activities in {location}",
+            'financial': f"financial management for students in {location}",
+            'school': f"{institution} news" if institution else ''
+        }
+        
+        query = queries.get(category, '')
+        if not query:
+            return []
+        
+        return NewsService.get_custom_news(query)
+
+        
+# def get_news_by_category(location, institution):
+#     categories = {
+#         'school': f"{institution}",
+#         'culture': f"culture in {location}",
+#         'events': f"events in {location}",
+#         'food': f"food in {location}",
+#         'weather': f"weather in {location}"
+#     }
+
+#     news_by_category = {}
+#     for category, query in categories.items():
+#         news_by_category[category] = NewsService.get_custom_news(query, location)
+    
+

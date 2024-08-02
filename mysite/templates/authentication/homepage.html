@@ -26,23 +26,32 @@
 
   </div>
   <div class="news-container">
-        {% for category, articles in news_data.items %}
+    {% for category, articles in news_data.items %}
+        <div class="news-category">
             <h2>{{ category|capfirst }}</h2>
             {% if articles %}
-                {% for article in articles %}
-                    <div class="news-card">
-                        <img src="{{ article.urlToImage }}" alt="Image for {{ article.title }}" class="news-image">
-                        <div class="news-content">
-                            <h3 class="news-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
-                            <p class="news-description">{{ article.description }}</p>
+                <div class="news-list">
+                    {% for article in articles %}
+                        <div class="news-card">
+                            {% if article.urlToImage %}
+                                <img src="{{ article.urlToImage }}" alt="Image for {{ article.title }}" class="news-image">
+                            {% else %}
+                                <img src="{% static 'default_image.jpg' %}" alt="Default Image" class="news-image">
+                            {% endif %}
+                            <div class="news-content">
+                                <h3 class="news-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+                                <p class="news-description">{{ article.description }}</p>
+                            </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             {% else %}
-                <p>No articles found for {{ category }}.</p>
+                <p>No articles available for {{ category }}.</p>
             {% endif %}
-        {% endfor %}
-    </div>
+        </div>
+    {% endfor %}
+</div>
+
   {% comment %} <div class="card">
     <div class="row-group">
       <div class="row">

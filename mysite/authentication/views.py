@@ -17,7 +17,7 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.auth.decorators import login_required
 from .models import Message
 import uuid
-from .news_service import NewsService, get_news_by_category
+from .news_service import NewsService
 
 
 
@@ -26,13 +26,18 @@ def home(request):
 
 def homepage(request):
     user = request.user
+    
+    if not hasattr(user, 'location') or not hasattr(user, 'institution'):
+        # Handle the case where the user does not have the necessary attributes
+        return render(request, 'authentication/homepage.html', {'error': 'User information is incomplete.'})
     location = user.location
     institution = user.institution
     print(f"User's location of study: {location}")
     
-    news_data = get_news_by_category(location, institution)
-    # news_articles = NewsService.get_news_by_country(user.location)
-    # print(news_articles)
+    categories = ['accommodation', 'culture', 'transportation', 'food', 'healthcare', 'weather', 'student_resources', 'legal', 'events', 'financial', 'school']
+    news_data = {}
+    for category in categories:
+        news_data[category] = NewsService.get_news_by_category(category, location, institution)
     return render(request, "authentication/homepage.html", {'news_data': news_data})
 
 def get_news_by_category(location, institution):
