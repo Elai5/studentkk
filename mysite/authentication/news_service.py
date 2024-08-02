@@ -12,7 +12,7 @@ class NewsService:
             'q': query,  # The query to search for specific topics
             'language': 'en',
             'sortBy': 'relevancy',  # Sort results by relevance
-            'pageSize': 5  # Limit the number of results
+            'pageSize': 3  # Limit the number of results
         }
         try:
             response = requests.get(NewsService.BASE_URL, params=params, timeout=10)  # Added timeout for request

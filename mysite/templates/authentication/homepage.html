@@ -3,30 +3,18 @@
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
-<section id="homepage"
-  style="background-image: url('{% static 'images/background.jpg' %}'); background-size: cover; background-position: center; height: 100vh; color: white;">
-  {% comment %} <div class="overlay"></div>  {% endcomment %}  
-<div class="profile">
-  <div class="text">
-    <h1>Hello {{ user.username}}</h1>
+<section id="homepage" style="background-image: url('{% static 'images/background.jpg' %}'); background-size: cover; background-position: center; height: 100vh; color: white;">
+  <div class="profile">
+    <div class="text">
+      <h1>Hello {{ user.username}}</h1>
       <h2>Welcome to {{ user.location }}!</h2>
       <p>Eager to start your new adventure? Heres ome guideline to start you off.</p>
-      {% comment %} <ul>
-    {% if articles %}
-        {% for article in articles %}
-            <li>
-                <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-                <p>{{ article.description }}</p>
-            </li>
-        {% endfor %}
-    {% else %}
-        <li>No articles found.</li>
-    {% endif %}
-    </ul> {% endcomment %}
-
-  </div>
-  <div class="news-container">
-    {% for category, articles in news_data.items %}
+    </div>
+    <div class="news-container">
+      {% if error %}
+      <p>{{ error }}</p>
+      {% endif %}
+      {% for category, articles in news_data.items %}
         <div class="news-category">
             <h2>{{ category|capfirst }}</h2>
             {% if articles %}
@@ -50,34 +38,7 @@
             {% endif %}
         </div>
     {% endfor %}
-</div>
-
-  {% comment %} <div class="card">
-    <div class="row-group">
-      <div class="row">
-        <h2>Transportation</h2>
-        <p>Getting Around Canada: Transportation Tips for International Students</p>
-        <small>Click here to view more</small>
-      </div>
-      <div class="row">
-        <h2>Housing</h2>
-        <p>Finding Accommodation in Canada: A Guide for International Students</p>
-        <small>Click here to view more</small>
-      </div>
     </div>
-    <div class="row-group">
-      <div class="row">
-        <h2>Culture</h2>
-        <p>Cultural Etiquette in Canada: What International Students Should Know</p>
-        <small>Click here to view more</small>
-      </div>
-      <div class="row">
-        <h2>Food</h2>
-        <p>Exploring Canadian Cuisine: A Food Guide for International Students</p>
-        <small>Click here to view more</small>
-      </div>
-    </div>
-  </div> {% endcomment %}
 </div>
 </section>
 {% endblock %}

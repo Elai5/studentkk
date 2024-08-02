@@ -32,7 +32,7 @@ def homepage(request):
         return render(request, 'authentication/homepage.html', {'error': 'User information is incomplete.'})
     location = user.location
     institution = user.institution
-    print(f"User's location of study: {location}")
+    # print(f"User's location of study: {location}")
     
     categories = ['accommodation', 'culture', 'transportation', 'food', 'healthcare', 'weather', 'student_resources', 'legal', 'events', 'financial', 'school']
     news_data = {}
