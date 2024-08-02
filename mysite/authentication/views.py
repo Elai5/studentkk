@@ -17,13 +17,39 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.contrib.auth.decorators import login_required
 from .models import Message
 import uuid
+from .news_service import NewsService, get_news_by_category
+
 
 
 def home(request):
     return render(request, "authentication/index.html")
 
 def homepage(request):
-    return render(request, "authentication/homepage.html")
+    user = request.user
+    location = user.location
+    institution = user.institution
+    print(f"User's location of study: {location}")
+    
+    news_data = get_news_by_category(location, institution)
+    # news_articles = NewsService.get_news_by_country(user.location)
+    # print(news_articles)
+    return render(request, "authentication/homepage.html", {'news_data': news_data})
+
+def get_news_by_category(location, institution):
+    categories = {
+        'school': f"{institution}",
+        'culture': f"culture in {location}",
+        'events': f"events in {location}",
+        'food': f"food in {location}",
+        'weather': f"weather in {location}"
+    }
+
+    news_by_category = {}
+    for category, query in categories.items():
+        news_by_category[category] = NewsService.get_custom_news(query, location)
+    
+    return news_by_category
+
 
 def signup(request):
     if request.method == "POST":
@@ -379,31 +405,7 @@ def edit_profile(request):
 
     return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
 
-def chat_view(request, friend_id):
-    if request.user.is_authenticated:
-        friend = get_object_or_404(CustomUser, id=friend_id)
-        
-        # Fetch messages between the two users
-        messages = Message.objects.filter(
-            (Q(sender=request.user) & Q(recipient=friend)) | 
-            (Q(sender=friend) & Q(recipient=request.user))
-        ).order_by('timestamp')
 
-        if request.method == 'POST':
-            content = request.POST.get('content')
-            if content:
-                Message.objects.create(sender=request.user, recipient=friend, content=content)
-                return redirect('chat', friend_id=friend.id)  # Redirect to the same chat view
-
-        return render(request, 'authentication/chat.html', {
-            'friend': friend,
-            'messages': messages,
-        })
-    else:
-        return redirect('signin')  # Redirect to sign-in if not authenticated
-
-@login_required
-def chat_list_view(request, friend_id=None):
     # Get the list of friends based on accepted friend requests
     friends = CustomUser.objects.filter(
         Q(friend_requests_received__from_user=request.user, friend_requests_received__accepted=True) |
@@ -425,7 +427,6 @@ def chat_list_view(request, friend_id=None):
         'messages': messages,
         'friend': friend,
     })
-
 
 def password_reset_request(request):
     if request.method == "POST":
@@ -451,9 +452,6 @@ def password_reset_request(request):
     
     return render(request, "authentication/password_reset_request.html")
 
-
-
-
 def password_reset_confirm(request, token):
     try:
         user = CustomUser.objects.get(password_reset_token=token)
@@ -476,4 +474,38 @@ def password_reset_confirm(request, token):
     
     return render(request, "authentication/password_reset_confirm.html", {'token': token})
 
+@login_required
+def chat_view(request, friend_id):
+    friend = get_object_or_404(CustomUser, id=friend_id)
+    messages = Message.objects.filter(
+        (Q(sender=request.user) & Q(recipient=friend)) | 
+        (Q(sender=friend) & Q(recipient=request.user))
+    ).order_by('timestamp')
 
+    return render(request, 'authentication/chat.html', {
+        'friend': friend,
+        'messages': messages,
+    })
+
+@login_required
+def chat_list_view(request, friend_id=None):
+    friends = CustomUser.objects.filter(
+        Q(friend_requests_received__from_user=request.user, friend_requests_received__accepted=True) |
+        Q(friend_requests_sent__to_user=request.user, friend_requests_sent__accepted=True)
+    )
+
+    messages = []
+    friend = None
+
+    if friend_id:
+        friend = get_object_or_404(CustomUser, id=friend_id)
+        messages = Message.objects.filter(
+            (Q(sender=request.user) & Q(recipient=friend)) |
+            (Q(sender=friend) & Q(recipient=request.user))
+        ).order_by('timestamp')
+
+    return render(request, 'authentication/chat_list.html', {
+        'friends': friends,
+        'messages': messages,
+        'friend': friend,
+    })

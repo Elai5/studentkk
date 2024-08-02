@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'mysite',
     'authentication',
     'channels',
+    'chat',
 ]
 
 MIDDLEWARE = [

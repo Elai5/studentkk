@@ -7,6 +7,8 @@ function toggleNavbar() {
     }
 }
 
+
+
 // Function to preview the profile image
 function previewProfileImage() {
     const file = document.getElementById('profileImage').files[0];
