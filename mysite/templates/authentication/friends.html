@@ -57,6 +57,8 @@
                         <span class="friend-institution">{{ friend.institution }}</span>
                         <span class="friend-country">{{ friend.country }}</span>
                         <span class="friend-location">{{ friend.location }}</span>
+                        <span class="friend-city">{{ friend.city }}</span>
+                        <span class="friend-state">{{ friend.state }}</span>
                     </div>
                     <a href="{% url 'chat_with_friend' friend.id %}" class="send-message">Send Message</a>
                 </li>
