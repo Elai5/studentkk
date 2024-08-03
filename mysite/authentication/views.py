@@ -28,33 +28,17 @@ def homepage(request):
     user = request.user
     
     if not hasattr(user, 'location') or not hasattr(user, 'institution'):
-        # Handle the case where the user does not have the necessary attributes
         return render(request, 'authentication/homepage.html', {'error': 'User information is incomplete.'})
+
     location = user.location
     institution = user.institution
-    # print(f"User's location of study: {location}")
     
-    categories = ['accommodation', 'culture', 'transportation', 'food', 'healthcare', 'weather', 'student_resources', 'legal', 'events', 'financial', 'school']
+    categories = ['accommodation', 'transportation', 'student_resources', 'school']
     news_data = {}
     for category in categories:
         news_data[category] = NewsService.get_news_by_category(category, location, institution)
+
     return render(request, "authentication/homepage.html", {'news_data': news_data})
-
-def get_news_by_category(location, institution):
-    categories = {
-        'school': f"{institution}",
-        'culture': f"culture in {location}",
-        'events': f"events in {location}",
-        'food': f"food in {location}",
-        'weather': f"weather in {location}"
-    }
-
-    news_by_category = {}
-    for category, query in categories.items():
-        news_by_category[category] = NewsService.get_custom_news(query, location)
-    
-    return news_by_category
-
 
 def signup(request):
     if request.method == "POST":
@@ -65,6 +49,8 @@ def signup(request):
         country = request.POST['country']
         location = request.POST['location']
         institution = request.POST['institution']
+        city = request.POST['city']  # New field
+        state = request.POST['state']  # New field
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
         profile_image = request.FILES.get('profileImage')  # Get the uploaded image file
@@ -125,7 +111,9 @@ def signup(request):
             user=myuser,
             country=country,
             location=location,
-            institution=institution
+            institution=institution,
+            city=city,  # Add city
+            state=state  # Add state
         )
 
         # Store the profile picture URL in the session
@@ -256,8 +244,9 @@ def profile_view(request):
 
 def friends(request):
     if request.user.is_authenticated:
-        user_profile = request.user
-        
+        # Fetch the user's profile
+        user_profile = UserProfile.objects.get(user=request.user)
+
         # Fetch accepted friends
         accepted_friends = CustomUser.objects.filter(
             id__in=FriendRequest.objects.filter(
@@ -276,19 +265,32 @@ def friends(request):
         # Fetch incoming friend requests
         incoming_requests = FriendRequest.objects.filter(to_user=request.user, accepted=False)
 
-        # Fetch friend suggestions based on institution or location
+        # Fetch friend suggestions based on institution, location, city, and state
         friend_suggestions = CustomUser.objects.exclude(id=request.user.id).exclude(id__in=accepted_friends.values_list('id', flat=True))
 
-        # Suggest friends from the same institution or location
+        # Suggest friends from the same institution
         suggestions_from_school = friend_suggestions.filter(
             institution=user_profile.institution
         )
+        
+        # Suggest friends from the same location
         suggestions_from_location = friend_suggestions.filter(
             location=user_profile.location
         )
+        
+        # Suggest friends from the same city
+        suggestions_from_city = friend_suggestions.filter(
+            userprofile__city=user_profile.city
+        )
+        
+        # Suggest friends from the same state
+        suggestions_from_state = friend_suggestions.filter(
+            userprofile__state=user_profile.state
+        )
 
         # Combine suggestions if needed
-        suggestions = suggestions_from_school | suggestions_from_location
+        suggestions = (suggestions_from_school | suggestions_from_location |
+                       suggestions_from_city | suggestions_from_state).distinct()
 
         return render(request, "authentication/friends.html", {
             'incoming_requests': incoming_requests,
@@ -297,6 +299,7 @@ def friends(request):
         })
     else:
         return redirect('signin')  # Redirect to sign-in if not authenticated
+
 
 def send_friend_request(request, user_id):
     if request.user.is_authenticated:

@@ -6,13 +6,13 @@
 <section id="homepage" style="background-image: url('{% static 'images/background.jpg' %}'); background-size: cover; background-position: center; height: 100vh; color: white;">
   <div class="profile">
     <div class="text">
-      <h1>Hello {{ user.username}}</h1>
+      <h1>Hello {{ user.username }}</h1>
       <h2>Welcome to {{ user.location }}!</h2>
-      <p>Eager to start your new adventure? Heres ome guideline to start you off.</p>
+      <p>Eager to start your new adventure? Here’s some guidance to start you off.</p>
     </div>
     <div class="news-container">
       {% if error %}
-      <p>{{ error }}</p>
+        <p>{{ error }}</p>
       {% endif %}
       {% for category, articles in news_data.items %}
         <div class="news-category">
@@ -37,10 +37,11 @@
                 <p>No articles available for {{ category }}.</p>
             {% endif %}
         </div>
-    {% endfor %}
+      {% endfor %}
     </div>
-</div>
+  </div>
 </section>
+
 {% endblock %}
 
 

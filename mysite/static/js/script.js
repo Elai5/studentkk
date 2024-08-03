@@ -86,3 +86,41 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error('Institution input element not found');
     }
 });
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Function to show only the first news item in each category on mobile
+    function adjustNewsDisplay() {
+        const newsCategories = document.querySelectorAll('.news-category');
+
+        newsCategories.forEach(category => {
+            const newsCards = category.querySelectorAll('.news-card');
+            if (newsCards.length > 1) {
+                newsCards.forEach((card, index) => {
+                    if (index > 0) {
+                        card.style.display = 'none'; // Hide all but the first news card
+                    }
+                });
+            }
+        });
+    }
+
+    // Check screen width and adjust news display
+    function handleResize() {
+        if (window.innerWidth <= 600) {
+            adjustNewsDisplay();
+        } else {
+            // Show all news cards on larger screens
+            const newsCards = document.querySelectorAll('.news-card');
+            newsCards.forEach(card => {
+                card.style.display = 'block';
+            });
+        }
+    }
+
+    // Initial check
+    handleResize();
+
+    // Recheck on window resize
+    window.addEventListener('resize', handleResize);
+});

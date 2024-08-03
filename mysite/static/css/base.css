@@ -375,6 +375,7 @@ p {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .news-card img {
@@ -546,6 +547,11 @@ p {
 
   .news-description {
     font-size: 0.9rem;
+  }
+
+  .news-list .news-card:nth-of-type(n+2) {
+    display: none;
+    /* Hide all news cards after the first one */
   }
 }
 
@@ -736,49 +742,43 @@ p {
 }
 
 /* Form Styles  */
+
+
 #formy {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
-form {
-  max-width: 480px;
-  width: 100%;
-  text-align: center;
-  background-color: #fff;
-  padding: 18px;
+.form-container {
+  width: 800px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 20px;
   box-sizing: border-box;
   border-radius: 10px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-label {
-  display: block;
-  margin-bottom: 8px;
-  text-align: start;
-}
-
-.image-upload-container {
   position: relative;
-  margin-bottom: 12px;
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: auto;
-  border: 3px solid red;
 }
 
-.image-preview {
-  width: 100%;
-  height: 100%;
-  /* border-radius: 50%; */
-  margin-bottom: 10px;
-  object-fit: cover;
+.profile-image-container {
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+}
 
+.profile-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ddd;
 }
 
 input[type="file"] {
@@ -789,6 +789,28 @@ input[type="file"] {
   height: 100%;
   opacity: 0;
   cursor: pointer;
+  z-index: 1;
+}
+
+.inputs-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.column {
+  width: 48%;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: start;
 }
 
 #username,
@@ -798,9 +820,11 @@ input[type="file"] {
 #country,
 #location,
 #institution,
-#pass1,
-#pass2,
-#password {
+#city,
+#state,
+#zip_code,
+#password,
+#pass2 {
   width: 100%;
   padding: 10px;
   box-sizing: border-box;
@@ -809,12 +833,22 @@ input[type="file"] {
   font-size: 16px;
 }
 
+select {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
 button {
   background-color: navy;
   color: #fff;
-  padding: 10px;
-  /* border: 1px solid white; */
+  padding: 10px 20px;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
   font-size: 18px;
   transition: background-color 0.3s ease;
@@ -822,11 +856,69 @@ button {
 
 button:hover {
   background-color: #2980b9;
-  /* border: 1px solid navy; */
 }
 
 p {
   text-align: center;
+}
+
+/* Media Query for screens with max-width of 425px */
+@media (max-width: 425px) {
+  .form-container {
+    width: 100%;
+    padding: 10px;
+    box-shadow: none;
+  }
+
+  .profile-image-container {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .profile-image {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #ddd;
+  }
+
+  .inputs-container {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .column {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .form-group {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  #username,
+  #fname,
+  #lname,
+  #email,
+  #country,
+  #location,
+  #institution,
+  #city,
+  #state,
+  #zip_code,
+  #password,
+  #pass2 {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
 }
 
 .messages {
@@ -858,6 +950,105 @@ p {
   background-color: #d4edda;
   color: #155724;
   border-color: #c3e6cb;
+}
+
+#signin-formy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#signin-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 400px;
+  /* Adjust width as needed */
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.image-upload-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid red;
+  margin-bottom: 20px;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: start;
+  width: 100%;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+button {
+  background-color: navy;
+  color: #fff;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+ul.messages {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+ul.messages li {
+  padding: 10px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
 #password-reset-confirm,
@@ -1492,13 +1683,16 @@ label {
 .profile-info h1 {
   margin: 0;
   font-size: 24px;
-  color: #333;
+  color: #F0440E;
+  /* text-align: justify; */
 }
 
 .profile-info p {
   margin: 5px 0;
   font-size: 16px;
   color: #555;
+  text-align: left;
+
 }
 
 .profile-footer {

@@ -1,74 +1,76 @@
+import time
 import requests
-from requests.exceptions import HTTPError, Timeout, RequestException
+from requests.exceptions import HTTPError, RequestException, Timeout
+from django.core.cache import cache
 
 class NewsService:
+    BASE_URL = 'https://newsapi.org/v2/everything'
     API_KEY = 'fbae98d6c8c045f5b378e44df0ed23c3'
-    BASE_URL = 'https://newsapi.org/v2/everything'  # Use the 'everything' endpoint for keyword-based searches
 
     @staticmethod
     def get_custom_news(query):
+        cache_key = f"news_{query.replace(' ', '_')}"
+        cached_news = cache.get(cache_key)
+        
+        if cached_news:
+            return cached_news
+
         params = {
             'apiKey': NewsService.API_KEY,
-            'q': query,  # The query to search for specific topics
+            'q': query,
             'language': 'en',
-            'sortBy': 'relevancy',  # Sort results by relevance
-            'pageSize': 3  # Limit the number of results
+            'sortBy': 'relevancy',
+            'pageSize': 3
         }
-        try:
-            response = requests.get(NewsService.BASE_URL, params=params, timeout=10)  # Added timeout for request
 
-            # Raise an exception if the response status code indicates an error
-            response.raise_for_status()
-            
-            # Try to get 'articles' from the JSON response
-            return response.json().get('articles', [])
-        
-        except HTTPError as http_err:
-            print(f"HTTP error occurred: {http_err}")  # Log or handle HTTP errors (e.g., 404, 500)
-            return []
-        except Timeout:
-            print("The request timed out.")  # Log or handle request timeouts
-            return []
-        except RequestException as req_err:
-            print(f"Request error occurred: {req_err}")  # Log or handle other request-related errors
-            return []
-        except Exception as err:
-            print(f"An unexpected error occurred: {err}")  # Log or handle any other unexpected errors
-            return []
-    
+        attempt = 0
+        max_attempts = 5
+        backoff_time = 1  # Initial backoff time in seconds
+
+        while attempt < max_attempts:
+            try:
+                response = requests.get(NewsService.BASE_URL, params=params, timeout=10)
+                response.raise_for_status()
+                articles = response.json().get('articles', [])
+                cache.set(cache_key, articles, 3600)  # Cache the results for 1 hour
+                return articles
+
+            except HTTPError as http_err:
+                if response.status_code == 429:  # Rate limit exceeded
+                    print(f"Rate limit exceeded. Retrying in {backoff_time} seconds...")
+                    time.sleep(backoff_time)
+                    backoff_time *= 2  # Exponential backoff
+                    attempt += 1
+                else:
+                    print(f"HTTP error occurred: {http_err}")
+                    return []
+
+            except Timeout:
+                print("The request timed out.")
+                return []
+
+            except RequestException as req_err:
+                print(f"Request error occurred: {req_err}")
+                return []
+
+            except Exception as err:
+                print(f"An unexpected error occurred: {err}")
+                return []
+
+        print("Max retries exceeded. Could not fetch the news.")
+        return []
+
+    @staticmethod
     def get_news_by_category(category, location, institution):
         queries = {
             'accommodation': f"housing tips in {location}",
-            'culture': f"culture in {location}",
             'transportation': f"transportation in {location}",
-            'food': f"food options in {location}",
-            'healthcare': f"healthcare services in {location}",
-            'weather': f"weather in {location}",
             'student_resources': f"student resources in {location}",
-            'legal': f"legal advice for students in {location}",
-            'events': f"events and social activities in {location}",
-            'financial': f"financial management for students in {location}",
             'school': f"{institution} news" if institution else ''
         }
-        
+
         query = queries.get(category, '')
         if not query:
             return []
-        
+
         return NewsService.get_custom_news(query)
-
-        
-# def get_news_by_category(location, institution):
-#     categories = {
-#         'school': f"{institution}",
-#         'culture': f"culture in {location}",
-#         'events': f"events in {location}",
-#         'food': f"food in {location}",
-#         'weather': f"weather in {location}"
-#     }
-
-#     news_by_category = {}
-#     for category, query in categories.items():
-#         news_by_category[category] = NewsService.get_custom_news(query, location)
-    
-

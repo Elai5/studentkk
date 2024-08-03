@@ -1,11 +1,11 @@
 {% extends "authentication/base.html" %}
-{% load static %} 
+{% load static %}
 
 {% block title %}Sign In{% endblock %}
 
 {% block content %}
-<section id="formy">
-    <form action="/signin" method="post" enctype="multipart/form-data">
+<section id="signin-formy">
+    <form action="/signin" method="post" enctype="multipart/form-data" id="signin-form">
         {% csrf_token %}
         <div class="image-upload-container">
             {% if profile_picture %}
@@ -15,10 +15,13 @@
             {% endif %}
             <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewProfileImage()">
         </div>
+
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required><br>
+        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        
         <label for="pass1">Password:</label>
-        <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required><br>
+        <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required>
+        
         <button type="submit">Sign In</button>
         <p>Don't have an account? Create one <a href="{% url 'signup' %}">here</a></p>
         <p><a href="{% url 'password_reset_request' %}">Forgot Password?</a></p>  <!-- Link to password reset -->
@@ -35,6 +38,3 @@
 </section>
 {% endblock %}
 <script src="{% static 'js/script.js' %}"></script>
-
-
-
