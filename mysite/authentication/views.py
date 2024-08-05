@@ -19,6 +19,7 @@ from .models import Message
 import uuid
 from .news_service import NewsService
 from django.templatetags.static import static
+from .models import Housing, Transport, Culture
 
 def home(request):
     return render(request, "authentication/index.html")
@@ -37,8 +38,24 @@ def homepage(request):
     for category in categories:
         news_data[category] = NewsService.get_news_by_category(category, location, institution)
 
-    return render(request, "authentication/homepage.html", {'news_data': news_data})
+    # Fetch all data without filtering by country
+    housing_items = Housing.objects.all()
+    transport_items = Transport.objects.all()
+    culture_items = Culture.objects.all()
+    
+    # Debugging statements
+    print(f"All Housing items: {list(housing_items.values())}")
+    print(f"All Transport items: {list(transport_items.values())}")
+    print(f"All Culture items: {list(culture_items.values())}")
 
+    context = {
+        'news_data': news_data,
+        'housing_items': housing_items,
+        'transport_items': transport_items,
+        'culture_items': culture_items,
+    }
+    
+    return render(request, "authentication/homepage.html", context)
 
 
 def signup(request):
@@ -144,8 +161,6 @@ def signup(request):
     
     return render(request, "authentication/signup.html")
 
-
-
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
     
@@ -195,7 +210,6 @@ def resend_otp(request):
     
     return redirect('verify_otp')  # Redirect back to the OTP verification page
 
-
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -220,7 +234,6 @@ def signin(request):
             profile_picture = None
 
     return render(request, "authentication/signin.html", {'profile_picture': profile_picture})
-
 
 def signout(request):
     logout(request)
@@ -305,7 +318,6 @@ def friends(request):
         })
     else:
         return redirect('signin')  # Redirect to sign-in if not authenticated
-
 
 def send_friend_request(request, user_id):
     if request.user.is_authenticated:

@@ -84,30 +84,35 @@ def save_user_profile(sender, instance, **kwargs):
     except UserProfile.DoesNotExist:
         UserProfile.objects.create(user=instance)
         
-        
-# myapp/models.py
-from django.db import models
 
 class Housing(models.Model):
-    country = models.CharField(max_length=100, choices=[('USA', 'United States'), ('UK', 'United Kingdom'), ('Canada', 'Canada'), ('Australia', 'Australia'), ('Germany', 'Germany'), ('Netherlands', 'Netherlands')])
+    country = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
+    short_description = models.TextField(default="Default description")  # Set a default value here
     link = models.URLField()
+    image = models.URLField(blank=True, null=True)  # New field for image
 
     def __str__(self):
         return self.title
 
 class Transport(models.Model):
-    country = models.CharField(max_length=100, choices=[('USA', 'United States'), ('UK', 'United Kingdom'), ('Canada', 'Canada'), ('Australia', 'Australia'), ('Germany', 'Germany'), ('Netherlands', 'Netherlands')])
+    country = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
+    short_description = models.TextField(default="Default description")  # Set a default value here
     link = models.URLField()
+    image = models.URLField(blank=True, null=True)  # New field for image
 
     def __str__(self):
         return self.title
 
 class Culture(models.Model):
-    country = models.CharField(max_length=100, choices=[('USA', 'United States'), ('UK', 'United Kingdom'), ('Canada', 'Canada'), ('Australia', 'Australia'), ('Germany', 'Germany'), ('Netherlands', 'Netherlands')])
+    country = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
+    short_description = models.TextField(default="Default description")  # Set a default value here
     description = models.TextField()
+    image = models.URLField(blank=True, null=True)  # New field for image
 
     def __str__(self):
         return self.title
+
+    

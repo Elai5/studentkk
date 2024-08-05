@@ -1,0 +1,200 @@
+[
+    {
+        "model": "authentication.housing",
+        "pk": 1,
+        "fields": {
+            "country": "USA",
+            "title": "Affordable Housing in New York",
+            "short_description": "Find affordable housing options in New York City.",
+            "link": "https://www.nyc.gov/site/hra/help/affordable-housing.page",
+            "image": "https://i.pinimg.com/564x/0c/f4/5e/0cf45ecc538a0ad2a7aea4825c907efc.jpg"
+        }
+    },
+    {
+        "model": "authentication.housing",
+        "pk": 2,
+        "fields": {
+            "country": "UK",
+            "title": "Council Housing in London",
+            "short_description": "Learn about council housing options in London.",
+            "link": "https://www.london.gov.uk/what-we-do/research-and-analysis/affordable-housing",
+            "image": "https://i.pinimg.com/736x/32/8f/6f/328f6f9f05056532dcd72e5a5a4a52be.jpg"
+        }
+    },
+    {
+        "model": "authentication.housing",
+        "pk": 3,
+        "fields": {
+            "country": "Canada",
+            "title": "Housing Market in Toronto",
+            "short_description": "Overview of the housing market in Toronto.",
+            "link": "https://www.toronto.ca/services-payments/housing-rentals/housing/",
+            "image": "https://i.pinimg.com/564x/3e/65/76/3e657674ce12c7dda5564b88103056d4.jpg"
+        }
+    },
+    {
+        "model": "authentication.housing",
+        "pk": 4,
+        "fields": {
+            "country": "Australia",
+            "title": "Housing in Sydney",
+            "short_description": "Information about housing options in Sydney.",
+            "link": "https://www.cityofsydney.nsw.gov.au/community/housing",
+            "image": "https://i.pinimg.com/564x/3b/2a/53/3b2a530616b695ac42a8dc9111985b40.jpg"
+        }
+    },
+    {
+        "model": "authentication.housing",
+        "pk": 5,
+        "fields": {
+            "country": "Germany",
+            "title": "Berlin Housing",
+            "short_description": "Find housing information for Berlin.",
+            "link": "https://www.berlin.de/en/housing/",
+            "image": "https://i.pinimg.com/564x/02/6c/4e/026c4e45f619ea83c3eb6ba6c133d257.jpg"
+        }
+    },
+    {
+        "model": "authentication.housing",
+        "pk": 6,
+        "fields": {
+            "country": "Netherlands",
+            "title": "Amsterdam Housing",
+            "short_description": "Explore housing options in Amsterdam.",
+            "link": "https://www.amsterdam.nl/en/housing/",
+            "image": "https://i.pinimg.com/736x/af/03/00/af03008da1c8a87864bc6722e8147a0d.jpg"
+        }
+    },
+    {
+        "model": "authentication.transport",
+        "pk": 1,
+        "fields": {
+            "country": "USA",
+            "title": "Public Transport in New York",
+            "short_description": "Information on public transport options in New York.",
+            "link": "https://www.mta.info/",
+            "image": "https://i.pinimg.com/564x/1e/f4/3f/1ef43f05ca7fd556b2a1c2b9acba2aa4.jpg"
+        }
+    },
+    {
+        "model": "authentication.transport",
+        "pk": 2,
+        "fields": {
+            "country": "UK",
+            "title": "Tube and Bus Services in London",
+            "short_description": "Details on London Tube and bus services.",
+            "link": "https://tfl.gov.uk/",
+            "image": "https://i.pinimg.com/564x/5d/ed/90/5ded90cbe30de9a84fe8164711951ef2.jpg"
+        }
+    },
+    {
+        "model": "authentication.transport",
+        "pk": 3,
+        "fields": {
+            "country": "Canada",
+            "title": "Toronto Transit System",
+            "short_description": "Transit services information for Toronto.",
+            "link": "https://www.ttc.ca/",
+            "image": "https://i.pinimg.com/564x/33/5f/0d/335f0de71f4b6f0d6ea931168c4085d8.jpg"
+        }
+    },
+    {
+        "model": "authentication.transport",
+        "pk": 4,
+        "fields": {
+            "country": "Australia",
+            "title": "Sydney Public Transport",
+            "short_description": "Public transport details for Sydney.",
+            "link": "https://transportnsw.info/",
+            "image": "https://i.pinimg.com/236x/94/02/4a/94024af949ac1e1511c82744adf1714a.jpg"
+        }
+    },
+    {
+        "model": "authentication.transport",
+        "pk": 5,
+        "fields": {
+            "country": "Germany",
+            "title": "Berlin U-Bahn and S-Bahn",
+            "short_description": "Information on Berlin's U-Bahn and S-Bahn.",
+            "link": "https://www.bvg.de/en",
+            "image": "https://i.pinimg.com/564x/51/41/f3/5141f396b01cc31c0b76cb3462833c84.jpg"
+        }
+    },
+    {
+        "model": "authentication.transport",
+        "pk": 6,
+        "fields": {
+            "country": "Netherlands",
+            "title": "Amsterdam Trams and Buses",
+            "short_description": "Details on Amsterdam trams and buses.",
+            "link": "https://www.gvb.nl/en",
+            "image": "https://i.pinimg.com/564x/95/dd/c3/95ddc34b54ab76f4c2455673c3de7d3d.jpg"
+        }
+    },
+    {
+        "model": "authentication.culture",
+        "pk": 1,
+        "fields": {
+            "country": "USA",
+            "title": "Cultural Events in New York",
+            "short_description": "Explore various cultural events in New York City.",
+            "description": "New York City hosts a wide range of cultural events including Broadway shows, concerts, and art exhibitions.",
+            "image": "https://i.pinimg.com/564x/72/46/b6/7246b633f0ba13b9e28d0105e9e912bd.jpg"
+        }
+    },
+    {
+        "model": "authentication.culture",
+        "pk": 2,
+        "fields": {
+            "country": "UK",
+            "title": "London Cultural Scene",
+            "short_description": "Discover London's rich cultural scene.",
+            "description": "London is known for its rich cultural heritage, museums, and theatres including the West End.",
+            "image": "https://i.pinimg.com/564x/cd/0b/59/cd0b594551ab1ec905964787ae3bfb5e.jpg"
+        }
+    },
+    {
+        "model": "authentication.culture",
+        "pk": 3,
+        "fields": {
+            "country": "Canada",
+            "title": "Toronto's Multicultural Festivals",
+            "short_description": "Learn about Toronto's multicultural festivals.",
+            "description": "Toronto hosts numerous multicultural festivals reflecting its diverse population.",
+            "image": "https://i.pinimg.com/236x/dd/53/1c/dd531cfb5a129a6d76332ae1bd7c7f9b.jpg"
+        }
+    },
+    {
+        "model": "authentication.culture",
+        "pk": 4,
+        "fields": {
+            "country": "Australia",
+            "title": "Sydney's Art and Culture",
+            "short_description": "Explore Sydney's art and cultural offerings.",
+            "description": "Sydney is known for its vibrant arts scene, including the Sydney Opera House and various art galleries.",
+            "image": "https://i.pinimg.com/564x/4b/03/c1/4b03c170fd7bbc44402210482322c542.jpg"
+        }
+    },
+    {
+        "model": "authentication.culture",
+        "pk": 5,
+        "fields": {
+            "country": "Germany",
+            "title": "Berlin's Cultural Diversity",
+            "short_description": "Discover Berlin's cultural diversity.",
+            "description": "Berlin is a hub for culture in Germany, offering everything from classical music to contemporary art.",
+            "image": "https://i.pinimg.com/564x/d0/13/a3/d013a3a9a947eb4d4a6cf342fa2c618d.jpg"
+        }
+    },
+    {
+        "model": "authentication.culture",
+        "pk": 6,
+        "fields": {
+            "country": "Netherlands",
+            "title": "Amsterdam's Cultural Attractions",
+            "short_description": "Find out about cultural attractions in Amsterdam.",
+            "description": "Amsterdam is famous for its museums, canals, and cultural festivals.",
+            "image": "https://i.pinimg.com/564x/99/a4/ae/99a4ae40a0f8fa830219a226aedc3ccc.jpg"
+        }
+    }
+]

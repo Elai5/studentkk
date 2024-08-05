@@ -4,46 +4,83 @@
 
 {% block content %}
 <section id="homepage" style="background-image: url('{% static 'images/background.jpg' %}'); background-size: cover; background-position: center; height: 100vh; color: white;">
-        <div class="profile">
-            <div class="text">
-                <h1>Hello {{ user.username }}</h1>
-                <h2>Welcome to {{ user.location }}!</h2>
-                <p>Eager to start your new adventure? Here’s some guidance to start you off.</p>
-            </div>
-            <div class="news-container">
-                {% if error %}
-                    <p>{{ error }}</p>
-                {% endif %}
-                {% for category, articles in news_data.items %}
-                    <div class="news-category">
-                        <h2>{{ category|capfirst }}</h2>
-                        {% if articles %}
-                            <div class="news-list">
-                                {% for article in articles %}
-                                    <div class="news-card">
-                                        <div class="image-container">
-                                            {% if article.urlToImage %}
-                                                <img src="{{ article.urlToImage }}" alt="Image for {{ article.title }}" class="news-image">
-                                            {% else %}
-                                                <img src="{% static 'default_image.jpg' %}" alt="Default Image" class="news-image">
-                                            {% endif %}
-                                        </div>
-                                        <div class="news-content">
-                                            <h3 class="news-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
-                                            <p class="news-description">{{ article.description }}</p>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            <p>No articles available for {{ category }}.</p>
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>
+    <div class="profile">
+        <div class="text">
+            <h1>Hello {{ user.username }}</h1>
+            <h2>Welcome to {{ user.location }}!</h2>
+            <p>Eager to start your new adventure? Here’s some guidance to start you off.</p>
         </div>
-    </section>
+        <div class="news-container">
+            {% if error %}
+                <p>{{ error }}</p>
+            {% endif %}
+            {% for category, articles in news_data.items %}
+                <div class="news-category">
+                    <h2>{{ category|capfirst }}</h2>
+                    {% if articles %}
+                        <div class="news-list">
+                            {% for article in articles %}
+                                <div class="news-card">
+                                    <div class="image-container">
+                                        {% if article.urlToImage %}
+                                            <img src="{{ article.urlToImage }}" alt="Image for {{ article.title }}" class="news-image">
+                                        {% else %}
+                                            <img src="{% static 'default_image.jpg' %}" alt="Default Image" class="news-image">
+                                        {% endif %}
+                                    </div>
+                                    <div class="news-content">
+                                        <h3 class="news-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+                                        <p class="news-description">{{ article.description }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>No articles available for {{ category }}.</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="additional-data">
+            <h2>Housing Information</h2>
+            <ul class="info-list">
+                {% for item in housing_items %}
+                    <li class="info-item">
+                        <img src="{{ item.image }}" alt="{{ item.title }}" class="info-image">
+                        <strong>{{ item.title }}</strong><br>
+                        Country: {{ item.country }}<br>
+                        Description: {{ item.short_description }}<br>
+                        <a href="{{ item.link }}" target="_blank" class="more-info-link">More Info</a>
+                    </li>
+                {% endfor %}
+            </ul>
 
+            <h2>Transport Information</h2>
+            <ul class="info-list">
+                {% for item in transport_items %}
+                    <li class="info-item">
+                        <img src="{{ item.image }}" alt="{{ item.title }}" class="info-image">
+                        <strong>{{ item.title }}</strong><br>
+                        Country: {{ item.country }}<br>
+                        Description: {{ item.short_description }}<br>
+                        <a href="{{ item.link }}" target="_blank" class="more-info-link">More Info</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <h2>Culture Information</h2>
+            <ul class="info-list">
+                {% for item in culture_items %}
+                    <li class="info-item">
+                        <img src="{{ item.image }}" alt="{{ item.title }}" class="info-image">
+                        <strong>{{ item.title }}</strong><br>
+                        Country: {{ item.country }}<br>
+                        Description: {{ item.short_description }}<br>
+                        <a href="{{ item.link }}" target="_blank" class="more-info-link">More Info</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>
 {% endblock %}
-
-
