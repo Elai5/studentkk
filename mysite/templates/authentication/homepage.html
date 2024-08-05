@@ -42,44 +42,45 @@
             {% endfor %}
         </div>
         <div class="additional-data">
-            <h2>Housing Information</h2>
-            <ul class="info-list">
-                {% for item in housing_items %}
-                    <li class="info-item">
-                        <img src="{{ item.image }}" alt="{{ item.title }}" class="info-image">
-                        <strong>{{ item.title }}</strong><br>
-                        Country: {{ item.country }}<br>
-                        Description: {{ item.short_description }}<br>
-                        <a href="{{ item.link }}" target="_blank" class="more-info-link">More Info</a>
-                    </li>
-                {% endfor %}
-            </ul>
+            {% for country, data in country_data.items %}
+                <h2>{{ country }}</h2>
 
-            <h2>Transport Information</h2>
-            <ul class="info-list">
-                {% for item in transport_items %}
-                    <li class="info-item">
-                        <img src="{{ item.image }}" alt="{{ item.title }}" class="info-image">
-                        <strong>{{ item.title }}</strong><br>
-                        Country: {{ item.country }}<br>
-                        Description: {{ item.short_description }}<br>
-                        <a href="{{ item.link }}" target="_blank" class="more-info-link">More Info</a>
-                    </li>
-                {% endfor %}
-            </ul>
+                <h3>Housing Information</h3>
+                <ul class="info-list">
+                    {% for item in data.housing %}
+                        <li class="info-item">
+                            <img src="{{ item.image }}" alt="{{ item.title }}" class="info-image">
+                            <strong>{{ item.title }}</strong><br>
+                            Description: {{ item.short_description }}<br>
+                            <a href="{{ item.link }}" target="_blank" class="more-info-link">More Info</a>
+                        </li>
+                    {% endfor %}
+                </ul>
 
-            <h2>Culture Information</h2>
-            <ul class="info-list">
-                {% for item in culture_items %}
-                    <li class="info-item">
-                        <img src="{{ item.image }}" alt="{{ item.title }}" class="info-image">
-                        <strong>{{ item.title }}</strong><br>
-                        Country: {{ item.country }}<br>
-                        Description: {{ item.short_description }}<br>
-                        <a href="{{ item.link }}" target="_blank" class="more-info-link">More Info</a>
-                    </li>
-                {% endfor %}
-            </ul>
+                <h3>Transport Information</h3>
+                <ul class="info-list">
+                    {% for item in data.transport %}
+                        <li class="info-item">
+                            <img src="{{ item.image }}" alt="{{ item.title }}" class="info-image">
+                            <strong>{{ item.title }}</strong><br>
+                            Description: {{ item.short_description }}<br>
+                            <a href="{{ item.link }}" target="_blank" class="more-info-link">More Info</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                <h3>Culture Information</h3>
+                <ul class="info-list">
+                    {% for item in data.culture %}
+                        <li class="info-item">
+                            <img src="{{ item.image }}" alt="{{ item.title }}" class="info-image">
+                            <strong>{{ item.title }}</strong><br>
+                            Description: {{ item.short_description }}<br>
+                            <a href="{{ item.link }}" target="_blank" class="more-info-link">More Info</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
         </div>
     </div>
 </section>

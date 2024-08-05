@@ -20,19 +20,20 @@ import uuid
 from .news_service import NewsService
 from django.templatetags.static import static
 from .models import Housing, Transport, Culture
+from collections import defaultdict
 
 def home(request):
     return render(request, "authentication/index.html")
 
 def homepage(request):
     user = request.user
-    
+
     if not hasattr(user, 'location') or not hasattr(user, 'institution'):
         return render(request, 'authentication/homepage.html', {'error': 'User information is incomplete.'})
 
     location = user.location
     institution = user.institution
-    
+
     categories = ['accommodation', 'transportation', 'student_resources', 'school']
     news_data = {}
     for category in categories:
@@ -42,21 +43,26 @@ def homepage(request):
     housing_items = Housing.objects.all()
     transport_items = Transport.objects.all()
     culture_items = Culture.objects.all()
-    
+
+    # Group items by country
+    country_data = defaultdict(lambda: {'housing': [], 'transport': [], 'culture': []})
+
+    for item in housing_items:
+        country_data[item.country]['housing'].append(item)
+    for item in transport_items:
+        country_data[item.country]['transport'].append(item)
+    for item in culture_items:
+        country_data[item.country]['culture'].append(item)
+
     # Debugging statements
-    print(f"All Housing items: {list(housing_items.values())}")
-    print(f"All Transport items: {list(transport_items.values())}")
-    print(f"All Culture items: {list(culture_items.values())}")
+    print(f"Country Data: {country_data}")
 
     context = {
         'news_data': news_data,
-        'housing_items': housing_items,
-        'transport_items': transport_items,
-        'culture_items': culture_items,
+        'country_data': dict(country_data),  # Convert defaultdict to a regular dict
     }
-    
-    return render(request, "authentication/homepage.html", context)
 
+    return render(request, "authentication/homepage.html", context)
 
 def signup(request):
     if request.method == "POST":
