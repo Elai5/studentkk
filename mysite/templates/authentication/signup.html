@@ -17,44 +17,45 @@
     <div class="form-container">
         <div class="profile-image-container">
             <img class="profile-image" src="{% static 'images/woman.jpg' %}" alt="Profile Image" id="previewImage">
-            <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewProfileImage()" required>
+            <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewProfileImage()">
         </div>
         
-        <form action="/signup" method="post" id="signup-form" enctype="multipart/form-data" class="signup-form">
+        <form action="{% url 'signup' %}" method="post" id="signup-form" enctype="multipart/form-data" class="signup-form">
             {% csrf_token %}
             
             <div class="inputs-container">
                 <div class="column">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" id="username" name="username" placeholder="Create a username (only letters and numbers)" required>
+                        <input type="text" id="username" name="username" placeholder="Create a username (only letters and numbers)" value="{{ username }}" required>
                     </div>
                     <div class="form-group">
                         <label for="fname">First Name</label>
-                        <input type="text" id="fname" name="fname" placeholder="Enter first name" required>
+                        <input type="text" id="fname" name="fname" placeholder="Enter first name" value="{{ fname }}" required>
                     </div>    
                 </div>
 
                 <div class="column">
                     <div class="form-group">
                         <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="Enter email address" required>
+                        <input type="email" id="email" name="email" placeholder="Enter email address" value="{{ email }}" required>
                     </div>
                     <div class="form-group">
                         <label for="lname">Last Name</label>
-                        <input type="text" id="lname" name="lname" placeholder="Enter last name" required>
+                        <input type="text" id="lname" name="lname" placeholder="Enter last name" value="{{ lname }}" required>
                     </div>
                 </div>
                 <div class="column">
                     <div class="form-group">
                         <label for="country">Country of Origin</label>
                         <select id="country" name="country" required>
-                            <option value="">Select country</option>
+                            <option value="" {% if not country %}selected{% endif %}>Select country</option>
+                            <!-- Populate countries dynamically -->
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="institution">Academic Institution</label>
-                        <input type="text" id="institution" name="institution" placeholder="Enter institution name" autocomplete="on" list="institution-datalist">
+                        <input type="text" id="institution" name="institution" placeholder="Enter institution name" value="{{ institution }}" autocomplete="on" list="institution-datalist">
                         <datalist id="institution-datalist"></datalist>
                     </div>
                 </div>
@@ -62,12 +63,13 @@
                     <div class="form-group">
                         <label for="location">Country of Study</label>
                         <select id="location" name="location" required>
-                            <option value="">Select country</option>
+                            <option value="" {% if not location %}selected{% endif %}>Select country</option>
+                            <!-- Populate countries dynamically -->
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="city">City</label>
-                        <input type="text" id="city" name="city" placeholder="Enter city" autocomplete="on" list="city-datalist">
+                        <input type="text" id="city" name="city" placeholder="Enter city" value="{{ city }}" autocomplete="on" list="city-datalist">
                         <datalist id="city-datalist"></datalist>
                     </div>
                 </div>
@@ -75,7 +77,7 @@
                 <div class="column">
                     <div class="form-group">
                         <label for="state">State</label>
-                        <input type="text" id="state" name="state" placeholder="Enter state" autocomplete="on" list="state-datalist">
+                        <input type="text" id="state" name="state" placeholder="Enter state" value="{{ state }}" autocomplete="on" list="state-datalist">
                         <datalist id="state-datalist"></datalist>
                     </div>
                     <div class="form-group">
@@ -84,7 +86,7 @@
                     </div>    
                 </div>
                 <div class="column">
-                     <div class="form-group">
+                    <div class="form-group">
                         <label for="zip_code">Zip Code</label>
                         <input type="text" id="zip_code" name="zip_code" placeholder="Enter zip code" autocomplete="on" list="zip-code-datalist">
                         <datalist id="zip-code-datalist"></datalist>
@@ -104,3 +106,4 @@
 </section>
 {% endblock %}
 <script src="{% static 'js/script.js' %}"></script>
+

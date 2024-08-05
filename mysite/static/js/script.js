@@ -23,8 +23,10 @@ function previewProfileImage() {
         reader.readAsDataURL(file); // Read the file as a data URL
     } else {
         preview.src = '{% static "images/woman.jpg" %}'; // Reset to default image if no file is selected
+        preview.style.display = 'block'; // Ensure the default image is displayed
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
     // Add event listener for the file input to preview the image

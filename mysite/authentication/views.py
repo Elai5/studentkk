@@ -21,6 +21,10 @@ from .news_service import NewsService
 from django.templatetags.static import static
 from .models import Housing, Transport, Culture
 from collections import defaultdict
+from django.core.files.storage import default_storage
+from django.templatetags.static import static
+from django.core.files.base import ContentFile
+from django.db import IntegrityError
 
 def home(request):
     return render(request, "authentication/index.html")
@@ -79,14 +83,11 @@ def signup(request):
         pass2 = request.POST['pass2']
         profile_image = request.FILES.get('profileImage')
 
-        # Define a regex pattern for institutional email domains
         institutional_email_pattern = r'^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+(edu|ac|org|[a-z]{2})$'
-
-        # Initialize a flag for errors
         has_error = False
         error_messages = []
 
-        # Check if the email matches the institutional email pattern
+        # Validation checks
         if not re.match(institutional_email_pattern, email):
             error_messages.append("Please use a valid institutional email address.")
             has_error = True
@@ -112,19 +113,28 @@ def signup(request):
             error_messages.append("Username must be alphanumeric.")
             has_error = True
 
-        # If there are errors, render the signup page again
         if has_error:
             for message in error_messages:
                 messages.error(request, message, extra_tags='safe')
-            return render(request, "authentication/signup.html")
+            return render(request, "authentication/signup.html", {
+                'username': username,
+                'fname': fname,
+                'lname': lname,
+                'email': email,
+                'country': country,
+                'location': location,
+                'institution': institution,
+                'city': city,
+                'state': state
+            })
 
-        # Check if the profile image is provided; if not, set a default image
+        # Set default profile image if none is provided
         if not profile_image:
-            profile_image = static('images/woman.jpg')
+            profile_image = 'images/woman.jpg'
 
-        # Create a new user instance
+        # Create the user
         myuser = CustomUser.objects.create_user(
-            username=username, email=email, password=pass1, 
+            username=username, email=email, password=pass1,
             country=country, location=location, institution=institution,
             city=city, state=state, profile_picture=profile_image
         )
@@ -133,23 +143,31 @@ def signup(request):
         myuser.generate_otp()
         myuser.save()
 
-        # Create the UserProfile automatically
-        UserProfile.objects.create(
+        # Create or update the user profile
+        user_profile, created = UserProfile.objects.get_or_create(
             user=myuser,
-            country=country,
-            location=location,
-            institution=institution,
-            city=city,
-            state=state
+            defaults={
+                'country': country,
+                'location': location,
+                'institution': institution,
+                'city': city,
+                'state': state,
+            }
         )
 
-        # Store the profile picture URL in the session
+        if not created:
+            user_profile.country = country
+            user_profile.location = location
+            user_profile.institution = institution
+            user_profile.city = city
+            user_profile.state = state
+            user_profile.save()
+
+        # Set session for profile picture
         request.session['profile_picture'] = myuser.profile_picture.url if myuser.profile_picture else None
 
-        # Generate the OTP verification URL
+        # Send OTP email
         otp_verification_url = f"{request.scheme}://{request.get_host()}{reverse('verify_otp')}?email={email}"
-
-        # Send OTP email with link
         subject = "Your OTP for StudentKonnect"
         message = (
             f"Hello {myuser.first_name},\n\n"
