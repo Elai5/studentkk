@@ -1,0 +1,29 @@
+[
+    {
+        "model": "mysite.housing",
+        "pk": 1,
+        "fields": {
+            "country": "USA",
+            "title": "Affordable Apartments in NYC",
+            "link": "https://example.com/nyc-apartments"
+        }
+    },
+    {
+        "model": "mysite.housing",
+        "pk": 2,
+        "fields": {
+            "country": "UK",
+            "title": "Student Housing in London",
+            "link": "https://example.com/london-housing"
+        }
+    },
+    {
+        "model": "mysite.housing",
+        "pk": 2,
+        "fields": {
+            "country": "NE",
+            "title": "Student Housing in Netherlands",
+            "link": "https://example.com/london-housing"
+        }
+    }
+]

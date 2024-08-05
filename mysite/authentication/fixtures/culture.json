@@ -1,0 +1,20 @@
+[
+    {
+        "model": "mysite.culture",
+        "pk": 1,
+        "fields": {
+            "country": "USA",
+            "title": "Cultural Events in New York",
+            "description": "Explore the diverse cultural events happening in New York City."
+        }
+    },
+    {
+        "model": "mysite.culture",
+        "pk": 2,
+        "fields": {
+            "country": "UK",
+            "title": "Festivals in London",
+            "description": "Discover the exciting festivals and cultural activities in London."
+        }
+    }
+]

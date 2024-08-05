@@ -60,7 +60,7 @@
         const roomName = `chat_${Math.min(userId, friendId)}_${Math.max(userId, friendId)}`; 
 
         const chatSocket = new WebSocket(
-            'ws://' + window.location.host + '/ws/chat/' + roomName + '/'
+            'wss://' + window.location.host + '/ws/chat/' + roomName + '/'
         );
 
         chatSocket.onmessage = function(e) {

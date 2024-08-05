@@ -7,7 +7,9 @@
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    {{ message|safe }}
+                </li>
             {% endfor %}
         </ul>
     {% endif %}
@@ -83,7 +85,7 @@
                 </div>
                 <div class="column">
                      <div class="form-group">
-                        <label for="zip_code">zip code</label>
+                        <label for="zip_code">Zip Code</label>
                         <input type="text" id="zip_code" name="zip_code" placeholder="Enter zip code" autocomplete="on" list="zip-code-datalist">
                         <datalist id="zip-code-datalist"></datalist>
                     </div> 

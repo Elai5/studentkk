@@ -16,7 +16,6 @@ class NewsService:
             return cached_news
 
         params = {
-            'apiKey': NewsService.API_KEY,
             'q': query,
             'language': 'en',
             'sortBy': 'relevancy',
@@ -32,8 +31,19 @@ class NewsService:
                 response = requests.get(NewsService.BASE_URL, params=params, timeout=10)
                 response.raise_for_status()
                 articles = response.json().get('articles', [])
-                cache.set(cache_key, articles, 3600)  # Cache the results for 1 hour
-                return articles
+                
+                # Deduplicate articles
+                unique_articles = []
+                seen_urls = set()
+                
+                for article in articles:
+                    url = article.get('url')
+                    if url and url not in seen_urls:
+                        seen_urls.add(url)
+                        unique_articles.append(article)
+                
+                cache.set(cache_key, unique_articles, 3600)  # Cache the results for 1 hour
+                return unique_articles
 
             except HTTPError as http_err:
                 if response.status_code == 429:  # Rate limit exceeded

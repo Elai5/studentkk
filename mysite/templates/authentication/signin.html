@@ -5,11 +5,11 @@
 
 {% block content %}
 <section id="signin-formy">
-    <form action="/signin" method="post" enctype="multipart/form-data" id="signin-form">
+    <form action="{% url 'signin' %}" method="post" enctype="multipart/form-data" id="signin-form">
         {% csrf_token %}
         <div class="image-upload-container">
-            {% if profile_picture %}
-                <img class="image-preview" src="{{ profile_picture }}" alt="Profile Picture" id="previewImage">
+            {% if request.session.profile_picture %}
+                <img class="image-preview" src="{{ request.session.profile_picture }}" alt="Profile Picture" id="previewImage">
             {% else %}
                 <img class="image-preview" src="{% static 'images/woman.jpg' %}" alt="Dummy Image" id="previewImage">
             {% endif %}
@@ -24,10 +24,9 @@
         
         <button type="submit">Sign In</button>
         <p>Don't have an account? Create one <a href="{% url 'signup' %}">here</a></p>
-        <p><a href="{% url 'password_reset_request' %}">Forgot Password?</a></p>  <!-- Link to password reset -->
+        <p><a href="{% url 'password_reset_request' %}">Forgot Password?</a></p>
     </form>
 
-    <!-- Message Display Section -->
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -38,3 +37,20 @@
 </section>
 {% endblock %}
 <script src="{% static 'js/script.js' %}"></script>
+
+<script>
+    function previewProfileImage() {
+        const file = document.getElementById('profileImage').files[0];
+        const preview = document.getElementById('previewImage');
+        
+        const reader = new FileReader();
+        
+        reader.addEventListener("load", function () {
+            preview.src = reader.result;
+        }, false);
+        
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+</script>

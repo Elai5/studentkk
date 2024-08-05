@@ -394,14 +394,16 @@ p {
   padding: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  /* Align items at the start */
   height: 50%;
   /* Make this 50% of the card's height */
 }
 
 .news-title {
   font-size: 1.2rem;
-  margin: 0;
+  margin-bottom: 10px;
+  /* Add some space below the title */
 }
 
 .news-title a {
@@ -417,7 +419,8 @@ p {
   text-overflow: ellipsis;
   line-clamp: 3;
   font-size: 1rem;
-  margin: 10px 0 0;
+  margin: 0;
+  /* Remove any default margin */
 }
 
 #homepage .profile .text h1 {
@@ -444,7 +447,6 @@ p {
   border-radius: 8px;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
-
 
 
 
@@ -884,36 +886,35 @@ p {
   }
 }
 
-.messages {
+/* styles.css or within a <style> tag */
+ul.messages {
   list-style-type: none;
   padding: 0;
-  margin: 20px 0;
+  margin: 0;
 }
 
-.messages li {
+ul.messages li {
   padding: 10px;
-  margin: 5px 0;
-  border: 1px solid transparent;
-  border-radius: 5px;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: #f8f9fa;
 }
 
-.messages li.error {
-  background-color: #f8d7da;
-  color: #721c24;
+ul.messages li.error {
   border-color: #f5c6cb;
+  background-color: #f8d7da;
 }
 
-.messages li.info {
-  background-color: #d1ecf1;
-  color: #0c5460;
+ul.messages li.info {
   border-color: #bee5eb;
+  background-color: #d1ecf1;
 }
 
-.messages li.success {
-  background-color: #d4edda;
-  color: #155724;
-  border-color: #c3e6cb;
-}
+
+
+
+
 
 #signin-formy {
   display: flex;
@@ -2044,7 +2045,7 @@ label {
   /* Bold text */
 }
 
-.messages {
+.chat-interface .messages {
   max-height: 400px;
   /* Limit height for scrolling */
   overflow-y: auto;

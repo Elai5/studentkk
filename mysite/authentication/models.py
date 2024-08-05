@@ -71,6 +71,7 @@ class State(models.Model):
 
     def __str__(self):
         return f"{self.name}, {self.country}"
+
 @receiver(post_save, sender=CustomUser)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
@@ -78,4 +79,35 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 @receiver(post_save, sender=CustomUser)
 def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+    try:
+        instance.userprofile.save()
+    except UserProfile.DoesNotExist:
+        UserProfile.objects.create(user=instance)
+        
+        
+# myapp/models.py
+from django.db import models
+
+class Housing(models.Model):
+    country = models.CharField(max_length=100, choices=[('USA', 'United States'), ('UK', 'United Kingdom'), ('Canada', 'Canada'), ('Australia', 'Australia'), ('Germany', 'Germany'), ('Netherlands', 'Netherlands')])
+    title = models.CharField(max_length=200)
+    link = models.URLField()
+
+    def __str__(self):
+        return self.title
+
+class Transport(models.Model):
+    country = models.CharField(max_length=100, choices=[('USA', 'United States'), ('UK', 'United Kingdom'), ('Canada', 'Canada'), ('Australia', 'Australia'), ('Germany', 'Germany'), ('Netherlands', 'Netherlands')])
+    title = models.CharField(max_length=200)
+    link = models.URLField()
+
+    def __str__(self):
+        return self.title
+
+class Culture(models.Model):
+    country = models.CharField(max_length=100, choices=[('USA', 'United States'), ('UK', 'United Kingdom'), ('Canada', 'Canada'), ('Australia', 'Australia'), ('Germany', 'Germany'), ('Netherlands', 'Netherlands')])
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title

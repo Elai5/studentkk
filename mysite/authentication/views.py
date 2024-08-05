@@ -18,8 +18,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Message
 import uuid
 from .news_service import NewsService
-
-
+from django.templatetags.static import static
 
 def home(request):
     return render(request, "authentication/index.html")
@@ -40,6 +39,8 @@ def homepage(request):
 
     return render(request, "authentication/homepage.html", {'news_data': news_data})
 
+
+
 def signup(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -49,71 +50,74 @@ def signup(request):
         country = request.POST['country']
         location = request.POST['location']
         institution = request.POST['institution']
-        city = request.POST['city']  # New field
-        state = request.POST['state']  # New field
+        city = request.POST['city']
+        state = request.POST['state']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
-        profile_image = request.FILES.get('profileImage')  # Get the uploaded image file
+        profile_image = request.FILES.get('profileImage')
 
         # Define a regex pattern for institutional email domains
         institutional_email_pattern = r'^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+(edu|ac|org|[a-z]{2})$'
 
         # Initialize a flag for errors
         has_error = False
+        error_messages = []
 
         # Check if the email matches the institutional email pattern
         if not re.match(institutional_email_pattern, email):
-            messages.error(request, "Please use a valid institutional email address.")
+            error_messages.append("Please use a valid institutional email address.")
             has_error = True
 
         if CustomUser.objects.filter(username=username).exists():
-            messages.error(request, "Username already exists. Choose another.")
+            error_messages.append("Username already exists. Choose another.")
             has_error = True
         
         if CustomUser.objects.filter(email=email).exists():
             mailto_link = f"mailto:{email}?subject=OTP%20Request&body=Please%20send%20me%20the%20OTP%20for%20my%20account."
-            messages.info(request, f"An account with this email already exists. Please check your email for the OTP. If you haven't received it, click <a href='{mailto_link}'>here</a> to send a request.", extra_tags='safe')
+            error_messages.append(f"An account with this email already exists.<br>Please check your email for the OTP.<br>If you haven't received it, click <a href='{mailto_link}'>here</a> to request it.")
             has_error = True
         
         if len(username) > 10:
-            messages.error(request, "Username must be under 10 characters.")
+            error_messages.append("Username must be under 10 characters.")
             has_error = True
         
         if pass1 != pass2:
-            messages.error(request, "Passwords do not match.")
+            error_messages.append("Passwords do not match.")
             has_error = True
         
         if not username.isalnum():
-            messages.error(request, "Username must be alphanumeric.")
+            error_messages.append("Username must be alphanumeric.")
             has_error = True
 
         # If there are errors, render the signup page again
         if has_error:
+            for message in error_messages:
+                messages.error(request, message, extra_tags='safe')
             return render(request, "authentication/signup.html")
 
         # Check if the profile image is provided; if not, set a default image
         if not profile_image:
-            profile_image = staticfiles_storage.url('images/woman.jpg') 
+            profile_image = static('images/woman.jpg')
 
         # Create a new user instance
         myuser = CustomUser.objects.create_user(
             username=username, email=email, password=pass1, 
             country=country, location=location, institution=institution,
-            profile_picture=profile_image  # Save the uploaded image or the default
+            city=city, state=state, profile_picture=profile_image
         )
         myuser.first_name = fname
         myuser.last_name = lname
         myuser.generate_otp()
         myuser.save()
-        
+
         # Create the UserProfile automatically
         UserProfile.objects.create(
             user=myuser,
             country=country,
             location=location,
             institution=institution,
-            city=city,  # Add city
-            state=state  # Add state
+            city=city,
+            state=state
         )
 
         # Store the profile picture URL in the session
@@ -139,6 +143,8 @@ def signup(request):
         return redirect(f'{reverse("verify_otp")}?email={email}')
     
     return render(request, "authentication/signup.html")
+
+
 
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
@@ -189,6 +195,7 @@ def resend_otp(request):
     
     return redirect('verify_otp')  # Redirect back to the OTP verification page
 
+
 def signin(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -197,14 +204,12 @@ def signin(request):
         user = authenticate(username=username, password=pass1)
         
         if user is not None:
-            # No OTP check here, since the user has already verified their OTP during signup
             login(request, user)
-            return redirect('homepage')  # Redirect to the homepage after successful login
+            return redirect('homepage')
         else:
-            messages.error(request, "Invalid username or password")  # Invalid username or password
-            return redirect('signin')  # Redirect back to the sign-in page
+            messages.error(request, "Invalid username or password")
+            return redirect('signin')
     
-    # If the request method is GET, retrieve the profile picture for display
     profile_picture = None
     if 'username' in request.GET:
         username = request.GET['username']
@@ -215,6 +220,7 @@ def signin(request):
             profile_picture = None
 
     return render(request, "authentication/signin.html", {'profile_picture': profile_picture})
+
 
 def signout(request):
     logout(request)
@@ -517,3 +523,6 @@ def chat_list_view(request, friend_id=None):
         'messages': messages,
         'friend': friend,
     })
+    
+    
+
