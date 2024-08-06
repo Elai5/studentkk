@@ -36,22 +36,22 @@
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" value="{{ user_profile.user.email }}" placeholder="Enter email address" required>
             </div>
-
             <div class="form-group">
                 <label for="country">Country of Origin</label>
                 <select id="country" name="country" required>
-                    <option value="">Select country</option>
-                    <!-- Country options will be populated by JavaScript -->
+                    <option value="" {% if not country %}selected{% endif %}>Select country</option>
+                            <!-- Populate countries dynamically -->
                 </select>
             </div>
-
+            
             <div class="form-group">
                 <label for="location">Country of Study</label>
                 <select id="location" name="location" required>
-                    <option value="">Select country</option>
-                    <!-- Location options will be populated by JavaScript -->
+                    <option value="" {% if not location %}selected{% endif %}>Select country</option>
+                            <!-- Populate countries dynamically -->
                 </select>
             </div>
+
 
             <div class="form-group">
                 <label for="institution">Academic Institution</label>

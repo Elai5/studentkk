@@ -1815,6 +1815,19 @@ label {
   transform: scale(1.05);
 }
 
+#edit-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.edit-profile-container {
+  width: 600px;
+}
+
+
 /* Responsive Styles */
 @media screen and (max-width: 600px) {
   .profile-container {
@@ -2095,6 +2108,7 @@ label {
   /* Flex container for user list and chat interface */
   width: 100%;
   height: 100vh;
+  padding: 100px 60px;
   /* Full height */
 }
 
@@ -2134,17 +2148,13 @@ label {
 
 .avatar {
   width: 50px;
-  /* Size of the avatar */
   height: 50px;
   border-radius: 50%;
-  /* Circular avatar */
   margin-right: 15px;
-  /* Space between avatar and name */
 }
 
 .chat-interface {
   width: 70%;
-  /* Adjust width as needed */
   background-color: #ffffff;
   /* Background for chat interface */
   border-radius: 8px;

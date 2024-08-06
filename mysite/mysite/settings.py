@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'mysite',
     'authentication',
     'channels',
-    'chat',
 ]
 
 MIDDLEWARE = [
@@ -82,27 +81,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-# Add this line for ASGI
-ASGI_APPLICATION = 'mysite.asgi.application'
 
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',  # Use Redis for channel layers
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],  # Adjust if Redis is on a different host or port
-        },
-    },
-}
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': 'redis://127.0.0.1:6379/1',
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        },
-        'KEY_PREFIX': 'example'
-    }
-}
 
 
 # Database

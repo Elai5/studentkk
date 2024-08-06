@@ -29,6 +29,7 @@ from django.db import IntegrityError
 def home(request):
     return render(request, "authentication/index.html")
 
+
 def homepage(request):
     user = request.user
 
@@ -67,6 +68,7 @@ def homepage(request):
     }
 
     return render(request, "authentication/homepage.html", context)
+
 
 def signup(request):
     if request.method == "POST":
@@ -283,7 +285,7 @@ def profile_view(request):
         user_profile = UserProfile.objects.get(user=request.user)  # Access the user profile
         return render(request, "authentication/profile.html", {'profile': user_profile})
     else:
-        return redirect('login')  # Redirect to login if not authenticated
+        return redirect('authentication/signin.html')  # Redirect to login if not authenticated
 
 def friends(request):
     if request.user.is_authenticated:
@@ -524,6 +526,7 @@ def password_reset_confirm(request, token):
     
     return render(request, "authentication/password_reset_confirm.html", {'token': token})
 
+
 @login_required
 def chat_view(request, friend_id):
     friend = get_object_or_404(CustomUser, id=friend_id)
@@ -531,6 +534,12 @@ def chat_view(request, friend_id):
         (Q(sender=request.user) & Q(recipient=friend)) | 
         (Q(sender=friend) & Q(recipient=request.user))
     ).order_by('timestamp')
+
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        if content:
+            Message.objects.create(sender=request.user, recipient=friend, content=content)
+            return redirect('chat_with_friend', friend_id=friend_id)
 
     return render(request, 'authentication/chat.html', {
         'friend': friend,
@@ -559,6 +568,4 @@ def chat_list_view(request, friend_id=None):
         'messages': messages,
         'friend': friend,
     })
-    
-    
 

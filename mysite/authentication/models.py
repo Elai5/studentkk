@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 class CustomUser(AbstractUser):
     country = models.CharField(max_length=100, null=True, blank=True)  # User's country of origin
     location = models.CharField(max_length=100, null=True, blank=True)  # Country where the user is studying or will study
@@ -54,6 +55,12 @@ class Message(models.Model):
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        indexes = [
+            models.Index(fields=['sender', 'recipient']),
+            models.Index(fields=['timestamp']),
+        ]
+    
     def __str__(self):
         return f"From {self.sender.username} to {self.recipient.username}: {self.content[:20]}..."
 

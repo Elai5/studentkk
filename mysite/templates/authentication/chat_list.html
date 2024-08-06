@@ -44,7 +44,6 @@
                     <textarea name="content" id="message-input" placeholder="Type your message here..." required></textarea>
                     <button type="submit">Send</button>
                 </form>
-                <div id="feedback" style="color: green;"></div> <!-- Feedback message -->
             {% else %}
                 <h2>Select a friend to chat with</h2>
                 <p>Once you select a friend, the chat will appear here.</p>
@@ -52,62 +51,4 @@
         </div>
     </div>
 </section>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const friendId = "{{ friend.id }}"; 
-        const userId = "{{ request.user.id }}"; 
-        const roomName = `chat_${Math.min(userId, friendId)}_${Math.max(userId, friendId)}`; 
-
-        const chatSocket = new WebSocket(
-            'wss://' + window.location.host + '/ws/chat/' + roomName + '/'
-        );
-
-        chatSocket.onmessage = function(e) {
-            const data = JSON.parse(e.data);
-            const message = data.message;
-            const sender = data.sender;
-
-            const messagesDiv = document.getElementById('messages');
-            messagesDiv.innerHTML += `<div class="chat-message user-b"><strong>${sender}:</strong> ${message}</div>`;
-
-            const isScrolledToBottom = messagesDiv.scrollHeight - messagesDiv.clientHeight <= messagesDiv.scrollTop + 1;
-            if (isScrolledToBottom) {
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            }
-        };
-
-        chatSocket.onerror = function(e) {
-            console.error('WebSocket error:', e);
-            document.getElementById('feedback').innerText = 'Error connecting to chat. Please try again.';
-        };
-
-        document.getElementById('chat-form').onsubmit = function(e) {
-            e.preventDefault();
-            const messageInputDom = document.getElementById('message-input');
-            const message = messageInputDom.value.trim();
-
-            if (message) {
-                chatSocket.send(JSON.stringify({
-                    'message': message,
-                    'sender': "{{ request.user.username }}"
-                }));
-
-                const messagesDiv = document.getElementById('messages');
-                messagesDiv.innerHTML += `<div class="chat-message user-a"><strong>You:</strong> ${message}</div>`;
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-
-                messageInputDom.value = '';
-                document.getElementById('feedback').innerText = 'Message sent!';
-                
-                setTimeout(() => {
-                    document.getElementById('feedback').innerText = '';
-                }, 2000);
-            } else {
-                document.getElementById('feedback').innerText = 'Please enter a message.';
-            }
-        };
-    });
-</script>
-
 {% endblock %}
