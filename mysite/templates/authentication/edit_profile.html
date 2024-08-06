@@ -16,11 +16,11 @@
             </ul>
         {% endif %}
 
-        <form action="/edit_profile" method="post" id="edit-profile-form" enctype="multipart/form-data">
+        <form action="{% url 'edit_profile' %}" method="post" id="edit-profile-form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="image-upload-container">
                 <img class="image-preview" src="{% if user_profile.profile_picture %}{{ user_profile.profile_picture.url }}{% else %}{% static 'images/woman.jpg' %}{% endif %}" alt="Profile Image" id="editPreviewImage">
-                <input type="file" id="editProfileImage" name="profile_picture" accept="image/*" onchange="previewProfileImage()" required>
+                <input type="file" id="editProfileImage" name="profile_picture" accept="image/*" onchange="previewProfileImage()">
             </div>
             <div class="form-group">
                 <label for="fname">First Name</label>
@@ -36,27 +36,31 @@
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" value="{{ user_profile.user.email }}" placeholder="Enter email address" required>
             </div>
+
             <div class="form-group">
                 <label for="country">Country of Origin</label>
-                <select id="country" name="country" required>
-                    <option value="" {% if not country %}selected{% endif %}>Select country</option>
-                            <!-- Populate countries dynamically -->
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label for="location">Country of Study</label>
-                <select id="location" name="location" required>
-                    <option value="" {% if not location %}selected{% endif %}>Select country</option>
-                            <!-- Populate countries dynamically -->
-                </select>
+                <input type="text" id="country" name="country" value="{{ user_profile.country }}" placeholder="Enter your country" required>
             </div>
 
+            <div class="form-group">
+                <label for="location">Country of Study</label>
+                <input type="text" id="location" name="location" value="{{ user_profile.location }}" placeholder="Enter your location" required>
+            </div>
 
             <div class="form-group">
                 <label for="institution">Academic Institution</label>
                 <input type="text" id="institution" name="institution" value="{{ user_profile.institution }}" placeholder="Enter institution name" autocomplete="on" list="institution-datalist">
                 <datalist id="institution-datalist"></datalist>
+            </div>
+
+            <div class="form-group">
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" value="{{ user_profile.city }}" placeholder="Enter city" required>
+            </div>
+
+            <div class="form-group">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" value="{{ user_profile.state }}" placeholder="Enter state" required>
             </div>
 
             <button type="submit">Update Profile</button>
@@ -65,5 +69,4 @@
     </div>
 </section>
 {% endblock %}
-
-<!-- Place your script tag here, at the end of the body -->
+<script src="{% static 'js/script.js' %}"></script>

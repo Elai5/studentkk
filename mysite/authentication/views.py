@@ -442,14 +442,16 @@ def edit_profile(request):
         print(request.POST)  # Print the POST data for debugging
 
         # Update user information
-        request.user.first_name = request.POST.get('fname', request.user.first_name)  # Ensure 'fname' matches your form
-        request.user.last_name = request.POST.get('lname', request.user.last_name)  # Ensure 'lname' matches your form
+        request.user.first_name = request.POST.get('fname', request.user.first_name)
+        request.user.last_name = request.POST.get('lname', request.user.last_name)
         request.user.email = request.POST.get('email', request.user.email)
 
         # Update profile information
         user_profile.country = request.POST.get('country', user_profile.country)
         user_profile.location = request.POST.get('location', user_profile.location)
         user_profile.institution = request.POST.get('institution', user_profile.institution)
+        user_profile.city = request.POST.get('city', user_profile.city)  # Update city
+        user_profile.state = request.POST.get('state', user_profile.state)  # Update state
 
         # Handle profile picture upload
         profile_image = request.FILES.get('profile_picture')
@@ -464,29 +466,6 @@ def edit_profile(request):
         return redirect('profile_view')  # Redirect to the profile view after saving
 
     return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
-
-
-    # Get the list of friends based on accepted friend requests
-    friends = CustomUser.objects.filter(
-        Q(friend_requests_received__from_user=request.user, friend_requests_received__accepted=True) |
-        Q(friend_requests_sent__to_user=request.user, friend_requests_sent__accepted=True)
-    )
-
-    messages = []
-    friend = None
-
-    if friend_id:
-        friend = get_object_or_404(CustomUser, id=friend_id)  # Get the friend by ID
-        messages = Message.objects.filter(
-            (Q(sender=request.user) & Q(recipient=friend)) |
-            (Q(sender=friend) & Q(recipient=request.user))
-        ).order_by('timestamp')  # Order messages by timestamp
-        
-    return render(request, 'authentication/chat_list.html', {
-        'friends': friends,
-        'messages': messages,
-        'friend': friend,
-    })
 
 def password_reset_request(request):
     if request.method == "POST":
@@ -534,40 +513,51 @@ def password_reset_confirm(request, token):
     
     return render(request, "authentication/password_reset_confirm.html", {'token': token})
 
-
-    
 @login_required
 def chat_view(request, friend_id):
     friend = get_object_or_404(CustomUser, id=friend_id)
+    
+    # Fetch the messages between the logged-in user and the friend
     messages_list = Message.objects.filter(
         (Q(sender=request.user) & Q(recipient=friend)) | 
         (Q(sender=friend) & Q(recipient=request.user))
     ).order_by('timestamp')
 
+    # Retrieve the list of friends for the logged-in user
+    friends = CustomUser.objects.filter(
+        Q(friend_requests_sent__to_user=request.user, friend_requests_sent__accepted=True) | 
+        Q(friend_requests_received__from_user=request.user, friend_requests_received__accepted=True)
+    ).distinct()
+
     if request.method == 'POST':
         content = request.POST.get('content')
         if content:
             Message.objects.create(sender=request.user, recipient=friend, content=content)
-            # No notification or success message is set here
             return redirect('chat_with_friend', friend_id=friend_id)
 
     return render(request, 'authentication/chat.html', {
         'friend': friend,
         'messages': messages_list,
+        'friends': friends,  # Pass the friends list to the template
     })
+
+
     
 # views.py
 @login_required
 def chat_list_view(request):
+    # Retrieve friends for the logged-in user
     friends = CustomUser.objects.filter(
         Q(friend_requests_received__from_user=request.user, friend_requests_received__accepted=True) |
         Q(friend_requests_sent__to_user=request.user, friend_requests_sent__accepted=True)
-    )
+    ).distinct()
 
+    # Retrieve all messages for the logged-in user
     messages = Message.objects.filter(
         Q(sender=request.user) | Q(recipient=request.user)
     ).order_by('timestamp')
 
+    # Create a dictionary to store the last message for each friend
     last_messages = {}
     for friend in friends:
         last_message = messages.filter(
@@ -579,7 +569,6 @@ def chat_list_view(request):
         'friends': friends,
         'last_messages': last_messages,
     })
-
 
 
 
