@@ -33,6 +33,7 @@ urlpatterns = [
     path('messages/', chat_list_view, name='chat_list'),
     path('friends/chat/<int:friend_id>/', chat_list_view, name='chat_with_friend'),
     path('how_it_works', views.how_it_works, name='how_it_works'),
+     path('testimonials', views.testimonials, name='testimonials'),
     path('password-reset/', password_reset_request, name='password_reset_request'),
     path('password-reset-confirm/<str:token>/', password_reset_confirm, name='password_reset_confirm'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

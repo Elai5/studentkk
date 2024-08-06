@@ -1,0 +1,64 @@
+{% extends "authentication/base.html" %}
+{% load static %} <!-- Load the static template tag library -->
+{% block title %}Testimonials{% endblock %}
+{% block content %}
+
+<section id="Testimonials">
+    <div class="container">
+        <h1>What Our Clients Say About Us</h1>
+        <h2>Learn more about how our app helps students around the world.</h2>
+
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="{% static 'images/boy.png' %}" alt="Client 1">
+                    <div class="testimonial-info">
+                        <p class="name">John Doe</p>
+                        <p class="school">University of Example</p>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    <p>This platform made my transition so much easier. From connecting with fellow students to accessing valuable resources, it truly streamlined my experiences. I'm grateful for the support and community I've found here!</p>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="{% static 'images/happy.jpg' %}" alt="Client 2">
+                    <div class="testimonial-info">
+                        <p class="name">Jane Smith</p>
+                        <p class="school">Example Institute</p>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    <p>Meeting friends through this platform has been an incredible experience. Not only did I find like-minded individuals who share my interests, but we've also formed a tight-knit community. The transportation options and information provided are incredibly useful. Highly recommended!</p>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="{% static 'images/gurl.jpeg' %}" alt="Client 3">
+                    <div class="testimonial-info">
+                        <p class="name">Emily Johnson</p>
+                        <p class="school">Sample University</p>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    <p>The app’s resources for international students are incredibly comprehensive and user-friendly. It offers a wealth of information about housing, transportation, and local cultural events, all tailored to the unique needs of students who are new to the country. Navigating through the app is a breeze, and it has significantly eased my transition to studying in Germany.</p>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="{% static 'images/crowd.png' %}" alt="Client 4">
+                    <div class="testimonial-info">
+                        <p class="name">Michael Brown</p>
+                        <p class="school">Global College</p>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    <p>I’ve found the cultural events and community connections facilitated by the app to be truly invaluable. It has helped me connect with local communities and participate in cultural activities that I wouldn’t have discovered otherwise. The app's recommendations are spot-on, making it easier for me to engage with the new culture and meet new people. It’s been a fantastic resource during my time in London.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

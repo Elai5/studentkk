@@ -29,7 +29,6 @@ from django.db import IntegrityError
 def home(request):
     return render(request, "authentication/index.html")
 
-
 def homepage(request):
     user = request.user
 
@@ -424,6 +423,9 @@ def your_django_view(request):
 
 def how_it_works(request):
     return render(request, 'authentication/how_it_works.html')
+
+def testimonials(request):
+    return render(request, "authentication/testimonials.html")
 
 @login_required
 def edit_profile(request):

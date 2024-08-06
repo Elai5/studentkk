@@ -11,37 +11,45 @@
             <p>Eager to start your new adventure? Here’s some guidance to start you off.</p>
         </div>
         <div class="news-container">
-        {% if error %}
-            <p>{{ error }}</p>
-        {% endif %}
-        {% for category, articles in news_data.items %}
-            <div class="news-category">
-                <h2>{{ category|capfirst }}</h2>
-                {% if articles %}
-                    <div class="news-list">
-                        {% for article in articles %}
-                            <div class="news-card">
-                                <div class="image-container">
-                                    {% if article.urlToImage %}
-                                        <img src="{{ article.urlToImage }}" alt="Image for {{ article.title }}" class="news-image">
-                                    {% else %}
-                                        <img src="{% static 'default_image.jpg' %}" alt="Default Image" class="news-image">
-                                    {% endif %}
-                                </div>
-                                <div class="news-content">
-                                    <h3 class="news-title"><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
-                                    <p class="news-description">{{ article.description }}</p>
-                                </div>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    {% for category, articles in news_data.items %}
+        <div class="news-category">
+            <h2>{{ category|capfirst }}</h2>
+            {% if articles %}
+                <div class="news-list">
+                    {% for article in articles %}
+                        <div class="news-card">
+                            <div class="image-container">
+                                {% if article.urlToImage %}
+                                    <img src="{{ article.urlToImage }}" alt="Image for {{ article.title }}" class="news-image">
+                                {% elif article.image_url %}
+                                    <img src="{{ article.image_url }}" alt="Image for {{ article.title }}" class="news-image">
+                                {% else %}
+                                    <img src="{% static 'default_image.jpg' %}" alt="Default Image" class="news-image">
+                                {% endif %}
                             </div>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    <p>No articles available for {{ category }}.</p>
-                {% endif %}
-            </div>
-        {% endfor %}
-    </div>
-        <div class="additional-data">
+                            <div class="news-content">
+                                <h3 class="news-title">
+                                    <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer">
+                                        {{ article.title }}
+                                    </a>
+                                </h3>
+                                <p class="news-description">{{ article.description }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>No articles available for {{ category }}.</p>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+
+        {% comment %} <div class="additional-data">
             {% for country, data in country_data.items %}
                 <h2>{{ country }}</h2>
 
@@ -81,7 +89,7 @@
                     {% endfor %}
                 </ul>
             {% endfor %}
-        </div>
+        </div> {% endcomment %}
     </div>
 </section>
 {% endblock %}
