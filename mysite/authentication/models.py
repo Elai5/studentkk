@@ -5,17 +5,16 @@ from django.utils import timezone
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-
 class CustomUser(AbstractUser):
-    country = models.CharField(max_length=100, null=True, blank=True)  # User's country of origin
-    location = models.CharField(max_length=100, null=True, blank=True)  # Country where the user is studying or will study
-    institution = models.CharField(max_length=100, null=True, blank=True)  # School or institution user is attending
-    city = models.CharField(max_length=100, null=True, blank=True)  # New field for city
-    state = models.CharField(max_length=100, null=True, blank=True)  # New field for state
-    zip_code = models.CharField(max_length=20, null=True, blank=True)  # New field for zip code
+    country = models.CharField(max_length=100, null=True, blank=True)
+    location = models.CharField(max_length=100, null=True, blank=True)
+    institution = models.CharField(max_length=100, null=True, blank=True)
+    city = models.CharField(max_length=100, null=True, blank=True)
+    state = models.CharField(max_length=100, null=True, blank=True)
+    zip_code = models.CharField(max_length=20, null=True, blank=True)
     otp = models.CharField(max_length=6, blank=True, null=True)
     otp_created_at = models.DateTimeField(blank=True, null=True)
-    otp_verified = models.BooleanField(default=False)  # Track OTP verification
+    otp_verified = models.BooleanField(default=False)
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
     password_reset_token = models.CharField(max_length=36, blank=True, null=True)
     token_created_at = models.DateTimeField(blank=True, null=True)
@@ -34,7 +33,7 @@ class UserProfile(models.Model):
     country = models.CharField(max_length=100, null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
     institution = models.CharField(max_length=100, null=True, blank=True)
-    city = models.CharField(max_length=100, null=True, blank=True)  # New field for city
+    city = models.CharField(max_length=100, null=True, blank=True)
     state = models.CharField(max_length=100, null=True, blank=True)
 
     def __str__(self):
@@ -44,7 +43,7 @@ class FriendRequest(models.Model):
     from_user = models.ForeignKey(CustomUser, related_name='friend_requests_sent', on_delete=models.CASCADE)
     to_user = models.ForeignKey(CustomUser, related_name='friend_requests_received', on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    accepted = models.BooleanField(default=False)  # Track if the request is accepted
+    accepted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.from_user.username} -> {self.to_user.username} (Accepted: {self.accepted})"
@@ -54,6 +53,7 @@ class Message(models.Model):
     recipient = models.ForeignKey(CustomUser, related_name='received_messages', on_delete=models.CASCADE)
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    read = models.BooleanField(default=False)  # New field to track if the message has been read
 
     class Meta:
         indexes = [
@@ -90,14 +90,13 @@ def save_user_profile(sender, instance, **kwargs):
         instance.userprofile.save()
     except UserProfile.DoesNotExist:
         UserProfile.objects.create(user=instance)
-        
 
 class Housing(models.Model):
     country = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
-    short_description = models.TextField(default="Default description")  # Set a default value here
+    short_description = models.TextField(default="Default description")
     link = models.URLField()
-    image = models.URLField(blank=True, null=True)  # New field for image
+    image = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -105,9 +104,9 @@ class Housing(models.Model):
 class Transport(models.Model):
     country = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
-    short_description = models.TextField(default="Default description")  # Set a default value here
+    short_description = models.TextField(default="Default description")
     link = models.URLField()
-    image = models.URLField(blank=True, null=True)  # New field for image
+    image = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -115,11 +114,9 @@ class Transport(models.Model):
 class Culture(models.Model):
     country = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
-    short_description = models.TextField(default="Default description")  # Set a default value here
+    short_description = models.TextField(default="Default description")
     description = models.TextField()
-    image = models.URLField(blank=True, null=True)  # New field for image
+    image = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.title
-
-    

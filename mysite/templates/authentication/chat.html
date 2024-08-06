@@ -1,4 +1,4 @@
-<!-- templates/authentication/chat.html -->
+<!-- chat.html -->
 {% extends "authentication/nav2.html" %}
 {% load static %}
 
@@ -7,6 +7,22 @@
 {% block content %}
 <section id="chat-page">
     <div class="chat-container">
+        <div class="sidebar">
+            <h2>Your Friends</h2>
+            <ul>
+                {% for friend in friends %}
+                    <li>
+                        <img src="{% if friend.profile_picture %}{{ friend.profile_picture.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" alt="{{ friend.username }}'s profile picture" class="friend-avatar">
+                        <a href="{% url 'chat_with_friend' friend.id %}">
+                            {{ friend.first_name }} {{ friend.last_name }}
+                        </a>
+                    </li>
+                {% empty %}
+                    <li>No friends available.</li>
+                {% endfor %}
+            </ul>
+        </div>
+
         <div class="chat-interface">
             <div class="chat-header">
                 <img src="{{ friend.profile_picture.url }}" alt="{{ friend.username }}'s profile picture" class="friend-avatar">
@@ -33,3 +49,4 @@
     </div>
 </section>
 {% endblock %}
+

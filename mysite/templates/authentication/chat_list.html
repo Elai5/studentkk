@@ -1,3 +1,4 @@
+<!-- chat_list.html -->
 {% extends "authentication/nav2.html" %}
 {% load static %}
 
@@ -13,6 +14,22 @@
                     <li class="user-card">
                         <img src="{% if friend.profile_picture %}{{ friend.profile_picture.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" alt="{{ friend.username }}'s profile picture" class="avatar">
                         <span class="user-name">{{ friend.first_name }} {{ friend.last_name }}</span>
+                        <span class="last-message">
+                            {% with last_message=last_messages[friend.id] %}
+                                {% if last_message %}
+                                    {{ last_message.content|truncatewords:5 }}
+                                {% else %}
+                                    No messages yet.
+                                {% endif %}
+                            {% endwith %}
+                        </span>
+                        <span class="timestamp">
+                            {% with last_message=last_messages[friend.id] %}
+                                {% if last_message %}
+                                    {{ last_message.timestamp|date:"F j, Y, g:i a" }}
+                                {% endif %}
+                            {% endwith %}
+                        </span>
                         <a href="{% url 'chat_with_friend' friend.id %}" class="send-message">Continue Chat</a>
                     </li>
                 {% empty %}

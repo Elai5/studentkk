@@ -6,11 +6,13 @@ from .views import (
     send_friend_request,
     accept_friend_request,
     decline_friend_request,
-    chat_list_view
+    chat_list_view,
+    chat_view,
+    password_reset_request,
+    password_reset_confirm,
 )
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import password_reset_request, password_reset_confirm
 
 urlpatterns = [
     path('', views.home, name="home"),
@@ -28,12 +30,13 @@ urlpatterns = [
     path('friends/send_request/<int:user_id>/', send_friend_request, name='send_friend_request'),
     path('friends/accept_request/<int:request_id>/', accept_friend_request, name='accept_friend_request'),
     path('friends/decline_request/<int:request_id>/', decline_friend_request, name='decline_friend_request'),
-    path('chat/', views.chat_list_view, name='chat_list'),
-    path('chat/<int:friend_id>/', views.chat_view, name='chat_with_friend'),
-    path('messages/', chat_list_view, name='chat_list'),
-    path('friends/chat/<int:friend_id>/', chat_list_view, name='chat_with_friend'),
+    
+    # Chat URLs
+    path('chat', chat_list_view, name='chat_list'),  # URL for chat list
+    path('chat/<int:friend_id>/', chat_view, name='chat_with_friend'),  # URL for chatting with a specific friend
+
     path('how_it_works', views.how_it_works, name='how_it_works'),
-     path('testimonials', views.testimonials, name='testimonials'),
+    path('testimonials', views.testimonials, name='testimonials'),
     path('password-reset/', password_reset_request, name='password_reset_request'),
     path('password-reset-confirm/<str:token>/', password_reset_confirm, name='password_reset_confirm'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

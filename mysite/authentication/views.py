@@ -68,7 +68,6 @@ def homepage(request):
 
     return render(request, "authentication/homepage.html", context)
 
-
 def signup(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -164,6 +163,11 @@ def signup(request):
             user_profile.state = state
             user_profile.save()
 
+        # Ensure the profile picture is saved in the CustomUser model
+        if profile_image:
+            myuser.profile_picture = profile_image
+            myuser.save()
+
         # Set session for profile picture
         request.session['profile_picture'] = myuser.profile_picture.url if myuser.profile_picture else None
 
@@ -174,7 +178,7 @@ def signup(request):
             f"Hello {myuser.first_name},\n\n"
             f"Your OTP is {myuser.otp}. It is valid for 10 minutes.\n\n"
             f"Click this link to enter your OTP: {otp_verification_url}\n\n"
-            "Thank You,\n ELaine"
+            "Thank You,\n Elaine"
         )
         from_email = settings.EMAIL_HOST_USER
         to_list = [myuser.email]
@@ -185,6 +189,7 @@ def signup(request):
         return redirect(f'{reverse("verify_otp")}?email={email}')
     
     return render(request, "authentication/signup.html")
+
 
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
@@ -249,7 +254,7 @@ def signin(request):
             messages.error(request, "Invalid username or password")
             return redirect('signin')
     
-    profile_picture = None
+    profile_picture = request.session.get('profile_picture')  # Get the profile picture from the session
     if 'username' in request.GET:
         username = request.GET['username']
         try:
@@ -278,13 +283,14 @@ def universities_data(request):
 
 def profile(request):
     return render(request, 'authentication/profile.html')
-
+# Redirect to login if not authenticated
 def profile_view(request):
     if request.user.is_authenticated:
         user_profile = UserProfile.objects.get(user=request.user)  # Access the user profile
         return render(request, "authentication/profile.html", {'profile': user_profile})
     else:
-        return redirect('authentication/signin.html')  # Redirect to login if not authenticated
+        return redirect('signin')  # Redirect to the signin page
+
 
 def friends(request):
     if request.user.is_authenticated:
@@ -529,10 +535,11 @@ def password_reset_confirm(request, token):
     return render(request, "authentication/password_reset_confirm.html", {'token': token})
 
 
+    
 @login_required
 def chat_view(request, friend_id):
     friend = get_object_or_404(CustomUser, id=friend_id)
-    messages = Message.objects.filter(
+    messages_list = Message.objects.filter(
         (Q(sender=request.user) & Q(recipient=friend)) | 
         (Q(sender=friend) & Q(recipient=request.user))
     ).order_by('timestamp')
@@ -541,33 +548,38 @@ def chat_view(request, friend_id):
         content = request.POST.get('content')
         if content:
             Message.objects.create(sender=request.user, recipient=friend, content=content)
+            # No notification or success message is set here
             return redirect('chat_with_friend', friend_id=friend_id)
 
     return render(request, 'authentication/chat.html', {
         'friend': friend,
-        'messages': messages,
+        'messages': messages_list,
     })
-
+    
+# views.py
 @login_required
-def chat_list_view(request, friend_id=None):
+def chat_list_view(request):
     friends = CustomUser.objects.filter(
         Q(friend_requests_received__from_user=request.user, friend_requests_received__accepted=True) |
         Q(friend_requests_sent__to_user=request.user, friend_requests_sent__accepted=True)
     )
 
-    messages = []
-    friend = None
+    messages = Message.objects.filter(
+        Q(sender=request.user) | Q(recipient=request.user)
+    ).order_by('timestamp')
 
-    if friend_id:
-        friend = get_object_or_404(CustomUser, id=friend_id)
-        messages = Message.objects.filter(
-            (Q(sender=request.user) & Q(recipient=friend)) |
-            (Q(sender=friend) & Q(recipient=request.user))
-        ).order_by('timestamp')
+    last_messages = {}
+    for friend in friends:
+        last_message = messages.filter(
+            Q(sender=friend, recipient=request.user) | Q(sender=request.user, recipient=friend)
+        ).last()
+        last_messages[friend.id] = last_message
 
     return render(request, 'authentication/chat_list.html', {
         'friends': friends,
-        'messages': messages,
-        'friend': friend,
+        'last_messages': last_messages,
     })
+
+
+
 
