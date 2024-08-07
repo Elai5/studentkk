@@ -136,87 +136,57 @@ def signup(request):
         myuser = CustomUser.objects.create_user(
             username=username, email=email, password=pass1,
             country=country, location=location, institution=institution,
-            city=city, state=state, profile_picture=profile_image
+            city=city, state=state, profile_picture=profile_image,
+            is_verified=False  # Set to False initially
         )
         myuser.first_name = fname
         myuser.last_name = lname
-        myuser.generate_otp()
+        myuser.generate_otp()  # Assuming this method generates and saves the OTP
         myuser.save()
-
-        # Create or update the user profile
-        user_profile, created = UserProfile.objects.get_or_create(
-            user=myuser,
-            defaults={
-                'country': country,
-                'location': location,
-                'institution': institution,
-                'city': city,
-                'state': state,
-            }
-        )
-
-        if not created:
-            user_profile.country = country
-            user_profile.location = location
-            user_profile.institution = institution
-            user_profile.city = city
-            user_profile.state = state
-            user_profile.save()
-
-        # Ensure the profile picture is saved in the CustomUser model
-        if profile_image:
-            myuser.profile_picture = profile_image
-            myuser.save()
-
-        # Set session for profile picture
-        request.session['profile_picture'] = myuser.profile_picture.url if myuser.profile_picture else None
 
         # Send OTP email
         otp_verification_url = f"{request.scheme}://{request.get_host()}{reverse('verify_otp')}?email={email}"
-        subject = "Your OTP for StudentKonnect"
+        subject = "Your OTP for Verification"
         message = (
             f"Hello {myuser.first_name},\n\n"
             f"Your OTP is {myuser.otp}. It is valid for 10 minutes.\n\n"
             f"Click this link to enter your OTP: {otp_verification_url}\n\n"
             "Thank You,\n Elaine"
         )
-        from_email = settings.EMAIL_HOST_USER
-        to_list = [myuser.email]
-        send_mail(subject, message, from_email, to_list, fail_silently=True)
-        
+        send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
+
         messages.success(request, "Your account has been successfully created. Please check your email for the OTP.")
         
-        return redirect(f'{reverse("verify_otp")}?email={email}')
+        return redirect('verify_otp')  # Redirect to the OTP verification page
     
     return render(request, "authentication/signup.html")
-
 
 def verify_otp(request):
     email = request.GET.get('email') or request.POST.get('email')
     
     if request.method == "POST":
         # Check if the OTP is provided
-        if 'otp' in request.POST:
-            otp = request.POST['otp']
-            try:
-                user = CustomUser.objects.get(email=email)
-                if user.is_otp_valid(otp):  # Pass the OTP to the method
-                    user.otp = None
-                    user.otp_created_at = None
-                    user.save()
-                    messages.success(request, "OTP verified successfully. You can now log in.")
-                    
-                    # Store the profile picture URL in the session
-                    request.session['profile_picture'] = user.profile_picture.url if user.profile_picture else None
-                    
-                    return redirect('signin')  # Redirect to the sign-in page
-                else:
-                    messages.error(request, "Invalid or expired OTP.")
-            except CustomUser.DoesNotExist:
-                messages.error(request, "User does not exist.")
-        else:
-            messages.error(request, "OTP is required.")
-    
+        otp = request.POST.get('otp')
+        try:
+            user = CustomUser.objects.get(email=email)
+            if user.is_otp_valid(otp):  # Pass the OTP to the method
+                user.is_verified = True  # Set verified status to True
+                user.otp = None  # Clear the OTP after verification
+                user.otp_created_at = None  # Clear the OTP creation time
+                user.save()
+                messages.success(request, "OTP verified successfully. You can now log in.")
+                
+                # Store the profile picture URL in the session
+                request.session['profile_picture'] = user.profile_picture.url if user.profile_picture else None
+                
+                return redirect('signin')  # Redirect to the sign-in page
+            else:
+                messages.error(request, "Invalid or expired OTP.")
+        except CustomUser.DoesNotExist:
+            messages.error(request, "User does not exist.")
+        except Exception as e:
+            messages.error(request, f"An error occurred: {str(e)}")
+
     return render(request, "authentication/verify_otp.html", {'email': email})
 
 def resend_otp(request):

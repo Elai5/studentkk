@@ -1556,13 +1556,16 @@ label {
 
 .friend-name {
   font-weight: bold;
+  color: #001F3F;
 }
 
 .friend-country,
 .friend-location,
-.friend-institution {
+.friend-institution,
+.friend-city,
+.friend-state {
   font-size: 14px;
-  color: #666;
+  color: black;
 }
 
 .send-request {
