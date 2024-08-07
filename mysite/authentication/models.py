@@ -18,6 +18,7 @@ class CustomUser(AbstractUser):
     profile_picture = models.ImageField(upload_to='profile_pictures/', null=True, blank=True)
     password_reset_token = models.CharField(max_length=36, blank=True, null=True)
     token_created_at = models.DateTimeField(blank=True, null=True)
+    is_verified = models.BooleanField(default=False)
 
     def generate_otp(self):      
         self.otp = str(random.randint(100000, 999999))

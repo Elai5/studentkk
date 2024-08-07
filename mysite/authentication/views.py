@@ -68,6 +68,7 @@ def homepage(request):
 
     return render(request, "authentication/homepage.html", context)
 
+# views.py
 def signup(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -144,8 +145,11 @@ def signup(request):
         myuser.generate_otp()  # Assuming this method generates and saves the OTP
         myuser.save()
 
+        # Store the email in the session
+        request.session['email'] = email  # Store email in session
+
         # Send OTP email
-        otp_verification_url = f"{request.scheme}://{request.get_host()}{reverse('verify_otp')}?email={email}"
+        otp_verification_url = f"{request.scheme}://{request.get_host()}{reverse('verify_otp')}"
         subject = "Your OTP for Verification"
         message = (
             f"Hello {myuser.first_name},\n\n"
@@ -161,33 +165,33 @@ def signup(request):
     
     return render(request, "authentication/signup.html")
 
+# views.py
 def verify_otp(request):
-    email = request.GET.get('email') or request.POST.get('email')
-    
     if request.method == "POST":
         # Check if the OTP is provided
         otp = request.POST.get('otp')
-        try:
-            user = CustomUser.objects.get(email=email)
-            if user.is_otp_valid(otp):  # Pass the OTP to the method
-                user.is_verified = True  # Set verified status to True
-                user.otp = None  # Clear the OTP after verification
-                user.otp_created_at = None  # Clear the OTP creation time
-                user.save()
-                messages.success(request, "OTP verified successfully. You can now log in.")
-                
-                # Store the profile picture URL in the session
-                request.session['profile_picture'] = user.profile_picture.url if user.profile_picture else None
-                
-                return redirect('signin')  # Redirect to the sign-in page
-            else:
-                messages.error(request, "Invalid or expired OTP.")
-        except CustomUser.DoesNotExist:
-            messages.error(request, "User does not exist.")
-        except Exception as e:
-            messages.error(request, f"An error occurred: {str(e)}")
+        
+        # Retrieve the user based on the session email
+        email = request.session.get('email')  # Get email from the session
+        if email:  # Ensure email is available
+            try:
+                user = CustomUser.objects.get(email=email)
+                if user.is_otp_valid(otp):  # Pass the OTP to the method
+                    user.is_verified = True  # Set verified status to True
+                    user.otp = None  # Clear the OTP after verification
+                    user.otp_created_at = None  # Clear the OTP creation time
+                    user.save()
+                    messages.success(request, "OTP verified successfully. You can now log in.")
+                    
+                    return redirect('signin')  # Redirect to the sign-in page
+                else:
+                    messages.error(request, "Invalid or expired OTP.")
+            except CustomUser.DoesNotExist:
+                messages.error(request, "User does not exist.")
+        else:
+            messages.error(request, "Email not found in session.")
 
-    return render(request, "authentication/verify_otp.html", {'email': email})
+    return render(request, "authentication/verify_otp.html")
 
 def resend_otp(request):
     if request.method == "POST":
@@ -253,13 +257,18 @@ def universities_data(request):
 
 def profile(request):
     return render(request, 'authentication/profile.html')
-# Redirect to login if not authenticated
+
+
+# views.py
 def profile_view(request):
     if request.user.is_authenticated:
         user_profile = UserProfile.objects.get(user=request.user)  # Access the user profile
-        return render(request, "authentication/profile.html", {'profile': user_profile})
+        return render(request, "authentication/profile.html", {
+            'profile': user_profile,
+            'profile_picture': request.user.profile_picture.url if request.user.profile_picture else None  # Access profile picture
+        })
     else:
-        return redirect('signin')  # Redirect to the signin page
+        return redirect('signin')  # Redirect to the sign-in page
 
 
 def friends(request):

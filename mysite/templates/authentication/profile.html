@@ -1,27 +1,27 @@
 {% extends "authentication/nav2.html" %}
-{% load static %} <!-- Load the static template tag library -->
-{% block title %}My Profile Page{% endblock %}
-{% block content %}
+{% load static %}  <!-- Load the static template tag library -->
 
+{% block title %}Profile{% endblock %}
+{% block content %}
 <section id="profile">
     <div class="profile-container">
+        <h1>Your Profile</h1>
         <div class="profile-header">
-            <img src="{% if profile.user.profile_picture %}{{ profile.user.profile_picture.url }}{% else %}{% static 'images/woman.jpg' %}{% endif %}" alt="Profile Picture" class="profile-image">
+            <img src="{% if profile.user.profile_picture %}{{ profile.user.profile_picture.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" alt="Profile Picture" class="profile-image">
             <div class="profile-info">
-                <h1>{{ profile.user.first_name }} {{ profile.user.last_name }}</h1>
+                <h2>{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
                 <p><strong>Email:</strong> {{ profile.user.email }}</p>
                 <p><strong>Country:</strong> {{ profile.country }}</p>
                 <p><strong>Location:</strong> {{ profile.location }}</p>
                 <p><strong>Institution:</strong> {{ profile.institution }}</p>
                 <p><strong>City:</strong> {{ profile.city }}</p>
                 <p><strong>State:</strong> {{ profile.state }}</p>
-                
+            
             </div>
-        </div>
-        <div class="profile-footer">
-            <a href="{% url 'edit_profile' %}" class="edit-button">Edit Profile</a>
-        </div>
+            </div>
+            <div class="edit-profile-button">
+                <a href="{% url 'edit_profile' %}" class="edit-button">Edit Profile</a>
+            </div>
     </div>
 </section>
 {% endblock %}
-<script src="{% static 'js/script.js' %}"></script>
