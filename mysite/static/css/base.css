@@ -1477,311 +1477,6 @@ label {
   cursor: pointer;
 }
 
-/* frineds section */
-#friends {
-  color: black;
-  height: 100vh;
-  padding: 20px;
-}
-
-.friend {
-  margin-top: 100px;
-  margin-left: 80px;
-  padding: 20px;
-  max-width: 80%;
-}
-
-.friend h1 {
-  color: navy;
-  margin-bottom: 20px;
-  font-size: 28px;
-}
-
-.friend h2 {
-  color: #001F3F;
-  font-size: 24px;
-  font-family: inter;
-  margin: 15px 0;
-}
-
-.friend ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.friend-card {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  color: black;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e0e0e0;
-  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
-}
-
-.friend-card:hover {
-  background-color: #f9f9f9;
-  border-color: #b0b0b0;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 15px;
-}
-
-.friend-info {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
-.friend-name {
-  font-weight: bold;
-  color: #001F3F;
-}
-
-.friend-country,
-.friend-location,
-.friend-institution,
-.friend-city,
-.friend-state {
-  font-size: 14px;
-  color: black;
-}
-
-.send-request {
-  background-color: orangered;
-  color: white;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.send-request:hover {
-  background-color: darkorange;
-}
-
-.incoming-requests {
-  list-style-type: none;
-  padding: 0;
-}
-
-.incoming-requests .request-card {
-  display: flex;
-  align-items: center;
-  background-color: white;
-  color: black;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-}
-
-.incoming-requests .request-info {
-  display: flex;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.incoming-requests .accept-button,
-.incoming-requests .decline-button {
-  background-color: orangered;
-  color: white;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-  margin-left: 10px;
-}
-
-.incoming-requests .accept-button:hover,
-.incoming-requests .decline-button:hover {
-  background-color: darkorange;
-}
-
-@media (max-width: 768px) {
-  .friend {
-    padding: 10px;
-  }
-
-  .friend h2 {
-    font-size: 24px;
-  }
-
-  .friend-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .incoming-requests .request-card {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .incoming-requests .request-actions {
-    margin-top: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .friend {
-    padding: 10px;
-  }
-
-  .friend h2 {
-    font-size: 20px;
-  }
-
-  .friend-card {
-    padding: 15px;
-  }
-
-  .avatar {
-    width: 40px;
-    height: 40px;
-  }
-
-  .incoming-requests .request-card {
-    padding: 10px;
-  }
-
-  .incoming-requests .request-info {
-    flex-direction: row;
-    align-items: center;
-  }
-
-  .incoming-requests .accept-button,
-  .incoming-requests .decline-button {
-    padding: 4px 8px;
-    font-size: 12px;
-  }
-}
-
-/* setting up rpofile page */
-
-#profile {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  background-color: #f9f9f9;
-}
-
-.profile-container {
-  max-width: 750px;
-  margin-top: -180px;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  padding: 20px;
-  background-color: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.profile-container:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-}
-
-.profile-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.profile-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 20px;
-  object-fit: cover;
-  border: 2px solid #FF6F20;
-}
-
-.profile-info {
-  flex-grow: 1;
-}
-
-.profile-info h1 {
-  margin: 0;
-  font-size: 24px;
-  color: #F0440E;
-
-}
-
-.profile-info p {
-  margin: 5px 0;
-  font-size: 16px;
-  color: #555;
-  text-align: left;
-}
-
-.profile-footer {
-  margin-top: 20px;
-  text-align: center;
-}
-
-.edit-button {
-  background-color: orangered;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.edit-button:hover {
-  background-color: darkorange;
-  transform: scale(1.05);
-}
-
-#edit-profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
-
-.edit-profile-container {
-  width: 600px;
-  /* background-color: #0056b3; */
-}
-
-
-/* Responsive Styles */
-@media screen and (max-width: 600px) {
-  .profile-container {
-    width: 90%;
-    margin: 20px auto;
-  }
-
-  .profile-image {
-    width: 80px;
-    height: 80px;
-  }
-
-  .profile-info h1 {
-    font-size: 20px;
-  }
-
-  .profile-info p {
-    font-size: 14px;
-  }
-
-  .edit-button {
-    padding: 8px 12px;
-  }
-}
 
 
 /* How it works section */
@@ -2132,6 +1827,313 @@ label {
 
 .testimonial-text p {
   font-size: 19px;
+}
+
+
+/* frineds section */
+#friends {
+  color: black;
+  height: 100vh;
+  padding: 20px;
+}
+
+.friend {
+  margin-top: 100px;
+  margin-left: 80px;
+  padding: 20px;
+  max-width: 80%;
+}
+
+.friend h1 {
+  color: navy;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.friend h2 {
+  color: #001F3F;
+  font-size: 24px;
+  font-family: inter;
+  margin: 15px 0;
+}
+
+.friend ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.friend-card {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  transition: background-color 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.friend-card:hover {
+  background-color: #f9f9f9;
+  border-color: #b0b0b0;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.friend-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.friend-name {
+  font-weight: bold;
+  color: #001F3F;
+}
+
+.friend-country,
+.friend-location,
+.friend-institution,
+.friend-city,
+.friend-state {
+  font-size: 14px;
+  color: black;
+}
+
+.send-request {
+  background-color: orangered;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.send-request:hover {
+  background-color: darkorange;
+}
+
+.incoming-requests {
+  list-style-type: none;
+  padding: 0;
+}
+
+.incoming-requests .request-card {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.incoming-requests .request-info {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.incoming-requests .accept-button,
+.incoming-requests .decline-button {
+  background-color: orangered;
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  margin-left: 10px;
+}
+
+.incoming-requests .accept-button:hover,
+.incoming-requests .decline-button:hover {
+  background-color: darkorange;
+}
+
+@media (max-width: 768px) {
+  .friend {
+    padding: 10px;
+  }
+
+  .friend h2 {
+    font-size: 24px;
+  }
+
+  .friend-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .incoming-requests .request-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .incoming-requests .request-actions {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .friend {
+    padding: 10px;
+  }
+
+  .friend h2 {
+    font-size: 20px;
+  }
+
+  .friend-card {
+    padding: 15px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .incoming-requests .request-card {
+    padding: 10px;
+  }
+
+  .incoming-requests .request-info {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .incoming-requests .accept-button,
+  .incoming-requests .decline-button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
+
+/* setting up rpofile page */
+
+#profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.profile-container {
+  max-width: 750px;
+  margin-top: -180px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background-color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+  object-fit: cover;
+  border: 2px solid #FF6F20;
+}
+
+.profile-info {
+  flex-grow: 1;
+}
+
+.profile-info h1 {
+  margin: 0;
+  font-size: 24px;
+  color: #F0440E;
+
+}
+
+.profile-info p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #555;
+  text-align: left;
+}
+
+.profile-footer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.edit-button {
+  background-color: orangered;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: darkorange;
+  transform: scale(1.05);
+}
+
+#edit-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.edit-profile-container {
+  width: 600px;
+  /* background-color: #0056b3; */
+}
+
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+  .profile-container {
+    width: 90%;
+    margin: 20px auto;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-info h1 {
+    font-size: 20px;
+  }
+
+  .profile-info p {
+    font-size: 14px;
+  }
+
+  .edit-button {
+    padding: 8px 12px;
+  }
 }
 
 /* chat page section */

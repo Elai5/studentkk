@@ -15,7 +15,7 @@
         <p>{{ error }}</p>
     {% endif %}
     {% for category, articles in news_data.items %}
-        <div class="news-category">
+        {% comment %} <div class="news-category">
             <h2>{{ category|capfirst }}</h2>
             {% if articles %}
                 <div class="news-list">
@@ -44,7 +44,7 @@
             {% else %}
                 <p>No articles available for {{ category }}.</p>
             {% endif %}
-        </div>
+        </div> {% endcomment %}
     {% endfor %}
 </div>
 

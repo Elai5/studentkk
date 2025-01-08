@@ -27,6 +27,11 @@ class NewsService:
 
     @staticmethod
     def fetch_news_from_newsapi(query, location):
+        if query is None:
+            query = ''
+        if location is None:
+            location = ''
+        
         # Create a cache key based on the query and location
         cache_key = f"news_newsapi_{query.replace(' ', '_')}_{location.replace(' ', '_')}"
         print(f"Cache Key: {cache_key}")  # Debugging line to see the cache key
@@ -93,6 +98,11 @@ class NewsService:
 
     @staticmethod
     def fetch_news_from_newsdata(query, location):
+        if query is None:
+            query = ''
+        if location is None:
+            location = ''
+            
         cache_key = f"news_newsdata_{query.replace(' ', '_')}_{location.replace(' ', '_')}"
         cached_news = cache.get(cache_key)
         
@@ -146,6 +156,11 @@ class NewsService:
 
     @staticmethod
     def fetch_news_from_eventregistry(query, location):
+        if query is None:
+            query = ''
+        if location is None:
+            location = ''
+            
         cache_key = f"news_eventregistry_{query.replace(' ', '_')}_{location.replace(' ', '_')}"
         cached_news = cache.get(cache_key)
         
