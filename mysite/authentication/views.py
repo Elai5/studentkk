@@ -32,6 +32,9 @@ def home(request):
 def homepage(request):
     user = request.user
 
+    # Debugging: Print user information
+    print(f"User: {user.username}, Location: {user.location}, Institution: {user.institution}")
+
     if not hasattr(user, 'location') or not hasattr(user, 'institution'):
         return render(request, 'authentication/homepage.html', {'error': 'User information is incomplete.'})
 
@@ -68,7 +71,46 @@ def homepage(request):
 
     return render(request, "authentication/homepage.html", context)
 
-# views.py
+
+# def homepage(request):
+#     user = request.user
+
+#     if not hasattr(user, 'location') or not hasattr(user, 'institution'):
+#         return render(request, 'authentication/homepage.html', {'error': 'User information is incomplete.'})
+
+#     location = user.location
+#     institution = user.institution
+
+#     categories = ['accommodation', 'transportation', 'student_resources', 'school']
+#     news_data = {}
+#     for category in categories:
+#         news_data[category] = NewsService.get_news_by_category(category, location, institution)
+
+
+#     housing_items = Housing.objects.all()
+#     transport_items = Transport.objects.all()
+#     culture_items = Culture.objects.all()
+
+   
+#     country_data = defaultdict(lambda: {'housing': [], 'transport': [], 'culture': []})
+
+#     for item in housing_items:
+#         country_data[item.country]['housing'].append(item)
+#     for item in transport_items:
+#         country_data[item.country]['transport'].append(item)
+#     for item in culture_items:
+#         country_data[item.country]['culture'].append(item)
+
+   
+#     print(f"Country Data: {country_data}")
+
+#     context = {
+#         'news_data': news_data,
+#         'country_data': dict(country_data),  
+#     }
+
+#     return render(request, "authentication/homepage.html", context)
+
 def signup(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -80,9 +122,24 @@ def signup(request):
         institution = request.POST['institution']
         city = request.POST['city']
         state = request.POST['state']
+        zip_code = request.POST['zip_code'] 
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
         profile_image = request.FILES.get('profileImage')
+
+        # Log the incoming data for debugging
+        print("Received data:", {
+            'username': username,
+            'fname': fname,
+            'lname': lname,
+            'email': email,
+            'country': country,
+            'location': location,
+            'institution': institution,
+            'city': city,
+            'state': state,
+            'zip_code': zip_code,
+        })  # Debugging line
 
         institutional_email_pattern = r'^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+(edu|ac|org|[a-z]{2})$'
         has_error = False
@@ -98,8 +155,7 @@ def signup(request):
             has_error = True
         
         if CustomUser.objects.filter(email=email).exists():
-            mailto_link = f"mailto:{email}?subject=OTP%20Request&body=Please%20send%20me%20the%20OTP%20for%20my%20account."
-            error_messages.append(f"An account with this email already exists.<br>Please check your email for the OTP.<br>If you haven't received it, click <a href='{mailto_link}'>here</a> to request it.")
+            error_messages.append("An account with this email already exists.")
             has_error = True
         
         if len(username) > 10:
@@ -126,91 +182,98 @@ def signup(request):
                 'location': location,
                 'institution': institution,
                 'city': city,
-                'state': state
+                'state': state,
+                'zip_code': zip_code 
             })
-
-        # Set default profile image if none is provided
-        if not profile_image:
-            profile_image = 'images/woman.jpg'
 
         # Create the user
         myuser = CustomUser.objects.create_user(
             username=username, email=email, password=pass1,
-            country=country, location=location, institution=institution,
-            city=city, state=state, profile_picture=profile_image,
             is_verified=False  # Set to False initially
         )
         myuser.first_name = fname
         myuser.last_name = lname
-        myuser.generate_otp()  # Assuming this method generates and saves the OTP
-        myuser.save()
+        myuser.profile_picture = profile_image if profile_image else 'images/default_profile.png'  # Handle profile image
+        myuser.zip_code = zip_code 
+        myuser.save()  # Save the user first
 
-        # Store the email in the session
-        request.session['email'] = email  # Store email in session
+        # Create the user profile
+        user_profile = UserProfile.objects.create(
+            user=myuser,
+            country=country,
+            location=location,
+            institution=institution,
+            city=city,
+            state=state,
+        )
+
+        # Debugging line to check if UserProfile was created correctly
+        print(f"UserProfile created for {myuser.username}: {user_profile.country}, {user_profile.location}, {user_profile.institution}, {user_profile.city}, {user_profile.state}")
+
+        # Generate OTP and send email
+        myuser.generate_otp()  # Generate and save the OTP
 
         # Send OTP email
-        otp_verification_url = f"{request.scheme}://{request.get_host()}{reverse('verify_otp')}"
         subject = "Your OTP for Verification"
         message = (
             f"Hello {myuser.first_name},\n\n"
             f"Your OTP is {myuser.otp}. It is valid for 10 minutes.\n\n"
-            f"Click this link to enter your OTP: {otp_verification_url}\n\n"
             "Thank You,\n Elaine"
         )
         send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
 
         messages.success(request, "Your account has been successfully created. Please check your email for the OTP.")
         
-        return redirect('verify_otp')  # Redirect to the OTP verification page
+        return redirect(f"{reverse('verify_otp')}?email={email}")
+        # Redirect to the OTP verification page
     
     return render(request, "authentication/signup.html")
 
-# views.py
 def verify_otp(request):
+    email = request.GET.get('email')  # Get email from the query parameters
+
     if request.method == "POST":
-        # Check if the OTP is provided
         otp = request.POST.get('otp')
-        
-        # Retrieve the user based on the session email
-        email = request.session.get('email')  # Get email from the session
+
         if email:  # Ensure email is available
             try:
-                user = CustomUser.objects.get(email=email)
+                user = CustomUser.objects.get(email=email)  # Fetch user by email
                 if user.is_otp_valid(otp):  # Pass the OTP to the method
                     user.is_verified = True  # Set verified status to True
                     user.otp = None  # Clear the OTP after verification
                     user.otp_created_at = None  # Clear the OTP creation time
                     user.save()
                     messages.success(request, "OTP verified successfully. You can now log in.")
-                    
                     return redirect('signin')  # Redirect to the sign-in page
                 else:
                     messages.error(request, "Invalid or expired OTP.")
             except CustomUser.DoesNotExist:
                 messages.error(request, "User does not exist.")
         else:
-            messages.error(request, "Email not found in session.")
+            messages.error(request, "Email not found.")
 
     return render(request, "authentication/verify_otp.html")
 
 def resend_otp(request):
     if request.method == "POST":
-        email = request.POST.get('email')
-        try:
-            user = CustomUser.objects.get(email=email)
-            user.generate_otp()  # Generate a new OTP
-            
-            # Send the new OTP email
-            send_mail(
-                'Your New OTP',
-                f'Your new OTP is {user.otp}. It is valid for 10 minutes.',
-                'from@example.com',
-                [user.email],
-                fail_silently=False,
-            )
-            messages.success(request, "A new OTP has been sent to your email.")
-        except CustomUser.DoesNotExist:
-            messages.error(request, "User does not exist.")
+        email = request.session.get('email')  # Get email from the session
+        if email:
+            try:
+                user = CustomUser.objects.get(email=email)
+                user.generate_otp()  # Generate a new OTP
+                # Send the new OTP email
+                send_mail(
+                    'Your New OTP',
+                    f'Your new OTP is {user.otp}. It is valid for 10 minutes.',
+                    'from@example.com',  # Replace with your actual sender email
+                    [user.email],
+                    fail_silently=False,
+                )
+                messages.success(request, "A new OTP has been sent to your email.")
+            except CustomUser.DoesNotExist:
+                messages.error(request, "User does not exist.")
+        else:
+            messages.error(request, "No email found in session.")
     
     return redirect('verify_otp')  # Redirect back to the OTP verification page
 
@@ -258,18 +321,12 @@ def universities_data(request):
 def profile(request):
     return render(request, 'authentication/profile.html')
 
-
-# views.py
 def profile_view(request):
     if request.user.is_authenticated:
-        user_profile = UserProfile.objects.get(user=request.user)  # Access the user profile
-        return render(request, "authentication/profile.html", {
-            'profile': user_profile,
-            'profile_picture': request.user.profile_picture.url if request.user.profile_picture else None  # Access profile picture
-        })
+        profile = get_object_or_404(UserProfile, user=request.user)
+        return render(request, "authentication/profile.html", {'profile': profile})
     else:
-        return redirect('signin')  # Redirect to the sign-in page
-
+        return redirect('login')  
 
 def friends(request):
     if request.user.is_authenticated:
@@ -520,8 +577,6 @@ def chat_view(request, friend_id):
         'friends': friends,  # Pass the friends list to the template
     })
 
-
-    
 # views.py
 @login_required
 def chat_list_view(request):

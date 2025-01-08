@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
-
 @import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
 
 * {
@@ -99,7 +98,6 @@ body {
   color: red;
 }
 
-
 .toggle-icon {
   display: none;
   color: #fff;
@@ -191,12 +189,13 @@ footer {
 #home {
   height: 100vh;
   color: black;
-  background-image: url('/static/images/Rectangle 2.png');
+  background-image: url('/static/images/sa-uni-1.png');
   background-size: cover;
-  background-position: center;
+  background-position: cover;
   background-repeat: no-repeat;
   position: relative;
   z-index: 1;
+  background-color: #007bff;
 }
 
 .home-profile {
@@ -226,6 +225,7 @@ footer {
 .home-text h1 {
   font-size: 58px;
   font-weight: bolder;
+  font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 20px;
 }
 
@@ -256,7 +256,6 @@ footer {
   background-color: #004494;
   transform: scale(1);
 }
-
 
 /* Responsive Styles */
 @media (max-width: 768px) {
@@ -401,7 +400,6 @@ p {
 
 .image-container {
   height: 50%;
-  /* Make this 50% of the card's height */
   overflow: hidden;
 }
 
@@ -409,7 +407,6 @@ p {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Ensure the image covers the container */
 }
 
 .news-content {
@@ -417,15 +414,12 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* Align items at the start */
   height: 50%;
-  /* Make this 50% of the card's height */
 }
 
 .news-title {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  /* Add some space below the title */
 }
 
 .news-title a {
@@ -519,10 +513,6 @@ p {
   border-radius: 8px;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
-
-
-
-
 
 @media screen and (max-width: 600px) {
   #homepage .profile {
@@ -1002,7 +992,6 @@ ul.messages li.info {
   align-items: center;
   width: 100%;
   max-width: 400px;
-  /* Adjust width as needed */
   background-color: #fff;
   padding: 20px;
   border-radius: 10px;
@@ -1155,7 +1144,6 @@ label {
 
 .verify-button {
   padding: 10px;
-
   margin: 20px 0;
   background-color: #007BFF;
   color: white;
@@ -1621,7 +1609,6 @@ label {
   background-color: darkorange;
 }
 
-
 @media (max-width: 768px) {
   .friend {
     padding: 10px;
@@ -1728,7 +1715,7 @@ label {
   margin: 0;
   font-size: 24px;
   color: #F0440E;
-  /* text-align: justify; */
+
 }
 
 .profile-info p {
@@ -1736,7 +1723,6 @@ label {
   font-size: 16px;
   color: #555;
   text-align: left;
-
 }
 
 .profile-footer {
@@ -1766,10 +1752,9 @@ label {
   height: 100vh;
 }
 
-
 .edit-profile-container {
   width: 600px;
-  background-color: #0056b3;
+  /* background-color: #0056b3; */
 }
 
 
@@ -1799,7 +1784,6 @@ label {
 }
 
 
-
 /* How it works section */
 #works {
   min-height: 100vh;
@@ -1821,6 +1805,7 @@ label {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /* background-color: green; */
 }
 
 .container h1 {
@@ -1830,7 +1815,7 @@ label {
   font-family: "Katibeh", serif;
   line-height: 22px;
   font-weight: 400;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 .container h2 {
@@ -1930,18 +1915,13 @@ label {
 
   .container h2 {
     font-size: 1em;
-    /* Smaller font size for subheadings */
     margin-bottom: 10px;
-    /* Reduced margin for visibility */
   }
 
   .container .card {
     width: 100%;
-    /* Full width for cards */
     margin: 5px 0;
-    /* Adjusted margin for cards */
     height: 400px;
-    /* Reduced height for cards */
   }
 }
 
@@ -2003,7 +1983,6 @@ label {
   }
 }
 
-
 @media screen and (min-width: 769px) and (max-width: 1440px) {
   .container {
     margin: 20px 60px;
@@ -2034,19 +2013,16 @@ label {
   }
 
   .container .card h2 {
-    /* font-size: 28px; */
     text-align: start;
-    /* margin-bottom: 10px; */
   }
 
   .container .card p {
     font-size: 18px;
-    /* margin-bottom: 10px; */
   }
 }
 
 #testimonials {
-  min-height: 100vh;
+  /* min-height: 100vh; */
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -2074,8 +2050,31 @@ label {
   justify-content: center;
 }
 
+.text-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  padding: 20px;
+}
+
+.text-center h1 {
+  margin-bottom: 10px;
+  font-size: 2.8rem;
+}
+
+.text-center h2 {
+  font-size: 1.5rem;
+  color: #555;
+  color: #001F3F;
+
+}
+
 .testimonial-card {
-  flex: 1 1 calc(50% - 20px);
+  flex: 1 1 calc(40% - 20px);
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -2088,10 +2087,9 @@ label {
 }
 
 .testimonial-card:hover {
-  transform: scale(1.05);
-  /* Slightly enlarges the card on hover */
+  transform: scale(1.01);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  /* Increases the shadow on hover */
+  cursor: pointer;
 }
 
 .testimonial-header {
@@ -2117,7 +2115,7 @@ label {
 .testimonial-info .name {
   font-size: 1.2rem;
   font-weight: bold;
-  margin: 5px 0;
+  margin: 0;
 }
 
 .testimonial-info .school {
@@ -2126,63 +2124,51 @@ label {
 }
 
 .testimonial-text {
-  font-size: 1rem;
+  font-size: 18px;
   color: #333;
   text-align: left;
-  /* Ensure text is aligned to the left */
   width: 100%;
 }
 
+.testimonial-text p {
+  font-size: 19px;
+}
+
+/* chat page section */
 
 #chat-page {
   display: flex;
-  /* Use flexbox for layout */
   background-color: #f9f9f9;
-  /* Light background for the chat page */
   padding: 20px;
 }
 
 .chat-container {
   display: flex;
-  /* Flex container for user list and chat interface */
   width: 100%;
   height: 100vh;
   padding: 100px 60px;
-  /* Full height */
 }
 
 .user-list {
   width: 30%;
-  /* Adjust width as needed */
   background-color: #ffffff;
-  /* Background for user list */
   border-radius: 8px;
-  /* Rounded corners */
   padding: 15px;
-  /* Padding inside the user list */
   margin-right: 20px;
-  /* Space between user list and chat interface */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for depth */
   overflow-y: auto;
-  /* Scroll if needed */
 }
 
 .user-card {
   display: flex;
-  /* Flexbox for alignment */
   align-items: center;
-  /* Center items vertically */
   padding: 10px;
-  /* Padding inside each user card */
   cursor: pointer;
   transition: background-color 0.3s;
-  /* Smooth transition for hover effect */
 }
 
 .user-card:hover {
   background-color: #f0f0f0;
-  /* Highlight on hover */
 }
 
 .avatar {
@@ -2195,13 +2181,9 @@ label {
 .chat-interface {
   width: 70%;
   background-color: #ffffff;
-  /* Background for chat interface */
   border-radius: 8px;
-  /* Rounded corners */
   padding: 15px;
-  /* Padding inside the chat interface */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  /* Subtle shadow for depth */
   display: flex;
   flex-direction: column;
 }
@@ -2210,98 +2192,72 @@ label {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  /* Space below the header */
 }
 
 .friend-avatar {
   width: 50px;
-  /* Size of the friend's avatar */
   height: 50px;
   border-radius: 50%;
-  /* Circular avatar */
   margin-right: 15px;
-  /* Space between avatar and name */
 }
 
 .friend-name {
   font-size: 24px;
-  /* Font size for friend's name */
   font-weight: bold;
-  /* Bold text */
 }
 
 .chat-interface .messages {
   max-height: 400px;
-  /* Limit height for scrolling */
   overflow-y: auto;
-  /* Enable scrolling */
   margin-bottom: 20px;
-  /* Space between messages and input */
   padding: 10px;
-  /* Padding inside messages area */
 }
 
 .chat-message {
   padding: 10px;
   border-radius: 5px;
-  /* Rounded corners */
   margin-bottom: 10px;
-  /* Space between messages */
 }
 
 .user-a {
   background-color: lightblue;
-  /* User A's message color */
   align-self: flex-end;
-  /* Align to the right */
 }
 
 .user-b {
   background-color: lightgreen;
-  /* User B's message color */
   align-self: flex-start;
   /* Align to the left */
 }
 
 .timestamp {
   font-size: 12px;
-  /* Smaller font for timestamp */
   color: #666;
-  /* Gray color for timestamps */
 }
 
 form {
   display: flex;
   flex-direction: column;
-  /* Stack elements vertically */
 }
 
 textarea {
   resize: none;
-  /* Prevent resizing */
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ccc;
-  /* Light border */
   margin-bottom: 10px;
-  /* Space below textarea */
   width: 100%;
-  /* Full width */
 }
 
 button {
   background-color: orangered;
-  /* Accent color for button */
   color: white;
-  /* Button text color */
   padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  /* Pointer cursor on hover */
 }
 
 button:hover {
   background-color: darkorange;
-  /* Darker shade on hover */
 }

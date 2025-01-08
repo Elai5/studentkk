@@ -1,5 +1,5 @@
 {% extends "authentication/nav2.html" %}
-{% load static %} <!-- Load the static template tag library -->
+{% load static %}
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
@@ -49,7 +49,7 @@
 </div>
 
 
-        {% comment %} <div class="additional-data">
+         <div class="additional-data">
             {% for country, data in country_data.items %}
                 <h2>{{ country }}</h2>
 
@@ -89,7 +89,7 @@
                     {% endfor %}
                 </ul>
             {% endfor %}
-        </div> {% endcomment %}
+        </div>
     </div>
 </section>
 {% endblock %}

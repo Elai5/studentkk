@@ -16,12 +16,11 @@
                 <p><strong>Institution:</strong> {{ profile.institution }}</p>
                 <p><strong>City:</strong> {{ profile.city }}</p>
                 <p><strong>State:</strong> {{ profile.state }}</p>
-            
             </div>
-            </div>
-            <div class="edit-profile-button">
-                <a href="{% url 'edit_profile' %}" class="edit-button">Edit Profile</a>
-            </div>
+        </div>
+        <div class="edit-profile-button">
+            <a href="{% url 'edit_profile' %}" class="edit-button">Edit Profile</a>
+        </div>
     </div>
 </section>
 {% endblock %}

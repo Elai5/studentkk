@@ -10,7 +10,7 @@ class NewsService:
     NEWSDATA_BASE_URL = 'https://newsdata.io/api/1/news'
     NEWSDATA_API_KEY = 'pub_501748e191671851253a67ffe6b68a4c03d8b'
     EVENTREGISTRY_BASE_URL = 'https://eventregistry.org/api/v1/article/getArticles'
-    EVENTREGISTRY_API_KEY = 'dfde48d7-1d1e-4ed6-b710-a28ac9cee41d'  # Replace with your EventRegistry API key
+    EVENTREGISTRY_API_KEY = 'dfde48d7-1d1e-4ed6-b710-a28ac9cee41d'  
 
     @staticmethod
     def get_custom_news(query, location):
@@ -27,7 +27,9 @@ class NewsService:
 
     @staticmethod
     def fetch_news_from_newsapi(query, location):
+        # Create a cache key based on the query and location
         cache_key = f"news_newsapi_{query.replace(' ', '_')}_{location.replace(' ', '_')}"
+        print(f"Cache Key: {cache_key}")  # Debugging line to see the cache key
         cached_news = cache.get(cache_key)
         
         if cached_news:
@@ -68,7 +70,7 @@ class NewsService:
                 if response.status_code == 429:  # Rate limit exceeded
                     print(f"Rate limit exceeded. Retrying in {backoff_time} seconds...")
                     time.sleep(backoff_time)
-                    backoff_time *= 2  # Exponential backoff
+                    backoff_time *= 2  # Exponential backoff fecth and retry
                     attempt += 1
                 else:
                     print(f"HTTP error occurred: {http_err}")
@@ -108,7 +110,7 @@ class NewsService:
             response.raise_for_status()
             articles = response.json().get('results', [])
             
-            # Deduplicate articles
+            # Deduplicate articles for 
             unique_articles = []
             seen_urls = set()
             
