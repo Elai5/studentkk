@@ -5,36 +5,24 @@
 
 {% block content %}
 <section id="signin-formy">
-    <form action="{% url 'signin' %}" method="post" enctype="multipart/form-data" id="signin-form">
+    <form action="{% url 'signin' %}" method="post" id="signin-form">
         {% csrf_token %}
-         <div class="image-upload-container">
-            {% if user.is_authenticated and user.profile_picture %}
-                <img class="image-preview" src="{{ user.profile_picture.url }}" alt="Profile Picture" id="previewImage">
-            {% else %}
-                <img class="image-preview" src="{% static 'images/woman.jpg' %}" alt="Dummy Image" id="previewImage">
-            {% endif %}
-            <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewProfileImage()">
-        </div>
-        {% comment %} <div class="image-upload-container">
-            {% if request.session.profile_picture %}
-                <img class="image-preview" src="{{ request.session.profile_picture }}" alt="Profile Picture" id="previewImage">
-            {% else %}
-                <img class="image-preview" src="{% static 'images/woman.jpg' %}" alt="Dummy Image" id="previewImage">
-            {% endif %}
-            <input type="file" id="profileImage" name="profileImage" accept="image/*" onchange="previewProfileImage()">
-        </div> {% endcomment %}
-
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username" required>
+        <!-- Sign-In Fields -->
+        <label for="username">Username or Email:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
         
-        <label for="pass1">Password:</label>
-        <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
         
+        <!-- Submit Button -->
         <button type="submit">Sign In</button>
+
+        <!-- Links for Sign-Up and Forgot Password -->
         <p>Don't have an account? Create one <a href="{% url 'signup' %}">here</a></p>
         <p><a href="{% url 'password_reset_request' %}">Forgot Password?</a></p>
     </form>
 
+    <!-- Display Django Messages -->
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -43,33 +31,5 @@
         </ul>
     {% endif %}
 </section>
+
 {% endblock %}
-<script src="{% static 'js/script.js' %}"></script>
-
-<script>
-    function previewProfileImage() {
-        const file = document.getElementById('profileImage').files[0];
-        const preview = document.getElementById('previewImage');
-        
-        const reader = new FileReader();
-
-         reader.onloadend = function() {
-        preview.src = reader.result;
-    }
-
-    if (file) {
-        reader.readAsDataURL(file);
-    } else {
-        preview.src = "{% static 'images/woman.jpg' %}";
-    }
-}
-        
-        {% comment %} reader.addEventListener("load", function () {
-            preview.src = reader.result;
-        }, false);
-        
-        if (file) {
-            reader.readAsDataURL(file);
-        } {% endcomment %}
-    }
-</script>

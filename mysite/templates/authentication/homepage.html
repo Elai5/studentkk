@@ -3,7 +3,7 @@
 {% block title %}Home Page{% endblock %}
 
 {% block content %}
-<section id="homepage" style="background-image: url('{% static 'images/background.jpg' %}'); background-size: cover; background-position: center; height: 100vh; color: white;">
+<section id="homepage" >
     <div class="profile">
         <div class="text">
             <h1>Hello {{ user.username }}</h1>
@@ -47,8 +47,6 @@
         </div> {% endcomment %}
     {% endfor %}
 </div>
-
-
          <div class="additional-data">
             {% for country, data in country_data.items %}
                 <h2>{{ country }}</h2>

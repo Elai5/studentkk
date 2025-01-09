@@ -35,6 +35,7 @@ def homepage(request):
     # Debugging: Print user information
     print(f"User: {user.username}, Location: {user.location}, Institution: {user.institution}")
 
+    # Check if user has location and institution attributes
     if not hasattr(user, 'location') or not hasattr(user, 'institution'):
         return render(request, 'authentication/homepage.html', {'error': 'User information is incomplete.'})
 
@@ -126,6 +127,8 @@ def signup(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
         profile_image = request.FILES.get('profileImage')
+        
+        print(f"Profile Image: {profile_image}")
 
         # Log the incoming data for debugging
         print("Received data:", {
@@ -194,9 +197,19 @@ def signup(request):
         )
         myuser.first_name = fname
         myuser.last_name = lname
-        myuser.profile_picture = profile_image if profile_image else 'images/default_profile.png'  # Handle profile image
+        
+        if profile_image:
+            myuser.profile_picture = profile_image
+        else:
+            myuser.profile_picture = 'images/default_profile.png'
+                    
+        # myuser.profile_picture = profile_image if profile_image else 'images/default_profile.png'  # Handle profile image
         myuser.zip_code = zip_code 
         myuser.save()  # Save the user first
+        
+        # Debugging: Check if the user was created correctly
+        print(f"User created: {myuser.username}, Profile Picture: {myuser.profile_picture}")
+
 
         # Create the user profile
         user_profile = UserProfile.objects.create(
@@ -280,10 +293,10 @@ def resend_otp(request):
 
 def signin(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        pass1 = request.POST['pass1']
+        username = request.POST.get('username', '').strip()  # Safely fetch username
+        password = request.POST.get('password', '').strip()  # Safely fetch password
         
-        user = authenticate(username=username, password=pass1)
+        user = authenticate(username=username, password=password)
         
         if user is not None:
             login(request, user)
@@ -292,14 +305,9 @@ def signin(request):
             messages.error(request, "Invalid username or password")
             return redirect('signin')
     
-    profile_picture = request.session.get('profile_picture')  # Get the profile picture from the session
-    if 'username' in request.GET:
-        username = request.GET['username']
-        try:
-            user = CustomUser.objects.get(username=username)
-            profile_picture = user.profile_picture.url if user.profile_picture else None
-        except CustomUser.DoesNotExist:
-            profile_picture = None
+    profile_picture = None
+    if request.user.is_authenticated:
+        profile_picture = request.user.profile_picture.url if request.user.profile_picture else None
 
     return render(request, "authentication/signin.html", {'profile_picture': profile_picture})
 

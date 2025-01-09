@@ -29,8 +29,15 @@ function previewProfileImage() {
 
 
 document.addEventListener("DOMContentLoaded", function () {
+    // check elements exist
+    const profileImageInput = document.getElementById('profileImage');
+    if (profileImageInput) {
+        profileImageInput.addEventListener('change', previewProfileImage);
+    } else {
+        console.error("ELement with ID 'profileImage' not found")
+    }
     // Add event listener for the file input to preview the image
-    document.getElementById('profileImage').addEventListener('change', previewProfileImage);
+    // document.getElementById('profileImage').addEventListener('change', previewProfileImage);
 
     // Fetch country data from the API
     fetch('https://restcountries.com/v3.1/all')

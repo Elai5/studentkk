@@ -314,6 +314,7 @@ footer {
   padding: 90px 0;
   box-sizing: border-box;
   overflow: scroll;
+  background-color: green;
 }
 
 #homepage .profile {
@@ -442,8 +443,9 @@ p {
 .additional-data {
   padding: 20px;
   background-color: #fff;
-  width: 700px;
+  width: 100%;
   color: black;
+
 }
 
 .additional-data h2 {
@@ -1716,6 +1718,7 @@ label {
   }
 }
 
+/* testimonial section */
 #testimonials {
   /* min-height: 100vh; */
   display: flex;
