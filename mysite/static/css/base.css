@@ -187,7 +187,7 @@ footer {
 
 /* /* landing page section/ index page */
 #home {
-  height: 100vh;
+  min-height: 100vh;
   color: black;
   background-image: url('/static/images/sa-uni-1.png');
   background-size: cover;
@@ -775,7 +775,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   margin-top: 30px;
 }
 
@@ -974,10 +974,6 @@ ul.messages li.info {
 }
 
 
-
-
-
-
 #signin-formy {
   display: flex;
   flex-direction: column;
@@ -1164,7 +1160,8 @@ label {
   background-color: #fff;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  /* height: 100vh; */
+  min-height: 100vh;
 }
 
 .about-page {
@@ -1275,6 +1272,9 @@ label {
     align-items: center;
     height: auto;
     padding: 10px;
+    overflow: scroll;
+    /* background-color: red; */
+    /* height: 100%; */
   }
 
   .about-page {
@@ -1293,6 +1293,7 @@ label {
     height: auto;
     margin-top: 20px;
     margin-right: 0;
+    /* background-color: gold; */
   }
 
   .about-page .mage img {
@@ -1525,7 +1526,7 @@ label {
 
 .cards-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   width: 100%;
   margin-top: 20px;
@@ -1538,7 +1539,8 @@ label {
   margin: 0 60px;
   padding: 20px;
   width: 400px;
-  height: 600px;
+  /* height: 600px; */
+  height: auto;
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1553,7 +1555,8 @@ label {
 .container .image-container {
   margin-bottom: 15px;
   width: 100%;
-  height: 40%;
+  /* height: 40%; */
+  height: 200px;
   overflow: hidden;
 }
 
@@ -1595,52 +1598,41 @@ label {
 }
 
 /* Responsive Styles */
-@media screen and (max-width: 320px) {
+@media screen and (min-width: 769px) and (max-width: 1440px) {
   .container {
-    width: 100%;
+    margin: 20px 60px;
+    padding: 40px 20px;
+  }
+
+  .container h1 {
+    font-size: 2.5em;
+    margin-top: 30px;
+  }
+
+  .container h2 {
+    color: #F0440E;
+    font-size: 1.5em;
+  }
+
+  .cards-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .container .card {
+    width: calc(33.33% - 20px);
+    height: 600px;
     margin: 0;
-    padding: 10px;
-    padding-top: 30px;
-    /* background-color: #721c24; */
   }
 
-  .container h1 {
-    font-size: 28px;
-    color: gold;
-    margin-bottom: 5px;
+  .container .card h2 {
+    text-align: start;
   }
 
-  .container h2 {
-    font-size: 1em;
-    margin-bottom: 10px;
-  }
-
-  .container .card {
-    width: 100%;
-    margin: 5px 0;
-    height: 400px;
-  }
-}
-
-@media screen and (min-width: 321px) and (max-width: 600px) {
-  .container {
-    margin: 10px;
-  }
-
-  .container h1 {
-    font-size: 2em;
-    margin-bottom: 5px;
-  }
-
-  .container h2 {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-  }
-
-  .container .card {
-    width: 100%;
-    margin: 10px 0;
-    height: auto;
+  .container .card p {
+    font-size: 18px;
   }
 }
 
@@ -1680,47 +1672,94 @@ label {
   }
 }
 
-@media screen and (min-width: 769px) and (max-width: 1440px) {
-  .container {
-    margin: 20px 60px;
-    padding: 40px 20px;
+@media screen and (min-width: 321px) and (max-width: 600px) {
+  #works {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+
+  #works .container {
+    margin: 10px;
+    width: 100%;
+    /* background-color: green; */
+  }
+
+  #works .text-center {
+    text-align: center;
+  }
+
+  #works .text-center h1 {
+    font-size: 38px;
   }
 
   .container h1 {
-    font-size: 2.5em;
-    margin-top: 30px;
+    font-size: 2em;
+    margin-bottom: 5px;
   }
 
   .container h2 {
-    color: #F0440E;
-    font-size: 1.5em;
-  }
-
-  .cards-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 20px;
+    font-size: 1.2em;
+    margin-bottom: 15px;
   }
 
   .container .card {
-    width: calc(33.33% - 20px);
-    height: 600px;
+    width: 100%;
+    margin: 10px 0;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #works {
+    width: 100%;
+    /* background-color: #004494; */
+  }
+
+  #works .container {
+    width: 100%;
     margin: 0;
+    /* background-color: goldenrod; */
   }
 
-  .container .card h2 {
-    text-align: start;
+  #works .text-center h1 {
+    font-size: 35px;
+    /* color: gold; */
+    margin-bottom: 5px;
   }
 
-  .container .card p {
+  #works.container h2 {
+    font-size: 1em;
+    margin-bottom: 10px;
+  }
+
+  #works .text-center h2 {
+    font-size: 20px;
+  }
+
+  .container .card {
+    width: 100%;
+    margin: 5px 0;
+    height: 400px;
+  }
+
+  .container .cards-container .card {
+    height: 20%;
+  }
+
+  .container .cards-container .card h2 {
     font-size: 18px;
   }
+
+  .container .cards-container .card p {
+    font-size: 15px;
+  }
+
 }
 
 /* testimonial section */
 #testimonials {
-  /* min-height: 100vh; */
+  min-height: 100vh;
   display: flex;
   align-items: flex-start;
   justify-content: center;
@@ -1830,6 +1869,144 @@ label {
 
 .testimonial-text p {
   font-size: 19px;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .text-center h1 {
+    font-size: 2rem;
+    /* Smaller heading for tablets */
+  }
+
+  .text-center h2 {
+    font-size: 1.1rem;
+  }
+
+  .testimonial-card {
+    flex: 1 1 calc(100% - 20px);
+    /* Full width for smaller screens */
+    padding: 15px;
+  }
+
+  .testimonial-header img {
+    width: 70px;
+    /* Further reduced size for medium devices */
+    height: 70px;
+  }
+
+  .testimonial-text {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #Testimonials {
+    background-color: floralwhite;
+    padding: 0;
+
+  }
+
+  #Testimonials .container {
+    /* background-color: gold; */
+    width: 100%;
+    padding: 20px;
+    margin: 0;
+  }
+
+  .text-center h1 {
+    font-size: 1.8rem;
+    /* Further reduced heading */
+  }
+
+  .text-center h2 {
+    font-size: 1rem;
+  }
+
+  .testimonial-card {
+    padding: 10px;
+    /* Reduced padding for small screens */
+  }
+
+  .testimonial-header img {
+    width: 60px;
+    /* Adjusted size for smaller devices */
+    height: 60px;
+    margin-right: 10px;
+  }
+
+  .testimonial-info .name {
+    font-size: 1rem;
+  }
+
+  .testimonial-info .school {
+    font-size: 0.9rem;
+  }
+
+  .testimonial-text {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .text-center h1 {
+    font-size: 1.5rem;
+    /* Smaller heading for compact devices */
+    margin-bottom: 10px;
+  }
+
+  .text-center h2 {
+    font-size: 0.9rem;
+    /* Adjust subtitle for smaller screens */
+    margin-bottom: 15px;
+  }
+
+  .testimonial-card {
+    flex: 1 1 100%;
+    /* Full width for single-column layout */
+    padding: 10px;
+    /* Reduced padding */
+    margin-bottom: 15px;
+    /* Added spacing between cards */
+  }
+
+  .testimonial-header img {
+    width: 50px;
+    /* Smaller avatar size */
+    height: 50px;
+    margin-right: 10px;
+    /* Reduced gap */
+  }
+
+  .testimonial-info .name {
+    font-size: 0.9rem;
+    /* Smaller font for name */
+  }
+
+  .testimonial-info .school {
+    font-size: 0.8rem;
+    /* Smaller font for school */
+  }
+
+  .testimonial-text {
+    font-size: 12px;
+    /* Reduced font size for text */
+    line-height: 1.4;
+    /* Tighter line spacing */
+  }
+
+  .testimonials-container {
+    gap: 15px;
+    /* Reduced gap between cards */
+  }
+
+  #testimonials {
+    padding: 10px;
+    /* Reduced padding for the overall section */
+  }
+
+  .testimonial-text p {
+    font-size: 15px;
+  }
 }
 
 

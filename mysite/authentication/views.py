@@ -483,34 +483,25 @@ def edit_profile(request):
     user_profile = get_object_or_404(UserProfile, user=request.user)
 
     if request.method == 'POST':
-        print("Form submitted")  # Debugging line
-        print(request.POST)  # Print the POST data for debugging
-
-        # Update user information
-        request.user.first_name = request.POST.get('fname', request.user.first_name)
-        request.user.last_name = request.POST.get('lname', request.user.last_name)
-        request.user.email = request.POST.get('email', request.user.email)
-
-        # Update profile information
+        # Update user and profile data
         user_profile.country = request.POST.get('country', user_profile.country)
         user_profile.location = request.POST.get('location', user_profile.location)
         user_profile.institution = request.POST.get('institution', user_profile.institution)
-        user_profile.city = request.POST.get('city', user_profile.city)  # Update city
-        user_profile.state = request.POST.get('state', user_profile.state)  # Update state
+        user_profile.city = request.POST.get('city', user_profile.city)
+        user_profile.state = request.POST.get('state', user_profile.state)
 
-        # Handle profile picture upload
         profile_image = request.FILES.get('profile_picture')
         if profile_image:
-            user_profile.profile_picture = profile_image  # Update the profile picture
+            user_profile.profile_picture = profile_image
 
-        # Save changes
         request.user.save()
         user_profile.save()
 
         messages.success(request, "Profile updated successfully.")
-        return redirect('profile_view')  # Redirect to the profile view after saving
+        return redirect('profile_view')  # Redirect to profile page
 
     return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
+
 
 def password_reset_request(request):
     if request.method == "POST":

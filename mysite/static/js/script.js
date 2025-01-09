@@ -39,6 +39,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add event listener for the file input to preview the image
     // document.getElementById('profileImage').addEventListener('change', previewProfileImage);
 
+
+
+
+
+
     // Fetch country data from the API
     fetch('https://restcountries.com/v3.1/all')
         .then(res => res.json())
