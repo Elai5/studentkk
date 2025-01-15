@@ -126,9 +126,9 @@ def signup(request):
         zip_code = request.POST['zip_code'] 
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
-        profile_image = request.FILES.get('profileImage')
+        profile_picture = request.FILES.get('profileImage')
         
-        print(f"Profile Image: {profile_image}")
+        print(f"Profile Picture: {profile_picture}")
 
         # Log the incoming data for debugging
         print("Received data:", {
@@ -189,6 +189,8 @@ def signup(request):
                 'state': state,
                 'zip_code': zip_code 
             })
+            printf(f"creating user profile for user: {myuser.username}")
+            printf(f"Country: {country}, Location:{location}, Institution: {institution},  City: {city}, State: {state}")
 
         # Create the user
         myuser = CustomUser.objects.create_user(
@@ -197,14 +199,19 @@ def signup(request):
         )
         myuser.first_name = fname
         myuser.last_name = lname
+        myuser.country = country
+        myuser.location = location
+        myuser.institution = institution
+        myuser.city = city
+        myuser.state = state
+        myuser.zip_code = zip_code
         
-        if profile_image:
-            myuser.profile_picture = profile_image
+        if profile_picture:
+            myuser.profile_picture = profile_picture
         else:
             myuser.profile_picture = 'images/default_profile.png'
                     
         # myuser.profile_picture = profile_image if profile_image else 'images/default_profile.png'  # Handle profile image
-        myuser.zip_code = zip_code 
         myuser.save()  # Save the user first
         
         # Debugging: Check if the user was created correctly
@@ -219,10 +226,12 @@ def signup(request):
             institution=institution,
             city=city,
             state=state,
+            profile_picture=profile_picture if profile_picture else 'images/default_profile.png' 
         )
 
         # Debugging line to check if UserProfile was created correctly
-        print(f"UserProfile created for {myuser.username}: {user_profile.country}, {user_profile.location}, {user_profile.institution}, {user_profile.city}, {user_profile.state}")
+        print(f"UserProfile created for {myuser.username}: {user_profile.country}, {user_profile.location}, {user_profile.institution}, {user_profile.city}, {user_profile.state}, {user_profile.profile_picture}")
+    
 
         # Generate OTP and send email
         myuser.generate_otp()  # Generate and save the OTP
@@ -294,7 +303,7 @@ def resend_otp(request):
 def signin(request):
     if request.method == 'POST':
         username = request.POST.get('username', '').strip()  # Safely fetch username
-        password = request.POST.get('password', '').strip()  # Safely fetch password
+        password = request.POST.get('pass1', '').strip()  # Safely fetch password
         
         user = authenticate(username=username, password=password)
         

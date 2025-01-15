@@ -9,10 +9,10 @@
         {% csrf_token %}
         <!-- Sign-In Fields -->
         <label for="username">Username or Email:</label>
-        <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
+        <input type="text" id="username" name="username" placeholder="Enter your username or email" required autocomplete="username">
         
         <label for="pass1">Password:</label>
-        <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required>
+        <input type="password" id="pass1" name="pass1" placeholder="Enter your password" required autocomplete="current-password">
         
         <!-- Submit Button -->
         <button type="submit">Sign In</button>
@@ -31,4 +31,5 @@
         </ul>
     {% endif %}
 </section>
+
 {% endblock %}

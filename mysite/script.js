@@ -52,6 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Fetch country data from the API
+
+
+
     fetch('https://restcountries.com/v3.1/all')
         .then(res => res.json())
         .then(data => {
@@ -60,7 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const locationSelect = document.querySelector('#location'); // Matches the ID in your HTML
 
             if (countrySelect && locationSelect) {
-                data.forEach(country => {
+                // Sort the countries alphabetically by their common name
+                const sortedCountries = data.sort((a, b) =>
+                    a.name.common.localeCompare(b.name.common)
+                );
+
+                sortedCountries.forEach(country => {
                     const option = document.createElement('option');
                     option.value = country.cca2; // Use ISO code as the value
                     option.textContent = country.name.common; // Display country name
