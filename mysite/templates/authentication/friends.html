@@ -77,12 +77,12 @@
                         <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture" class="avatar">
                     {% endif %}
                     <div class="friend-info">
-                        <span class="friend-name">{{ friend.first_name }} {{ friend.last_name }}</span>
-                        <span class="friend-university">University: <span class="university-name">{{ friend.institution }}</span></span>
-                        <span class="friend-country">From: {{ friend.country }}</span>
-                        <span class="friend-location">Studies in: {{ friend.location }}</span>
-                        <span class="friend-city">City: {{ friend.city }}</span>
-                        <span class="friend-state">State: {{ friend.state }}</span>
+                        <span class="friend-name">{{ suggestion.first_name }} {{ suggestion.last_name }}</span>
+                        <span class="friend-university">University: <span class="university-name">{{ suggestion.institution }}</span></span>
+                        <span class="friend-country">From: {{ suggestion.country }}</span>
+                        <span class="friend-location">Studies in: {{ suggestion.location }}</span>
+                        <span class="friend-city">City: {{ suggestion.city }}</span>
+                        <span class="friend-state">State: {{ suggestion.state }}</span>
                     </div>
                     <a href="{% url 'send_friend_request' suggestion.id %}" class="send-request">Send Friend Request</a>
                 </li>
