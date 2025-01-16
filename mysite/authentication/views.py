@@ -114,6 +114,7 @@ def homepage(request):
 
 def signup(request):
     if request.method == "POST":
+        profile_picture = request.FILES.get('profileImage')
         username = request.POST['username']
         fname = request.POST['fname']
         lname = request.POST['lname']
@@ -126,7 +127,7 @@ def signup(request):
         zip_code = request.POST['zip_code'] 
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
-        profile_picture = request.FILES.get('profileImage')
+      
         
         print(f"Profile Picture: {profile_picture}")
 
@@ -216,8 +217,11 @@ def signup(request):
         
         # Debugging: Check if the user was created correctly
         print(f"User created: {myuser.username}, Profile Picture: {myuser.profile_picture}")
+        
+        if has_error:
+            return JsonResponse({'errors': error_messages}, status=400)
 
-
+        return JsonResponse({'message': 'Success'})
         # Create the user profile
         user_profile = UserProfile.objects.create(
             user=myuser,
@@ -243,6 +247,7 @@ def signup(request):
             f"Your OTP is {myuser.otp}. It is valid for 10 minutes.\n\n"
             "Thank You,\n Elaine"
         )
+        
         send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
 
         messages.success(request, "Your account has been successfully created. Please check your email for the OTP.")

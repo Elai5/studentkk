@@ -7,7 +7,7 @@
     <div class="profile-container">
         <h1>Your Profile</h1>
         <div class="profile-header">
-            <img src="{% if profile.user.profile_picture %}{{ profile.user.profile_picture.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" alt="Profile Picture" class="profile-image">
+            <img src="{% if profile.profile_picture %}{{ profile.profile_picture.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" alt="Profile Picture" class="profile-image">
             <div class="profile-info">
                 <h2>{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
                 <p><strong>Email:</strong> {{ profile.user.email }}</p>

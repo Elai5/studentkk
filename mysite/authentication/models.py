@@ -3,6 +3,7 @@ from django.db import models
 import random
 from django.utils import timezone
 
+
 class CustomUser(AbstractUser):
     country = models.CharField(max_length=100, null=True, blank=True)
     location = models.CharField(max_length=100, null=True, blank=True)
@@ -80,7 +81,6 @@ class State(models.Model):
     def __str__(self):
         return f"{self.name}, {self.country}"
 
-
 class Housing(models.Model):
     country = models.CharField(max_length=100)
     title = models.CharField(max_length=200)
@@ -110,3 +110,4 @@ class Culture(models.Model):
 
     def __str__(self):
         return self.title
+    
