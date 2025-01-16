@@ -2015,6 +2015,7 @@ label {
   color: black;
   height: 100vh;
   padding: 20px;
+  overflow: scroll;
 }
 
 .friend {
@@ -2063,8 +2064,8 @@ label {
 }
 
 .avatar {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   margin-right: 15px;
 }
@@ -2085,8 +2086,9 @@ label {
 .friend-institution,
 .friend-city,
 .friend-state {
-  font-size: 14px;
+  font-size: 17px;
   color: black;
+  line-height: 22px;
 }
 
 .send-request {

@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const option = document.createElement('option');
                     option.value = country.cca2; // Use ISO code as the value
                     option.textContent = country.name.common; // Display country name
+                    console.log('Adding option:', option.textContent); // Log the option text
 
                     countrySelect.appendChild(option);
                     locationSelect.appendChild(option.cloneNode(true)); // Clone for the other dropdown
