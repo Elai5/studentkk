@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Katibeh&display=swap');
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+}
+
+body {
+  font-family: 'Arial', sans-serif, 'Itim', cursive;
+}
+
+.navbar {
+  background-color: #001F3F;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  /* Position at the top */
+  z-index: 1000;
+  /* Ensure it stays above other content */
+}
+
+.logo-container {
+  width: auto;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  /* Allow the ul to grow and take available space */
+}
+
+.navbar li {
+  margin-right: 8px;
+}
+
+.navbar a,
+.navbar .button {
+  display: inline-block;
+  margin: 0 5px;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.navbar a:hover {
+  color: #333;
+  text-decoration: underline;
+}
+
+.navbar ul li .active {
+  color: red;
+}
+
+.btn button {
+  background-color: red;
+  border-radius: 4px;
+  padding: 5px 10px;
+  border: 0;
+}
+
+.btn .button a {
+  font-weight: bolder;
+  border: none;
+}
+
+.navbar .button:hover {
+  background-color: #0086B3;
+}
+
+.toggle-icon {
+  display: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+
+footer {
+  height: 40px;
+  background-color: #001F3F;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  padding: 0 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .navbar ul {
+    display: none;
+    /* Hide the navbar links by default */
+    flex-direction: column;
+    /* Stack links vertically when shown */
+    background-color: #001F3F;
+    /* Match navbar background */
+    width: 100%;
+    /* Full width */
+  }
+
+  .navbar .toggle-icon {
+    display: block;
+    /* Show the toggle icon */
+  }
+
+  .navbar.responsive ul {
+    display: flex;
+    /* Show the links when responsive */
+  }
+
+  .navbar.responsive {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navbar.responsive a,
+  .navbar.responsive .button {
+    display: block;
+    width: 100%;
+    /* Ensure buttons take full width */
+    padding: 14px 23px;
+    cursor: pointer;
+  }
+
+  footer {
+    display: none;
+    /* Hide footer on mobile */
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  .navbar a,
+  .navbar .button {
+    display: inline-block;
+    margin: 0 5px;
+    font-size: 14px;
+  }
+
+  .navbar .logo-container {
+    flex: 1;
+  }
+
+  .navbar .toggle-icon {
+    display: none;
+    /* Hide toggle icon on larger screens */
+  }
+}

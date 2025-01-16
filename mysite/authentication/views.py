@@ -221,8 +221,9 @@ def signup(request):
         if has_error:
             return JsonResponse({'errors': error_messages}, status=400)
 
-        return JsonResponse({'message': 'Success'})
+        # return JsonResponse({'message': 'Success'})
         # Create the user profile
+        
         user_profile = UserProfile.objects.create(
             user=myuser,
             country=country,
