@@ -29,7 +29,7 @@ Easy Communication: Facilitates seamless interactions through features like real
 StudentKonnect empowers students to thrive by fostering connections and providing essential tools to navigate their new environment with ease.
 
 
-## Features {#features}
+## Features #features
 
 1. Account Management:
 
