@@ -22,8 +22,19 @@ StudentKonnect is a social media platform tailored for foreign students navigati
 
 8. License
 
-# About StudentKonnect
+   ## Table of Contents
 
+1. [About StudentKonnect](#about-studentkonnect)
+2. [Features](#features)
+3. [Technologies Used](#technologies-used)
+4. [Setup Instructions](#setup-instructions)
+5. [Usage](#usage)
+6. [Future Enhancements](#future-enhancements)
+7. [Contributing](#contributing)
+8. [License](#license)
+
+# About StudentKonnect
+## About StudentKonnect {#about-studentkonnect}
 Relocating to a foreign country as a student can be daunting. From cultural shock to logistical challenges like housing, transportation, and social networking, the transition often lacks proper support. StudentKonnect addresses these challenges by offering:
 
 A Support Network: Connects students based on geolocation, institution, and personal interests.
