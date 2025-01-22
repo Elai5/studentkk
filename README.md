@@ -15,16 +15,15 @@ StudentKonnect is a social media platform tailored for foreign students navigati
 8. [License](#license)
 
 # About StudentKonnect
-## About StudentKonnect {#about-studentkonnect}
 Relocating to a foreign country as a student can be daunting. From cultural shock to logistical challenges like housing, transportation, and social networking, the transition often lacks proper support. StudentKonnect addresses these challenges by offering:
 
-A Support Network: Connects students based on geolocation, institution, and personal interests.
+- A Support Network: Connects students based on geolocation, institution, and personal interests.
 
-Localized Insights: Provides real-time news on transportation, local food, cultural norms, and academic resources.
+- Localized Insights: Provides real-time news on transportation, local food, cultural norms, and academic resources.
 
-Easy Communication: Facilitates seamless interactions through features like real-time messaging and friend requests.
+-Easy Communication: Facilitates seamless interactions through features like real-time messaging and friend requests.
 
-StudentKonnect empowers students to thrive by fostering connections and providing essential tools to navigate their new environment with ease.
+- StudentKonnect empowers students to thrive by fostering connections and providing essential tools to navigate their new environment with ease.
 
 ## Features
 
@@ -45,7 +44,7 @@ StudentKonnect empowers students to thrive by fostering connections and providin
    - Event discovery and participation for academic and social networking.
 
 
-## Run Locally  {#setup-instructions}
+## Run Locally  
 
 1. Clone the project
 
@@ -89,7 +88,7 @@ StudentKonnect empowers students to thrive by fostering connections and providin
 
 8. Access the app at http://localhost:8000
 
-## Tech Stack {#technologies-used}
+## Tech Stack 
 
 **Client:** Client-Side
 HTML, CSS, JavaScript, Bootstrap,
@@ -98,7 +97,7 @@ HTML, CSS, JavaScript, Bootstrap,
 Python, APIs
 
 
-## Roadmap {#future-enhancements}
+## Future-enhancements
 1. Upcoming Features:
 
 - Events Page: A platform for students to discover and participate in academic, social, and networking events based on their location.
