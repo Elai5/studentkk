@@ -1,5 +1,3 @@
-# studentkk
-
 # StudentKonect
 
 StudentKonnect is a social media platform tailored for foreign students navigating life in a new country. Imagine a Kenyan student in Canada who wants to connect with other Kenyan students nearby—whether at the same school, city, or town. This app bridges that gap, fostering a support network while providing real-time insights into local transportation, cultural norms, and housing options. It simplifies integration and enhances connections, helping students feel at home in unfamiliar environments.
