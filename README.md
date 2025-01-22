@@ -26,37 +26,23 @@ Easy Communication: Facilitates seamless interactions through features like real
 
 StudentKonnect empowers students to thrive by fostering connections and providing essential tools to navigate their new environment with ease.
 
+## Features
 
-## Features #features
+1. **User Authentication & Profile Management**:  
+   - Secure sign-up and login process using OTP validation.  
+   - Profile customization with personal details like country, institution, and city.
 
-1. Account Management:
+2. **Real-Time Communication**:  
+   - Real-time messaging and friend requests for seamless student networking.
 
-- OTP validation during sign-up for secure authentication.
-- Password reset functionality.
-2. User Profiles:
+3. **Location-Based Resources**:  
+   - Real-time updates on transportation, food, cultural norms, and academic resources based on user location.
 
-- Create and customize profiles with details like country of origin, residence, school, and city.
-- Update personal information as needed.
+4. **Cultural Integration**:  
+   - Features aiding students in adapting to new environments through cultural insights and networking.
 
-3. Real-Time Messaging:
-- Send and receive instant messages for seamless communication.
-4. Friend Requests:
-
-- Send, accept, decline, or remove friend requests to build a personal network.
-Real-Time News:
-
-5. Location
-- specific updates about schools, transportation systems, cultural practices, and accommodations.
-6. Cultural Integration:
-- Provides students with cultural insights to help them adapt smoothly and navigate challenges of a new environment.
-7. Geolocation-based Connections:
-- Connects students based on geolocation and school affiliation to ensure meaningful networking.
-8. Native Student Mentorship:
-- Allows native students to mentor and guide foreign students, fostering deeper connections.
-9. Events and Activities:
-- Provides a platform for students to discover academic, social, and cultural events within their vicinity.
-10. Accessibility and Responsiveness:
-- Fully responsive design ensuring compatibility across various devices and screen sizes.
+5. **Event and Networking Opportunities**:  
+   - Event discovery and participation for academic and social networking.
 
 
 ## Run Locally  {#setup-instructions}
