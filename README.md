@@ -4,23 +4,6 @@
 
 StudentKonnect is a social media platform tailored for foreign students navigating life in a new country. Imagine a Kenyan student in Canada who wants to connect with other Kenyan students nearby—whether at the same school, city, or town. This app bridges that gap, fostering a support network while providing real-time insights into local transportation, cultural norms, and housing options. It simplifies integration and enhances connections, helping students feel at home in unfamiliar environments.
 
-# Table of Contents
-
-1. About StudentKonnect
-
-2. Features
-
-3. Technologies Used
-
-4. Setup Instructions
-
-5. Usage
-
-6. Future Enhancements
-
-7. Contributing
-
-8. License
 
    ## Table of Contents
 
@@ -46,7 +29,7 @@ Easy Communication: Facilitates seamless interactions through features like real
 StudentKonnect empowers students to thrive by fostering connections and providing essential tools to navigate their new environment with ease.
 
 
-## Features
+## Features {#features}
 
 1. Account Management:
 
@@ -78,7 +61,7 @@ Real-Time News:
 - Fully responsive design ensuring compatibility across various devices and screen sizes.
 
 
-## Run Locally
+## Run Locally  {#setup-instructions}
 
 1. Clone the project
 
@@ -122,7 +105,7 @@ Real-Time News:
 
 8. Access the app at http://localhost:8000
 
-## Tech Stack
+## Tech Stack {#technologies-used}
 
 **Client:** Client-Side
 HTML, CSS, JavaScript, Bootstrap,
@@ -131,7 +114,7 @@ HTML, CSS, JavaScript, Bootstrap,
 Python, APIs
 
 
-## Roadmap
+## Roadmap {#future-enhancements}
 1. Upcoming Features:
 
 - Events Page: A platform for students to discover and participate in academic, social, and networking events based on their location.
