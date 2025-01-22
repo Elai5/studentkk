@@ -35,26 +35,37 @@ Easy Communication: Facilitates seamless interactions through features like real
 StudentKonnect empowers students to thrive by fostering connections and providing essential tools to navigate their new environment with ease.
 
 
+## Features
 
-## Tech Stack
+1. Account Management:
 
-**Client:** Client-Side
-HTML, CSS, JavaScript, Bootstrap,
+- OTP validation during sign-up for secure authentication.
+- Password reset functionality.
+2. User Profiles:
 
-**Server:** Django
-Python, APIs
+- Create and customize profiles with details like country of origin, residence, school, and city.
+- Update personal information as needed.
 
+3. Real-Time Messaging:
+- Send and receive instant messages for seamless communication.
+4. Friend Requests:
 
-## Roadmap
-1. Upcoming Features:
+- Send, accept, decline, or remove friend requests to build a personal network.
+Real-Time News:
 
-- Events Page: A platform for students to discover and participate in academic, social, and networking events based on their location.
-- Post Page: A space where students can share survival tips, advice, and stories to help others adapt.
-- Native Student Sign-Up: Allowing native students to join and mentor foreign students.
-2. Improvements:
+5. Location
+- specific updates about schools, transportation systems, cultural practices, and accommodations.
+6. Cultural Integration:
+- Provides students with cultural insights to help them adapt smoothly and navigate challenges of a new environment.
+7. Geolocation-based Connections:
+- Connects students based on geolocation and school affiliation to ensure meaningful networking.
+8. Native Student Mentorship:
+- Allows native students to mentor and guide foreign students, fostering deeper connections.
+9. Events and Activities:
+- Provides a platform for students to discover academic, social, and cultural events within their vicinity.
+10. Accessibility and Responsiveness:
+- Fully responsive design ensuring compatibility across various devices and screen sizes.
 
-- Enhancing real-time messaging for better performance and user experience.
-- Optimizing user profiles for additional customization options.
 
 ## Run Locally
 
@@ -100,36 +111,27 @@ Python, APIs
 
 8. Access the app at http://localhost:8000
 
-## Features
+## Tech Stack
 
-1. Account Management:
+**Client:** Client-Side
+HTML, CSS, JavaScript, Bootstrap,
 
-- OTP validation during sign-up for secure authentication.
-- Password reset functionality.
-2. User Profiles:
+**Server:** Django
+Python, APIs
 
-- Create and customize profiles with details like country of origin, residence, school, and city.
-- Update personal information as needed.
 
-3. Real-Time Messaging:
-- Send and receive instant messages for seamless communication.
-4. Friend Requests:
+## Roadmap
+1. Upcoming Features:
 
-- Send, accept, decline, or remove friend requests to build a personal network.
-Real-Time News:
+- Events Page: A platform for students to discover and participate in academic, social, and networking events based on their location.
+- Post Page: A space where students can share survival tips, advice, and stories to help others adapt.
+- Native Student Sign-Up: Allowing native students to join and mentor foreign students.
+2. Improvements:
 
-5. Location
-- specific updates about schools, transportation systems, cultural practices, and accommodations.
-6. Cultural Integration:
-- Provides students with cultural insights to help them adapt smoothly and navigate challenges of a new environment.
-7. Geolocation-based Connections:
-- Connects students based on geolocation and school affiliation to ensure meaningful networking.
-8. Native Student Mentorship:
-- Allows native students to mentor and guide foreign students, fostering deeper connections.
-9. Events and Activities:
-- Provides a platform for students to discover academic, social, and cultural events within their vicinity.
-10. Accessibility and Responsiveness:
-- Fully responsive design ensuring compatibility across various devices and screen sizes.
+- Enhancing real-time messaging for better performance and user experience.
+- Optimizing user profiles for additional customization options.
+
+
 
 ## Documentation
 
