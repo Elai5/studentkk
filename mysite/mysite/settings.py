@@ -34,9 +34,11 @@ EMAIL_PORT = EMAIL_PORT
 SECRET_KEY = 'django-insecure-rb9i)64_$!p8#q$)oz=v$)!@@d3%gaqjw&f=*e-dr@ftue)968'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['elainney.pythonanywhere.com', '127.0.0.1']
+# ALLOWED_HOSTS = ['elainney.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['studentkonnection.onrender.com', 'localhost', '127.0.0.1']
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -58,7 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -144,6 +146,8 @@ USE_TZ = True
 BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
