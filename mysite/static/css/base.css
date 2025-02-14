@@ -24,9 +24,7 @@ body {
   width: 100%;
   position: fixed;
   top: 0;
-  /* Position at the top */
   z-index: 1000;
-  /* Ensure it stays above other content */
 }
 
 .logo-container {
@@ -181,7 +179,6 @@ footer {
 
   .navbar .toggle-icon {
     display: none;
-    /* Hide toggle icon on larger screens */
   }
 }
 
@@ -213,7 +210,6 @@ footer {
   width: 100%;
   padding: 50px 20px;
   outline: 0;
-  /* border :2px solid gold ; */
   border-radius: 25px;
 }
 
@@ -1390,36 +1386,31 @@ label {
     align-items: center;
     padding: 20px;
     height: auto;
-    /* background-color: darkgray; */
   }
 
   .about-page {
     display: flex;
     flex-direction: column;
-    /* Stack elements vertically */
     justify-content: center;
     align-items: center;
     width: 100%;
     height: auto;
-    /* background-color: darkgoldenrod; */
     margin-top: -120px;
   }
 
   .about-page .mage {
     width: 100%;
     max-width: 600px;
-    /* Increase max-width for larger screens */
     height: auto;
     border-radius: 10px;
     margin-bottom: 10px;
     margin-right: 20px;
-    /* Space below the image */
+    padding-top: 20px;
   }
 
   .about-page .info {
     width: 100%;
     max-width: 600px;
-    /* Increase max-width for larger screens */
     font-size: 16px;
     text-align: justify;
     padding: 0 10px;
@@ -1440,10 +1431,9 @@ label {
 
   .btn {
     display: inline-block;
-    margin-top: 10px;
+    margin: 20px 0;
+    justify-content: center;
   }
-
-
 }
 
 /* Laptop Styles (769px to 1024px) */
@@ -1684,26 +1674,34 @@ label {
 }
 
 @media screen and (min-width: 601px) and (max-width: 768px) {
+  #works{
+    margin-top: 80px;
+    padding-top: 30px;
+  }
   .container {
     margin: 20px 40px;
-    padding: 30px 15px;
+    padding: 20px 15px;
   }
 
   .container h1 {
     font-size: 2.2em;
     margin-bottom: 10px;
-    margin-top: 50px;
+    /* margin-top: 80px; */
   }
 
   .container h2 {
-    font-size: 1.4em;
+    font-size: 1.5em;
     margin-bottom: 15px;
     color: #F0440E;
+  }
+  .text-center{
+    /* background-color: red; */
+    margin-top: -80px;
   }
 
   .container .card {
     width: 90%;
-    margin: 10px 0;
+    margin: 20px 0;
     height: 500px;
   }
 
