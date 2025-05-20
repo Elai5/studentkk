@@ -2338,16 +2338,28 @@ label {
 
 #edit-profile {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  padding: 100px 0;
 }
 
-.edit-profile-container {
-  width: 600px;
+#edit-profile .edit-profile-container {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
   /* background-color: #0056b3; */
 }
-
+.edit-profile-container form{
+  height: 50%;
+  /* background-color: tomato; */
+  width: 30%;
+  padding: 10px;
+  box-shadow:0 0 20px rgba(0,0,0,0.6) ;
+}
 
 /* Responsive Styles */
 @media screen and (max-width: 600px) {
