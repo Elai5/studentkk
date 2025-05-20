@@ -184,17 +184,27 @@ footer {
 
 /* /* landing page section/ index page */
 #home {
+  position: relative;
   min-height: 100vh;
   color: black;
   background-image: url('/static/images/sa-uni-1.png');
   background-size: cover;
   background-position: cover;
   background-repeat: no-repeat;
-  position: relative;
   z-index: 1;
   background-color: #007bff;
-}
 
+}
+#home::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1;
+}
 .home-profile {
   width: 100%;
   max-width: 1300px;
@@ -358,7 +368,7 @@ footer {
   padding: 90px 0;
   box-sizing: border-box;
   overflow: scroll;
-  background-color: green;
+  /* background-color: green; */
 }
 
 #homepage .profile {
@@ -1886,6 +1896,7 @@ label {
   width: 100px;
   height: 100px;
   margin-right: 20px;
+  object-fit: cover;
 }
 
 .testimonial-info {
