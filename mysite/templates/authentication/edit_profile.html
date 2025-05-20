@@ -1,94 +1,166 @@
-{% extends "authentication/nav2.html" %}
-{% load static %} <!-- Load the static template tag library -->
+{% extends "authentication/nav2.html" %} {% load static %}
+<!-- Load the static template tag library -->
 
-{% block title %}Edit Profile{% endblock %}
-
-{% block content %}
+{% block title %}Edit Profile{% endblock %} {% block content %}
 <section id="edit-profile">
-    <div class="edit-profile-container">
-        <h1>Edit Profile</h1>
+  <div class="edit-profile-container">
+    <h1>Edit Profile</h1>
 
-        {% if messages %}
-            <ul class="messages">
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        
-        <form action="{% url 'edit_profile' %}" method="post" id="edit-profile-form" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="image-upload-container">
-                <img class="image-preview" src="{% if user_profile.profile_picture %}{{ user_profile.profile_picture.url }}{% else %}{% static 'images/woman.jpg' %}{% endif %}" alt="Profile Image" id="editPreviewImage">
-                <input type="file" id="editProfileImage" name="profile_picture" accept="image/*">
-            </div>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
 
-            <div class="form-group">
-                <label for="fname">First Name</label>
-                <input type="text" id="fname" name="fname" value="{{ user_profile.user.first_name }}" placeholder="Enter first name" required>
-            </div>
+    <form
+      action="{% url 'edit_profile' %}"
+      method="post"
+      id="edit-profile-form"
+      enctype="multipart/form-data"
+      id="prof-form"
+    >
+      {% csrf_token %}
+      <div class="image-upload-container">
+        <img
+          class="image-preview"
+          src="{% if user_profile.profile_picture %}{{ user_profile.profile_picture.url }}{% else %}{% static 'images/woman.jpg' %}{% endif %}"
+          alt="Profile Image"
+          id="editPreviewImage"
+        />
+        <input
+          type="file"
+          id="editProfileImage"
+          name="profile_picture"
+          accept="image/*"
+        />
+      </div>
 
-            <div class="form-group">
-                <label for="lname">Last Name</label>
-                <input type="text" id="lname" name="lname" value="{{ user_profile.user.last_name }}" placeholder="Enter last name" required>
-            </div>
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input
+          type="text"
+          id="fname"
+          name="fname"
+          value="{{ user_profile.user.first_name }}"
+          placeholder="Enter first name"
+          required
+        />
+      </div>
 
-            <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" value="{{ user_profile.user.email }}" placeholder="Enter email address" required>
-            </div>
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input
+          type="text"
+          id="lname"
+          name="lname"
+          value="{{ user_profile.user.last_name }}"
+          placeholder="Enter last name"
+          required
+        />
+      </div>
 
-            <div class="form-group">
-                <label for="country">Country of Origin</label>
-                <input type="text" id="country" name="country" value="{{ user_profile.country }}" placeholder="Enter your country" required>
-            </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value="{{ user_profile.user.email }}"
+          placeholder="Enter email address"
+          required
+        />
+      </div>
 
-            <div class="form-group">
-                <label for="location">Country of Study</label>
-                <input type="text" id="location" name="location" value="{{ user_profile.location }}" placeholder="Enter your location" required>
-            </div>
+      <div class="form-group">
+        <label for="country">Country of Origin</label>
+        <input
+          type="text"
+          id="country"
+          name="country"
+          value="{{ user_profile.country }}"
+          placeholder="Enter your country"
+          required
+        />
+      </div>
 
-            <div class="form-group">
-                <label for="institution">Academic Institution</label>
-                <input type="text" id="institution" name="institution" value="{{ user_profile.institution }}" placeholder="Enter institution name" required>
-            </div>
+      <div class="form-group">
+        <label for="location">Country of Study</label>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          value="{{ user_profile.location }}"
+          placeholder="Enter your location"
+          required
+        />
+      </div>
 
-            <div class="form-group">
-                <label for="city">City</label>
-                <input type="text" id="city" name="city" value="{{ user_profile.city }}" placeholder="Enter city" required>
-            </div>
+      <div class="form-group">
+        <label for="institution">Academic Institution</label>
+        <input
+          type="text"
+          id="institution"
+          name="institution"
+          value="{{ user_profile.institution }}"
+          placeholder="Enter institution name"
+          required
+        />
+      </div>
 
-            <div class="form-group">
-                <label for="state">State</label>
-                <input type="text" id="state" name="state" value="{{ user_profile.state }}" placeholder="Enter state" required>
-            </div>
+      <div class="form-group">
+        <label for="city">City</label>
+        <input
+          type="text"
+          id="city"
+          name="city"
+          value="{{ user_profile.city }}"
+          placeholder="Enter city"
+          required
+        />
+      </div>
 
-            <button type="submit">Update Profile</button>
-            <p>Want to go back? Click <a href="{% url 'profile_view' %}">here</a></p>
-        </form>
-    </div>
+      <div class="form-group">
+        <label for="state">State</label>
+        <input
+          type="text"
+          id="state"
+          name="state"
+          value="{{ user_profile.state }}"
+          placeholder="Enter state"
+          required
+        />
+      </div>
+
+      <button type="submit">Update Profile</button>
+      <p>Want to go back? Click <a href="{% url 'profile_view' %}">here</a></p>
+    </form>
+  </div>
 </section>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const profileImageInput = document.getElementById('editProfileImage');
-    const previewImage = document.getElementById('editPreviewImage');
+  document.addEventListener("DOMContentLoaded", function () {
+    const profileImageInput = document.getElementById("editProfileImage");
+    const previewImage = document.getElementById("editPreviewImage");
 
     if (profileImageInput && previewImage) {
-        profileImageInput.addEventListener('change', function () {
-            const file = profileImageInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    previewImage.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
-        });
+      profileImageInput.addEventListener("change", function () {
+        const file = profileImageInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            previewImage.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
     } else {
-        console.error("Element with ID 'editProfileImage' or 'editPreviewImage' not found.");
+      console.error(
+        "Element with ID 'editProfileImage' or 'editPreviewImage' not found."
+      );
     }
-});
+  });
 </script>
 
 {% endblock %}

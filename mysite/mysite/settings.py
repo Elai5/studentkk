@@ -38,7 +38,7 @@ SECRET_KEY = 'django-insecure-rb9i)64_$!p8#q$)oz=v$)!@@d3%gaqjw&f=*e-dr@ftue)968
 DEBUG = True
 
 # ALLOWED_HOSTS = ['elainney.pythonanywhere.com', '127.0.0.1']
-ALLOWED_HOSTS = ['studentkonnection.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['studentkonnection.onrender.com', 'localhost', '127.0.0.1', '0.0.0.0']
 
 # Application definition
 
