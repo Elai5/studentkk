@@ -82,6 +82,7 @@ body {
   display: inline-block;
   margin: 0 5px;
   color: white;
+  /* color: green; */
   text-decoration: none;
   font-size: 18px;
   padding: 5px 10px;
@@ -109,6 +110,7 @@ body {
 footer {
   height: 40px;
   background-color: #001f3f;
+  /* background-color: green; */
   bottom: 0;
   display: flex;
   justify-content: space-between;
@@ -913,6 +915,7 @@ label {
   margin-bottom: 8px;
   border-radius: 5px;
   font-size: 16px;
+  border: 1px solid;
 }
 
 select {
