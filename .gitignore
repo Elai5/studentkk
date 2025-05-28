@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -22,3 +23,12 @@ db.sqlite3
 # System files
 .DS_Store
 Thumbs.db
+=======
+# .gitignore
+*.pyc
+__pycache__/
+.env
+.venv/
+*.sqlite3
+.DS_Store
+>>>>>>> docker-setup
