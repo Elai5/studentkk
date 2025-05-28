@@ -81,10 +81,10 @@ body {
 .navbar a {
   display: inline-block;
   margin: 0 5px;
-  /* color: white; */
+  color: white;
   /* color: green; */
   text-decoration: none;
-  font-size: 28px;
+  font-size: 18px;
   padding: 5px 10px;
 }
 
@@ -109,8 +109,8 @@ body {
 
 footer {
   height: 40px;
-  /* background-color: #001f3f; */
-  background-color: green;
+  background-color: #001f3f;
+  /* background-color: green; */
   bottom: 0;
   display: flex;
   justify-content: space-between;
