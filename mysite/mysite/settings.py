@@ -165,3 +165,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 FIXTURE_DIRS = [
     os.path.join(BASE_DIR, 'data'),
 ]
+FILE_UPLOAD_MAX_MEMORY_SIZE = 26214400  # 25 MB
