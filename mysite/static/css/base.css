@@ -109,7 +109,8 @@ body {
 
 footer {
   height: 40px;
-  background-color: #001f3f;
+  /* background-color: #001f3f; */
+  background-color: green;
   bottom: 0;
   display: flex;
   justify-content: space-between;
