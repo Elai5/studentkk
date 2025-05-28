@@ -1,26 +1,27 @@
-{% extends "authentication/nav2.html" %}
-{% load static %}  <!-- Load the static template tag library -->
-
-{% block title %}Profile{% endblock %}
-{% block content %}
+{% extends "authentication/nav2.html" %} {% load static %} {% block title
+%}Profile{% endblock %} {% block content %}
 <section id="profile">
-    <div class="profile-container">
-        <h1>Your Profile</h1>
-        <div class="profile-header">
-            <img src="{% if profile.profile_picture %}{{ profile.profile_picture.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" alt="Profile Picture" class="profile-image">
-            <div class="profile-info">
-                <h2>{{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
-                <p><strong>Email:</strong> {{ profile.user.email }}</p>
-                <p><strong>Country:</strong> {{ profile.country }}</p>
-                <p><strong>Location:</strong> {{ profile.location }}</p>
-                <p><strong>Institution:</strong> {{ profile.institution }}</p>
-                <p><strong>City:</strong> {{ profile.city }}</p>
-                <p><strong>State:</strong> {{ profile.state }}</p>
-            </div>
-        </div>
-        <div class="edit-profile-button">
-            <a href="{% url 'edit_profile' %}" class="edit-button">Edit Profile</a>
-        </div>
+  <div class="profile-container">
+    <h1>Your Profile</h1>
+    <div class="profile-header">
+      <img
+        src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}"
+        alt="Profile Picture"
+        class="profile-image"
+      />
+      <div class="profile-info">
+        <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Country:</strong> {{ user.country }}</p>
+        <p><strong>Location:</strong> {{ user.location }}</p>
+        <p><strong>Institution:</strong> {{ user.institution }}</p>
+        <p><strong>City:</strong> {{ user.city }}</p>
+        <p><strong>State:</strong> {{ user.state }}</p>
+      </div>
     </div>
+    <div class="edit-profile-button">
+      <a href="{% url 'edit_profile' %}" class="edit-button">Edit Profile</a>
+    </div>
+  </div>
 </section>
 {% endblock %}

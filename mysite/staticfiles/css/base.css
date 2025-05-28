@@ -908,7 +908,7 @@ datalist option:hover {
   margin-top: 5px;
   display: none;
   position: absolute;
-  width: calc(100% - 2px); /* Match input width */
+  width: calc(100% - 2px);
   background: white;
   z-index: 1000;
 }
@@ -920,7 +920,7 @@ datalist option:hover {
   background-color: #f5f5f5;
 }
 .form-group {
-  position: relative; /* Needed for absolute positioning of dropdown */
+  position: relative;
 }
 
 button {
