@@ -1,3 +1,30 @@
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Django-specific
+*.log
+*.sqlite3
+db.sqlite3
+/staticfiles/
+/media/
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+
+# System files
+.DS_Store
+Thumbs.db
+=======
+# .gitignore
 # Python bytecode and cache
 *.pyc
 __pycache__/
