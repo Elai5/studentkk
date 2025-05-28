@@ -1,7 +1,20 @@
-# .gitignore
+# Python bytecode and cache
 *.pyc
 __pycache__/
+
+# Environment files
 .env
+
+# Virtual environments
 .venv/
+.venv*/
+
+# Local databases
 *.sqlite3
+
+# macOS files
 .DS_Store
+
+# Editor directories and files
+.idea/
+.vscode/

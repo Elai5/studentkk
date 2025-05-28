@@ -81,9 +81,10 @@ body {
 .navbar a {
   display: inline-block;
   margin: 0 5px;
-  color: white;
+  /* color: white; */
+  /* color: green; */
   text-decoration: none;
-  font-size: 18px;
+  font-size: 28px;
   padding: 5px 10px;
 }
 
@@ -913,6 +914,7 @@ label {
   margin-bottom: 8px;
   border-radius: 5px;
   font-size: 16px;
+  border: 1px solid;
 }
 
 select {
