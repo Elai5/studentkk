@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'mysite',
     'authentication',
     'channels',
+    'django_countries',
 ]
 
 MIDDLEWARE = [

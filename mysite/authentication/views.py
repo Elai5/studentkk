@@ -25,6 +25,7 @@ from django.core.files.storage import default_storage
 from django.templatetags.static import static
 from django.core.files.base import ContentFile
 from django.db import IntegrityError
+from django_countries import countries
 
 def home(request):
     return render(request, "authentication/index.html")
@@ -188,7 +189,8 @@ def signup(request):
                 'institution': institution,
                 'city': city,
                 'state': state,
-                'zip_code': zip_code 
+                'zip_code': zip_code,
+                'country_choices': list(countries) 
             })
             printf(f"creating user profile for user: {myuser.username}")
             printf(f"Country: {country}, Location:{location}, Institution: {institution},  City: {city}, State: {state}")
