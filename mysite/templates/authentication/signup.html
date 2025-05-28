@@ -34,6 +34,7 @@ Up{% endblock %} {% block extra_css %}
   {% endif %}
 
   <div class="form-container">
+    {% comment %}
     <div class="profile-image-container">
       <img
         class="profile-image"
@@ -49,6 +50,7 @@ Up{% endblock %} {% block extra_css %}
         onchange="previewProfileImage()"
       />
     </div>
+    {% endcomment %}
 
     <form
       action="{% url 'signup' %}"
@@ -58,7 +60,21 @@ Up{% endblock %} {% block extra_css %}
       class="signup-form"
     >
       {% csrf_token %}
-
+      <div class="profile-image-container">
+        <img
+          class="profile-image"
+          src="{% static 'images/woman.jpg' %}"
+          alt="Profile Image"
+          id="previewImage"
+        />
+        <input
+          type="file"
+          id="profileImage"
+          name="profileImage"
+          accept="image/*"
+          onchange="previewProfileImage()"
+        />
+      </div>
       <div class="inputs-container">
         <div class="column">
           <div class="form-group">

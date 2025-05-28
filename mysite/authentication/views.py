@@ -130,7 +130,8 @@ def signup(request):
         pass2 = request.POST['pass2']
       
         
-        print(f"Profile Picture: {profile_picture}")
+        print("Files in request:", request.FILES)
+        print("Profile picture:", profile_picture)
 
         # Log the incoming data for debugging
         print("Received data:", {
@@ -192,8 +193,6 @@ def signup(request):
                 'zip_code': zip_code,
                 'country_choices': list(countries) 
             })
-            printf(f"creating user profile for user: {myuser.username}")
-            printf(f"Country: {country}, Location:{location}, Institution: {institution},  City: {city}, State: {state}")
 
         # Create the user
         myuser = CustomUser.objects.create_user(
@@ -211,10 +210,6 @@ def signup(request):
         
         if profile_picture:
             myuser.profile_picture = profile_picture
-        else:
-            myuser.profile_picture = 'images/default_profile.png'
-                    
-        # myuser.profile_picture = profile_image if profile_image else 'images/default_profile.png'  # Handle profile image
         myuser.save()  # Save the user first
         
         # Debugging: Check if the user was created correctly
@@ -233,7 +228,7 @@ def signup(request):
             institution=institution,
             city=city,
             state=state,
-            profile_picture=profile_picture if profile_picture else 'images/default_profile.png' 
+            profile_picture=profile_picture if profile_picture else None 
         )
 
         # Debugging line to check if UserProfile was created correctly
@@ -347,12 +342,17 @@ def universities_data(request):
 def profile(request):
     return render(request, 'authentication/profile.html')
 
+# def profile_view(request):
+#     if request.user.is_authenticated:
+#         profile = get_object_or_404(UserProfile, user=request.user)
+#         return render(request, "authentication/profile.html", {'profile': profile})
+#     else:
+#         return redirect('login')  
+
+
+@login_required
 def profile_view(request):
-    if request.user.is_authenticated:
-        profile = get_object_or_404(UserProfile, user=request.user)
-        return render(request, "authentication/profile.html", {'profile': profile})
-    else:
-        return redirect('login')  
+    return render(request, "authentication/profile.html", {'user': request.user})
 
 def friends(request):
     if request.user.is_authenticated:
