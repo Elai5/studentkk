@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -41,7 +41,6 @@ __pycache__/
 
 # macOS files
 .DS_Store
->>>>>>> docker-setup
 
 # Editor directories and files
 .idea/
