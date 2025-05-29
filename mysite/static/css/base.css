@@ -2247,6 +2247,7 @@ label {
   justify-content: center;
   height: 100vh;
   background-color: #f9f9f9;
+  /* background-color: #007bff; */
 }
 
 .profile-container {
@@ -2331,11 +2332,9 @@ label {
   flex-direction: column;
   align-items: center;
   padding: 10px;
-  /* background-color: #0056b3; */
 }
 .edit-profile-container form {
   height: 50%;
-  /* background-color: tomato; */
   width: 30%;
   padding: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
@@ -2363,6 +2362,12 @@ label {
 
   .edit-button {
     padding: 8px 12px;
+  }
+  .edit-profile-container form {
+    height: 50%;
+    width: 90%;
+    padding: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
   }
 }
 
@@ -2394,7 +2399,6 @@ label {
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
   overflow-y: auto;
   max-height: calc(100vh - 80px);
-  background-color: red;
 }
 
 .user-card {
@@ -2409,7 +2413,6 @@ label {
   border-radius: 8px;
   margin-bottom: 12px;
 }
-
 .user-card:hover {
   background-color: #f0f0f0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
