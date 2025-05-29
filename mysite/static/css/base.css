@@ -365,6 +365,7 @@ footer {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-image: url("/static/images/background.jpg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -375,6 +376,16 @@ footer {
   overflow: scroll;
   /* background-color: green; */
 }
+#homepage::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* black with 50% opacity */
+  z-index: 0; /* behind content */
+}
 
 #homepage .profile {
   display: flex;
@@ -383,6 +394,8 @@ footer {
   padding: 15px;
   width: 100%;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
 }
 
 #homepage .profile .text {
@@ -500,6 +513,7 @@ p {
   line-clamp: 3;
   font-size: 1rem;
   margin: 0;
+  color: gray;
 }
 
 .additional-data {
