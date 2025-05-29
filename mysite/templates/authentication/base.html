@@ -50,7 +50,7 @@
       <ul>
         <li><a href="{% url 'home' %}" class="active">Home</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
-        <li><a href="{% url 'how_it_works' %}">How it works</a></li>
+        <li><a href="{% url 'how_it_works' %}">Guide</a></li>
         <li><a href="{% url 'testimonials' %}">Testimonials</a></li>
         {% comment %}
         <li><a href="#">Contact</a></li>
@@ -64,7 +64,7 @@
         </button>
         {% else %}
         <a href="{% url 'signup' %}">
-          <button class="button signup" type="submit">Sign Up</button>
+          <button class="button signup" type="submit">SignUp</button>
         </a>
         <a href="{% url 'signin' %}">
           <button class="button signin" type="submit">Sign In</button>

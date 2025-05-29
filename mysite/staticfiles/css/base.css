@@ -24,9 +24,7 @@ body {
   width: 100%;
   position: fixed;
   top: 0;
-  /* Position at the top */
   z-index: 1000;
-  /* Ensure it stays above other content */
 }
 
 .logo-container {
@@ -39,7 +37,6 @@ body {
   margin: 0;
   padding: 0;
   flex-grow: 1;
-  /* Allow the ul to grow and take available space */
 }
 
 .navbar li {
@@ -167,7 +164,6 @@ footer {
   .navbar {
     padding: 8px;
   }
-
   .navbar a,
   .navbar .button {
     display: inline-block;
@@ -181,7 +177,6 @@ footer {
 
   .navbar .toggle-icon {
     display: none;
-    /* Hide toggle icon on larger screens */
   }
 }
 
@@ -1919,7 +1914,6 @@ label {
 @media screen and (max-width: 768px) {
   .text-center h1 {
     font-size: 2rem;
-    /* Smaller heading for tablets */
   }
 
   .text-center h2 {
@@ -1928,13 +1922,11 @@ label {
 
   .testimonial-card {
     flex: 1 1 calc(100% - 20px);
-    /* Full width for smaller screens */
     padding: 15px;
   }
 
   .testimonial-header img {
     width: 70px;
-    /* Further reduced size for medium devices */
     height: 70px;
   }
 
@@ -1950,7 +1942,6 @@ label {
   }
 
   #Testimonials .container {
-    /* background-color: gold; */
     width: 100%;
     padding: 20px;
     margin: 0;
@@ -1958,7 +1949,6 @@ label {
 
   .text-center h1 {
     font-size: 1.8rem;
-    /* Further reduced heading */
   }
 
   .text-center h2 {
@@ -1967,12 +1957,10 @@ label {
 
   .testimonial-card {
     padding: 10px;
-    /* Reduced padding for small screens */
   }
 
   .testimonial-header img {
     width: 60px;
-    /* Adjusted size for smaller devices */
     height: 60px;
     margin-right: 10px;
   }
@@ -1993,58 +1981,45 @@ label {
 @media screen and (max-width: 320px) {
   .text-center h1 {
     font-size: 1.5rem;
-    /* Smaller heading for compact devices */
     margin-bottom: 10px;
   }
 
   .text-center h2 {
     font-size: 0.9rem;
-    /* Adjust subtitle for smaller screens */
     margin-bottom: 15px;
   }
 
   .testimonial-card {
     flex: 1 1 100%;
-    /* Full width for single-column layout */
     padding: 10px;
-    /* Reduced padding */
     margin-bottom: 15px;
-    /* Added spacing between cards */
   }
 
   .testimonial-header img {
     width: 50px;
-    /* Smaller avatar size */
     height: 50px;
     margin-right: 10px;
-    /* Reduced gap */
   }
 
   .testimonial-info .name {
     font-size: 0.9rem;
-    /* Smaller font for name */
   }
 
   .testimonial-info .school {
     font-size: 0.8rem;
-    /* Smaller font for school */
   }
 
   .testimonial-text {
     font-size: 12px;
-    /* Reduced font size for text */
     line-height: 1.4;
-    /* Tighter line spacing */
   }
 
   .testimonials-container {
     gap: 15px;
-    /* Reduced gap between cards */
   }
 
   #testimonials {
     padding: 10px;
-    /* Reduced padding for the overall section */
   }
 
   .testimonial-text p {

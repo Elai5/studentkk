@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Katibeh&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Katibeh&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
 * {
   padding: 0;
@@ -37,7 +38,6 @@ body {
   margin: 0;
   padding: 0;
   flex-grow: 1;
-  /* Allow the ul to grow and take available space */
 }
 
 .navbar li {
@@ -86,6 +86,8 @@ body {
   text-decoration: none;
   font-size: 18px;
   padding: 5px 10px;
+  font-family: "Roboto", sans-serif;
+  font-family: "Itim", cursive;
 }
 
 .navbar a:hover {
@@ -94,7 +96,7 @@ body {
 }
 
 .navbar ul li .active {
-  color: red;
+  color: orangered;
 }
 
 .toggle-icon {
@@ -148,7 +150,9 @@ footer {
     padding: 14px 23px;
     cursor: pointer;
   }
-
+  .navbar.responsive .button {
+    font-size: 9px;
+  }
   footer p {
     font-size: 13px;
   }
@@ -174,7 +178,9 @@ footer {
     /* margin: 0 3px; */
     font-size: 10px;
   }
-
+  .navbar a {
+    font-size: 18px;
+  }
   .navbar .logo-container {
     flex: 1;
   }
@@ -226,18 +232,26 @@ footer {
 
 .home-text h2 {
   color: red;
+  color: #f5f5f5;
+  color: #f24e1e;
   margin-bottom: 20px;
-  font-size: 40px;
+  font-size: 28px;
   font-weight: medium;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .home-text h1 {
-  font-size: 58px;
+  font-size: 68px;
   font-weight: bolder;
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+  font-family: "Inter", sans-serif;
+  font-family: "Katibeh", serif;
   margin-bottom: 20px;
+  color: #ffb100;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
 }
 
 .cta-container {
@@ -251,9 +265,9 @@ footer {
   font-size: 16px;
   font-weight: bold;
   color: #fff;
-  background-color: red;
+  background-color: #f24e1e;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   text-decoration: none;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -289,7 +303,6 @@ footer {
     padding-top: 80px;
     padding-bottom: 30px;
     font-size: 39px;
-    color: navajowhite;
   }
 
   .home-text h1 {
@@ -333,20 +346,11 @@ footer {
     text-align: start;
     font-size: 26px;
     padding-top: 50px;
-    /* color:#001F3F; */
-    color: orange;
-    color: navajowhite;
-    /* color:wheat; */
-    /* color:white; */
   }
   .home-text h1 {
     font-size: 30px;
     padding-top: 30px;
     text-align: start;
-    /* color: navajowhite; */
-    /* color: chocolate; */
-    /* color: orangered; */
-    /* color: white; */
     text-transform: capitalize;
   }
 
@@ -1283,6 +1287,7 @@ label {
   color: #001f3f;
   font-weight: 600;
   margin-bottom: 20px;
+  font-family: "Itim", cursive;
 }
 
 .info p {
@@ -1290,6 +1295,7 @@ label {
   margin-bottom: 15px;
   line-height: 32px;
   font-family: "Roboto", sans-serif;
+  /* font-family: "Itim", cursive; */
   text-align: start;
 }
 
@@ -1565,6 +1571,7 @@ label {
 
 .container h2 {
   font-family: "Inter", sans-serif;
+  font-family: "Itim", cursive;
   font-size: 24px;
   color: #001f3f;
   font-weight: 600;
