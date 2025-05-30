@@ -106,7 +106,7 @@ def signup(request):
         })  # Debugging line
 
         # institutional_email_pattern = r'^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9-]+\.)+(edu|ac|org|[a-z]{2})$'
-        institutional_email_pattern = r'^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com|([a-zA-Z0-9-]+\.)+(edu|ac|org|com|[a-z]{2}))$'
+        institutional_email_pattern = r'^[a-zA-Z0-9._%+-]+@(gmail\.com|yahoo\.com|outlook\.com|net|([a-zA-Z0-9-]+\.)+(edu|ac|org|com|[a-z]{2}))$'
         has_error = False
         error_messages = []
 
