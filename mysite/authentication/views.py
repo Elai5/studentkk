@@ -71,6 +71,21 @@ def homepage(request):
 
     return render(request, "authentication/homepage.html", context)
 
+def validate_password(password):
+    if len(password) < 8:
+        return False, "Password must be atleast 8 characters long."
+    if not re.search(r"[a-z]", password):
+        return False, "Password must contain atleast one lowercase letter"
+    if not re.search(r"[A-Z]", password):
+        return False, "Password must contain atleast one uppercase letter"
+    if not re.search(r"[0-9]", password):
+        return False, "password must contain atleast one number"
+    if not re.search(r"[!@#$%^&*]", password):
+        return False, "Password must contain atleast one special character (!@#$%)"
+    if re.search(r"\s", password):
+        return False, "Passsword must not contain spaces"
+    return True, "Password is valid."
+
 def signup(request):
     if request.method == "POST":
         profile_picture = request.FILES.get('profileImage')
@@ -111,6 +126,7 @@ def signup(request):
         error_messages = []
 
         # Validation checks
+
         if not re.match(institutional_email_pattern, email):
             error_messages.append("Please use a valid institutional email address.")
             has_error = True
@@ -135,6 +151,11 @@ def signup(request):
             error_messages.append("Username must be alphanumeric.")
             has_error = True
 
+        is_valid, message = validate_password(pass1)
+        if not is_valid:
+            error_messages.append(message)
+            has_error = True
+        
         if has_error:
             for message in error_messages:
                 messages.error(request, message, extra_tags='safe')
@@ -150,7 +171,8 @@ def signup(request):
                 'state': state,
                 'zip_code': zip_code,
                 'country_choices': list(countries),
-                # 'profile_picture': profileImage
+                'profile_picture': profile_picture, 
+              
             })
 
         # Create the user

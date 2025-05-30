@@ -77,6 +77,14 @@ body {
   background-color: white;
   color: #f0440e;
 }
+#signout {
+  background-color: #f0440e;
+  /* width: 50%; */
+}
+#signout-nav {
+  display: none;
+  background-color: #f0440e;
+}
 
 .navbar a {
   display: inline-block;
@@ -159,7 +167,12 @@ footer {
   .navbar .btn button {
     display: none;
   }
-
+  #signout-nav {
+    display: inline;
+    /* height: 10px; */
+    width: 40%;
+    /* width: ; */
+  }
   footer {
     position: sticky;
     bottom: 0;
@@ -174,7 +187,6 @@ footer {
   .navbar a,
   .navbar .button {
     display: inline-block;
-    /* margin: 0 3px; */
     font-size: 10px;
   }
   .navbar a {
@@ -183,7 +195,6 @@ footer {
   .navbar .logo-container {
     flex: 1;
   }
-
   .navbar .toggle-icon {
     display: none;
   }
@@ -383,7 +394,7 @@ footer {
   right: 0;
   bottom: 0;
   /* background-color: rgba(0, 0, 0, 0.5); black with 50% opacity */
-  z-index: 0; /* behind content */
+  z-index: 0;
 }
 
 #homepage .profile {
@@ -737,7 +748,6 @@ footer {
   #homepage .profile .text p {
     font-size: 12px;
   }
-
   #homepage .profile .card {
     padding: 15px;
     width: 100%;
@@ -1040,7 +1050,7 @@ p {
   }
 }
 
-/* styles.css or within a <style> tag */
+
 ul.messages {
   list-style-type: none;
   padding: 0;
@@ -2736,6 +2746,9 @@ label {
   }
   .subtitle {
     display: none;
+  }
+  .small-text {
+    font-size: 12px;
   }
   .user-list {
     padding-top: 8px;
