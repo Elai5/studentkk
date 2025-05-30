@@ -26,8 +26,6 @@ function previewProfileImage() {
         preview.style.display = 'block'; // Ensure the default image is displayed
     }
 }
-
-
 document.addEventListener("DOMContentLoaded", function () {
     // check elements exist
     const profileImageInput = document.getElementById('profileImage');
@@ -38,12 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     // Add event listener for the file input to preview the image
     // document.getElementById('profileImage').addEventListener('change', previewProfileImage);
-
-
-
-
-
-
     // Fetch country data from the API
     fetch('https://restcountries.com/v3.1/all')
         .then(res => res.json())
@@ -76,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
         'University of Oxford',
         // Add more universities here...
     ];
-
     const institutionInput = document.querySelector('#institution');
 
     if (institutionInput) {
@@ -101,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-
 document.addEventListener('DOMContentLoaded', function () {
     // Function to show only the first news item in each category on mobile
     function adjustNewsDisplay() {
@@ -118,7 +108,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
-
     // Check screen width and adjust news display
     function handleResize() {
         if (window.innerWidth <= 600) {
