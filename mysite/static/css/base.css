@@ -361,7 +361,7 @@ footer {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-image: url("/static/images/background.jpg");
+  /* background-image: url("/static/images/background.jpg"); */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -370,7 +370,7 @@ footer {
   padding: 90px 0;
   box-sizing: border-box;
   overflow: scroll;
-  /* background-color: green; */
+  background-color: white;
 }
 #homepage::before {
   content: "";
@@ -379,7 +379,7 @@ footer {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* black with 50% opacity */
+  /* background-color: rgba(0, 0, 0, 0.5); black with 50% opacity */
   z-index: 0; /* behind content */
 }
 
@@ -387,23 +387,20 @@ footer {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding: 15px;
+  padding: 25px;
   width: 100%;
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  background: #f9faff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 #homepage .profile .text {
   height: 190px;
   width: 80%;
   padding: 20px 30px;
-  margin: 20px auto;
-  background: linear-gradient(
-    to right,
-    rgba(217, 217, 217, 0.6),
-    rgba(217, 217, 217, 0.4)
-  );
+  /* margin: 20px auto; */
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
@@ -420,10 +417,37 @@ footer {
   padding-bottom: 10px;
 }
 
-#homepage .profile .text h3 {
-  margin: 0 0 5px;
+#homepage .profile .text h1 {
+  font-size: 2.5rem;
+  color: black;
+  margin-bottom: 0.2rem;
+}
+#homepage .profile .text span {
+  color: #f0440e;
+}
+#homepage .profile .text h2 {
+  font-size: 1.5rem;
+  color: #001f3f;
+  margin-bottom: 1rem;
+  font-family: "Inter", sans-serif;
 }
 
+#homepage .profile .text:hover {
+  transform: translateY(-5px);
+}
+
+#homepage .profile .text p {
+  text-align: left;
+  margin: 5px 0;
+  font-size: 20px;
+  color: #555;
+  font-family: "Roboto", sans-serif;
+}
+
+#homepage .card {
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
 #homepage .profile .text a {
   text-decoration: none;
   color: #333;
@@ -431,10 +455,6 @@ footer {
 
 #homepage .profile .text a:hover {
   text-decoration: underline;
-}
-
-p {
-  margin: 0;
 }
 
 .news-container {
@@ -449,37 +469,47 @@ p {
 
 .news-category h2 {
   font-size: 2rem;
-  border-bottom: 2px solid #fff;
   padding-bottom: 10px;
+  color: #f0440e;
+  font-family: "Inter", sans-serif;
 }
 
 .news-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 1.4rem;
 }
 
 .news-card {
-  background: rgba(0, 0, 0, 0.6);
+  background: white;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.07);
   border-radius: 8px;
   overflow: hidden;
   width: calc(33.333% - 20px);
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
-  height: 500px;
+  height: 350px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .image-container {
   height: 50%;
   overflow: hidden;
+  overflow: hidden;
+  background-color: #eaeaea;
 }
 
 .news-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .news-content {
@@ -496,8 +526,12 @@ p {
 }
 
 .news-title a {
-  color: #fff;
-  text-decoration: none;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  color: #001f3f;
+}
+.news-title a:hover {
+  text-decoration: underline;
 }
 
 .news-description {
@@ -509,7 +543,8 @@ p {
   line-clamp: 3;
   font-size: 1rem;
   margin: 0;
-  color: gray;
+  /* color: gray; */
+  text-align: start;
 }
 
 .additional-data {
@@ -560,31 +595,6 @@ p {
 
 .more-info-link:hover {
   text-decoration: underline;
-}
-
-#homepage .profile .text h1 {
-  color: black;
-  font-size: 38px;
-}
-
-#homepage .profile .text:hover {
-  transform: translateY(-5px);
-}
-
-#homepage .profile .text h2 {
-  font-size: 30px;
-  color: black;
-  margin: 5px 0;
-}
-
-#homepage .profile .text p {
-  text-align: left;
-  margin: 5px 0;
-}
-
-#homepage .card {
-  border-radius: 8px;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 @media screen and (max-width: 600px) {
@@ -651,7 +661,6 @@ p {
 
   .news-list .news-card:nth-of-type(n + 2) {
     display: none;
-    /* Hide all news cards after the first one */
   }
 }
 
@@ -687,7 +696,6 @@ p {
 
   .news-card {
     width: 100%;
-    /* 1 item per row for small screens */
   }
 
   .text h1 {
@@ -716,6 +724,15 @@ p {
     width: 100%;
     margin: 0;
     padding: 10px;
+  }
+  #homepage .profile .text h1 {
+    font-size: 30px;
+  }
+  #homepage .profile .text h2 {
+    font-size: 18px;
+  }
+  #homepage .profile .text p {
+    font-size: 12px;
   }
 
   #homepage .profile .card {
@@ -2053,23 +2070,27 @@ label {
   height: 100vh;
   padding: 20px;
   overflow: scroll;
+  width: 100%;
 }
 
 .friend {
   margin-top: 100px;
   margin-left: 80px;
   padding: 20px;
-  max-width: 80%;
+  width: 100;
 }
 
 .friend h1 {
-  color: navy;
+  color: #001f3f;
+  /* color: #f0440e; */
   margin-bottom: 20px;
   font-size: 28px;
+  font-family: "Inter", sans-serif;
 }
 
 .friend h2 {
   color: #001f3f;
+  color: #f0440e;
   font-size: 24px;
   font-family: inter;
   margin: 15px 0;
@@ -2207,17 +2228,27 @@ label {
 
 @media (max-width: 480px) {
   .friend {
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    margin: 35px 0;
+    width: 100;
   }
-
-  .friend h2 {
+  .friend h1 {
     font-size: 20px;
+  }
+  .friend h2 {
+    font-size: 16px;
+    text-align: start;
   }
 
   .friend-card {
     padding: 15px;
   }
-
+  .friend .sub-text {
+    font-size: 12px;
+  }
   .avatar {
     width: 40px;
     height: 40px;
@@ -2389,7 +2420,9 @@ label {
   gap: 50px;
   box-sizing: border-box;
 }
-
+.subtitle {
+  color: #001f3f;
+}
 .user-list {
   width: 30%;
   background-color: #ffffff;
