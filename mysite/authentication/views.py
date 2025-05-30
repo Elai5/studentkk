@@ -472,11 +472,11 @@ def edit_profile(request):
         if profile_image:
             user_profile.profile_picture = profile_image
 
-        request.user.save()
+        # request.user.save()
         user_profile.save()
 
         messages.success(request, "Profile updated successfully.")
-        return redirect('profile_view')  # Redirect to profile page
+        return redirect('profile_view')
 
     return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
 
