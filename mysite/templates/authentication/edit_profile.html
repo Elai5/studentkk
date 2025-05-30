@@ -24,7 +24,7 @@
       <div class="image-upload-container">
         <img
           class="image-preview"
-          src="{% if user_profile.profile_picture %}{{ user_profile.profile_picture.url }}{% else %}{% static 'images/woman.jpg' %}{% endif %}"
+          src="{% if user_profile.profile_picture %}{{ user_profile.profile_picture.url }}{% else %}{% static 'images/default_profile.jpeg' %}{% endif %}"
           alt="Profile Image"
           id="editPreviewImage"
         />
@@ -42,7 +42,8 @@
           type="text"
           id="fname"
           name="fname"
-          value="{{ user_profile.user.first_name }}"
+          value="{{ user.first_name }}" required
+          {% comment %} value="{{ user_profile.user.first_name }}" {% endcomment %}
           placeholder="Enter first name"
           required
         />
@@ -54,7 +55,8 @@
           type="text"
           id="lname"
           name="lname"
-          value="{{ user_profile.user.last_name }}"
+          {% comment %} value="{{ user_profile.user.last_name }}" {% endcomment %}
+          value="{{ user.last_name }}" required
           placeholder="Enter last name"
           required
         />
@@ -66,7 +68,8 @@
           type="email"
           id="email"
           name="email"
-          value="{{ user_profile.user.email }}"
+          {% comment %} value="{{ user_profile.user.email }}" {% endcomment %}
+          value="{{ user.email }}" required
           placeholder="Enter email address"
           required
         />
@@ -78,7 +81,8 @@
           type="text"
           id="country"
           name="country"
-          value="{{ user_profile.country }}"
+          {% comment %} value="{{ user_profile.country }}" {% endcomment %}
+          value="{{ user.country }}" required
           placeholder="Enter your country"
           required
         />
@@ -90,7 +94,8 @@
           type="text"
           id="location"
           name="location"
-          value="{{ user_profile.location }}"
+          {% comment %} value="{{ user_profile.location }}" {% endcomment %}
+          value="{{ user.location }}" required
           placeholder="Enter your location"
           required
         />
@@ -102,7 +107,8 @@
           type="text"
           id="institution"
           name="institution"
-          value="{{ user_profile.institution }}"
+          {% comment %} value="{{ user_profile.institution }}" {% endcomment %}
+          value="{{ user.institution }}" required
           placeholder="Enter institution name"
           required
         />
@@ -114,7 +120,8 @@
           type="text"
           id="city"
           name="city"
-          value="{{ user_profile.city }}"
+          {% comment %} value="{{ user_profile.city }}" {% endcomment %}
+          value="{{ user.city }}" required
           placeholder="Enter city"
           required
         />
@@ -126,7 +133,8 @@
           type="text"
           id="state"
           name="state"
-          value="{{ user_profile.state }}"
+          {% comment %} value="{{ user_profile.state }}" {% endcomment %}
+          value="{{ user.state }}" required
           placeholder="Enter state"
           required
         />
