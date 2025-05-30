@@ -13,7 +13,11 @@
                 {% for friend in friends %}
                     <li class="user-card">
                         <img src="{% if friend.profile_picture %}{{ friend.profile_picture.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" alt="{{ friend.username }}'s profile picture" class="avatar">
-                                          <a href="{% url 'chat_with_friend' friend.id %}" class="send-message">   <span class="user-name">{{ friend.first_name }} {{ friend.last_name }}</span></a>
+                        <a href="{% url 'chat_with_friend' friend.id %}" class="send-message">
+                            <span class="user-name">
+                                {{ friend.first_name }} {{ friend.last_name }}
+                            </span>
+                        </a>
                      
                         {% comment %} <span class="last-message">
                             {% with last_message=last_messages|get_item:friend.id %}
