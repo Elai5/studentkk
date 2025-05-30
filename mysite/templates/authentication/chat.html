@@ -7,11 +7,11 @@
 {% block content %}
 <section id="chat-page">
     <div class="chat-container">
-        <div class="sidebar">
+        <div class="user-list">
             <h2 class="subtitle">Your Friends</h2>
             <ul>
                 {% for friend in friends %}
-                    <li>
+                    <li class="user-card">
                         <img src="{% if friend.profile_picture %}{{ friend.profile_picture.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" alt="{{ friend.username }}'s profile picture" class="friend-avatar">
                         <a href="{% url 'chat_with_friend' friend.id %}">
                             {{ friend.first_name }} {{ friend.last_name }}
