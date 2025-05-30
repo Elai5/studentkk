@@ -26,6 +26,9 @@ from django.templatetags.static import static
 from django.core.files.base import ContentFile
 from django.db import IntegrityError
 from django_countries import countries
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+import os
 
 def home(request):
     return render(request, "authentication/index.html")
@@ -198,24 +201,21 @@ def signup(request):
         
         if has_error:
             return JsonResponse({'errors': error_messages}, status=400)
-
         # return JsonResponse({'message': 'Success'})
         # Create the user profile
         
-        user_profile = UserProfile.objects.create(
-            user=myuser,
-            country=country,
-            location=location,
-            institution=institution,
-            city=city,
-            state=state,
-            profile_picture=profile_picture if profile_picture else None 
-        )
+        # user_profile = UserProfile.objects.create(
+        #     user=myuser,
+        #     country=country,
+        #     location=location,
+        #     institution=institution,
+        #     city=city,
+        #     state=state,
+        #     profile_picture=profile_picture if profile_picture else None 
+        # )
 
         # Debugging line to check if UserProfile was created correctly
-        print(f"UserProfile created for {myuser.username}: {user_profile.country}, {user_profile.location}, {user_profile.institution}, {user_profile.city}, {user_profile.state}, {user_profile.profile_picture}")
-    
-
+        # print(f"UserProfile created for {myuser.username}: {user_profile.country}, {user_profile.location}, {user_profile.institution}, {user_profile.city}, {user_profile.state}, {user_profile.profile_picture}")
         # Generate OTP and send email
         myuser.generate_otp()  # Generate and save the OTP
 
@@ -226,7 +226,6 @@ def signup(request):
             f"Your OTP is {myuser.otp}. It is valid for 10 minutes.\n\n"
             "Thank You,\n Elaine"
         )
-        
         send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
 
         messages.success(request, "Your account has been successfully created. Please check your email for the OTP.")
@@ -478,29 +477,68 @@ def how_it_works(request):
 def testimonials(request):
     return render(request, "authentication/testimonials.html")
 
+# @login_required
+# def edit_profile(request):
+#     user_profile = get_object_or_404(UserProfile, user=request.user)
+
+#     if request.method == 'POST':
+#         user_profile.country = request.POST.get('country', user_profile.country)
+#         user_profile.location = request.POST.get('location', user_profile.location)
+#         user_profile.institution = request.POST.get('institution', user_profile.institution)
+#         user_profile.city = request.POST.get('city', user_profile.city)
+#         user_profile.state = request.POST.get('state', user_profile.state)
+
+#         profile_image = request.FILES.get('profile_picture')
+#         if profile_image:
+#             user_profile.profile_picture = profile_image
+#         user_profile.save()
+#         messages.success(request, "Profile updated successfully.")
+#         return redirect('profile_view')
+
+#     return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
+
 @login_required
 def edit_profile(request):
-    user_profile = get_object_or_404(UserProfile, user=request.user)
+    user = request.user
 
     if request.method == 'POST':
-        # Update user and profile data
-        user_profile.country = request.POST.get('country', user_profile.country)
-        user_profile.location = request.POST.get('location', user_profile.location)
-        user_profile.institution = request.POST.get('institution', user_profile.institution)
-        user_profile.city = request.POST.get('city', user_profile.city)
-        user_profile.state = request.POST.get('state', user_profile.state)
+        # Update profile fields
+        user.first_name = request.POST.get('fname', user.first_name)
+        user.last_name = request.POST.get('lname', user.last_name)
+        user.email = request.POST.get('email', user.email)
+        user.country = request.POST.get('country', user.country)
+        user.location = request.POST.get('location', user.location)
+        user.institution = request.POST.get('institution', user.institution)
+        user.city = request.POST.get('city', user.city)
+        user.state = request.POST.get('state', user.state)
 
         profile_image = request.FILES.get('profile_picture')
         if profile_image:
-            user_profile.profile_picture = profile_image
+            user.profile_picture = profile_image
 
-        # request.user.save()
-        user_profile.save()
-
+        user.save()
         messages.success(request, "Profile updated successfully.")
         return redirect('profile_view')
+    context = {
+        'user': user,
+    }
 
-    return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
+    return render(request, 'authentication/edit_profile.html', context)
+@receiver(pre_save, sender=CustomUser)
+def delete_old_profile_picture(sender, instance, **kwargs):
+    if not instance.pk:
+        return  # Skip if new object
+
+    try:
+        old_user = sender.objects.get(pk=instance.pk)
+    except sender.DoesNotExist:
+        return
+
+    old_file = old_user.profile_picture
+    new_file = instance.profile_picture
+    if old_file and old_file != new_file:
+        if os.path.isfile(old_file.path):
+            os.remove(old_file.path)
 
 def password_reset_request(request):
     if request.method == "POST":

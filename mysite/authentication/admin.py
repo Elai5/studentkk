@@ -17,17 +17,16 @@ admin.site.register(CustomUser, CustomUserAdmin)
 class UserProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'country', 'location', 'institution', 'city', 'state', 'profile_picture')
 
-
 # Register Housing model with default admin
 @admin.register(Housing)
 class HousingAdmin(admin.ModelAdmin):
-    list_display = ('country', 'title', 'short_description', 'link', 'image')  # Added image field
+    list_display = ('country', 'title', 'short_description', 'link', 'image')  
 
 @admin.register(Transport)
 class TransportAdmin(admin.ModelAdmin):
-    list_display = ('country', 'title', 'short_description', 'link', 'image')  # Added image field
+    list_display = ('country', 'title', 'short_description', 'link', 'image')  
 
 @admin.register(Culture)
 class CultureAdmin(admin.ModelAdmin):
-    list_display = ('country', 'title', 'short_description', 'description', 'image')  # Added image field
+    list_display = ('country', 'title', 'short_description', 'description', 'image') 
 
