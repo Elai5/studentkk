@@ -24,7 +24,7 @@
       <div class="image-upload-container">
         <img
           class="image-preview"
-          src="{% if user_profile.profile_picture %}{{ user_profile.profile_picture.url }}{% else %}{% static 'images/woman.jpg' %}{% endif %}"
+          src="{% if user_profile.profile_picture %}{{ user_profile.profile_picture.url }}{% else %}{% static 'images/default_profile.jpeg' %}{% endif %}"
           alt="Profile Image"
           id="editPreviewImage"
         />

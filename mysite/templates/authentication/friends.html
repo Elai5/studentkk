@@ -26,7 +26,7 @@
                             {% if request.from_user.profile_picture %}
                                 <img src="{{ request.from_user.profile_picture.url }}" alt="{{ request.from_user.username }}'s profile picture" class="avatar">
                             {% else %}
-                                <img src="{% static 'images/default_profile.png' %}" alt="Default Profile Picture" class="avatar">
+                                <img src="{% static 'images/default_profile.jpeg' %}" alt="Default Profile Picture" class="avatar">
                             {% endif %}
                             <span class="friend-name">{{ request.from_user.first_name }} {{ request.from_user.last_name }}</span>
                         </div>
@@ -36,11 +36,11 @@
                         </div>
                     </li>
                 {% empty %}
-                    <li class="sub-text">No incoming friend requests.</li>
+                    <li>No incoming friend requests.</li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p class="sub-text">No incoming friend requests.</p>
+            <p>No incoming friend requests.</p>
         {% endif %}
 
         <h2>Your Friends</h2>
@@ -63,11 +63,11 @@
                     <a href="{% url 'chat_with_friend' friend.id %}" class="send-message">Send Message</a>
                 </li>
             {% empty %}
-                <li class="sub-text">No friends found.</li>
+                <li>No friends found.</li>
             {% endfor %}
         </ul>
 
-        <h2 class="subtitle">Friend Suggestions</h2>
+        <h2>Friend Suggestions</h2>
         <ul>
             {% for suggestion in suggestions %}
                 <li class="friend-card">
@@ -87,7 +87,7 @@
                     <a href="{% url 'send_friend_request' suggestion.id %}" class="send-request">Send Friend Request</a>
                 </li>
             {% empty %}
-                <li class="sub-text">No friend suggestions available.</li>
+                <li>No friend suggestions available.</li>
             {% endfor %}
         </ul>
     </div>
