@@ -36,11 +36,11 @@
                         </div>
                     </li>
                 {% empty %}
-                    <li>No incoming friend requests.</li>
+                    <li class="sub-text">No incoming friend requests.</li>
                 {% endfor %}
             </ul>
         {% else %}
-            <p>No incoming friend requests.</p>
+            <p class="sub-text">No incoming friend requests.</p>
         {% endif %}
 
         <h2>Your Friends</h2>
@@ -63,11 +63,11 @@
                     <a href="{% url 'chat_with_friend' friend.id %}" class="send-message">Send Message</a>
                 </li>
             {% empty %}
-                <li>No friends found.</li>
+                <li class="sub-text">No friends found.</li>
             {% endfor %}
         </ul>
 
-        <h2>Friend Suggestions</h2>
+        <h2 class="subtitle">Friend Suggestions</h2>
         <ul>
             {% for suggestion in suggestions %}
                 <li class="friend-card">
@@ -87,7 +87,7 @@
                     <a href="{% url 'send_friend_request' suggestion.id %}" class="send-request">Send Friend Request</a>
                 </li>
             {% empty %}
-                <li>No friend suggestions available.</li>
+                <li class="sub-text">No friend suggestions available.</li>
             {% endfor %}
         </ul>
     </div>

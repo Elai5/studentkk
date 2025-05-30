@@ -32,8 +32,6 @@ def home(request):
 
 def homepage(request):
     user = request.user
-
-    # Debugging: Print user information
     print(f"User: {user.username}, Location: {user.location}, Institution: {user.institution}")
 
     # Check if user has location and institution attributes
@@ -68,50 +66,10 @@ def homepage(request):
 
     context = {
         'news_data': news_data,
-        'country_data': dict(country_data),  # Convert defaultdict to a regular dict
+        'country_data': dict(country_data), 
     }
 
     return render(request, "authentication/homepage.html", context)
-
-
-# def homepage(request):
-#     user = request.user
-
-#     if not hasattr(user, 'location') or not hasattr(user, 'institution'):
-#         return render(request, 'authentication/homepage.html', {'error': 'User information is incomplete.'})
-
-#     location = user.location
-#     institution = user.institution
-
-#     categories = ['accommodation', 'transportation', 'student_resources', 'school']
-#     news_data = {}
-#     for category in categories:
-#         news_data[category] = NewsService.get_news_by_category(category, location, institution)
-
-
-#     housing_items = Housing.objects.all()
-#     transport_items = Transport.objects.all()
-#     culture_items = Culture.objects.all()
-
-   
-#     country_data = defaultdict(lambda: {'housing': [], 'transport': [], 'culture': []})
-
-#     for item in housing_items:
-#         country_data[item.country]['housing'].append(item)
-#     for item in transport_items:
-#         country_data[item.country]['transport'].append(item)
-#     for item in culture_items:
-#         country_data[item.country]['culture'].append(item)
-
-   
-#     print(f"Country Data: {country_data}")
-
-#     context = {
-#         'news_data': news_data,
-#         'country_data': dict(country_data),  
-#     }
-
-#     return render(request, "authentication/homepage.html", context)
 
 def signup(request):
     if request.method == "POST":
@@ -191,7 +149,8 @@ def signup(request):
                 'city': city,
                 'state': state,
                 'zip_code': zip_code,
-                'country_choices': list(countries) 
+                'country_choices': list(countries),
+                # 'profile_picture': profileImage
             })
 
         # Create the user
@@ -271,7 +230,7 @@ def verify_otp(request):
                     user.otp_created_at = None
                     user.save()
                     messages.success(request, "OTP verified successfully. You can now log in.")
-                    # Clear email from session if you want
+                   
                     del request.session['email']
                     return redirect('signin')
                 else:
@@ -305,11 +264,10 @@ def resend_otp(request):
 
     return redirect('verify_otp')
 
-
 def signin(request):
     if request.method == 'POST':
-        username = request.POST.get('username', '').strip()  # Safely fetch username
-        password = request.POST.get('pass1', '').strip()  # Safely fetch password
+        username = request.POST.get('username', '').strip()  
+        password = request.POST.get('pass1', '').strip() 
         
         user = authenticate(username=username, password=password)
         
@@ -514,14 +472,13 @@ def edit_profile(request):
         if profile_image:
             user_profile.profile_picture = profile_image
 
-        request.user.save()
+        # request.user.save()
         user_profile.save()
 
         messages.success(request, "Profile updated successfully.")
-        return redirect('profile_view')  # Redirect to profile page
+        return redirect('profile_view')
 
     return render(request, 'authentication/edit_profile.html', {'user_profile': user_profile})
-
 
 def password_reset_request(request):
     if request.method == "POST":
