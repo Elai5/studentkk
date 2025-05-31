@@ -83,6 +83,7 @@ body {
 #signout {
   background-color: #f0440e;
   /* width: 50%; */
+  display: none;
 }
 #signout-nav {
   display: none;
@@ -1052,7 +1053,6 @@ p {
     font-size: 16px;
   }
 }
-
 
 ul.messages {
   list-style-type: none;
