@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser, UserProfile
+from .models import CustomUser
 from .models import CustomUser, Housing, Transport, Culture
 # Register your models here.
 
@@ -11,11 +11,6 @@ class CustomUserAdmin(admin.ModelAdmin):
         'state', 'zip_code', 'profile_picture' )
 
 admin.site.register(CustomUser, CustomUserAdmin)
-
-# Register UserProfile model
-@admin.register(UserProfile)
-class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ('user', 'country', 'location', 'institution', 'city', 'state', 'profile_picture')
 
 # Register Housing model with default admin
 @admin.register(Housing)

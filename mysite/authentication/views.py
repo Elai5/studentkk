@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.conf import settings
-from .models import CustomUser, UserProfile, FriendRequest
+from .models import CustomUser, FriendRequest
 from django.utils import timezone
 from django.urls import reverse
 from django.http import JsonResponse
@@ -129,7 +129,6 @@ def signup(request):
         error_messages = []
 
         # Validation checks
-
         if not re.match(institutional_email_pattern, email):
             error_messages.append("Please use a valid institutional email address.")
             has_error = True
@@ -202,21 +201,7 @@ def signup(request):
         if has_error:
             return JsonResponse({'errors': error_messages}, status=400)
         # return JsonResponse({'message': 'Success'})
-        # Create the user profile
-        
-        # user_profile = UserProfile.objects.create(
-        #     user=myuser,
-        #     country=country,
-        #     location=location,
-        #     institution=institution,
-        #     city=city,
-        #     state=state,
-        #     profile_picture=profile_picture if profile_picture else None 
-        # )
-
-        # Debugging line to check if UserProfile was created correctly
-        # print(f"UserProfile created for {myuser.username}: {user_profile.country}, {user_profile.location}, {user_profile.institution}, {user_profile.city}, {user_profile.state}, {user_profile.profile_picture}")
-        # Generate OTP and send email
+       
         myuser.generate_otp()  # Generate and save the OTP
 
         # Send OTP email
