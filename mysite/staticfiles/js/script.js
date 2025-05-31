@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (profileImageInput) {
     profileImageInput.addEventListener("change", previewProfileImage);
   } else {
-    console.error("ELement with ID 'profileImage' not found");
+    console.error("Element with ID 'profileImage' not found");
   }
   // Add event listener for the file input to preview the image
   // document.getElementById('profileImage').addEventListener('change', previewProfileImage);
@@ -59,16 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .catch((error) => {
       console.error("Error fetching country data:", error);
     });
-
-  // Example universities array (replace with your actual data)
-  const universities = [
-    "Harvard University",
-    "Stanford University",
-    "Massachusetts Institute of Technology (MIT)",
-    "University of Oxford",
-    // Add more universities here...
-  ];
-
+  // university api on load
   const institutionInput = document.querySelector("#institution");
   const datalist = document.querySelector("#institution-datalist");
 
