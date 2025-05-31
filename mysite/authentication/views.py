@@ -336,53 +336,53 @@ def profile(request):
 def profile_view(request):
     return render(request, "authentication/profile.html", {'user': request.user})
 
+@login_required
 def friends(request):
     if request.user.is_authenticated:
-        # Fetch the user's profile
-        user_profile = UserProfile.objects.get(user=request.user)
+        user = request.user  # Use the CustomUser instance directly
 
-        # Fetch accepted friends
+        # Fetch accepted friends (unchanged)
         accepted_friends = CustomUser.objects.filter(
             id__in=FriendRequest.objects.filter(
                 accepted=True,
-                from_user=request.user
+                from_user=user
             ).values_list('to_user', flat=True)
         ).union(
             CustomUser.objects.filter(
                 id__in=FriendRequest.objects.filter(
                     accepted=True,
-                    to_user=request.user
+                    to_user=user
                 ).values_list('from_user', flat=True)
             )
         )
 
-        # Fetch incoming friend requests
-        incoming_requests = FriendRequest.objects.filter(to_user=request.user, accepted=False)
+        # Fetch incoming friend requests (unchanged)
+        incoming_requests = FriendRequest.objects.filter(to_user=user, accepted=False)
 
         # Fetch friend suggestions based on institution, location, city, and state
-        friend_suggestions = CustomUser.objects.exclude(id=request.user.id).exclude(id__in=accepted_friends.values_list('id', flat=True))
+        friend_suggestions = CustomUser.objects.exclude(id=user.id).exclude(id__in=accepted_friends.values_list('id', flat=True))
 
         # Suggest friends from the same institution
         suggestions_from_school = friend_suggestions.filter(
-            institution=user_profile.institution
+            institution=user.institution  # <-- Changed
         )
         
         # Suggest friends from the same location
         suggestions_from_location = friend_suggestions.filter(
-            location=user_profile.location
+            location=user.location  # <-- Changed
         )
         
         # Suggest friends from the same city
         suggestions_from_city = friend_suggestions.filter(
-            userprofile__city=user_profile.city
+            city=user.city  # <-- Changed (no userprofile__)
         )
         
         # Suggest friends from the same state
         suggestions_from_state = friend_suggestions.filter(
-            userprofile__state=user_profile.state
+            state=user.state  # <-- Changed (no userprofile__)
         )
 
-        # Combine suggestions if needed
+        # Combine suggestions (unchanged)
         suggestions = (suggestions_from_school | suggestions_from_location |
                        suggestions_from_city | suggestions_from_state).distinct()
 
@@ -392,7 +392,8 @@ def friends(request):
             'suggestions': suggestions
         })
     else:
-        return redirect('signin')  # Redirect to sign-in if not authenticated
+        return redirect('signin')
+
 
 def send_friend_request(request, user_id):
     if request.user.is_authenticated:
