@@ -59,12 +59,12 @@
       </ul>
       <div class="btn">
         {% if user.is_authenticated %}
-        <button type="submit">
+        <button type="submit" class="signout">
           <a href="{% url 'signout' %}">Sign Out</a>
         </button>
         {% else %}
         <a href="{% url 'signup' %}">
-          <button class="button signup" type="submit">Sign Up</button>
+          <button class="button signup" type="submit">SignUp</button>
         </a>
         <a href="{% url 'signin' %}">
           <button class="button signin" type="submit">Sign In</button>

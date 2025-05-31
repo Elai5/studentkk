@@ -31,7 +31,7 @@
       </ul>
       <div class="btn">
         {% if user.is_authenticated %}
-        <button type="submit">
+        <button type="submit" class="signout">
           <a href="{% url 'signout' %}">Sign Out</a>
         </button>
         {% else %}
