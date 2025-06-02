@@ -15,6 +15,8 @@ from pathlib import Path
 from . info import *
 # import dj_database_url
 import dj_database_url
+from decouple import config
+
 
 
 
@@ -25,8 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 EMAIL_USE_TILS = EMAIL_USE_TLS
 EMAIL_HOST = EMAIL_HOST
-EMAIL_HOST_USER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = EMAIL_PORT
 
 
